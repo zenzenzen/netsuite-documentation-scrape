@@ -1,0 +1,741 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>creditMemo | NetSuite REST API</title>
+  <style>
+    :root {
+      --bg: #f6f1e8;
+      --paper: rgba(255, 255, 255, 0.84);
+      --paper-strong: rgba(255, 255, 255, 0.96);
+      --ink: #1f2430;
+      --muted: #5d6472;
+      --line: rgba(31, 36, 48, 0.12);
+      --gold: #f2b741;
+      --teal: #148f88;
+      --coral: #e46b53;
+      --blue: #2e71d1;
+      --berry: #9c4dcc;
+      --shadow: 0 18px 48px rgba(28, 36, 54, 0.12);
+      --radius: 24px;
+      --mono: "SFMono-Regular", "Menlo", "Monaco", monospace;
+      --sans: "Avenir Next", "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: var(--sans);
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(242, 183, 65, 0.22), transparent 36%),
+        radial-gradient(circle at top right, rgba(156, 77, 204, 0.18), transparent 34%),
+        linear-gradient(180deg, #efe6d6 0%, #f9f6ef 42%, #eef6f6 100%);
+    }
+
+    a { color: inherit; }
+
+    .shell {
+      width: min(1260px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 28px 0 72px;
+    }
+
+    .hero {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      padding: 18px 0 8px;
+      backdrop-filter: blur(14px);
+    }
+
+    .hero-card {
+      display: grid;
+      gap: 14px;
+      padding: 24px 28px;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      border-radius: 28px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.92), rgba(255,248,237,0.78));
+      box-shadow: var(--shadow);
+    }
+
+    .eyebrow {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--teal);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3.6rem);
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+    }
+
+    .intro {
+      max-width: 780px;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .top-nav, .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .top-link, .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      text-decoration: none;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.78);
+      color: var(--ink);
+      transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+    }
+
+    .top-link:hover, .chip:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(28, 36, 54, 0.08);
+      border-color: rgba(20, 143, 136, 0.34);
+    }
+
+    .top-link strong { font-size: 0.95rem; }
+    .top-link span, .chip small { color: var(--muted); }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .stats-grid {
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+
+    .stat-card, .panel, .record-card, .workflow-card, .matrix-card {
+      border-radius: var(--radius);
+      background: var(--paper);
+      border: 1px solid rgba(255,255,255,0.7);
+      box-shadow: var(--shadow);
+    }
+
+    .stat-card {
+      padding: 20px;
+    }
+
+    .stat-label {
+      margin: 0 0 6px;
+      color: var(--muted);
+      font-size: 0.84rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .stat-value {
+      margin: 0;
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 16px;
+      margin: 38px 0 16px;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      letter-spacing: -0.04em;
+    }
+
+    .section-heading p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 620px;
+      line-height: 1.6;
+    }
+
+    .record-grid {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .record-card, .workflow-card, .matrix-card {
+      padding: 22px;
+    }
+
+    .record-card h3, .workflow-card h3, .matrix-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.3rem;
+    }
+
+    .record-meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      background: rgba(20, 143, 136, 0.12);
+      color: var(--teal);
+    }
+
+    .record-copy, .muted {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .record-link {
+      display: inline-flex;
+      margin-top: 14px;
+      padding: 11px 14px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(20, 143, 136, 0.9), rgba(46, 113, 209, 0.9));
+      color: white;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .record-link.secondary {
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+
+    .panel {
+      padding: 24px;
+    }
+
+    .accordion {
+      display: grid;
+      gap: 12px;
+    }
+
+    details.endpoint {
+      overflow: hidden;
+      border: 1px solid rgba(31, 36, 48, 0.08);
+      border-radius: 20px;
+      background: rgba(255,255,255,0.86);
+    }
+
+    details.endpoint[open] {
+      border-color: rgba(46, 113, 209, 0.26);
+      box-shadow: 0 16px 32px rgba(28, 36, 54, 0.08);
+    }
+
+    details.endpoint summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 18px 20px;
+      display: grid;
+      gap: 10px;
+    }
+
+    details.endpoint summary::-webkit-details-marker { display: none; }
+
+    .endpoint-top {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .method-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 72px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-family: var(--mono);
+      font-weight: 700;
+      font-size: 0.82rem;
+      color: white;
+    }
+
+    .tone-get { background: linear-gradient(135deg, #148f88, #28b6ad); }
+    .tone-post { background: linear-gradient(135deg, #2e71d1, #46a0ff); }
+    .tone-patch { background: linear-gradient(135deg, #c35d15, #f39237); }
+    .tone-put { background: linear-gradient(135deg, #7a4de0, #ab67ff); }
+    .tone-delete { background: linear-gradient(135deg, #bf3148, #f1677d); }
+    .tone-neutral { background: linear-gradient(135deg, #4d5566, #7a8396); }
+
+    .endpoint-path {
+      font-family: var(--mono);
+      font-size: 0.96rem;
+      word-break: break-word;
+    }
+
+    .endpoint-summary {
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .endpoint-body {
+      border-top: 1px solid rgba(31, 36, 48, 0.08);
+      padding: 0 20px 18px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .split {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    .subpanel {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(247, 247, 247, 0.72);
+      border: 1px solid rgba(31, 36, 48, 0.06);
+    }
+
+    .subpanel h4 {
+      margin: 0 0 10px;
+      font-size: 1rem;
+    }
+
+    .subpanel ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    .subpanel li {
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+
+    .schema-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+    }
+
+    .schema-table th,
+    .schema-table td {
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(31, 36, 48, 0.08);
+      vertical-align: top;
+    }
+
+    .schema-table th {
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .schema-table code,
+    .mono {
+      font-family: var(--mono);
+      font-size: 0.92rem;
+    }
+
+    .matrix {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 14px;
+    }
+
+    .matrix th, .matrix td {
+      padding: 12px 10px;
+      border-bottom: 1px solid rgba(31, 36, 48, 0.08);
+      text-align: left;
+    }
+
+    .matrix th {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+
+    .kicker {
+      display: inline-flex;
+      padding: 6px 10px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+      background: rgba(242, 183, 65, 0.18);
+      color: #8a5b00;
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 760px) {
+      .shell { width: min(100vw - 20px, 1260px); }
+      .hero-card, .panel, .record-card, .workflow-card, .matrix-card { padding: 18px; }
+      details.endpoint summary, .endpoint-body { padding-left: 16px; padding-right: 16px; }
+    }
+  </style>
+  
+</head>
+<body>
+  <div class="shell">
+    <div class="hero">
+      <div class="hero-card">
+        <div class="eyebrow">NetSuite Record Explorer</div>
+        <h1>creditMemo | NetSuite REST API</h1>
+        <div class="intro"><div class="record-meta">
+      <span class="pill">6 endpoints</span>
+      <span class="pill">0 transforms</span>
+      <span class="pill">0 schema rows</span>
+    </div>
+    <div class="muted">This page is generated from the NetSuite REST API Browser scrape and tuned for fast scanning: endpoint cards, transform emphasis, and direct links to dependency records.</div></div>
+        <div class="top-nav">
+          <a class="top-link" href="../../public.html"><strong>Overview</strong> <span>Focus objects</span></a>
+          <a class="top-link" href="../../transforms.html"><strong>Transforms</strong> <span>Workflow map</span></a>
+        </div>
+      </div>
+    </div>
+    
+      <div class="section-heading">
+        <h2>Credit Memo</h2>
+        <p>Linked records surface here as navigable chips, so you can jump between record dependencies while you read the endpoint contracts.</p>
+      </div>
+      <div class="panel">
+        <div class="chip-row"><a class="chip" href="./account.html"><strong>account</strong><small>Account</small></a><a class="chip" href="./billing-account.html"><strong>billingAccount</strong><small>Billing Account</small></a><a class="chip" href="./classification.html"><strong>classification</strong><small>Classification</small></a><a class="chip" href="./coupon-code.html"><strong>couponCode</strong><small>Coupon Code</small></a><a class="chip" href="./currency.html"><strong>currency</strong><small>Currency</small></a><a class="chip" href="./department.html"><strong>department</strong><small>Department</small></a><a class="chip" href="./discount-item.html"><strong>discountItem</strong><small>Discount Item</small></a><a class="chip" href="./customer.html"><strong>customer</strong><small>Customer</small></a><a class="chip" href="./partner.html"><strong>partner</strong><small>Partner</small></a><a class="chip" href="./vendor.html"><strong>vendor</strong><small>Vendor</small></a><a class="chip" href="./employee.html"><strong>employee</strong><small>Employee</small></a><a class="chip" href="./contact.html"><strong>contact</strong><small>Contact</small></a><a class="chip" href="./location.html"><strong>location</strong><small>Location</small></a><a class="chip" href="./customer-message.html"><strong>customerMessage</strong><small>Customer Message</small></a><a class="chip" href="./nexus.html"><strong>nexus</strong><small>Nexus</small></a><a class="chip" href="./accounting-period.html"><strong>accountingPeriod</strong><small>Accounting Period</small></a><a class="chip" href="./promotion-code.html"><strong>promotionCode</strong><small>Promotion Code</small></a><a class="chip" href="./ship-item.html"><strong>shipItem</strong><small>Ship Item</small></a><a class="chip" href="./subsidiary.html"><strong>subsidiary</strong><small>Subsidiary</small></a><a class="chip" href="./term.html"><strong>term</strong><small>Term</small></a></div>
+      </div>
+
+      <div class="section-heading">
+        <h2>Endpoints</h2>
+        <p>Transform routes are expanded by default because they usually drive the interesting cross-record workflows in NetSuite.</p>
+      </div>
+      <div class="accordion">
+        <details class="endpoint" >
+    <summary>
+      <div class="endpoint-top">
+        <span class="method-badge tone-get">GET</span>
+        
+        <span class="endpoint-path">/creditMemo</span>
+      </div>
+      <div class="endpoint-summary">Get list of records.</div>
+      
+    </summary>
+    <div class="endpoint-body">
+      <div class="split">
+        <div class="subpanel">
+          <h4>Request Parameters</h4>
+          <ul><li><strong>Prefer:
+string
+respond-async</strong> <span class="mono">string
+respond-async
+ string</span><br>The server behavior requested by the client. Use &#39;respond-async&#39; to execute the request asynchronously. If the request is executed asynchronously, &#39;Preference-applied: respond-async&#39; is returned in the response.</li><li><strong>X-NetSuite-Idempotency-Key:
+string</strong> <span class="mono">string
+ string</span><br>A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.</li><li><strong>q:
+string</strong> <span class="mono">string
+ string</span><br>The search query that is used to filter results.</li><li><strong>limit:
+integer
+(int32)
+1000</strong> <span class="mono">integer
+(int32)
+1000
+ integer (int32)</span><br>The limit used to specify the number of results on a single page.</li><li><strong>offset:
+integer
+(int32)
+0</strong> <span class="mono">integer
+(int32)
+0
+ integer (int32)</span><br>The offset used for selecting a specific page of results.</li></ul>
+        </div>
+        <div class="subpanel">
+          <h4>Request / Response Schemas</h4>
+          <ul>
+            <li>No request body rows detected.</li>
+            <li><strong>200 OK</strong> <span class="mono">creditMemoCollection</span><br>List of records.</li><li><strong>default</strong> <span class="mono">nsError</span><br>Error response.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </details><details class="endpoint" >
+    <summary>
+      <div class="endpoint-top">
+        <span class="method-badge tone-post">POST</span>
+        
+        <span class="endpoint-path">/creditMemo</span>
+      </div>
+      <div class="endpoint-summary">Insert record.</div>
+      <div class="chip-row"><a class="chip" href="./credit-memo.html"><strong>creditMemo</strong><small>dependency</small></a></div>
+    </summary>
+    <div class="endpoint-body">
+      <div class="split">
+        <div class="subpanel">
+          <h4>Request Parameters</h4>
+          <ul><li><strong>Prefer:
+string
+respond-async</strong> <span class="mono">string
+respond-async
+ string</span><br>The server behavior requested by the client. Use &#39;respond-async&#39; to execute the request asynchronously. If the request is executed asynchronously, &#39;Preference-applied: respond-async&#39; is returned in the response.</li><li><strong>X-NetSuite-Idempotency-Key:
+string</strong> <span class="mono">string
+ string</span><br>A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.</li><li><strong>replace:
+string</strong> <span class="mono">string
+ string</span><br>The names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.</li><li><strong>X-NetSuite-PropertyNameValidation:
+string
+Error ,
+Warning ,
+Ignore
+Warning</strong> <span class="mono">string
+Error ,
+Warning ,
+Ignore
+Warning
+ string</span><br>Sets the strictness of property name validation.</li><li><strong>X-NetSuite-PropertyValueValidation:
+string
+Error ,
+Warning ,
+Ignore
+Error</strong> <span class="mono">string
+Error ,
+Warning ,
+Ignore
+Error
+ string</span><br>Sets the strictness of property value validation.</li></ul>
+        </div>
+        <div class="subpanel">
+          <h4>Request / Response Schemas</h4>
+          <ul>
+            <li><strong>creditMemo</strong> <span class="mono">creditMemo</span><br>Request body.</li>
+            <li><strong>204 No Content</strong><br>Inserted record.</li><li><strong>default</strong> <span class="mono">nsError</span><br>Error response.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </details><details class="endpoint" >
+    <summary>
+      <div class="endpoint-top">
+        <span class="method-badge tone-delete">DELETE</span>
+        
+        <span class="endpoint-path">/creditMemo/{id}</span>
+      </div>
+      <div class="endpoint-summary">Remove record.</div>
+      
+    </summary>
+    <div class="endpoint-body">
+      <div class="split">
+        <div class="subpanel">
+          <h4>Request Parameters</h4>
+          <ul><li><strong>Prefer:
+string
+respond-async</strong> <span class="mono">string
+respond-async
+ string</span><br>The server behavior requested by the client. Use &#39;respond-async&#39; to execute the request asynchronously. If the request is executed asynchronously, &#39;Preference-applied: respond-async&#39; is returned in the response.</li><li><strong>X-NetSuite-Idempotency-Key:
+string</strong> <span class="mono">string
+ string</span><br>A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.</li><li><strong>id:
+integer
+(int32)</strong> <span class="mono">integer
+(int32)
+ integer (int32)</span><br>Internal identifier.</li></ul>
+        </div>
+        <div class="subpanel">
+          <h4>Request / Response Schemas</h4>
+          <ul>
+            <li>No request body rows detected.</li>
+            <li><strong>204 No Content</strong><br>Removed record.</li><li><strong>default</strong> <span class="mono">nsError</span><br>Error response.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </details><details class="endpoint" >
+    <summary>
+      <div class="endpoint-top">
+        <span class="method-badge tone-get">GET</span>
+        
+        <span class="endpoint-path">/creditMemo/{id}</span>
+      </div>
+      <div class="endpoint-summary">Get record.</div>
+      <div class="chip-row"><a class="chip" href="./credit-memo.html"><strong>creditMemo</strong><small>dependency</small></a></div>
+    </summary>
+    <div class="endpoint-body">
+      <div class="split">
+        <div class="subpanel">
+          <h4>Request Parameters</h4>
+          <ul><li><strong>Prefer:
+string
+respond-async</strong> <span class="mono">string
+respond-async
+ string</span><br>The server behavior requested by the client. Use &#39;respond-async&#39; to execute the request asynchronously. If the request is executed asynchronously, &#39;Preference-applied: respond-async&#39; is returned in the response.</li><li><strong>X-NetSuite-Idempotency-Key:
+string</strong> <span class="mono">string
+ string</span><br>A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.</li><li><strong>id:
+integer
+(int32)</strong> <span class="mono">integer
+(int32)
+ integer (int32)</span><br>Internal identifier.</li><li><strong>expandSubResources:
+boolean
+false</strong> <span class="mono">boolean
+false
+ boolean</span><br>Set to &#39;true&#39; to automatically expand all sublists, sublist lines, and subrecords on this record.</li><li><strong>simpleEnumFormat:
+boolean
+false</strong> <span class="mono">boolean
+false
+ boolean</span><br>Set to true to return enumeration values in a format that only shows the internal ID value.</li><li><strong>fields:
+string</strong> <span class="mono">string
+ string</span><br>The names of the fields and sublists on the record. Only the selected fields and sublists will be returned in the response.</li></ul>
+        </div>
+        <div class="subpanel">
+          <h4>Request / Response Schemas</h4>
+          <ul>
+            <li>No request body rows detected.</li>
+            <li><strong>200 OK</strong> <span class="mono">creditMemo</span><br>Retrieved record.</li><li><strong>default</strong> <span class="mono">nsError</span><br>Error response.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </details><details class="endpoint" >
+    <summary>
+      <div class="endpoint-top">
+        <span class="method-badge tone-patch">PATCH</span>
+        
+        <span class="endpoint-path">/creditMemo/{id}</span>
+      </div>
+      <div class="endpoint-summary">Update record.</div>
+      <div class="chip-row"><a class="chip" href="./credit-memo.html"><strong>creditMemo</strong><small>dependency</small></a></div>
+    </summary>
+    <div class="endpoint-body">
+      <div class="split">
+        <div class="subpanel">
+          <h4>Request Parameters</h4>
+          <ul><li><strong>Prefer:
+string
+respond-async</strong> <span class="mono">string
+respond-async
+ string</span><br>The server behavior requested by the client. Use &#39;respond-async&#39; to execute the request asynchronously. If the request is executed asynchronously, &#39;Preference-applied: respond-async&#39; is returned in the response.</li><li><strong>X-NetSuite-Idempotency-Key:
+string</strong> <span class="mono">string
+ string</span><br>A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.</li><li><strong>id:
+integer
+(int32)</strong> <span class="mono">integer
+(int32)
+ integer (int32)</span><br>Internal identifier.</li><li><strong>X-NetSuite-PropertyNameValidation:
+string
+Error ,
+Warning ,
+Ignore
+Warning</strong> <span class="mono">string
+Error ,
+Warning ,
+Ignore
+Warning
+ string</span><br>Sets the strictness of property name validation.</li><li><strong>X-NetSuite-PropertyValueValidation:
+string
+Error ,
+Warning ,
+Ignore
+Error</strong> <span class="mono">string
+Error ,
+Warning ,
+Ignore
+Error
+ string</span><br>Sets the strictness of property value validation.</li><li><strong>replace:
+string</strong> <span class="mono">string
+ string</span><br>The names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.</li><li><strong>replaceSelectedFields:
+boolean
+false</strong> <span class="mono">boolean
+false
+ boolean</span><br>If set to &#39;true&#39;, all fields that should be deleted in the update request, including body fields, must be included in the &#39;replace&#39; query parameter.</li></ul>
+        </div>
+        <div class="subpanel">
+          <h4>Request / Response Schemas</h4>
+          <ul>
+            <li><strong>creditMemo</strong> <span class="mono">creditMemo</span><br>Request body.</li>
+            <li><strong>204 No Content</strong><br>Updated record.</li><li><strong>default</strong> <span class="mono">nsError</span><br>Error response.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </details><details class="endpoint" >
+    <summary>
+      <div class="endpoint-top">
+        <span class="method-badge tone-put">PUT</span>
+        
+        <span class="endpoint-path">/creditMemo/{id}</span>
+      </div>
+      <div class="endpoint-summary">Insert or update record.</div>
+      <div class="chip-row"><a class="chip" href="./credit-memo.html"><strong>creditMemo</strong><small>dependency</small></a></div>
+    </summary>
+    <div class="endpoint-body">
+      <div class="split">
+        <div class="subpanel">
+          <h4>Request Parameters</h4>
+          <ul><li><strong>Prefer:
+string
+respond-async</strong> <span class="mono">string
+respond-async
+ string</span><br>The server behavior requested by the client. Use &#39;respond-async&#39; to execute the request asynchronously. If the request is executed asynchronously, &#39;Preference-applied: respond-async&#39; is returned in the response.</li><li><strong>X-NetSuite-Idempotency-Key:
+string</strong> <span class="mono">string
+ string</span><br>A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.</li><li><strong>id:
+string</strong> <span class="mono">string
+ string</span><br>External identifier.</li><li><strong>X-NetSuite-PropertyNameValidation:
+string
+Error ,
+Warning ,
+Ignore
+Warning</strong> <span class="mono">string
+Error ,
+Warning ,
+Ignore
+Warning
+ string</span><br>Sets the strictness of property name validation.</li><li><strong>X-NetSuite-PropertyValueValidation:
+string
+Error ,
+Warning ,
+Ignore
+Error</strong> <span class="mono">string
+Error ,
+Warning ,
+Ignore
+Error
+ string</span><br>Sets the strictness of property value validation.</li><li><strong>replace:
+string</strong> <span class="mono">string
+ string</span><br>The names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.</li><li><strong>replaceSelectedFields:
+boolean
+false</strong> <span class="mono">boolean
+false
+ boolean</span><br>If set to &#39;true&#39;, all fields that should be deleted in the update request, including body fields, must be included in the &#39;replace&#39; query parameter.</li></ul>
+        </div>
+        <div class="subpanel">
+          <h4>Request / Response Schemas</h4>
+          <ul>
+            <li><strong>creditMemo</strong> <span class="mono">creditMemo</span><br>Request body.</li>
+            <li><strong>204 No Content</strong><br>Upserted record.</li><li><strong>default</strong> <span class="mono">nsError</span><br>Error response.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </details>
+      </div>
+
+      <div class="section-heading" id="schema">
+        <h2>Schema Snapshot</h2>
+        <p>The definition table highlights the first 40 captured rows from the record schema, which is usually enough to orient yourself before dropping into the raw JSON.</p>
+      </div>
+      <div class="panel">
+        <div class="muted">No schema field rows were captured for this record definition.</div>
+      </div>
+    
+  </div>
+  
+</body>
+</html>

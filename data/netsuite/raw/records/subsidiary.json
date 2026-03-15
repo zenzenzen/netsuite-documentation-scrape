@@ -1,0 +1,345 @@
+{
+  "recordName": "subsidiary",
+  "title": "subsidiary",
+  "stats": {
+    "operations": 2,
+    "transforms": 0,
+    "schemaFields": 0
+  },
+  "operations": [
+    {
+      "id": "operation--subsidiary-get",
+      "summary": "Get list of records.",
+      "tag": "subsidiary",
+      "method": "GET",
+      "path": "/subsidiary",
+      "isTransform": false,
+      "transformTarget": null,
+      "requestBody": [],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "q:\nstring",
+          "name": "q:\nstring\n in query",
+          "description": "The search query that is used to filter results.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "limit:\ninteger\n(int32)\n1000",
+          "name": "limit:\ninteger\n(int32)\n1000\n in query",
+          "description": "The limit used to specify the number of results on a single page.",
+          "type": "integer\n(int32)\n1000\n integer (int32)",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "offset:\ninteger\n(int32)\n0",
+          "name": "offset:\ninteger\n(int32)\n0\n in query",
+          "description": "The offset used for selecting a specific page of results.",
+          "type": "integer\n(int32)\n0\n integer (int32)",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "200 OK",
+          "name": "200 OK\nsubsidiaryCollection",
+          "description": "List of records.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "subsidiaryCollection",
+              "href": "#/definitions/subsidiaryCollection",
+              "definitionId": "subsidiaryCollection"
+            }
+          ],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "subsidiaryCollection",
+          "href": "#/definitions/subsidiaryCollection",
+          "definitionId": "subsidiaryCollection"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [],
+      "rawText": "subsidiary\nGet list of records.\nGET /subsidiary\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nq: string\nin query\nThe search query that is used to filter results.\nlimit: integer (int32) 1000\nin query\nThe limit used to specify the number of results on a single page.\noffset: integer (int32) 0\nin query\nThe offset used for selecting a specific page of results.\napplication/vnd.oracle.resource+json; type=collection application/vnd.oracle.resource+json; type=error\n200 OK\nsubsidiaryCollection\nList of records.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--subsidiary--id--get",
+      "summary": "Get record.",
+      "tag": "subsidiary",
+      "method": "GET",
+      "path": "/subsidiary/{id}",
+      "isTransform": false,
+      "transformTarget": null,
+      "requestBody": [],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "id:\ninteger\n(int32)",
+          "name": "id:\ninteger\n(int32)\n in path",
+          "description": "Internal identifier.",
+          "type": "integer\n(int32)\n integer (int32)",
+          "subtitle": "in path",
+          "required": true,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "expandSubResources:\nboolean\nfalse",
+          "name": "expandSubResources:\nboolean\nfalse\n in query",
+          "description": "Set to 'true' to automatically expand all sublists, sublist lines, and subrecords on this record.",
+          "type": "boolean\nfalse\n boolean",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "simpleEnumFormat:\nboolean\nfalse",
+          "name": "simpleEnumFormat:\nboolean\nfalse\n in query",
+          "description": "Set to true to return enumeration values in a format that only shows the internal ID value.",
+          "type": "boolean\nfalse\n boolean",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "fields:\nstring",
+          "name": "fields:\nstring\n in query",
+          "description": "The names of the fields and sublists on the record. Only the selected fields and sublists will be returned in the response.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "200 OK",
+          "name": "200 OK\nsubsidiary",
+          "description": "Retrieved record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "subsidiary",
+              "href": "#/definitions/subsidiary",
+              "definitionId": "subsidiary"
+            }
+          ],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "subsidiary",
+          "href": "#/definitions/subsidiary",
+          "definitionId": "subsidiary"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [
+        "subsidiary"
+      ],
+      "rawText": "subsidiary\nGet record.\nGET /subsidiary/{id}\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nid: integer (int32)\nin path\nInternal identifier.\nexpandSubResources: boolean false\nin query\nSet to 'true' to automatically expand all sublists, sublist lines, and subrecords on this record.\nsimpleEnumFormat: boolean false\nin query\nSet to true to return enumeration values in a format that only shows the internal ID value.\nfields: string\nin query\nThe names of the fields and sublists on the record. Only the selected fields and sublists will be returned in the response.\napplication/vnd.oracle.resource+json; type=singular application/vnd.oracle.resource+json; type=error\n200 OK\nsubsidiary\nRetrieved record.\ndefault\nnsError\nError response."
+    }
+  ],
+  "transforms": [],
+  "definition": {
+    "id": "definition-subsidiary",
+    "refs": [
+      {
+        "text": "subsidiary-accountingBookDetailCollection",
+        "href": "#/definitions/subsidiary-accountingBookDetailCollection",
+        "definitionId": "subsidiary-accountingBookDetailCollection"
+      },
+      {
+        "text": "subsidiary-classTranslationCollection",
+        "href": "#/definitions/subsidiary-classTranslationCollection",
+        "definitionId": "subsidiary-classTranslationCollection"
+      },
+      {
+        "text": "currency",
+        "href": "#/definitions/currency",
+        "definitionId": "currency"
+      },
+      {
+        "text": "nsLink",
+        "href": "#/definitions/nsLink",
+        "definitionId": "nsLink"
+      },
+      {
+        "text": "subsidiary-mainAddress",
+        "href": "#/definitions/subsidiary-mainAddress",
+        "definitionId": "subsidiary-mainAddress"
+      },
+      {
+        "text": "subsidiary",
+        "href": "#/definitions/subsidiary",
+        "definitionId": "subsidiary"
+      },
+      {
+        "text": "customer",
+        "href": "#/definitions/customer",
+        "definitionId": "customer"
+      },
+      {
+        "text": "vendor",
+        "href": "#/definitions/vendor",
+        "definitionId": "vendor"
+      },
+      {
+        "text": "subsidiary-returnAddress",
+        "href": "#/definitions/subsidiary-returnAddress",
+        "definitionId": "subsidiary-returnAddress"
+      },
+      {
+        "text": "subsidiary-shippingAddress",
+        "href": "#/definitions/subsidiary-shippingAddress",
+        "definitionId": "subsidiary-shippingAddress"
+      },
+      {
+        "text": "subsidiary-taxRegistrationCollection",
+        "href": "#/definitions/subsidiary-taxRegistrationCollection",
+        "definitionId": "subsidiary-taxRegistrationCollection"
+      }
+    ],
+    "fields": [],
+    "rawText": "subsidiary\naccountingBookDetail: subsidiary-accountingBookDetailCollection\nclassTranslation: subsidiary-classTranslationCollection\ncountry: object\nid Internal identifier: string PR , PS , PT , PW , PY , QA , AD , AE , AF , AG ,\nrefName Reference Name: string\ncurrency: currency\nemail Return Email Address: string\nEnter the return email address for this subsidiary.\nexternalId External ID: string\nfax Fax: string\nEnter the fax number for this subsidiary.\nfullName Full Name: string\nid Internal ID: string\ninternalId Internal ID: integer (int64)\nEither the internalID or externalID field is required for update, delete and get operations.\nisElimination Elimination: boolean\nCheck this box if this subsidiary record is to be used for only journal entries and transactions between subsidiaries. When a loan, sale, or inventory transfer is made between subsidiaries, you use an elimination subsidiary to balance your consolidated books. By entering a journal entry against the elimination subsidiary in the same amount as the inter-company transaction, you have both a record of the transactions and a correct balance.\nisInactive Subsidiary is Inactive: boolean\nCheck this box if this subsidiary is no longer active or used in your account. Inactivated subsidiaries no longer show in the Subsidiary field on records and transactions unless they are currently attached to a record. Web sites of inactive subsidiaries are no longer available online.\nlastModifiedDate Last Modified Date: string (date-time)\nlegalName Legal Name: string\nEnter the legal name of this subsidiary as it should appear on tax forms.\nlinks Links: nsLink\nnsLink\nmainAddress: subsidiary-mainAddress\nname Name: string\nEnter the name of this subsidiary the way it should appear on all forms except checks. On checks, your company name is pre-printed with address and MICR information. The name can be alphanumeric. The maximum number of characters is 83.\nparent: subsidiary\npurchaseOrderAmount Vendor Bill - Purchase Order Amount Tolerance: number (float)\nEnter the tolerance limit for the discrepancy between the amount on the vendor bill and purchase order.\npurchaseOrderQuantity Vendor Bill - Purchase Order Quantity Tolerance: number (float)\nEnter the tolerance limit for the discrepancy between the quantity on the vendor bill and purchase order.\npurchaseOrderQuantityDiff Vendor Bill - Purchase Order Quantity Difference: number (float)\nEnter the difference limit for the discrepancy between the quantity on the vendor bill and purchase order.\nreceiptAmount Vendor Bill - Item Receipt Amount Tolerance: number (float)\nEnter the tolerance limit for the discrepancy between the amount on the vendor bill and item receipt.\nreceiptQuantity Vendor Bill - Item Receipt Quantity Tolerance: number (float)\nEnter the tolerance limit for the discrepancy between the quantity on the vendor bill and item receipt.\nreceiptQuantityDiff Vendor Bill - Item Receipt Quantity Difference: number (float)\nEnter the difference limit for the discrepancy between the quantity on the vendor bill and item receipt.\nrefName Reference Name: string\nrepresentingCustomer: customer\nrepresentingVendor: vendor\nreturnAddress: subsidiary-returnAddress\nshippingAddress: subsidiary-shippingAddress\nstate State: string\nSelect the state or province in which this subsidiary is located.\ntaxRegistration: subsidiary-taxRegistrationCollection\ntranInternalPrefix Transaction Number Prefix: string\nWhen you use auto-generated numbering with NetSuite OneWorld, you can make your transaction number sequences independent per subsidiary. Enter up to 8 alphanumeric characters in this field to number transactions with a prefix to signify this subsidiary. To set up auto-generated numbering, go to Setup > Company > Setup Tasks > Auto-Generated Numbers. On the Transaction Numbers subtab, check the Use Subsidiary box next to each transaction to which this prefix should be applied.\nurl Web Site: string\nEnter this subsidiary's Web Site address, or URL."
+  },
+  "dependencyRecords": [
+    "currency",
+    "customer",
+    "vendor"
+  ]
+}

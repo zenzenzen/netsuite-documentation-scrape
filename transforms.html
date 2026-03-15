@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NetSuite Transform Workflows</title>
+  <style>
+    :root {
+      --bg: #f6f1e8;
+      --paper: rgba(255, 255, 255, 0.84);
+      --paper-strong: rgba(255, 255, 255, 0.96);
+      --ink: #1f2430;
+      --muted: #5d6472;
+      --line: rgba(31, 36, 48, 0.12);
+      --gold: #f2b741;
+      --teal: #148f88;
+      --coral: #e46b53;
+      --blue: #2e71d1;
+      --berry: #9c4dcc;
+      --shadow: 0 18px 48px rgba(28, 36, 54, 0.12);
+      --radius: 24px;
+      --mono: "SFMono-Regular", "Menlo", "Monaco", monospace;
+      --sans: "Avenir Next", "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: var(--sans);
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(242, 183, 65, 0.22), transparent 36%),
+        radial-gradient(circle at top right, rgba(156, 77, 204, 0.18), transparent 34%),
+        linear-gradient(180deg, #efe6d6 0%, #f9f6ef 42%, #eef6f6 100%);
+    }
+
+    a { color: inherit; }
+
+    .shell {
+      width: min(1260px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 28px 0 72px;
+    }
+
+    .hero {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      padding: 18px 0 8px;
+      backdrop-filter: blur(14px);
+    }
+
+    .hero-card {
+      display: grid;
+      gap: 14px;
+      padding: 24px 28px;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      border-radius: 28px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.92), rgba(255,248,237,0.78));
+      box-shadow: var(--shadow);
+    }
+
+    .eyebrow {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--teal);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3.6rem);
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+    }
+
+    .intro {
+      max-width: 780px;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .top-nav, .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .top-link, .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      text-decoration: none;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.78);
+      color: var(--ink);
+      transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+    }
+
+    .top-link:hover, .chip:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(28, 36, 54, 0.08);
+      border-color: rgba(20, 143, 136, 0.34);
+    }
+
+    .top-link strong { font-size: 0.95rem; }
+    .top-link span, .chip small { color: var(--muted); }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .stats-grid {
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+
+    .stat-card, .panel, .record-card, .workflow-card, .matrix-card {
+      border-radius: var(--radius);
+      background: var(--paper);
+      border: 1px solid rgba(255,255,255,0.7);
+      box-shadow: var(--shadow);
+    }
+
+    .stat-card {
+      padding: 20px;
+    }
+
+    .stat-label {
+      margin: 0 0 6px;
+      color: var(--muted);
+      font-size: 0.84rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .stat-value {
+      margin: 0;
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 16px;
+      margin: 38px 0 16px;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      letter-spacing: -0.04em;
+    }
+
+    .section-heading p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 620px;
+      line-height: 1.6;
+    }
+
+    .record-grid {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .record-card, .workflow-card, .matrix-card {
+      padding: 22px;
+    }
+
+    .record-card h3, .workflow-card h3, .matrix-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.3rem;
+    }
+
+    .record-meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      background: rgba(20, 143, 136, 0.12);
+      color: var(--teal);
+    }
+
+    .record-copy, .muted {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .record-link {
+      display: inline-flex;
+      margin-top: 14px;
+      padding: 11px 14px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(20, 143, 136, 0.9), rgba(46, 113, 209, 0.9));
+      color: white;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .record-link.secondary {
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+
+    .panel {
+      padding: 24px;
+    }
+
+    .accordion {
+      display: grid;
+      gap: 12px;
+    }
+
+    details.endpoint {
+      overflow: hidden;
+      border: 1px solid rgba(31, 36, 48, 0.08);
+      border-radius: 20px;
+      background: rgba(255,255,255,0.86);
+    }
+
+    details.endpoint[open] {
+      border-color: rgba(46, 113, 209, 0.26);
+      box-shadow: 0 16px 32px rgba(28, 36, 54, 0.08);
+    }
+
+    details.endpoint summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 18px 20px;
+      display: grid;
+      gap: 10px;
+    }
+
+    details.endpoint summary::-webkit-details-marker { display: none; }
+
+    .endpoint-top {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .method-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 72px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-family: var(--mono);
+      font-weight: 700;
+      font-size: 0.82rem;
+      color: white;
+    }
+
+    .tone-get { background: linear-gradient(135deg, #148f88, #28b6ad); }
+    .tone-post { background: linear-gradient(135deg, #2e71d1, #46a0ff); }
+    .tone-patch { background: linear-gradient(135deg, #c35d15, #f39237); }
+    .tone-put { background: linear-gradient(135deg, #7a4de0, #ab67ff); }
+    .tone-delete { background: linear-gradient(135deg, #bf3148, #f1677d); }
+    .tone-neutral { background: linear-gradient(135deg, #4d5566, #7a8396); }
+
+    .endpoint-path {
+      font-family: var(--mono);
+      font-size: 0.96rem;
+      word-break: break-word;
+    }
+
+    .endpoint-summary {
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .endpoint-body {
+      border-top: 1px solid rgba(31, 36, 48, 0.08);
+      padding: 0 20px 18px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .split {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    .subpanel {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(247, 247, 247, 0.72);
+      border: 1px solid rgba(31, 36, 48, 0.06);
+    }
+
+    .subpanel h4 {
+      margin: 0 0 10px;
+      font-size: 1rem;
+    }
+
+    .subpanel ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    .subpanel li {
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+
+    .schema-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+    }
+
+    .schema-table th,
+    .schema-table td {
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(31, 36, 48, 0.08);
+      vertical-align: top;
+    }
+
+    .schema-table th {
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .schema-table code,
+    .mono {
+      font-family: var(--mono);
+      font-size: 0.92rem;
+    }
+
+    .matrix {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 14px;
+    }
+
+    .matrix th, .matrix td {
+      padding: 12px 10px;
+      border-bottom: 1px solid rgba(31, 36, 48, 0.08);
+      text-align: left;
+    }
+
+    .matrix th {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+
+    .kicker {
+      display: inline-flex;
+      padding: 6px 10px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+      background: rgba(242, 183, 65, 0.18);
+      color: #8a5b00;
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 760px) {
+      .shell { width: min(100vw - 20px, 1260px); }
+      .hero-card, .panel, .record-card, .workflow-card, .matrix-card { padding: 18px; }
+      details.endpoint summary, .endpoint-body { padding-left: 16px; padding-right: 16px; }
+    }
+  </style>
+  
+</head>
+<body>
+  <div class="shell">
+    <div class="hero">
+      <div class="hero-card">
+        <div class="eyebrow">Transform-Centric View</div>
+        <h1>NetSuite Transform Workflows</h1>
+        <div class="intro"><div class="muted">This page separates transform workflows from the standard CRUD surface so you can scan the source-to-target routes faster. It is especially useful when you are tracing record creation chains like customer to salesOrder to invoice or salesOrder to itemFulfillment.</div></div>
+        <div class="top-nav">
+          <a class="top-link" href="./public.html"><strong>Overview</strong> <span>Focus objects</span></a>
+          <a class="top-link" href="./transforms.html"><strong>Transforms</strong> <span>Workflow map</span></a>
+        </div>
+      </div>
+    </div>
+    
+      <div class="section-heading">
+        <h2>Workflow Groups</h2>
+        <p>The cards below cluster transform endpoints by their source record, which makes orchestration patterns easier to recognize.</p>
+      </div>
+      <div class="grid record-grid">
+        <article class="workflow-card">
+        <div class="kicker">cashRefund</div>
+        <h3>Cash Refund</h3>
+        <div class="muted">These are the transform destinations that surfaced in the REST API browser for this source record.</div>
+        <div class="chip-row" style="margin-top:14px;">
+          <a class="chip" href="./public/records/cash-refund.html"><strong>cashRefund</strong><small>to creditMemo</small></a>
+        </div>
+      </article><article class="workflow-card">
+        <div class="kicker">customer</div>
+        <h3>Customer</h3>
+        <div class="muted">These are the transform destinations that surfaced in the REST API browser for this source record.</div>
+        <div class="chip-row" style="margin-top:14px;">
+          <a class="chip" href="./public/records/customer.html"><strong>customer</strong><small>to cashSale</small></a><a class="chip" href="./public/records/customer.html"><strong>customer</strong><small>to customerPayment</small></a><a class="chip" href="./public/records/customer.html"><strong>customer</strong><small>to estimate</small></a><a class="chip" href="./public/records/customer.html"><strong>customer</strong><small>to invoice</small></a><a class="chip" href="./public/records/customer.html"><strong>customer</strong><small>to opportunity</small></a><a class="chip" href="./public/records/customer.html"><strong>customer</strong><small>to salesOrder</small></a><a class="chip" href="./public/records/customer.html"><strong>customer</strong><small>to vendor</small></a>
+        </div>
+      </article><article class="workflow-card">
+        <div class="kicker">estimate</div>
+        <h3>Estimate</h3>
+        <div class="muted">These are the transform destinations that surfaced in the REST API browser for this source record.</div>
+        <div class="chip-row" style="margin-top:14px;">
+          <a class="chip" href="./public/records/estimate.html"><strong>estimate</strong><small>to invoice</small></a><a class="chip" href="./public/records/estimate.html"><strong>estimate</strong><small>to salesOrder</small></a>
+        </div>
+      </article><article class="workflow-card">
+        <div class="kicker">intercompanyTransferOrder</div>
+        <h3>Intercompany Transfer Order</h3>
+        <div class="muted">These are the transform destinations that surfaced in the REST API browser for this source record.</div>
+        <div class="chip-row" style="margin-top:14px;">
+          <a class="chip" href="./public/records/intercompany-transfer-order.html"><strong>intercompanyTransferOrder</strong><small>to itemFulfillment</small></a>
+        </div>
+      </article><article class="workflow-card">
+        <div class="kicker">invoice</div>
+        <h3>Invoice</h3>
+        <div class="muted">These are the transform destinations that surfaced in the REST API browser for this source record.</div>
+        <div class="chip-row" style="margin-top:14px;">
+          <a class="chip" href="./public/records/invoice.html"><strong>invoice</strong><small>to creditMemo</small></a><a class="chip" href="./public/records/invoice.html"><strong>invoice</strong><small>to customerPayment</small></a><a class="chip" href="./public/records/invoice.html"><strong>invoice</strong><small>to returnAuthorization</small></a>
+        </div>
+      </article><article class="workflow-card">
+        <div class="kicker">job</div>
+        <h3>Job</h3>
+        <div class="muted">These are the transform destinations that surfaced in the REST API browser for this source record.</div>
+        <div class="chip-row" style="margin-top:14px;">
+          <a class="chip" href="./public/records/job.html"><strong>job</strong><small>to invoice</small></a><a class="chip" href="./public/records/job.html"><strong>job</strong><small>to salesOrder</small></a>
+        </div>
+      </article><article class="workflow-card">
+        <div class="kicker">opportunity</div>
+        <h3>Opportunity</h3>
+        <div class="muted">These are the transform destinations that surfaced in the REST API browser for this source record.</div>
+        <div class="chip-row" style="margin-top:14px;">
+          <a class="chip" href="./public/records/opportunity.html"><strong>opportunity</strong><small>to invoice</small></a><a class="chip" href="./public/records/opportunity.html"><strong>opportunity</strong><small>to salesOrder</small></a>
+        </div>
+      </article><article class="workflow-card">
+        <div class="kicker">returnAuthorization</div>
+        <h3>Return Authorization</h3>
+        <div class="muted">These are the transform destinations that surfaced in the REST API browser for this source record.</div>
+        <div class="chip-row" style="margin-top:14px;">
+          <a class="chip" href="./public/records/return-authorization.html"><strong>returnAuthorization</strong><small>to creditMemo</small></a>
+        </div>
+      </article><article class="workflow-card">
+        <div class="kicker">salesOrder</div>
+        <h3>Sales Order</h3>
+        <div class="muted">These are the transform destinations that surfaced in the REST API browser for this source record.</div>
+        <div class="chip-row" style="margin-top:14px;">
+          <a class="chip" href="./public/records/sales-order.html"><strong>salesOrder</strong><small>to cashSale</small></a><a class="chip" href="./public/records/sales-order.html"><strong>salesOrder</strong><small>to fulfillmentRequest</small></a><a class="chip" href="./public/records/sales-order.html"><strong>salesOrder</strong><small>to invoice</small></a><a class="chip" href="./public/records/sales-order.html"><strong>salesOrder</strong><small>to itemFulfillment</small></a><a class="chip" href="./public/records/sales-order.html"><strong>salesOrder</strong><small>to returnAuthorization</small></a>
+        </div>
+      </article><article class="workflow-card">
+        <div class="kicker">transferOrder</div>
+        <h3>Transfer Order</h3>
+        <div class="muted">These are the transform destinations that surfaced in the REST API browser for this source record.</div>
+        <div class="chip-row" style="margin-top:14px;">
+          <a class="chip" href="./public/records/transfer-order.html"><strong>transferOrder</strong><small>to itemFulfillment</small></a>
+        </div>
+      </article><article class="workflow-card">
+        <div class="kicker">vendor</div>
+        <h3>Vendor</h3>
+        <div class="muted">These are the transform destinations that surfaced in the REST API browser for this source record.</div>
+        <div class="chip-row" style="margin-top:14px;">
+          <a class="chip" href="./public/records/vendor.html"><strong>vendor</strong><small>to customer</small></a>
+        </div>
+      </article><article class="workflow-card">
+        <div class="kicker">vendorReturnAuthorization</div>
+        <h3>Vendor Return Authorization</h3>
+        <div class="muted">These are the transform destinations that surfaced in the REST API browser for this source record.</div>
+        <div class="chip-row" style="margin-top:14px;">
+          <a class="chip" href="./public/records/vendor-return-authorization.html"><strong>vendorReturnAuthorization</strong><small>to itemFulfillment</small></a>
+        </div>
+      </article>
+      </div>
+
+      <div class="section-heading">
+        <h2>Route Matrix</h2>
+        <p>Use this matrix when you need the exact transform endpoint path without opening each record page individually.</p>
+      </div>
+      <div class="matrix-card">
+        <table class="matrix">
+          <thead>
+            <tr>
+              <th>Source</th>
+              <th>Target</th>
+              <th>Endpoint</th>
+              <th>Summary</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+        <td><a href="./public/records/cash-refund.html">cashRefund</a></td>
+        <td><a href="./public/records/credit-memo.html">creditMemo</a></td>
+        <td><code>/cashRefund/{id}/!transform/creditMemo</code></td>
+        <td>Transform to creditMemo.</td>
+      </tr><tr>
+        <td><a href="./public/records/customer.html">customer</a></td>
+        <td><a href="./public/records/cash-sale.html">cashSale</a></td>
+        <td><code>/customer/{id}/!transform/cashSale</code></td>
+        <td>Transform to cashSale.</td>
+      </tr><tr>
+        <td><a href="./public/records/customer.html">customer</a></td>
+        <td><a href="./public/records/customer-payment.html">customerPayment</a></td>
+        <td><code>/customer/{id}/!transform/customerPayment</code></td>
+        <td>Transform to customerPayment.</td>
+      </tr><tr>
+        <td><a href="./public/records/customer.html">customer</a></td>
+        <td><a href="./public/records/estimate.html">estimate</a></td>
+        <td><code>/customer/{id}/!transform/estimate</code></td>
+        <td>Transform to estimate.</td>
+      </tr><tr>
+        <td><a href="./public/records/customer.html">customer</a></td>
+        <td><a href="./public/records/invoice.html">invoice</a></td>
+        <td><code>/customer/{id}/!transform/invoice</code></td>
+        <td>Transform to invoice.</td>
+      </tr><tr>
+        <td><a href="./public/records/customer.html">customer</a></td>
+        <td><a href="./public/records/opportunity.html">opportunity</a></td>
+        <td><code>/customer/{id}/!transform/opportunity</code></td>
+        <td>Transform to opportunity.</td>
+      </tr><tr>
+        <td><a href="./public/records/customer.html">customer</a></td>
+        <td><a href="./public/records/sales-order.html">salesOrder</a></td>
+        <td><code>/customer/{id}/!transform/salesOrder</code></td>
+        <td>Transform to salesOrder.</td>
+      </tr><tr>
+        <td><a href="./public/records/customer.html">customer</a></td>
+        <td><a href="./public/records/vendor.html">vendor</a></td>
+        <td><code>/customer/{id}/!transform/vendor</code></td>
+        <td>Transform to vendor.</td>
+      </tr><tr>
+        <td><a href="./public/records/estimate.html">estimate</a></td>
+        <td><a href="./public/records/invoice.html">invoice</a></td>
+        <td><code>/estimate/{id}/!transform/invoice</code></td>
+        <td>Transform to invoice.</td>
+      </tr><tr>
+        <td><a href="./public/records/estimate.html">estimate</a></td>
+        <td><a href="./public/records/sales-order.html">salesOrder</a></td>
+        <td><code>/estimate/{id}/!transform/salesOrder</code></td>
+        <td>Transform to salesOrder.</td>
+      </tr><tr>
+        <td><a href="./public/records/intercompany-transfer-order.html">intercompanyTransferOrder</a></td>
+        <td><a href="./public/records/item-fulfillment.html">itemFulfillment</a></td>
+        <td><code>/intercompanyTransferOrder/{id}/!transform/itemFulfillment</code></td>
+        <td>Transform to itemFulfillment.</td>
+      </tr><tr>
+        <td><a href="./public/records/invoice.html">invoice</a></td>
+        <td><a href="./public/records/credit-memo.html">creditMemo</a></td>
+        <td><code>/invoice/{id}/!transform/creditMemo</code></td>
+        <td>Transform to creditMemo.</td>
+      </tr><tr>
+        <td><a href="./public/records/invoice.html">invoice</a></td>
+        <td><a href="./public/records/customer-payment.html">customerPayment</a></td>
+        <td><code>/invoice/{id}/!transform/customerPayment</code></td>
+        <td>Transform to customerPayment.</td>
+      </tr><tr>
+        <td><a href="./public/records/invoice.html">invoice</a></td>
+        <td><a href="./public/records/return-authorization.html">returnAuthorization</a></td>
+        <td><code>/invoice/{id}/!transform/returnAuthorization</code></td>
+        <td>Transform to returnAuthorization.</td>
+      </tr><tr>
+        <td><a href="./public/records/job.html">job</a></td>
+        <td><a href="./public/records/invoice.html">invoice</a></td>
+        <td><code>/job/{id}/!transform/invoice</code></td>
+        <td>Transform to invoice.</td>
+      </tr><tr>
+        <td><a href="./public/records/job.html">job</a></td>
+        <td><a href="./public/records/sales-order.html">salesOrder</a></td>
+        <td><code>/job/{id}/!transform/salesOrder</code></td>
+        <td>Transform to salesOrder.</td>
+      </tr><tr>
+        <td><a href="./public/records/opportunity.html">opportunity</a></td>
+        <td><a href="./public/records/invoice.html">invoice</a></td>
+        <td><code>/opportunity/{id}/!transform/invoice</code></td>
+        <td>Transform to invoice.</td>
+      </tr><tr>
+        <td><a href="./public/records/opportunity.html">opportunity</a></td>
+        <td><a href="./public/records/sales-order.html">salesOrder</a></td>
+        <td><code>/opportunity/{id}/!transform/salesOrder</code></td>
+        <td>Transform to salesOrder.</td>
+      </tr><tr>
+        <td><a href="./public/records/return-authorization.html">returnAuthorization</a></td>
+        <td><a href="./public/records/credit-memo.html">creditMemo</a></td>
+        <td><code>/returnAuthorization/{id}/!transform/creditMemo</code></td>
+        <td>Transform to creditMemo.</td>
+      </tr><tr>
+        <td><a href="./public/records/sales-order.html">salesOrder</a></td>
+        <td><a href="./public/records/cash-sale.html">cashSale</a></td>
+        <td><code>/salesOrder/{id}/!transform/cashSale</code></td>
+        <td>Transform to cashSale.</td>
+      </tr><tr>
+        <td><a href="./public/records/sales-order.html">salesOrder</a></td>
+        <td><a href="./public/records/fulfillment-request.html">fulfillmentRequest</a></td>
+        <td><code>/salesOrder/{id}/!transform/fulfillmentRequest</code></td>
+        <td>Transform to fulfillmentRequest.</td>
+      </tr><tr>
+        <td><a href="./public/records/sales-order.html">salesOrder</a></td>
+        <td><a href="./public/records/invoice.html">invoice</a></td>
+        <td><code>/salesOrder/{id}/!transform/invoice</code></td>
+        <td>Transform to invoice.</td>
+      </tr><tr>
+        <td><a href="./public/records/sales-order.html">salesOrder</a></td>
+        <td><a href="./public/records/item-fulfillment.html">itemFulfillment</a></td>
+        <td><code>/salesOrder/{id}/!transform/itemFulfillment</code></td>
+        <td>Transform to itemFulfillment.</td>
+      </tr><tr>
+        <td><a href="./public/records/sales-order.html">salesOrder</a></td>
+        <td><a href="./public/records/return-authorization.html">returnAuthorization</a></td>
+        <td><code>/salesOrder/{id}/!transform/returnAuthorization</code></td>
+        <td>Transform to returnAuthorization.</td>
+      </tr><tr>
+        <td><a href="./public/records/transfer-order.html">transferOrder</a></td>
+        <td><a href="./public/records/item-fulfillment.html">itemFulfillment</a></td>
+        <td><code>/transferOrder/{id}/!transform/itemFulfillment</code></td>
+        <td>Transform to itemFulfillment.</td>
+      </tr><tr>
+        <td><a href="./public/records/vendor.html">vendor</a></td>
+        <td><a href="./public/records/customer.html">customer</a></td>
+        <td><code>/vendor/{id}/!transform/customer</code></td>
+        <td>Transform to customer.</td>
+      </tr><tr>
+        <td><a href="./public/records/vendor-return-authorization.html">vendorReturnAuthorization</a></td>
+        <td><a href="./public/records/item-fulfillment.html">itemFulfillment</a></td>
+        <td><code>/vendorReturnAuthorization/{id}/!transform/itemFulfillment</code></td>
+        <td>Transform to itemFulfillment.</td>
+      </tr>
+          </tbody>
+        </table>
+      </div>
+    
+  </div>
+  
+</body>
+</html>

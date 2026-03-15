@@ -1,0 +1,19 @@
+{
+  "name": "netsuite-documentation-scrape",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Workspace for scraping and building local NetSuite documentation pages.",
+  "scripts": {
+    "playwright:open": "playwright open",
+    "playwright:codegen": "playwright codegen",
+    "playwright:test": "playwright test",
+    "playwright:install": "playwright install chromium",
+    "netsuite:scrape": "node scripts/netsuite/scrape-rest-browser.mjs",
+    "netsuite:build": "node scripts/netsuite/build-docs-site.mjs",
+    "netsuite:docs": "npm run netsuite:scrape && npm run netsuite:build",
+    "netsuite:serve": "node scripts/netsuite/serve-public.mjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.52.0"
+  }
+}

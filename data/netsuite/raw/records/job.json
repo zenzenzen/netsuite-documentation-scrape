@@ -1,0 +1,1761 @@
+{
+  "recordName": "job",
+  "title": "job",
+  "stats": {
+    "operations": 10,
+    "transforms": 4,
+    "schemaFields": 0
+  },
+  "operations": [
+    {
+      "id": "operation--job-get",
+      "summary": "Get list of records.",
+      "tag": "job",
+      "method": "GET",
+      "path": "/job",
+      "isTransform": false,
+      "transformTarget": null,
+      "requestBody": [],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "q:\nstring",
+          "name": "q:\nstring\n in query",
+          "description": "The search query that is used to filter results.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "limit:\ninteger\n(int32)\n1000",
+          "name": "limit:\ninteger\n(int32)\n1000\n in query",
+          "description": "The limit used to specify the number of results on a single page.",
+          "type": "integer\n(int32)\n1000\n integer (int32)",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "offset:\ninteger\n(int32)\n0",
+          "name": "offset:\ninteger\n(int32)\n0\n in query",
+          "description": "The offset used for selecting a specific page of results.",
+          "type": "integer\n(int32)\n0\n integer (int32)",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "200 OK",
+          "name": "200 OK\njobCollection",
+          "description": "List of records.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "jobCollection",
+              "href": "#/definitions/jobCollection",
+              "definitionId": "jobCollection"
+            }
+          ],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "jobCollection",
+          "href": "#/definitions/jobCollection",
+          "definitionId": "jobCollection"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [],
+      "rawText": "job\nGet list of records.\nGET /job\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nq: string\nin query\nThe search query that is used to filter results.\nlimit: integer (int32) 1000\nin query\nThe limit used to specify the number of results on a single page.\noffset: integer (int32) 0\nin query\nThe offset used for selecting a specific page of results.\napplication/vnd.oracle.resource+json; type=collection application/vnd.oracle.resource+json; type=error\n200 OK\njobCollection\nList of records.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--job-post",
+      "summary": "Insert record.",
+      "tag": "job",
+      "method": "POST",
+      "path": "/job",
+      "isTransform": false,
+      "transformTarget": null,
+      "requestBody": [
+        {
+          "label": "job",
+          "name": "job",
+          "description": "Request body.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "job",
+              "href": "#/definitions/job",
+              "definitionId": "job"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replace:\nstring",
+          "name": "replace:\nstring\n in query",
+          "description": "The names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning",
+          "name": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning\n in header",
+          "description": "Sets the strictness of property name validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nWarning\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError",
+          "name": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError\n in header",
+          "description": "Sets the strictness of property value validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nError\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "204 No Content",
+          "name": "204 No Content",
+          "description": "Inserted record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "job",
+          "href": "#/definitions/job",
+          "definitionId": "job"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [
+        "job"
+      ],
+      "rawText": "job\nInsert record.\nPOST /job\njob\nRequest body.\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nreplace: string\nin query\nThe names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.\nX-NetSuite-PropertyNameValidation: string Error , Warning , Ignore Warning\nin header\nSets the strictness of property name validation.\nX-NetSuite-PropertyValueValidation: string Error , Warning , Ignore Error\nin header\nSets the strictness of property value validation.\napplication/vnd.oracle.resource+json; type=error\n204 No Content\nInserted record.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--job--id--delete",
+      "summary": "Remove record.",
+      "tag": "job",
+      "method": "DELETE",
+      "path": "/job/{id}",
+      "isTransform": false,
+      "transformTarget": null,
+      "requestBody": [],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "id:\ninteger\n(int32)",
+          "name": "id:\ninteger\n(int32)\n in path",
+          "description": "Internal identifier.",
+          "type": "integer\n(int32)\n integer (int32)",
+          "subtitle": "in path",
+          "required": true,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "204 No Content",
+          "name": "204 No Content",
+          "description": "Removed record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [],
+      "rawText": "job\nRemove record.\nDELETE /job/{id}\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nid: integer (int32)\nin path\nInternal identifier.\napplication/vnd.oracle.resource+json; type=error\n204 No Content\nRemoved record.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--job--id--get",
+      "summary": "Get record.",
+      "tag": "job",
+      "method": "GET",
+      "path": "/job/{id}",
+      "isTransform": false,
+      "transformTarget": null,
+      "requestBody": [],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "id:\ninteger\n(int32)",
+          "name": "id:\ninteger\n(int32)\n in path",
+          "description": "Internal identifier.",
+          "type": "integer\n(int32)\n integer (int32)",
+          "subtitle": "in path",
+          "required": true,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "expandSubResources:\nboolean\nfalse",
+          "name": "expandSubResources:\nboolean\nfalse\n in query",
+          "description": "Set to 'true' to automatically expand all sublists, sublist lines, and subrecords on this record.",
+          "type": "boolean\nfalse\n boolean",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "simpleEnumFormat:\nboolean\nfalse",
+          "name": "simpleEnumFormat:\nboolean\nfalse\n in query",
+          "description": "Set to true to return enumeration values in a format that only shows the internal ID value.",
+          "type": "boolean\nfalse\n boolean",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "fields:\nstring",
+          "name": "fields:\nstring\n in query",
+          "description": "The names of the fields and sublists on the record. Only the selected fields and sublists will be returned in the response.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "200 OK",
+          "name": "200 OK\njob",
+          "description": "Retrieved record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "job",
+              "href": "#/definitions/job",
+              "definitionId": "job"
+            }
+          ],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "job",
+          "href": "#/definitions/job",
+          "definitionId": "job"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [
+        "job"
+      ],
+      "rawText": "job\nGet record.\nGET /job/{id}\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nid: integer (int32)\nin path\nInternal identifier.\nexpandSubResources: boolean false\nin query\nSet to 'true' to automatically expand all sublists, sublist lines, and subrecords on this record.\nsimpleEnumFormat: boolean false\nin query\nSet to true to return enumeration values in a format that only shows the internal ID value.\nfields: string\nin query\nThe names of the fields and sublists on the record. Only the selected fields and sublists will be returned in the response.\napplication/vnd.oracle.resource+json; type=singular application/vnd.oracle.resource+json; type=error\n200 OK\njob\nRetrieved record.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--job--id--patch",
+      "summary": "Update record.",
+      "tag": "job",
+      "method": "PATCH",
+      "path": "/job/{id}",
+      "isTransform": false,
+      "transformTarget": null,
+      "requestBody": [
+        {
+          "label": "job",
+          "name": "job",
+          "description": "Request body.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "job",
+              "href": "#/definitions/job",
+              "definitionId": "job"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "id:\ninteger\n(int32)",
+          "name": "id:\ninteger\n(int32)\n in path",
+          "description": "Internal identifier.",
+          "type": "integer\n(int32)\n integer (int32)",
+          "subtitle": "in path",
+          "required": true,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning",
+          "name": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning\n in header",
+          "description": "Sets the strictness of property name validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nWarning\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError",
+          "name": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError\n in header",
+          "description": "Sets the strictness of property value validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nError\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replace:\nstring",
+          "name": "replace:\nstring\n in query",
+          "description": "The names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replaceSelectedFields:\nboolean\nfalse",
+          "name": "replaceSelectedFields:\nboolean\nfalse\n in query",
+          "description": "If set to 'true', all fields that should be deleted in the update request, including body fields, must be included in the 'replace' query parameter.",
+          "type": "boolean\nfalse\n boolean",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "204 No Content",
+          "name": "204 No Content",
+          "description": "Updated record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "job",
+          "href": "#/definitions/job",
+          "definitionId": "job"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [
+        "job"
+      ],
+      "rawText": "job\nUpdate record.\nPATCH /job/{id}\njob\nRequest body.\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nid: integer (int32)\nin path\nInternal identifier.\nX-NetSuite-PropertyNameValidation: string Error , Warning , Ignore Warning\nin header\nSets the strictness of property name validation.\nX-NetSuite-PropertyValueValidation: string Error , Warning , Ignore Error\nin header\nSets the strictness of property value validation.\nreplace: string\nin query\nThe names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.\nreplaceSelectedFields: boolean false\nin query\nIf set to 'true', all fields that should be deleted in the update request, including body fields, must be included in the 'replace' query parameter.\napplication/vnd.oracle.resource+json; type=error\n204 No Content\nUpdated record.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--job--id--put",
+      "summary": "Insert or update record.",
+      "tag": "job",
+      "method": "PUT",
+      "path": "/job/{id}",
+      "isTransform": false,
+      "transformTarget": null,
+      "requestBody": [
+        {
+          "label": "job",
+          "name": "job",
+          "description": "Request body.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "job",
+              "href": "#/definitions/job",
+              "definitionId": "job"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "id:\nstring",
+          "name": "id:\nstring\n in path",
+          "description": "External identifier.",
+          "type": "string\n string",
+          "subtitle": "in path",
+          "required": true,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning",
+          "name": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning\n in header",
+          "description": "Sets the strictness of property name validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nWarning\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError",
+          "name": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError\n in header",
+          "description": "Sets the strictness of property value validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nError\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replace:\nstring",
+          "name": "replace:\nstring\n in query",
+          "description": "The names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replaceSelectedFields:\nboolean\nfalse",
+          "name": "replaceSelectedFields:\nboolean\nfalse\n in query",
+          "description": "If set to 'true', all fields that should be deleted in the update request, including body fields, must be included in the 'replace' query parameter.",
+          "type": "boolean\nfalse\n boolean",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "204 No Content",
+          "name": "204 No Content",
+          "description": "Upserted record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "job",
+          "href": "#/definitions/job",
+          "definitionId": "job"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [
+        "job"
+      ],
+      "rawText": "job\nInsert or update record.\nPUT /job/{id}\njob\nRequest body.\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nid: string\nin path\nExternal identifier.\nX-NetSuite-PropertyNameValidation: string Error , Warning , Ignore Warning\nin header\nSets the strictness of property name validation.\nX-NetSuite-PropertyValueValidation: string Error , Warning , Ignore Error\nin header\nSets the strictness of property value validation.\nreplace: string\nin query\nThe names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.\nreplaceSelectedFields: boolean false\nin query\nIf set to 'true', all fields that should be deleted in the update request, including body fields, must be included in the 'replace' query parameter.\napplication/vnd.oracle.resource+json; type=error\n204 No Content\nUpserted record.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--job--id---transform-cashSale-post",
+      "summary": "Transform to cashSale.",
+      "tag": "job",
+      "method": "POST",
+      "path": "/job/{id}/!transform/cashSale",
+      "isTransform": true,
+      "transformTarget": "cashSale",
+      "requestBody": [
+        {
+          "label": "cashSale",
+          "name": "cashSale",
+          "description": "Request body.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "cashSale",
+              "href": "#/definitions/cashSale",
+              "definitionId": "cashSale"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning",
+          "name": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning\n in header",
+          "description": "Sets the strictness of property name validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nWarning\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError",
+          "name": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError\n in header",
+          "description": "Sets the strictness of property value validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nError\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replace:\nstring",
+          "name": "replace:\nstring\n in query",
+          "description": "The names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "id:\ninteger\n(int32)",
+          "name": "id:\ninteger\n(int32)\n in path",
+          "description": "Internal identifier.",
+          "type": "integer\n(int32)\n integer (int32)",
+          "subtitle": "in path",
+          "required": true,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "204 No Content",
+          "name": "204 No Content\ncashSale",
+          "description": "Transformed record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "cashSale",
+              "href": "#/definitions/cashSale",
+              "definitionId": "cashSale"
+            }
+          ],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "cashSale",
+          "href": "#/definitions/cashSale",
+          "definitionId": "cashSale"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [
+        "cashSale"
+      ],
+      "rawText": "job\nTransform to cashSale.\nPOST /job/{id}/!transform/cashSale\ncashSale\nRequest body.\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nX-NetSuite-PropertyNameValidation: string Error , Warning , Ignore Warning\nin header\nSets the strictness of property name validation.\nX-NetSuite-PropertyValueValidation: string Error , Warning , Ignore Error\nin header\nSets the strictness of property value validation.\nreplace: string\nin query\nThe names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.\nid: integer (int32)\nin path\nInternal identifier.\napplication/vnd.oracle.resource+json; type=singular application/vnd.oracle.resource+json; type=error\n204 No Content\ncashSale\nTransformed record.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--job--id---transform-estimate-post",
+      "summary": "Transform to estimate.",
+      "tag": "job",
+      "method": "POST",
+      "path": "/job/{id}/!transform/estimate",
+      "isTransform": true,
+      "transformTarget": "estimate",
+      "requestBody": [
+        {
+          "label": "estimate",
+          "name": "estimate",
+          "description": "Request body.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "estimate",
+              "href": "#/definitions/estimate",
+              "definitionId": "estimate"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning",
+          "name": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning\n in header",
+          "description": "Sets the strictness of property name validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nWarning\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError",
+          "name": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError\n in header",
+          "description": "Sets the strictness of property value validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nError\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replace:\nstring",
+          "name": "replace:\nstring\n in query",
+          "description": "The names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "id:\ninteger\n(int32)",
+          "name": "id:\ninteger\n(int32)\n in path",
+          "description": "Internal identifier.",
+          "type": "integer\n(int32)\n integer (int32)",
+          "subtitle": "in path",
+          "required": true,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "204 No Content",
+          "name": "204 No Content\nestimate",
+          "description": "Transformed record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "estimate",
+              "href": "#/definitions/estimate",
+              "definitionId": "estimate"
+            }
+          ],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "estimate",
+          "href": "#/definitions/estimate",
+          "definitionId": "estimate"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [
+        "estimate"
+      ],
+      "rawText": "job\nTransform to estimate.\nPOST /job/{id}/!transform/estimate\nestimate\nRequest body.\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nX-NetSuite-PropertyNameValidation: string Error , Warning , Ignore Warning\nin header\nSets the strictness of property name validation.\nX-NetSuite-PropertyValueValidation: string Error , Warning , Ignore Error\nin header\nSets the strictness of property value validation.\nreplace: string\nin query\nThe names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.\nid: integer (int32)\nin path\nInternal identifier.\napplication/vnd.oracle.resource+json; type=singular application/vnd.oracle.resource+json; type=error\n204 No Content\nestimate\nTransformed record.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--job--id---transform-invoice-post",
+      "summary": "Transform to invoice.",
+      "tag": "job",
+      "method": "POST",
+      "path": "/job/{id}/!transform/invoice",
+      "isTransform": true,
+      "transformTarget": "invoice",
+      "requestBody": [
+        {
+          "label": "invoice",
+          "name": "invoice",
+          "description": "Request body.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "invoice",
+              "href": "#/definitions/invoice",
+              "definitionId": "invoice"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning",
+          "name": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning\n in header",
+          "description": "Sets the strictness of property name validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nWarning\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError",
+          "name": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError\n in header",
+          "description": "Sets the strictness of property value validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nError\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replace:\nstring",
+          "name": "replace:\nstring\n in query",
+          "description": "The names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "id:\ninteger\n(int32)",
+          "name": "id:\ninteger\n(int32)\n in path",
+          "description": "Internal identifier.",
+          "type": "integer\n(int32)\n integer (int32)",
+          "subtitle": "in path",
+          "required": true,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "204 No Content",
+          "name": "204 No Content\ninvoice",
+          "description": "Transformed record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "invoice",
+              "href": "#/definitions/invoice",
+              "definitionId": "invoice"
+            }
+          ],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "invoice",
+          "href": "#/definitions/invoice",
+          "definitionId": "invoice"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [
+        "invoice"
+      ],
+      "rawText": "job\nTransform to invoice.\nPOST /job/{id}/!transform/invoice\ninvoice\nRequest body.\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nX-NetSuite-PropertyNameValidation: string Error , Warning , Ignore Warning\nin header\nSets the strictness of property name validation.\nX-NetSuite-PropertyValueValidation: string Error , Warning , Ignore Error\nin header\nSets the strictness of property value validation.\nreplace: string\nin query\nThe names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.\nid: integer (int32)\nin path\nInternal identifier.\napplication/vnd.oracle.resource+json; type=singular application/vnd.oracle.resource+json; type=error\n204 No Content\ninvoice\nTransformed record.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--job--id---transform-salesOrder-post",
+      "summary": "Transform to salesOrder.",
+      "tag": "job",
+      "method": "POST",
+      "path": "/job/{id}/!transform/salesOrder",
+      "isTransform": true,
+      "transformTarget": "salesOrder",
+      "requestBody": [
+        {
+          "label": "salesOrder",
+          "name": "salesOrder",
+          "description": "Request body.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "salesOrder",
+              "href": "#/definitions/salesOrder",
+              "definitionId": "salesOrder"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning",
+          "name": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning\n in header",
+          "description": "Sets the strictness of property name validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nWarning\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError",
+          "name": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError\n in header",
+          "description": "Sets the strictness of property value validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nError\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replace:\nstring",
+          "name": "replace:\nstring\n in query",
+          "description": "The names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "id:\ninteger\n(int32)",
+          "name": "id:\ninteger\n(int32)\n in path",
+          "description": "Internal identifier.",
+          "type": "integer\n(int32)\n integer (int32)",
+          "subtitle": "in path",
+          "required": true,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "204 No Content",
+          "name": "204 No Content\nsalesOrder",
+          "description": "Transformed record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "salesOrder",
+              "href": "#/definitions/salesOrder",
+              "definitionId": "salesOrder"
+            }
+          ],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "salesOrder",
+          "href": "#/definitions/salesOrder",
+          "definitionId": "salesOrder"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [
+        "salesOrder"
+      ],
+      "rawText": "job\nTransform to salesOrder.\nPOST /job/{id}/!transform/salesOrder\nsalesOrder\nRequest body.\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nX-NetSuite-PropertyNameValidation: string Error , Warning , Ignore Warning\nin header\nSets the strictness of property name validation.\nX-NetSuite-PropertyValueValidation: string Error , Warning , Ignore Error\nin header\nSets the strictness of property value validation.\nreplace: string\nin query\nThe names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.\nid: integer (int32)\nin path\nInternal identifier.\napplication/vnd.oracle.resource+json; type=singular application/vnd.oracle.resource+json; type=error\n204 No Content\nsalesOrder\nTransformed record.\ndefault\nnsError\nError response."
+    }
+  ],
+  "transforms": [
+    {
+      "id": "operation--job--id---transform-cashSale-post",
+      "source": "job",
+      "target": "cashSale",
+      "method": "POST",
+      "path": "/job/{id}/!transform/cashSale",
+      "summary": "Transform to cashSale.",
+      "dependencyRecords": [
+        "cashSale"
+      ],
+      "dependencyRefs": [
+        {
+          "text": "cashSale",
+          "href": "#/definitions/cashSale",
+          "definitionId": "cashSale"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ]
+    },
+    {
+      "id": "operation--job--id---transform-estimate-post",
+      "source": "job",
+      "target": "estimate",
+      "method": "POST",
+      "path": "/job/{id}/!transform/estimate",
+      "summary": "Transform to estimate.",
+      "dependencyRecords": [
+        "estimate"
+      ],
+      "dependencyRefs": [
+        {
+          "text": "estimate",
+          "href": "#/definitions/estimate",
+          "definitionId": "estimate"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ]
+    },
+    {
+      "id": "operation--job--id---transform-invoice-post",
+      "source": "job",
+      "target": "invoice",
+      "method": "POST",
+      "path": "/job/{id}/!transform/invoice",
+      "summary": "Transform to invoice.",
+      "dependencyRecords": [
+        "invoice"
+      ],
+      "dependencyRefs": [
+        {
+          "text": "invoice",
+          "href": "#/definitions/invoice",
+          "definitionId": "invoice"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ]
+    },
+    {
+      "id": "operation--job--id---transform-salesOrder-post",
+      "source": "job",
+      "target": "salesOrder",
+      "method": "POST",
+      "path": "/job/{id}/!transform/salesOrder",
+      "summary": "Transform to salesOrder.",
+      "dependencyRecords": [
+        "salesOrder"
+      ],
+      "dependencyRefs": [
+        {
+          "text": "salesOrder",
+          "href": "#/definitions/salesOrder",
+          "definitionId": "salesOrder"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ]
+    }
+  ],
+  "definition": {
+    "id": "definition-job",
+    "refs": [
+      {
+        "text": "job-addressBookCollection",
+        "href": "#/definitions/job-addressBookCollection",
+        "definitionId": "job-addressBookCollection"
+      },
+      {
+        "text": "job-bBudgetCollection",
+        "href": "#/definitions/job-bBudgetCollection",
+        "definitionId": "job-bBudgetCollection"
+      },
+      {
+        "text": "nsResource",
+        "href": "#/definitions/nsResource",
+        "definitionId": "nsResource"
+      },
+      {
+        "text": "billingAccount",
+        "href": "#/definitions/billingAccount",
+        "definitionId": "billingAccount"
+      },
+      {
+        "text": "billingSchedule",
+        "href": "#/definitions/billingSchedule",
+        "definitionId": "billingSchedule"
+      },
+      {
+        "text": "job-cBudgetCollection",
+        "href": "#/definitions/job-cBudgetCollection",
+        "definitionId": "job-cBudgetCollection"
+      },
+      {
+        "text": "customerCategory",
+        "href": "#/definitions/customerCategory",
+        "definitionId": "customerCategory"
+      },
+      {
+        "text": "contact",
+        "href": "#/definitions/contact",
+        "definitionId": "contact"
+      },
+      {
+        "text": "contactCollection",
+        "href": "#/definitions/contactCollection",
+        "definitionId": "contactCollection"
+      },
+      {
+        "text": "currency",
+        "href": "#/definitions/currency",
+        "definitionId": "currency"
+      },
+      {
+        "text": "revRecTemplate",
+        "href": "#/definitions/revRecTemplate",
+        "definitionId": "revRecTemplate"
+      },
+      {
+        "text": "jobType",
+        "href": "#/definitions/jobType",
+        "definitionId": "jobType"
+      },
+      {
+        "text": "nsLink",
+        "href": "#/definitions/nsLink",
+        "definitionId": "nsLink"
+      },
+      {
+        "text": "account",
+        "href": "#/definitions/account",
+        "definitionId": "account"
+      },
+      {
+        "text": "job-paStatementCollection",
+        "href": "#/definitions/job-paStatementCollection",
+        "definitionId": "job-paStatementCollection"
+      },
+      {
+        "text": "job-percentCompleteOverrideCollection",
+        "href": "#/definitions/job-percentCompleteOverrideCollection",
+        "definitionId": "job-percentCompleteOverrideCollection"
+      },
+      {
+        "text": "job-plStatementCollection",
+        "href": "#/definitions/job-plStatementCollection",
+        "definitionId": "job-plStatementCollection"
+      },
+      {
+        "text": "customer",
+        "href": "#/definitions/customer",
+        "definitionId": "customer"
+      },
+      {
+        "text": "partner",
+        "href": "#/definitions/partner",
+        "definitionId": "partner"
+      },
+      {
+        "text": "vendor",
+        "href": "#/definitions/vendor",
+        "definitionId": "vendor"
+      },
+      {
+        "text": "employee",
+        "href": "#/definitions/employee",
+        "definitionId": "employee"
+      },
+      {
+        "text": "subsidiary",
+        "href": "#/definitions/subsidiary",
+        "definitionId": "subsidiary"
+      }
+    ],
+    "fields": [],
+    "rawText": "job\naccountNumber Account: string\nIf you assign account numbers for projects, enter the account number here.\nactualTime Actual Work: string\nIndicates the actual time entered for the project, including open, pending approval, approved, unapproved, and rejected time transactions. This total includes time transactions entered against project tasks and the project as a whole without a specified task. If this project is set to include CRM tasks in project totals, then Actual Work also includes time entered for CRM tasks associated with this project.\naddressBook: job-addressBookCollection\nallocatedTime Allocated Work: string\nAllocated work is the total number of hours allocated to this project. This includes hours allocated directly to project tasks.\nallowAllResourcesForTasks Display All Resources for Project Task Assignment: boolean\nCheck this box to allow any employee or vendor designated as a project resource on the entity record or any employee or vendor that has previously been assigned to a project to be assigned to a project task. When you enable this preference, any resource that has been previously assigned to a project appears in the list of available resources. This allows for the possibility that an employee or vendor no longer designated as a project resource can still be assigned to a new project task. Clear the box if you want to restrict project task assignment to resources you add to the Resources subtab. If you use Resource Allocations, enabling this preference overrides the need to allocate resources prior to making task assignments. Disabling this preference requires you to allocate defined resources prior to making task assignments. Generic resources are available for task assignments regardless of project allocation.\nallowExpenses Allow Expenses: boolean\nCheck this box to allow expenses to be entered for this project. If the Limit Time Entry to Assignees field is also checked, then only resources listed on the Resource subtab will be able to see this project in the Customer/Project select list for Expense Reporting.\nallowTaskTimeForRsrcAlloc Allow Allocated Resources to Enter Time to All Tasks: boolean\nCheck this box to allow resources allocated to this project to enter time against project tasks regardless of being assigned to the task. When this preference is enabled, the estimated work for a project task is updated with any additional time tracked by an allocated resource.\nallowTime Allow Time Entry: boolean\nCheck this box to enable time to be entered for this project. If the Limit Time Entry to Assignees field is checked, the project appears only in the Customer/Project dropdown for resources listed on the Resource tab of the project.\napplyProjectExpenseTypeToAll Apply to all time entries: boolean\nCheck this box to apply the selected project expense type to all time entries for this project. This preference overrides any other project expense type for time transactions recorded for this project.\nautoName Auto: boolean\nClear the box to manually enter an ID for this project. If you leave the box checked, then NetSuite copies the project name to create the ID.\naverageProjectPlanRecalculationDuration Average Recalculation Duration: string\nbBudget: job-bBudgetCollection\nbBudgetUseCalculatedValues Use Calculated Values for all Billing Budgets: boolean\nCheck this box to use calculated values for billing budget categories. You will no longer be able to manually enter amounts. Billing budgets will not be calculated for non-billable tasks.\nbaselineBudget: nsResource\nbillingAccount: billingAccount\nbillingRateCard: nsResource\nbillingSchedule: billingSchedule\ncBudget: job-cBudgetCollection\ncBudgetLaborBudgetFromAlloc Calculate Labor Budgets from Resource Allocations: boolean\nCheck this box to automatically calculate labor budgets from resource allocations. You will no longer be able to enter budget amounts manually.\ncBudgetUseCalculatedValues Use Calculated Values for all Cost Budgets: boolean\nCheck this box to automatically calculate labor budgets. You will no longer be able to enter budget amounts manually.\ncalculatedEndDate Calculated End Date: string (date)\nNetSuite calculates the end date for the project as the date that all project tasks will be complete according to the current project schedule. Calculated End Date changes as the project schedule changes.\ncalculatedEndDateBaseline Calculated End Date Baseline: string (date)\nThe Calculated End Date when the baseline was set.\ncalculatedStartDate Calculated Start Date: string (date)\nIf you selected Backward in the Scheduling Method field, NetSuite displays the calculated start date of your project here.\ncalculatedStartDateBaseline Calculated Start Date Baseline: string (date)\ncalculatedWork Calculated Work: string\nTotal time calculated by NetSuite based on planned and actual time entered for project tasks. The Calculated Work field cannot be manually edited.\ncalculatedWorkBaseline Calculated Work Baseline: string\ncategory: customerCategory\nchargeAmountBilled Processed: number (double)\nThis is the total amount that has been billed to the customer.\nchargeAmountHoldForBilling Hold: number (double)\nThe amount displayed is the total of charges with a Hold status. These charges must be set to Ready for Billing to be included on project sales orders.\nchargeAmountPending Total Pending Charges: number (double)\nThis is the total amount of charges that have been generated but not yet billed. Click the amount in this field to open the Manage Pending Charges page. This page allows you to review and update the stage of charges generated for this project.\nchargeAmountReadyForBilling Ready: number (double)\nThis amount is the total of charges with a status of Ready for Billing. These charges can be included on a project sales order.\nchargeAmountRemaining Remaining: number (double)\nThis is the total charge amount that has not been billed or put in the Ready stage.\nchargeExpenseAmount Expense: number (double)\nThe total billed expense charges are displayed here.\nchargeLaborAmount Labor: number (double)\nThe total billed labor charges are displayed here.\ncomments Comments: string\nEnter other information about this project.\ncompanyName Project Name: string\nEnter a unique project name. If you use Auto-Generated Numbering, it is important to enter the project name here because the Project ID does not include the project name.\ncontact: contact\ncontactList: contactCollection\ncreateChargeRule Create Charge Rule: boolean\ncurrency: currency\ncustomForm: object\nid Internal identifier: string 47 , -10003 , -3 , -10006\nrefName Reference Name: string\ndateCreated Date Created: string (date-time)\nIndicates the date the project was created.\ndefaultAddress Default Address: string\nEnter a default address.\ndefaultShippingAddress Default Shipping Address: string\nReturns the default shipping address for the job, if one is entered on the customer record.\nendDate Actual End Date: string (date)\nEnter the date the project is finished.\nentityId Entity ID: string\nNetSuite copies the Project Name as the Project ID. If you want to manually enter a Project ID, clear the Auto check box next to the field and enter the ID. If you use Auto-Generated Numbering, then NetSuite creates this ID automatically based on your settings at Setup > Company Set Up Auto-Generated Numbers.\nentityStatus: object\nid Internal identifier: string 1 , 2 , 3 , 4 , 5\nrefName Reference Name: string\nestimateAtCompletionBudget: nsResource\nestimateRevRecTemplate: revRecTemplate\nestimatedLaborCostBaseLine Estimated Labor Cost Baseline: number (double)\nThe value of Estimated Labor Cost when the baseline was set.\nestimatedTime Initial Time Budget: string\nIndicates the sum of the initial time budgeted for the CRM Tasks that are included in this project.\nestimatedTimeOverrideBaseline Estimated Work Baseline: string\nThe value in the Estimated Work field when the baseline was set.\nestimatedcost Estimated Cost: number (double)\nEnter the projected cost to complete this project.\nestimatedcostjc Estimated Cost: number (double)\nThe estimated cost for completing the project is displayed here. This cost is calculated from the labor cost of project tasks.\nestimatedgrossprofit Estimated Gross Profit: number (double)\nEstimated Gross Profit is calculated as follows: For projects with the Job Costing and Project Budgeting feature, Estimated Cost and Estimated Revenue disabled: For Fix Bid projects: [Project Price - Estimated Labor Cost]; for all other cases: [Estimated Labor Revenue - Estimated Labor Cost]. For projects with the Job Costing and Project Budgeting feature disabled, Estimated Cost, or Estimated Revenue enabled: [Estimated Revenue - Estimated Cost]. Note: The field that you do not use gets a 0 value. For projects with the Job Costing and Project Budgeting feature enabled: [Estimated Revenue - Estimated Cost]\nestimatedgrossprofitpercent Estimated Gross Profit Percent: number (double)\nShows the expected profit percentage, calculated as: For Time and Materials projects: [Estimated Gross Profit / Estimated Labor Revenue For Fixed Bid projects: [Estimated Gross Profit / Project Price]\nestimatedlaborcost Estimated Labor Cost: number (double)\nEstimated Labor Cost is the total amount expected to be spent on labor for the project.\nestimatedlaborrevenue Estimated Labor Revenue: number (double)\nIndicates the projected revenue to be billed for work performed on this project.\nestimatedrevenue Estimated Revenue: number (double)\nEnter the projected revenue to be billed for work performed on this project.\nestimatedrevenuejc Estimated Revenue: number (double)\nThe estimated revenue for this project is displayed here. The estimate is calculated from the labor price of project tasks.\nestimatedtimeoverride Estimated Work: string\nEstimated Work is the sum of the estimated work for all project tasks. Estimated Work also includes the Current Time Budget amounts for all CRM tasks if the Include CRM Tasks in Project Totals check box is selected for this project.\nexternalId External ID: string\nReturns the job's external ID, if one is assigned.\nforecastChargeRunOnDemand Forecast Charge Run on Demand: boolean\nCheck this box to only update actual and forecast charge runs when manually triggered and during the nightly update. Actual and forecast charges will no longer be automatically updated when a change to the project is made.\nfxRate Exchange Rate: number (double)\nShows the currency's exchange rate when you create the project. You can edit the rate for this project if you want to use a different rate for cost and labor estimates.\nid Internal ID: string\nReturns the job's internal ID.\nincludeCrmTasksInTotals Include CRM Task In Project Totals: boolean\nCheck this box to allow CRM tasks to be included in costs, planned time, and actual time for this project.\nisExemptTime Classify Time as Exempt: boolean\nExempt time is excluded when calculating utilization. It is not included in the numerator or denominator of the utilization formula.\nisInactive Inactive: boolean\nIf you check this box, then the project no longer appears on the list of projects. You cannot edit or make any changes to a project marked inactive. Check the Show Inactives box at the bottom of the List page to view inactive projects.\nisProductiveTime Classify Time as Productive: boolean\nProductive time is time worked on a project but not included when calculating revenue for the project. Productive time is not billed to the customer. Training and pre-sales support are examples of productive time.\nisUtilizedTime Classify Time as Utilized: boolean\nUtilized time directly contributes to the revenue for a project.\njobBillingType: object\nid Internal identifier: string 1 , 2 , 3 , 4 , 5\nrefName Reference Name: string\njobItem: nsResource\njobPrice Project Price: number (double)\nEnter the price billed to the customer on transactions. Project Price is also used to calculate the gross profit margin for the project.\njobType: jobType\nlanguage: object\nid Internal identifier: string ro_RO , af_ZA , tl_PH , pt_BR , th_TH , bn_BD , cs_CZ , ca_ES , hu_HU , kn_IN ,\nrefName Reference Name: string\nlastBaseLineDate Last Baseline Date: string (date)\nThe date when the last project baseline was set.\nlastModifiedDate Last Modified Date: string (date-time)\nReturns the date on which the job record was last modified.\nlastProjectPlanRecalculationDateTime Last Recalculation: string (date-time)\nlastProjectPlanRecalculationDuration Last Recalculation Duration: string\nlastProjectPlanRecalculationStatus Last Recalculation Status: string\nlastProjectPlanRecalculationTrigger Last Recalculation Trigger: string\nlimitTimeToAssignees Limit Time and Expenses To Resources: boolean\nCheck this box to allow only resources listed on the Resources subtab for the project to enter time and expenses. Clearing this box allows any project resource to track time against this project and its project tasks. Only resources listed on the Resource tab will be able to see the project in Project select lists for time and expenses. Note: Regardless of whether this box is marked, in the Vendor Center, this project will only show if the vendor is listed as a resource of the project.\nlinks Links: nsLink\nnsLink\nmaterializeTime Create Planned Time Entries: boolean\nCheck this box to generate time entries for planned work on project tasks. Resources assigned to this project will be able to see their planned time in Time Tracking or Timesheets. If you use Project Budgets, planned time entries are required to generate calculated costs.\nopeningBalance Opening Balance: number (double)\nopeningBalanceAccount: account\nopeningBalanceDate Opening Balance Date: string (date)\npaStatement: job-paStatementCollection\nparent: nsResource\npercentComplete Rev Rec Override Percent Complete: number (double)\nEnter an estimate of how much of the total project work is complete. This percentage is not calculated or updated by NetSuite.\npercentCompleteByRsrcAlloc Percent Complete by Allocated Work: number (double)\nPercent Complete by Allocated Work is the progress of the project based on the allocated resources. This field can be useful in showing when projects require more effort than was originally planned.\npercentCompleteOverride: job-percentCompleteOverrideCollection\npercentTimeComplete Percent Work Complete: number (double)\nShows the percent of the total planned project time that has been completed. Percent Work Complete is calculated by dividing the total number of actual hours worked and reported in Time Tracking by the number of hours entered in the Estimated Work field for each project task. The percentage is 100% when the status of all project tasks is Completed.\nplStatement: job-plStatementCollection\nplannedRevenue Planned Revenue: number (double)\nplannedwork Planned Work: string\nTotal of all planned time entered for project tasks. This field is not updated when time is entered outside the planned time. Planned time can only be updated by manually adding addition time to project tasks.\nplannedworkbaseline Planned Work Baseline: string\nprojectCompletelyBilled Project Completely Billed: boolean\nprojectExpenseType: nsResource\nprojectManager: one of: [ customer, partner, vendor, nsResource, employee, contact ]\nprojectedEndDate Estimated End Date: string (date)\nEnter the date you plan to complete all project tasks by. You can update this date at any time. If you use Advanced Projects, NetSuite calculates an end date based on the project schedule and displays it in Calculated End Date.\nprojectedEndDateBaseline Estimated End Date Baseline: string (date)\nThe Estimated End Date when the baseline was set. Baseline information is available only if you use Advanced Projects.\nrecognizedRevenue Recognize Revenue: number (double)\nrefName Reference Name: string\nrevRecForecastRule: nsResource\nscheduledEndDateBaseline Scheduled End Date Baseline: string (date)\nscheduledenddate Scheduled End Date: string (date)\nIf you selected Backward in the Scheduling Method field, enter the end date for your project.\nschedulingMethod: object\nid Internal identifier: string BACKWARD , FORWARD\nrefName Reference Name: string\nsourceServiceItemFromRateCard Source Service Item to Task Assignments from Rate Card: boolean\nDisplays a check mark if the Source Service Item to Task Assignments from Rate Card box is checked on the job record.\nstartDateBaseline Start Date Baseline: string (date)\nThe Start Date when the baseline was set. Baseline information is available only if you use Advanced Projects.\nstartdate Start Date: string (date)\nEnter the estimated date work will start on the project. You can change this date at any time during the life of the project. NetSuite schedules all project tasks without predecessors to start on this date.\nsubsidiary: subsidiary\ntimeRemaining Remaining Work: string\nIndicates the time for work yet to be done on all project tasks, calculated as: [Estimated Work(all tasks) - Actual Work (all tasks)]\ntimeapproval: object\nid Internal identifier: string 1 , 2 , 3 , 4\nrefName Reference Name: string\ntotalRevenue Total (Revenue): number (double)\nuseAllocatedTimeForForecast Use Allocated Time for Forecast: boolean\nCheck this box to use allocated time for project forecast reports.\nusePercentCompleteOverride Use Percent Complete Override for Forecasting: boolean\nCheck this box to generate forecast revenue plans based on the latest status of the Rev Rec Percent Complete Override subtab. Any planned time entries in the project record are ignored for revenue recognition and forecasting purposes. The Cumulative Percent Complete on the subtab must equal 100. For more information, see the help topic Using the Rev Rec Percent Complete Override Subtab.\nwbs: nsResource"
+  },
+  "dependencyRecords": [
+    "cashSale",
+    "estimate",
+    "invoice",
+    "salesOrder",
+    "billingAccount",
+    "billingSchedule",
+    "customerCategory",
+    "contact",
+    "currency",
+    "revRecTemplate",
+    "jobType",
+    "account",
+    "customer",
+    "partner",
+    "vendor",
+    "employee",
+    "subsidiary"
+  ]
+}

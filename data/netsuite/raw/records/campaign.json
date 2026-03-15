@@ -1,0 +1,909 @@
+{
+  "recordName": "campaign",
+  "title": "campaign",
+  "stats": {
+    "operations": 5,
+    "transforms": 0,
+    "schemaFields": 0
+  },
+  "operations": [
+    {
+      "id": "operation--campaign-post",
+      "summary": "Insert record.",
+      "tag": "campaign",
+      "method": "POST",
+      "path": "/campaign",
+      "isTransform": false,
+      "transformTarget": null,
+      "requestBody": [
+        {
+          "label": "campaign",
+          "name": "campaign",
+          "description": "Request body.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "campaign",
+              "href": "#/definitions/campaign",
+              "definitionId": "campaign"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replace:\nstring",
+          "name": "replace:\nstring\n in query",
+          "description": "The names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning",
+          "name": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning\n in header",
+          "description": "Sets the strictness of property name validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nWarning\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError",
+          "name": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError\n in header",
+          "description": "Sets the strictness of property value validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nError\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "204 No Content",
+          "name": "204 No Content",
+          "description": "Inserted record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "campaign",
+          "href": "#/definitions/campaign",
+          "definitionId": "campaign"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [
+        "campaign"
+      ],
+      "rawText": "campaign\nInsert record.\nPOST /campaign\ncampaign\nRequest body.\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nreplace: string\nin query\nThe names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.\nX-NetSuite-PropertyNameValidation: string Error , Warning , Ignore Warning\nin header\nSets the strictness of property name validation.\nX-NetSuite-PropertyValueValidation: string Error , Warning , Ignore Error\nin header\nSets the strictness of property value validation.\napplication/vnd.oracle.resource+json; type=error\n204 No Content\nInserted record.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--campaign--id--delete",
+      "summary": "Remove record.",
+      "tag": "campaign",
+      "method": "DELETE",
+      "path": "/campaign/{id}",
+      "isTransform": false,
+      "transformTarget": null,
+      "requestBody": [],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "id:\ninteger\n(int32)",
+          "name": "id:\ninteger\n(int32)\n in path",
+          "description": "Internal identifier.",
+          "type": "integer\n(int32)\n integer (int32)",
+          "subtitle": "in path",
+          "required": true,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "204 No Content",
+          "name": "204 No Content",
+          "description": "Removed record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [],
+      "rawText": "campaign\nRemove record.\nDELETE /campaign/{id}\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nid: integer (int32)\nin path\nInternal identifier.\napplication/vnd.oracle.resource+json; type=error\n204 No Content\nRemoved record.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--campaign--id--get",
+      "summary": "Get record.",
+      "tag": "campaign",
+      "method": "GET",
+      "path": "/campaign/{id}",
+      "isTransform": false,
+      "transformTarget": null,
+      "requestBody": [],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "id:\ninteger\n(int32)",
+          "name": "id:\ninteger\n(int32)\n in path",
+          "description": "Internal identifier.",
+          "type": "integer\n(int32)\n integer (int32)",
+          "subtitle": "in path",
+          "required": true,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "expandSubResources:\nboolean\nfalse",
+          "name": "expandSubResources:\nboolean\nfalse\n in query",
+          "description": "Set to 'true' to automatically expand all sublists, sublist lines, and subrecords on this record.",
+          "type": "boolean\nfalse\n boolean",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "simpleEnumFormat:\nboolean\nfalse",
+          "name": "simpleEnumFormat:\nboolean\nfalse\n in query",
+          "description": "Set to true to return enumeration values in a format that only shows the internal ID value.",
+          "type": "boolean\nfalse\n boolean",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "fields:\nstring",
+          "name": "fields:\nstring\n in query",
+          "description": "The names of the fields and sublists on the record. Only the selected fields and sublists will be returned in the response.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "200 OK",
+          "name": "200 OK\ncampaign",
+          "description": "Retrieved record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "campaign",
+              "href": "#/definitions/campaign",
+              "definitionId": "campaign"
+            }
+          ],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "campaign",
+          "href": "#/definitions/campaign",
+          "definitionId": "campaign"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [
+        "campaign"
+      ],
+      "rawText": "campaign\nGet record.\nGET /campaign/{id}\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nid: integer (int32)\nin path\nInternal identifier.\nexpandSubResources: boolean false\nin query\nSet to 'true' to automatically expand all sublists, sublist lines, and subrecords on this record.\nsimpleEnumFormat: boolean false\nin query\nSet to true to return enumeration values in a format that only shows the internal ID value.\nfields: string\nin query\nThe names of the fields and sublists on the record. Only the selected fields and sublists will be returned in the response.\napplication/vnd.oracle.resource+json; type=singular application/vnd.oracle.resource+json; type=error\n200 OK\ncampaign\nRetrieved record.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--campaign--id--patch",
+      "summary": "Update record.",
+      "tag": "campaign",
+      "method": "PATCH",
+      "path": "/campaign/{id}",
+      "isTransform": false,
+      "transformTarget": null,
+      "requestBody": [
+        {
+          "label": "campaign",
+          "name": "campaign",
+          "description": "Request body.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "campaign",
+              "href": "#/definitions/campaign",
+              "definitionId": "campaign"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "id:\ninteger\n(int32)",
+          "name": "id:\ninteger\n(int32)\n in path",
+          "description": "Internal identifier.",
+          "type": "integer\n(int32)\n integer (int32)",
+          "subtitle": "in path",
+          "required": true,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning",
+          "name": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning\n in header",
+          "description": "Sets the strictness of property name validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nWarning\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError",
+          "name": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError\n in header",
+          "description": "Sets the strictness of property value validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nError\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replace:\nstring",
+          "name": "replace:\nstring\n in query",
+          "description": "The names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replaceSelectedFields:\nboolean\nfalse",
+          "name": "replaceSelectedFields:\nboolean\nfalse\n in query",
+          "description": "If set to 'true', all fields that should be deleted in the update request, including body fields, must be included in the 'replace' query parameter.",
+          "type": "boolean\nfalse\n boolean",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "204 No Content",
+          "name": "204 No Content",
+          "description": "Updated record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "campaign",
+          "href": "#/definitions/campaign",
+          "definitionId": "campaign"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [
+        "campaign"
+      ],
+      "rawText": "campaign\nUpdate record.\nPATCH /campaign/{id}\ncampaign\nRequest body.\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nid: integer (int32)\nin path\nInternal identifier.\nX-NetSuite-PropertyNameValidation: string Error , Warning , Ignore Warning\nin header\nSets the strictness of property name validation.\nX-NetSuite-PropertyValueValidation: string Error , Warning , Ignore Error\nin header\nSets the strictness of property value validation.\nreplace: string\nin query\nThe names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.\nreplaceSelectedFields: boolean false\nin query\nIf set to 'true', all fields that should be deleted in the update request, including body fields, must be included in the 'replace' query parameter.\napplication/vnd.oracle.resource+json; type=error\n204 No Content\nUpdated record.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--campaign--id--put",
+      "summary": "Insert or update record.",
+      "tag": "campaign",
+      "method": "PUT",
+      "path": "/campaign/{id}",
+      "isTransform": false,
+      "transformTarget": null,
+      "requestBody": [
+        {
+          "label": "campaign",
+          "name": "campaign",
+          "description": "Request body.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "campaign",
+              "href": "#/definitions/campaign",
+              "definitionId": "campaign"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "id:\nstring",
+          "name": "id:\nstring\n in path",
+          "description": "External identifier.",
+          "type": "string\n string",
+          "subtitle": "in path",
+          "required": true,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning",
+          "name": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning\n in header",
+          "description": "Sets the strictness of property name validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nWarning\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError",
+          "name": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError\n in header",
+          "description": "Sets the strictness of property value validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nError\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replace:\nstring",
+          "name": "replace:\nstring\n in query",
+          "description": "The names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replaceSelectedFields:\nboolean\nfalse",
+          "name": "replaceSelectedFields:\nboolean\nfalse\n in query",
+          "description": "If set to 'true', all fields that should be deleted in the update request, including body fields, must be included in the 'replace' query parameter.",
+          "type": "boolean\nfalse\n boolean",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "204 No Content",
+          "name": "204 No Content",
+          "description": "Upserted record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "campaign",
+          "href": "#/definitions/campaign",
+          "definitionId": "campaign"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [
+        "campaign"
+      ],
+      "rawText": "campaign\nInsert or update record.\nPUT /campaign/{id}\ncampaign\nRequest body.\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nid: string\nin path\nExternal identifier.\nX-NetSuite-PropertyNameValidation: string Error , Warning , Ignore Warning\nin header\nSets the strictness of property name validation.\nX-NetSuite-PropertyValueValidation: string Error , Warning , Ignore Error\nin header\nSets the strictness of property value validation.\nreplace: string\nin query\nThe names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.\nreplaceSelectedFields: boolean false\nin query\nIf set to 'true', all fields that should be deleted in the update request, including body fields, must be included in the 'replace' query parameter.\napplication/vnd.oracle.resource+json; type=error\n204 No Content\nUpserted record.\ndefault\nnsError\nError response."
+    }
+  ],
+  "transforms": [],
+  "definition": {
+    "id": "definition-campaign",
+    "refs": [
+      {
+        "text": "nsResource",
+        "href": "#/definitions/nsResource",
+        "definitionId": "nsResource"
+      },
+      {
+        "text": "campaign-campaignDirectMailCollection",
+        "href": "#/definitions/campaign-campaignDirectMailCollection",
+        "definitionId": "campaign-campaignDirectMailCollection"
+      },
+      {
+        "text": "campaign-campaignDripCollection",
+        "href": "#/definitions/campaign-campaignDripCollection",
+        "definitionId": "campaign-campaignDripCollection"
+      },
+      {
+        "text": "campaign-campaignEmailCollection",
+        "href": "#/definitions/campaign-campaignEmailCollection",
+        "definitionId": "campaign-campaignEmailCollection"
+      },
+      {
+        "text": "campaign-campaignEventCollection",
+        "href": "#/definitions/campaign-campaignEventCollection",
+        "definitionId": "campaign-campaignEventCollection"
+      },
+      {
+        "text": "campaign-defaultEventCollection",
+        "href": "#/definitions/campaign-defaultEventCollection",
+        "definitionId": "campaign-defaultEventCollection"
+      },
+      {
+        "text": "inventoryItemCollection",
+        "href": "#/definitions/inventoryItemCollection",
+        "definitionId": "inventoryItemCollection"
+      },
+      {
+        "text": "assemblyItemCollection",
+        "href": "#/definitions/assemblyItemCollection",
+        "definitionId": "assemblyItemCollection"
+      },
+      {
+        "text": "kitItemCollection",
+        "href": "#/definitions/kitItemCollection",
+        "definitionId": "kitItemCollection"
+      },
+      {
+        "text": "nsResourceCollection",
+        "href": "#/definitions/nsResourceCollection",
+        "definitionId": "nsResourceCollection"
+      },
+      {
+        "text": "discountItemCollection",
+        "href": "#/definitions/discountItemCollection",
+        "definitionId": "discountItemCollection"
+      },
+      {
+        "text": "markupItemCollection",
+        "href": "#/definitions/markupItemCollection",
+        "definitionId": "markupItemCollection"
+      },
+      {
+        "text": "subtotalItemCollection",
+        "href": "#/definitions/subtotalItemCollection",
+        "definitionId": "subtotalItemCollection"
+      },
+      {
+        "text": "descriptionItemCollection",
+        "href": "#/definitions/descriptionItemCollection",
+        "definitionId": "descriptionItemCollection"
+      },
+      {
+        "text": "paymentItemCollection",
+        "href": "#/definitions/paymentItemCollection",
+        "definitionId": "paymentItemCollection"
+      },
+      {
+        "text": "salesTaxItemCollection",
+        "href": "#/definitions/salesTaxItemCollection",
+        "definitionId": "salesTaxItemCollection"
+      },
+      {
+        "text": "shipItemCollection",
+        "href": "#/definitions/shipItemCollection",
+        "definitionId": "shipItemCollection"
+      },
+      {
+        "text": "downloadItemCollection",
+        "href": "#/definitions/downloadItemCollection",
+        "definitionId": "downloadItemCollection"
+      },
+      {
+        "text": "giftCertificateItemCollection",
+        "href": "#/definitions/giftCertificateItemCollection",
+        "definitionId": "giftCertificateItemCollection"
+      },
+      {
+        "text": "subscriptionPlanCollection",
+        "href": "#/definitions/subscriptionPlanCollection",
+        "definitionId": "subscriptionPlanCollection"
+      },
+      {
+        "text": "nonInventorySaleItemCollection",
+        "href": "#/definitions/nonInventorySaleItemCollection",
+        "definitionId": "nonInventorySaleItemCollection"
+      },
+      {
+        "text": "nonInventoryResaleItemCollection",
+        "href": "#/definitions/nonInventoryResaleItemCollection",
+        "definitionId": "nonInventoryResaleItemCollection"
+      },
+      {
+        "text": "nonInventoryPurchaseItemCollection",
+        "href": "#/definitions/nonInventoryPurchaseItemCollection",
+        "definitionId": "nonInventoryPurchaseItemCollection"
+      },
+      {
+        "text": "serviceSaleItemCollection",
+        "href": "#/definitions/serviceSaleItemCollection",
+        "definitionId": "serviceSaleItemCollection"
+      },
+      {
+        "text": "serviceResaleItemCollection",
+        "href": "#/definitions/serviceResaleItemCollection",
+        "definitionId": "serviceResaleItemCollection"
+      },
+      {
+        "text": "servicePurchaseItemCollection",
+        "href": "#/definitions/servicePurchaseItemCollection",
+        "definitionId": "servicePurchaseItemCollection"
+      },
+      {
+        "text": "otherChargeSaleItemCollection",
+        "href": "#/definitions/otherChargeSaleItemCollection",
+        "definitionId": "otherChargeSaleItemCollection"
+      },
+      {
+        "text": "otherChargeResaleItemCollection",
+        "href": "#/definitions/otherChargeResaleItemCollection",
+        "definitionId": "otherChargeResaleItemCollection"
+      },
+      {
+        "text": "otherChargePurchaseItemCollection",
+        "href": "#/definitions/otherChargePurchaseItemCollection",
+        "definitionId": "otherChargePurchaseItemCollection"
+      },
+      {
+        "text": "nsLink",
+        "href": "#/definitions/nsLink",
+        "definitionId": "nsLink"
+      },
+      {
+        "text": "employee",
+        "href": "#/definitions/employee",
+        "definitionId": "employee"
+      },
+      {
+        "text": "promotionCode",
+        "href": "#/definitions/promotionCode",
+        "definitionId": "promotionCode"
+      }
+    ],
+    "fields": [],
+    "rawText": "campaign\naudience: nsResource\nautoName Auto: boolean\nClear this box if you want to enter an ID for this campaign.\nbaseCost Cost: number (double)\nEnter the cost of this campaign apart from the cost of any specific campaign events. The base cost is added to the cost of individual campaign events to determine the total cost of the campaign.\ncampaignDirectMail: campaign-campaignDirectMailCollection\ncampaignDrip: campaign-campaignDripCollection\ncampaignEmail: campaign-campaignEmailCollection\ncampaignEvent: campaign-campaignEventCollection\ncampaignId ID: string\nThe campaign ID is determined in one of the following ways: * If you use auto-generated numbers for campaigns, this ID is generated when you save the campaign. * If you do not use auto-generated numbers for campaigns, enter a campaign ID. Campaign IDs make it easier to identify campaigns on reports and lists.\ncategory: nsResource\nconvCostPerCustomer Cost per Purchaser: number (double)\nThe cost per customer conversion for this campaign is calculated here. This is calculated by dividing the cost of the campaign by the number of transactions entered with this campaign's promotion code.\nconversions Number of Purchasers: integer (int64)\nThis is the number of leads or prospects that have become customers as a result of this campaign.\ncost Total Cost: number (double)\nThis cost is calculated by adding the base cost of the campaign to the cost of each individual campaign event. You cannot edit the amount in this field. This amount is deducted from the revenue generated by this campaign to determine the return on investment.\ncostPerCustomer Cost Per Lead: number (double)\nThe cost per new customer for this campaign is calculated here. Cost per customer is calculated by dividing the total cost of the campaign by the number of new customers your business gained as a result of this campaign. The number of new customers is calculated by counting the transactions entered with this campaign's promotion code.\ncreatedDate Created Date: string (date-time)\ncustomForm: object\nid Internal identifier: string 11 , -10130 , -130\nrefName Reference Name: string\ndefaultEvent: campaign-defaultEventCollection\nendDate End Date: string (date)\nEnter or select the date this campaign ends.\neventNumber Number: integer (int64)\nexpectedRevenue Projected Income: number (double)\nEnter the amount of revenue that is predicted that this marketing campaign will generate.\nexternalId External ID: string\nfamily: nsResource\nid Internal ID: string\nisDefaultLeadSource Default Lead Source: boolean\nisInactive Inactive: boolean\nCheck this box to inactivate this campaign.\nitem: one of: [ inventoryItemCollection, assemblyItemCollection, kitItemCollection, nsResourceCollection, discountItemCollection, markupItemCollection, subtotalItemCollection, descriptionItemCollection, paymentItemCollection, salesTaxItemCollection, shipItemCollection, downloadItemCollection, giftCertificateItemCollection, subscriptionPlanCollection, nonInventorySaleItemCollection, nonInventoryResaleItemCollection, nonInventoryPurchaseItemCollection, serviceSaleItemCollection, serviceResaleItemCollection, servicePurchaseItemCollection, otherChargeSaleItemCollection, otherChargeResaleItemCollection, otherChargePurchaseItemCollection ]\nkeyword Keyword: string\nEnter the paid keyword you are tracking with this campaign.\nlastModifiedDate Last Modified Date: string (date-time)\nleadsGenerated Leads Generated: integer (int64)\nThis is the number of new leads generated by this campaign.\nlinks Links: nsLink\nnsLink\nmessage Description: string\nEnter a description for this campaign. This description only appears on the campaign record.\noffer: nsResource\nowner: employee\nprofit Profit: number (double)\nThis is the profit earned by this campaign. Profit is calculated by deducting the cost of the campaign from the total revenue.\npromotionCode: promotionCode\nrefName Reference Name: string\nroi Return on Investment: number (double)\nThe return on investment of this campaign is calculated here. Return on investment is calculated by deducting the cost of the campaign from the total revenue generated and dividing the difference by the campaign's cost.\nsearchEngine: nsResource\nstartDate Start Date: string (date)\nEnter or select the date this campaign begins.\ntitle Title: string\nEnter a title for this campaign. You can enter up to 99 characters in this field.\ntotalRevenue Revenue: number (double)\nThis field shows the total sales of transactions associated with this campaign.\nuniqueVisitors Unique Visitors: integer (int64)\nThis is the number of unique visitors that have visited your website as a result of this campaign.\nurl URL: string\nEnter the URL for the campaign landing page or online customer form associated with this campaign. If you enter a campaign ID or if you autonumber your campaigns, NetSuite automatically appends the URL to include the leadsource parameter. This is the destination URL you provide to search engine services for paid keywords.\nvertical: nsResource"
+  },
+  "dependencyRecords": [
+    "employee",
+    "promotionCode"
+  ]
+}
