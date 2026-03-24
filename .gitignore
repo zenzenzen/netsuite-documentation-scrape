@@ -3,3 +3,7 @@ playwright-report/
 test-results/
 output/
 .DS_Store
+.npm-cache/
+apps/docs/dist/
+apps/docs/.astro/
+apps/app/.next/

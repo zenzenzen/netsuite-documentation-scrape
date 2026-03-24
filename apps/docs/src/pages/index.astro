@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getRecordsIndex, getWorkflowIndex } from '@netsuite/netsuite-data';
+
+const records = getRecordsIndex();
+const workflows = getWorkflowIndex();
+---
+
+<BaseLayout title="NetSuite Docs Shell">
+  <section class="card stack">
+    <p class="eyebrow">Astro Docs Shell</p>
+    <h1>Foundation ready for the shared docs shell</h1>
+    <p class="muted">
+      This app is intentionally thin in the foundation branch. It proves Astro can consume shared generated
+      NetSuite data without replacing the current static docs pages yet.
+    </p>
+    <div class="pill-row">
+      <span class="pill">{records.length} records indexed</span>
+      <span class="pill">{workflows.length} workflow bases cached</span>
+      <a class="pill" href="../../../public.html">Current static docs</a>
+    </div>
+  </section>
+</BaseLayout>

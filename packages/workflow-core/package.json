@@ -1,0 +1,12 @@
+{
+  "name": "@netsuite/workflow-core",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "dependencies": {
+    "@netsuite/design-tokens": "0.1.0"
+  }
+}

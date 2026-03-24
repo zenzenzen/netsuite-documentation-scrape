@@ -1,0 +1,186 @@
+[
+  {
+    "recordName": "customer",
+    "slug": "customer",
+    "title": "Customer",
+    "category": "entity",
+    "categoryLabel": "Entity",
+    "outgoingTransforms": 7
+  },
+  {
+    "recordName": "invoice",
+    "slug": "invoice",
+    "title": "Invoice",
+    "category": "transaction",
+    "categoryLabel": "Transaction",
+    "outgoingTransforms": 3
+  },
+  {
+    "recordName": "salesOrder",
+    "slug": "sales-order",
+    "title": "Sales Order",
+    "category": "transaction",
+    "categoryLabel": "Transaction",
+    "outgoingTransforms": 5
+  },
+  {
+    "recordName": "cashSale",
+    "slug": "cash-sale",
+    "title": "Cash Sale",
+    "category": "transaction",
+    "categoryLabel": "Transaction",
+    "outgoingTransforms": 2
+  },
+  {
+    "recordName": "customerPayment",
+    "slug": "customer-payment",
+    "title": "Customer Payment",
+    "category": "transaction",
+    "categoryLabel": "Transaction",
+    "outgoingTransforms": 1
+  },
+  {
+    "recordName": "employee",
+    "slug": "employee",
+    "title": "Employee",
+    "category": "entity",
+    "categoryLabel": "Entity",
+    "outgoingTransforms": 2
+  },
+  {
+    "recordName": "estimate",
+    "slug": "estimate",
+    "title": "Estimate",
+    "category": "transaction",
+    "categoryLabel": "Transaction",
+    "outgoingTransforms": 3
+  },
+  {
+    "recordName": "opportunity",
+    "slug": "opportunity",
+    "title": "Opportunity",
+    "category": "other",
+    "categoryLabel": "Other",
+    "outgoingTransforms": 4
+  },
+  {
+    "recordName": "returnAuthorization",
+    "slug": "return-authorization",
+    "title": "Return Authorization",
+    "category": "transaction",
+    "categoryLabel": "Transaction",
+    "outgoingTransforms": 3
+  },
+  {
+    "recordName": "vendor",
+    "slug": "vendor",
+    "title": "Vendor",
+    "category": "entity",
+    "categoryLabel": "Entity",
+    "outgoingTransforms": 4
+  },
+  {
+    "recordName": "assemblyBuild",
+    "slug": "assembly-build",
+    "title": "Assembly Build",
+    "category": "inventory",
+    "categoryLabel": "Inventory",
+    "outgoingTransforms": 1
+  },
+  {
+    "recordName": "assemblyItem",
+    "slug": "assembly-item",
+    "title": "Assembly Item",
+    "category": "inventory",
+    "categoryLabel": "Inventory",
+    "outgoingTransforms": 2
+  },
+  {
+    "recordName": "cashRefund",
+    "slug": "cash-refund",
+    "title": "Cash Refund",
+    "category": "transaction",
+    "categoryLabel": "Transaction",
+    "outgoingTransforms": 1
+  },
+  {
+    "recordName": "customerDeposit",
+    "slug": "customer-deposit",
+    "title": "Customer Deposit",
+    "category": "transaction",
+    "categoryLabel": "Transaction",
+    "outgoingTransforms": 2
+  },
+  {
+    "recordName": "intercompanyTransferOrder",
+    "slug": "intercompany-transfer-order",
+    "title": "Intercompany Transfer Order",
+    "category": "transaction",
+    "categoryLabel": "Transaction",
+    "outgoingTransforms": 2
+  },
+  {
+    "recordName": "job",
+    "slug": "job",
+    "title": "Job",
+    "category": "entity",
+    "categoryLabel": "Entity",
+    "outgoingTransforms": 4
+  },
+  {
+    "recordName": "purchaseOrder",
+    "slug": "purchase-order",
+    "title": "Purchase Order",
+    "category": "transaction",
+    "categoryLabel": "Transaction",
+    "outgoingTransforms": 3
+  },
+  {
+    "recordName": "purchaseRequisition",
+    "slug": "purchase-requisition",
+    "title": "Purchase Requisition",
+    "category": "other",
+    "categoryLabel": "Other",
+    "outgoingTransforms": 1
+  },
+  {
+    "recordName": "transferOrder",
+    "slug": "transfer-order",
+    "title": "Transfer Order",
+    "category": "transaction",
+    "categoryLabel": "Transaction",
+    "outgoingTransforms": 2
+  },
+  {
+    "recordName": "vendorBill",
+    "slug": "vendor-bill",
+    "title": "Vendor Bill",
+    "category": "transaction",
+    "categoryLabel": "Transaction",
+    "outgoingTransforms": 3
+  },
+  {
+    "recordName": "vendorPrepayment",
+    "slug": "vendor-prepayment",
+    "title": "Vendor Prepayment",
+    "category": "transaction",
+    "categoryLabel": "Transaction",
+    "outgoingTransforms": 1
+  },
+  {
+    "recordName": "vendorReturnAuthorization",
+    "slug": "vendor-return-authorization",
+    "title": "Vendor Return Authorization",
+    "category": "transaction",
+    "categoryLabel": "Transaction",
+    "outgoingTransforms": 2
+  },
+  {
+    "recordName": "workOrder",
+    "slug": "work-order",
+    "title": "Work Order",
+    "category": "transaction",
+    "categoryLabel": "Transaction",
+    "outgoingTransforms": 4
+  }
+]
