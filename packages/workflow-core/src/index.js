@@ -1,5 +1,7 @@
 import { categoryPalette } from '@netsuite/design-tokens';
 
+const RECORD_API_ROOT = '{{NETSUITE_BASE_URL}}/services/rest/record/v1';
+
 const CATEGORY_RULES = [
   {
     category: 'transaction',
@@ -213,6 +215,22 @@ export function findTransform(edges, source, target) {
   return edges.find((edge) => edge.source === source && edge.target === target) || null;
 }
 
+export function buildRecordRequest(recordName) {
+  return {
+    name: `GET ${recordName}`,
+    method: 'GET',
+    url: `${RECORD_API_ROOT}/${recordName}/{{${recordName}Id}}`,
+  };
+}
+
+export function buildTransformRequest(transform) {
+  return {
+    name: `POST ${transform.source} -> ${transform.target}`,
+    method: 'POST',
+    url: `${RECORD_API_ROOT}${transform.path.replace('{id}', `{{${transform.source}Id}}`)}`,
+  };
+}
+
 export function buildRequestBundle(workflowLayout, baseRecord, lockedLevels) {
   const selectedTransforms = [];
 
@@ -230,11 +248,7 @@ export function buildRequestBundle(workflowLayout, baseRecord, lockedLevels) {
   const seenRequests = new Set();
   const requests = [];
   for (const recordName of Array.from(new Set(lockedLevels.flat()))) {
-    const request = {
-      name: `GET ${recordName}`,
-      method: 'GET',
-      url: `{{NETSUITE_BASE_URL}}/services/rest/record/v1/${recordName}/{{${recordName}Id}}`,
-    };
+    const request = buildRecordRequest(recordName);
     const key = `${request.method}:${request.url}`;
     if (!seenRequests.has(key)) {
       seenRequests.add(key);
@@ -243,11 +257,7 @@ export function buildRequestBundle(workflowLayout, baseRecord, lockedLevels) {
   }
 
   for (const transform of selectedTransforms) {
-    const request = {
-      name: `POST ${transform.source} -> ${transform.target}`,
-      method: 'POST',
-      url: `{{NETSUITE_BASE_URL}}/services/rest/record/v1${transform.path.replace('{id}', `{{${transform.source}Id}}`)}`,
-    };
+    const request = buildTransformRequest(transform);
     const key = `${request.method}:${request.url}`;
     if (!seenRequests.has(key)) {
       seenRequests.add(key);

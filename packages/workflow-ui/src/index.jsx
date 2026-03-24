@@ -1,12 +1,14 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Background, Controls, Handle, Panel, Position, ReactFlow } from '@xyflow/react';
 import { animate, stagger } from 'animejs';
 import '@xyflow/react/dist/style.css';
 import './styles.css';
 import {
   buildAtomicConfig,
-  buildRequestBundle,
+  buildRecordRequest,
   buildShareQuery,
+  buildTransformRequest,
   categoryColor,
   findRecordByName,
   findRecordBySlug,
@@ -58,8 +60,111 @@ function buildNodeStateMap(layout, lockedLevels, pendingSelection) {
   return { stateMap, previewSet };
 }
 
-function buildFlowGraph(layout, lockedLevels, pendingSelection, favorites, handlers) {
-  const { stateMap, previewSet } = buildNodeStateMap(layout, lockedLevels, pendingSelection);
+function collectInspectionRoute(layout, lockedLevels, recordName) {
+  if (!layout || !recordName || recordName === layout.baseRecord) {
+    return [];
+  }
+
+  const previewTargets = new Set(buildPreviewTargets(layout, lockedLevels));
+  const lockedIndex = lockedLevels.findIndex((level) => level.includes(recordName));
+  const terminalDepth = lockedIndex >= 0 ? lockedIndex : previewTargets.has(recordName) ? lockedLevels.length : -1;
+
+  if (terminalDepth < 1) {
+    return [];
+  }
+
+  const stages = [];
+  let currentTargets = new Set([recordName]);
+
+  for (let depth = terminalDepth; depth >= 1; depth -= 1) {
+    const sources = lockedLevels[depth - 1] || [];
+    const transforms = layout.edges.filter(
+      (edge) => sources.includes(edge.source) && currentTargets.has(edge.target)
+    );
+
+    if (!transforms.length) {
+      break;
+    }
+
+    stages.unshift({ depth, transforms });
+    currentTargets = new Set(transforms.map((transform) => transform.source));
+  }
+
+  return stages;
+}
+
+function buildRecordCatalog(workflowMap, workflowIndex) {
+  const catalog = new Map();
+
+  for (const item of workflowIndex) {
+    if (item.recordName) {
+      catalog.set(item.recordName, item);
+    }
+    if (item.slug) {
+      catalog.set(item.slug, item);
+    }
+  }
+
+  for (const workflow of workflowMap.values()) {
+    for (const layer of workflow.layers || []) {
+      for (const node of layer.nodes || []) {
+        catalog.set(node.recordName, node);
+        if (node.slug) {
+          catalog.set(node.slug, node);
+        }
+      }
+    }
+  }
+
+  return catalog;
+}
+
+function buildImmediateTransformRequests(record, resolveRecord, routeStages) {
+  if (!record) {
+    return [];
+  }
+
+  if (routeStages.length) {
+    return routeStages.flatMap((stage) =>
+      stage.transforms.map((transform) => {
+        const sourceRecord = resolveRecord(transform.source);
+        const targetRecord = resolveRecord(transform.target);
+
+        return {
+          id: transform.id,
+          label: `${sourceRecord?.title || transform.source} -> ${targetRecord?.title || transform.target}`,
+          summary: transform.summary,
+          request: buildTransformRequest(transform),
+        };
+      })
+    );
+  }
+
+  return (record.endpoints || [])
+    .filter((endpoint) => endpoint.isTransform)
+    .map((endpoint) => {
+      const targetName = endpoint.path.split('/!transform/')[1] || endpoint.path;
+      const targetRecord = resolveRecord(targetName);
+      const transform = {
+        id: `${record.recordName}:${endpoint.path}`,
+        source: record.recordName,
+        target: targetRecord?.recordName || targetName,
+        path: endpoint.path,
+        method: endpoint.method,
+        summary: endpoint.summary,
+      };
+
+      return {
+        id: transform.id,
+        label: `${record.title} -> ${targetRecord?.title || transform.target}`,
+        summary: transform.summary,
+        request: buildTransformRequest(transform),
+      };
+    });
+}
+
+function buildFlowGraph(layout, lockedLevels, pendingSelection, favorites, handlers, nodeState) {
+  const { stateMap, previewSet } = nodeState;
   const visibleColumns = [
     ...lockedLevels.map((records, index) => ({ kind: index === 0 ? 'base' : 'locked', records })),
     { kind: 'preview', records: Array.from(previewSet) },
@@ -91,6 +196,7 @@ function buildFlowGraph(layout, lockedLevels, pendingSelection, favorites, handl
             state: stateMap.get(node.recordName) || 'preview',
             tone,
             favorite: favorites.includes(node.recordName),
+            onInspect: handlers.onInspect,
             onToggle: handlers.onToggle,
             onPin: handlers.onPin,
             onOpenDocs: handlers.onOpenDocs,
@@ -123,8 +229,226 @@ function buildFlowGraph(layout, lockedLevels, pendingSelection, favorites, handl
   return { nodes, edges, previewTargets: Array.from(previewSet) };
 }
 
+function TooltipButton({
+  tooltip,
+  className = '',
+  children,
+  type = 'button',
+  disabled = false,
+  onMouseEnter,
+  onMouseLeave,
+  onFocus,
+  onBlur,
+  ...props
+}) {
+  const [visible, setVisible] = useState(false);
+  const timeoutRef = useRef(null);
+
+  useEffect(
+    () => () => {
+      if (timeoutRef.current) {
+        window.clearTimeout(timeoutRef.current);
+      }
+    },
+    []
+  );
+
+  function showTooltip(event) {
+    if (onMouseEnter) {
+      onMouseEnter(event);
+    }
+
+    if (!tooltip || disabled) {
+      return;
+    }
+
+    if (timeoutRef.current) {
+      window.clearTimeout(timeoutRef.current);
+    }
+
+    setVisible(true);
+    timeoutRef.current = window.setTimeout(() => setVisible(false), 2000);
+  }
+
+  function hideTooltip(event) {
+    if (onMouseLeave) {
+      onMouseLeave(event);
+    }
+
+    if (timeoutRef.current) {
+      window.clearTimeout(timeoutRef.current);
+    }
+
+    setVisible(false);
+  }
+
+  return (
+    <button
+      type={type}
+      className={`workflow-tooltip-button ${className}`.trim()}
+      disabled={disabled}
+      onMouseEnter={showTooltip}
+      onMouseLeave={hideTooltip}
+      onFocus={(event) => {
+        if (onFocus) {
+          onFocus(event);
+        }
+        showTooltip(event);
+      }}
+      onBlur={(event) => {
+        if (onBlur) {
+          onBlur(event);
+        }
+        hideTooltip(event);
+      }}
+      {...props}
+    >
+      {children}
+      {tooltip ? (
+        <span className={`workflow-button-tooltip${visible ? ' is-visible' : ''}`}>{tooltip}</span>
+      ) : null}
+    </button>
+  );
+}
+
+function RecordOverlay({
+  record,
+  state,
+  favorite,
+  canQueue,
+  activeQuery,
+  transformRequests,
+  copyState,
+  onClose,
+  onCopy,
+  onOpenDocs,
+  onPin,
+  onToggleQueue,
+}) {
+  useEffect(() => {
+    function handleKeyDown(event) {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    }
+
+    document.body.classList.add('workflow-overlay-open');
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.classList.remove('workflow-overlay-open');
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [onClose]);
+
+  if (!record || typeof document === 'undefined') {
+    return null;
+  }
+
+  return createPortal(
+    <div className="workflow-overlay-backdrop" onClick={onClose}>
+      <section
+        className="workflow-overlay-card"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="workflow-overlay-title"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <div className="workflow-overlay-header">
+          <div>
+            <p className="workflow-kicker">Workflow Inspector</p>
+            <h2 id="workflow-overlay-title">{record.title}</h2>
+            <p className="workflow-overlay-summary">{record.summary}</p>
+          </div>
+          <TooltipButton
+            className="workflow-overlay-close"
+            tooltip="Close this record overlay"
+            aria-label="Close record overlay"
+            onClick={onClose}
+          >
+            ×
+          </TooltipButton>
+        </div>
+
+        <div className="workflow-pill-row">
+          <span className="workflow-mini-pill is-tinted">{record.categoryLabel}</span>
+          <span className="workflow-mini-pill">{record.stats.operations} endpoints</span>
+          <span className="workflow-mini-pill">{record.stats.outgoingTransforms} outgoing</span>
+          <span className="workflow-mini-pill">{record.stats.incomingTransforms} incoming</span>
+          <span className="workflow-mini-pill">{state}</span>
+        </div>
+
+        <div className="workflow-overlay-actions">
+          {canQueue ? (
+            <TooltipButton
+              className="workflow-overlay-action is-primary"
+              tooltip={state === 'queued' ? 'Remove this branch from the queued next step' : 'Queue this branch for the next lock'}
+              onClick={() => onToggleQueue(record.recordName)}
+            >
+              {state === 'queued' ? 'Remove from queue' : 'Queue next branch'}
+            </TooltipButton>
+          ) : null}
+          <TooltipButton
+            className="workflow-overlay-action"
+            tooltip="Open the record documentation in a new tab"
+            onClick={() => onOpenDocs(record.docsPath)}
+          >
+            Open docs
+          </TooltipButton>
+          <TooltipButton
+            className="workflow-overlay-action"
+            tooltip={favorite ? 'Unpin this record from favorites' : 'Pin this record to favorites'}
+            onClick={() => onPin(record.recordName)}
+          >
+            {favorite ? 'Unpin record' : 'Pin record'}
+          </TooltipButton>
+          <TooltipButton
+            className="workflow-overlay-action"
+            tooltip="Copy the current GET query for Postman"
+            onClick={() => onCopy(activeQuery.url, 'Active query')}
+          >
+            Copy active query
+          </TooltipButton>
+        </div>
+
+        <div className="workflow-overlay-grid">
+          <section className="workflow-overlay-panel">
+            <span className="workflow-overlay-label">Active query</span>
+            <pre>{`${activeQuery.method} ${activeQuery.url}`}</pre>
+            <p className="muted">GET requests do not require a request body.</p>
+          </section>
+
+          <section className="workflow-overlay-panel">
+            <span className="workflow-overlay-label">Immediate transform endpoints</span>
+            <div className="workflow-overlay-endpoints">
+              {transformRequests.length ? (
+                transformRequests.map((item) => (
+                  <article className="workflow-endpoint-card" key={item.id}>
+                    <strong>{item.label}</strong>
+                    <p>{item.summary || 'Transform endpoint'}</p>
+                    <pre>{`${item.request.method} ${item.request.url}`}</pre>
+                  </article>
+                ))
+              ) : (
+                <p className="muted">
+                  No upstream transform is required for this base record yet. Inspect a downstream node to see
+                  the route-specific transform endpoints.
+                </p>
+              )}
+            </div>
+          </section>
+        </div>
+
+        {copyState ? <p className="workflow-copy-note">{copyState}</p> : null}
+      </section>
+    </div>,
+    document.body
+  );
+}
+
 function RecordNode({ data }) {
-  const { node, state, tone, favorite, onToggle, onPin, onOpenDocs } = data;
+  const { node, state, tone, favorite, onInspect, onToggle, onPin, onOpenDocs } = data;
+  const canQueue = state === 'preview' || state === 'queued';
 
   return (
     <div
@@ -132,11 +456,10 @@ function RecordNode({ data }) {
       style={{ '--node-accent': tone.accent, '--node-surface': tone.surface }}
     >
       <Handle type="target" position={Position.Left} className="workflow-handle" />
-      <button
+      <TooltipButton
         className="workflow-node-button"
-        type="button"
-        onClick={() => onToggle(node.recordName)}
-        aria-pressed={state === 'queued'}
+        tooltip="Open endpoint details for this record"
+        onClick={() => onInspect(node.recordName)}
       >
         <span className="workflow-node-heading">
           <span className="workflow-node-title">{node.title}</span>
@@ -155,14 +478,31 @@ function RecordNode({ data }) {
           {state === 'preview' && 'Preview branch'}
           {state === 'dimmed' && 'Cached downstream object'}
         </span>
-      </button>
+      </TooltipButton>
       <div className="workflow-node-actions">
-        <button type="button" className="workflow-node-action" onClick={() => onOpenDocs(node.docsPath)}>
+        {canQueue ? (
+          <TooltipButton
+            className="workflow-node-action"
+            tooltip={state === 'queued' ? 'Remove this branch from the next lock' : 'Queue this branch for the next lock'}
+            onClick={() => onToggle(node.recordName)}
+          >
+            {state === 'queued' ? 'Queued' : 'Queue'}
+          </TooltipButton>
+        ) : null}
+        <TooltipButton
+          className="workflow-node-action"
+          tooltip="Open the record docs in a new tab"
+          onClick={() => onOpenDocs(node.docsPath)}
+        >
           Open docs
-        </button>
-        <button type="button" className="workflow-node-action" onClick={() => onPin(node.recordName)}>
+        </TooltipButton>
+        <TooltipButton
+          className="workflow-node-action"
+          tooltip={favorite ? 'Unpin this record from favorites' : 'Pin this record to favorites'}
+          onClick={() => onPin(node.recordName)}
+        >
           {favorite ? 'Pinned' : 'Pin'}
-        </button>
+        </TooltipButton>
       </div>
       <Handle type="source" position={Position.Right} className="workflow-handle" />
     </div>
@@ -210,9 +550,18 @@ export function WorkflowStudio({ workflowIndex, initialWorkflow, initialBaseSlug
 
   const [state, setState] = useState(initialState);
   const [pendingSelection, setPendingSelection] = useState([]);
+  const [overlayRecordName, setOverlayRecordName] = useState(null);
   const [copyState, setCopyState] = useState('');
   const graphRef = useRef(null);
   const currentWorkflow = workflowMap.get(state.baseSlug) || null;
+  const recordCatalog = useMemo(() => buildRecordCatalog(workflowMap, workflowIndex), [workflowMap, workflowIndex]);
+  function resolveRecord(recordName) {
+    return (
+      recordCatalog.get(recordName) ||
+      findRecordByName(workflowIndex, recordName) ||
+      findRecordBySlug(workflowIndex, recordName)
+    );
+  }
   const activeRecord = useMemo(
     () => findRecordByName(workflowIndex, state.baseRecord) || findRecordBySlug(workflowIndex, state.baseSlug),
     [state.baseRecord, state.baseSlug, workflowIndex]
@@ -297,6 +646,21 @@ export function WorkflowStudio({ workflowIndex, initialWorkflow, initialBaseSlug
     return () => window.clearTimeout(timeoutId);
   }, [copyState]);
 
+  useEffect(() => {
+    if (!overlayRecordName) {
+      return;
+    }
+
+    const visibleNow = new Set([
+      ...state.lockedLevels.flat(),
+      ...buildPreviewTargets(currentWorkflow || initialWorkflow, state.lockedLevels),
+    ]);
+
+    if (!visibleNow.has(overlayRecordName)) {
+      setOverlayRecordName(null);
+    }
+  }, [currentWorkflow, initialWorkflow, overlayRecordName, state.lockedLevels]);
+
   async function ensureWorkflow(slug) {
     if (workflowMap.has(slug)) {
       return workflowMap.get(slug);
@@ -324,11 +688,16 @@ export function WorkflowStudio({ workflowIndex, initialWorkflow, initialBaseSlug
 
     await ensureWorkflow(nextSlug);
     setPendingSelection([]);
+    setOverlayRecordName(null);
     setState({
       baseRecord: nextRecord?.recordName || nextSlug,
       baseSlug: nextSlug,
       lockedLevels: [[nextRecord?.recordName || nextSlug]],
     });
+  }
+
+  function handleInspect(recordName) {
+    setOverlayRecordName(recordName);
   }
 
   function handleToggle(recordName) {
@@ -380,6 +749,7 @@ export function WorkflowStudio({ workflowIndex, initialWorkflow, initialBaseSlug
 
   function handleReset() {
     setPendingSelection([]);
+    setOverlayRecordName(null);
     setState((current) => ({
       ...current,
       lockedLevels: [[current.baseRecord]],
@@ -408,24 +778,30 @@ export function WorkflowStudio({ workflowIndex, initialWorkflow, initialBaseSlug
     }
   }
 
+  const nodeState = useMemo(
+    () =>
+      currentWorkflow
+        ? buildNodeStateMap(currentWorkflow, state.lockedLevels, pendingSelection)
+        : { stateMap: new Map(), previewSet: new Set() },
+    [currentWorkflow, pendingSelection, state.lockedLevels]
+  );
+
   const graph = useMemo(
     () =>
       currentWorkflow
         ? buildFlowGraph(currentWorkflow, state.lockedLevels, pendingSelection, favorites, {
+            onInspect: handleInspect,
             onToggle: handleToggle,
             onPin: handlePin,
             onOpenDocs: handleOpenDocs,
-          })
+          }, nodeState)
         : { nodes: [], edges: [], previewTargets: [] },
-    [currentWorkflow, favorites, pendingSelection, state.lockedLevels]
+    [currentWorkflow, favorites, nodeState, pendingSelection, state.lockedLevels]
   );
 
-  const bundle = useMemo(
-    () =>
-      currentWorkflow
-        ? buildRequestBundle(currentWorkflow, state.baseRecord, state.lockedLevels)
-        : null,
-    [currentWorkflow, state.baseRecord, state.lockedLevels]
+  const shareQuery = useMemo(
+    () => buildShareQuery(activeBaseSlug || state.baseRecord, state.lockedLevels),
+    [activeBaseSlug, state.baseRecord, state.lockedLevels]
   );
 
   const atomicConfig = useMemo(
@@ -437,22 +813,46 @@ export function WorkflowStudio({ workflowIndex, initialWorkflow, initialBaseSlug
   );
 
   const previewRecords = useMemo(
-    () => graph.previewTargets.map((recordName) => findRecordByName(workflowIndex, recordName)).filter(Boolean),
-    [graph.previewTargets, workflowIndex]
+    () => graph.previewTargets.map((recordName) => resolveRecord(recordName)).filter(Boolean),
+    [graph.previewTargets, recordCatalog]
   );
 
   const favoritesMeta = useMemo(
-    () => favorites.map((recordName) => findRecordByName(workflowIndex, recordName)).filter(Boolean),
-    [favorites, workflowIndex]
+    () => favorites.map((recordName) => resolveRecord(recordName)).filter(Boolean),
+    [favorites, recordCatalog]
   );
 
   const lockedPath = useMemo(
     () =>
       state.lockedLevels.map((level) =>
-        level.map((recordName) => findRecordByName(workflowIndex, recordName)?.title || recordName)
+        level.map((recordName) => resolveRecord(recordName)?.title || recordName)
       ),
-    [state.lockedLevels, workflowIndex]
+    [state.lockedLevels, recordCatalog]
   );
+
+  const inspectedRecordName =
+    overlayRecordName || state.lockedLevels[state.lockedLevels.length - 1]?.[0] || state.baseRecord;
+  const activeQuery = useMemo(
+    () => (inspectedRecordName ? buildRecordRequest(inspectedRecordName) : null),
+    [inspectedRecordName]
+  );
+
+  const overlayRecord = useMemo(
+    () => (overlayRecordName ? resolveRecord(overlayRecordName) : null),
+    [overlayRecordName, recordCatalog]
+  );
+  const overlayRouteStages = useMemo(
+    () =>
+      currentWorkflow && overlayRecordName
+        ? collectInspectionRoute(currentWorkflow, state.lockedLevels, overlayRecordName)
+        : [],
+    [currentWorkflow, overlayRecordName, state.lockedLevels]
+  );
+  const overlayTransformRequests = useMemo(
+    () => buildImmediateTransformRequests(overlayRecord, resolveRecord, overlayRouteStages),
+    [overlayRecord, overlayRouteStages, recordCatalog]
+  );
+  const overlayState = overlayRecordName ? nodeState.stateMap.get(overlayRecordName) || 'base' : null;
 
   return (
     <section className="workflow-studio-route">
@@ -461,9 +861,8 @@ export function WorkflowStudio({ workflowIndex, initialWorkflow, initialBaseSlug
           <p className="workflow-kicker">Workflow Studio</p>
           <h1>{activeRecord?.title || currentWorkflow?.baseRecord || initialWorkflow.baseRecord} transform atlas</h1>
           <p>
-            Cached NetSuite object relationships render as a left-to-right transform map. Queue preview
-            branches, lock the route forward, and export the exact query string, request bundle, and atomic
-            config that describe the chosen path.
+            Inspect any visible record card to open the route overlay, copy the active GET query, and review the
+            exact transform endpoints that lead into that object.
           </p>
           <div className="workflow-pill-row">
             <span className="workflow-mini-pill is-tinted">
@@ -491,19 +890,27 @@ export function WorkflowStudio({ workflowIndex, initialWorkflow, initialBaseSlug
           </label>
 
           <div className="workflow-toolbar-actions">
-            <button type="button" onClick={handleCommit} disabled={pendingSelection.length === 0 || !currentWorkflow}>
+            <TooltipButton
+              tooltip="Commit the queued preview branches into the next locked level"
+              onClick={handleCommit}
+              disabled={pendingSelection.length === 0 || !currentWorkflow}
+            >
               Lock selected
-            </button>
-            <button
-              type="button"
+            </TooltipButton>
+            <TooltipButton
+              tooltip="Step back one level, or clear the current queued branch list first"
               onClick={handleBack}
               disabled={pendingSelection.length === 0 && state.lockedLevels.length === 1}
             >
               Back
-            </button>
-            <button type="button" onClick={handleReset} disabled={!currentWorkflow}>
+            </TooltipButton>
+            <TooltipButton
+              tooltip="Reset the route back to the base object"
+              onClick={handleReset}
+              disabled={!currentWorkflow}
+            >
               Reset
-            </button>
+            </TooltipButton>
           </div>
 
           <div className="workflow-legend-row">
@@ -562,11 +969,11 @@ export function WorkflowStudio({ workflowIndex, initialWorkflow, initialBaseSlug
             <div className="workflow-pill-stack">
               {pendingSelection.length ? (
                 pendingSelection.map((recordName) => {
-                  const record = findRecordByName(workflowIndex, recordName);
+                  const record = resolveRecord(recordName);
                   return <span className="workflow-mini-pill" key={recordName}>{record?.title || recordName}</span>;
                 })
               ) : (
-                <span className="muted">Click any faded preview node to queue it.</span>
+                <span className="muted">Use Queue on any preview card, or inspect a card to review its endpoint path.</span>
               )}
             </div>
           </section>
@@ -619,42 +1026,59 @@ export function WorkflowStudio({ workflowIndex, initialWorkflow, initialBaseSlug
 
           <section className="workflow-rail-card">
             <h2>Share query</h2>
-            <pre>{bundle ? `?${bundle.shareQuery}` : 'Loading...'}</pre>
-            <button
-              type="button"
-              onClick={() => bundle && handleCopy(`?${bundle.shareQuery}`, 'Share query')}
-              disabled={!bundle}
+            <pre>{`?${shareQuery}`}</pre>
+            <TooltipButton
+              tooltip="Copy the studio share query from the current locked route"
+              onClick={() => handleCopy(`?${shareQuery}`, 'Share query')}
             >
               Copy query
-            </button>
+            </TooltipButton>
           </section>
 
           <section className="workflow-rail-card">
-            <h2>Request bundle</h2>
-            <pre>{bundle ? JSON.stringify(bundle, null, 2) : 'Loading...'}</pre>
-            <button
-              type="button"
-              onClick={() => bundle && handleCopy(JSON.stringify(bundle, null, 2), 'Request bundle')}
-              disabled={!bundle}
+            <h2>Postman active query</h2>
+            <pre>{activeQuery ? `${activeQuery.method} ${activeQuery.url}` : 'Loading...'}</pre>
+            <p className="muted">GET requests do not require body data.</p>
+            <TooltipButton
+              tooltip="Copy the current GET query for the focused record"
+              onClick={() => activeQuery && handleCopy(activeQuery.url, 'Active query')}
+              disabled={!activeQuery}
             >
-              Copy bundle
-            </button>
+              Copy active query
+            </TooltipButton>
           </section>
 
           <section className="workflow-rail-card">
             <h2>Atomic config</h2>
             <pre>{atomicConfig ? JSON.stringify(atomicConfig, null, 2) : 'Loading...'}</pre>
-            <button
-              type="button"
+            <TooltipButton
+              tooltip="Copy the atomic route configuration"
               onClick={() => atomicConfig && handleCopy(JSON.stringify(atomicConfig, null, 2), 'Atomic config')}
               disabled={!atomicConfig}
             >
               Copy config
-            </button>
+            </TooltipButton>
             {copyState ? <p className="workflow-copy-note">{copyState}</p> : null}
           </section>
         </aside>
       </div>
+
+      {overlayRecord && activeQuery ? (
+        <RecordOverlay
+          record={overlayRecord}
+          state={overlayState}
+          favorite={favorites.includes(overlayRecord.recordName)}
+          canQueue={overlayState === 'preview' || overlayState === 'queued'}
+          activeQuery={buildRecordRequest(overlayRecord.recordName)}
+          transformRequests={overlayTransformRequests}
+          copyState={copyState}
+          onClose={() => setOverlayRecordName(null)}
+          onCopy={handleCopy}
+          onOpenDocs={handleOpenDocs}
+          onPin={handlePin}
+          onToggleQueue={handleToggle}
+        />
+      ) : null}
     </section>
   );
 }
