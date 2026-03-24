@@ -259,6 +259,32 @@
   box-shadow: 0 14px 28px rgba(28, 36, 54, 0.08);
 }
 
+.workflow-stage-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.workflow-stage-actions-static {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+.workflow-graph-action {
+  border: 1px solid rgba(31, 36, 48, 0.08);
+  border-radius: 999px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #1f2430;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 14px 28px rgba(28, 36, 54, 0.08);
+}
+
 .workflow-side-rail {
   display: grid;
   gap: 16px;
@@ -356,6 +382,7 @@
     rgba(255, 255, 255, 0.96);
   box-shadow: 0 16px 34px rgba(28, 36, 54, 0.08);
   transition: transform 160ms ease, opacity 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+  position: relative;
 }
 
 .workflow-node-shell.is-catalog {
@@ -373,12 +400,18 @@
   box-shadow: 0 20px 42px rgba(28, 36, 54, 0.14);
 }
 
-.workflow-node-shell.is-preview {
-  opacity: 0.74;
+.workflow-node-shell.is-selected {
+  border-color: rgba(20, 143, 136, 0.34);
+  box-shadow: 0 20px 44px rgba(20, 143, 136, 0.18);
 }
 
-.workflow-node-shell.is-branch {
-  opacity: 0.54;
+.workflow-node-shell.is-path {
+  opacity: 0.92;
+  border-color: rgba(46, 113, 209, 0.18);
+}
+
+.workflow-node-shell.is-frontier {
+  opacity: 0.86;
 }
 
 .workflow-node-shell.is-favorite {
@@ -404,6 +437,14 @@
 .workflow-node-shell.is-catalog .workflow-node-button {
   max-width: none;
   min-height: 64px;
+}
+
+.workflow-node-button.is-static {
+  cursor: default;
+}
+
+.workflow-node-button.is-advance {
+  cursor: pointer;
 }
 
 .workflow-node-heading {
@@ -435,6 +476,65 @@
 
 .react-flow__node-recordNode .workflow-node-button {
   pointer-events: auto;
+}
+
+.workflow-node-menu {
+  position: absolute;
+  top: -10px;
+  right: -6px;
+  z-index: 8;
+}
+
+.workflow-node-menu-trigger {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  border: 1px solid rgba(31, 36, 48, 0.08);
+  background: rgba(255, 255, 255, 0.95);
+  color: #1f2430;
+  font: inherit;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 140ms ease, transform 140ms ease;
+  box-shadow: 0 10px 24px rgba(28, 36, 54, 0.12);
+}
+
+.workflow-node-shell:hover .workflow-node-menu-trigger,
+.workflow-node-shell:focus-within .workflow-node-menu-trigger,
+.workflow-node-menu.is-open .workflow-node-menu-trigger {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.workflow-node-menu-popover {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 190px;
+  display: grid;
+  gap: 6px;
+  padding: 10px;
+  border-radius: 18px;
+  border: 1px solid rgba(31, 36, 48, 0.08);
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 20px 40px rgba(22, 28, 42, 0.16);
+}
+
+.workflow-node-menu-item {
+  border: 0;
+  border-radius: 12px;
+  padding: 10px 12px;
+  background: rgba(245, 247, 251, 0.92);
+  color: #1f2430;
+  font: inherit;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
 }
 
 body.workflow-overlay-open {
