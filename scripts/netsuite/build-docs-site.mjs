@@ -378,6 +378,8 @@ function pageShell({
     .top-link, .chip {
       display: inline-flex;
       align-items: center;
+      min-width: 0;
+      max-width: 100%;
       gap: 8px;
       padding: 10px 14px;
       border-radius: 999px;
@@ -385,6 +387,7 @@ function pageShell({
       border: 1px solid var(--line);
       background: rgba(255,255,255,0.78);
       color: var(--ink);
+      line-height: 1.4;
       transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
     }
 
@@ -396,6 +399,11 @@ function pageShell({
 
     .top-link strong { font-size: 0.95rem; }
     .top-link span, .chip small { color: var(--muted); }
+    .top-link strong, .top-link span, .chip strong, .chip small {
+      min-width: 0;
+      overflow-wrap: anywhere;
+      white-space: normal;
+    }
 
     .grid {
       display: grid;

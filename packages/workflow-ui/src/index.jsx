@@ -217,6 +217,7 @@ export function WorkflowStudio({ workflowIndex, initialWorkflow, initialBaseSlug
     () => findRecordByName(workflowIndex, state.baseRecord) || findRecordBySlug(workflowIndex, state.baseSlug),
     [state.baseRecord, state.baseSlug, workflowIndex]
   );
+  const activeBaseSlug = activeRecord?.slug || state.baseSlug || initialBaseSlug;
 
   useEffect(() => {
     ensureWorkflow(state.baseSlug).catch((error) => {
@@ -263,9 +264,9 @@ export function WorkflowStudio({ workflowIndex, initialWorkflow, initialBaseSlug
       return;
     }
 
-    const query = buildShareQuery(state.baseRecord, state.lockedLevels);
+    const query = buildShareQuery(activeBaseSlug || state.baseRecord, state.lockedLevels);
     window.history.replaceState({}, '', `${window.location.pathname}?${query}`);
-  }, [state]);
+  }, [activeBaseSlug, state]);
 
   useEffect(() => {
     if (!graphRef.current) {
@@ -480,7 +481,7 @@ export function WorkflowStudio({ workflowIndex, initialWorkflow, initialBaseSlug
         <div className="workflow-toolbar-card">
           <label className="workflow-select-label">
             <span>Base object</span>
-            <select value={state.baseSlug} onChange={handleBaseChange}>
+            <select value={activeBaseSlug} onChange={handleBaseChange}>
               {workflowIndex.map((item) => (
                 <option key={item.slug} value={item.slug}>
                   {item.title} ({item.outgoingTransforms} transforms)

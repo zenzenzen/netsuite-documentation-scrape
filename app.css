@@ -174,7 +174,38 @@ body.has-side-nav {
 }
 
 .nav-section-item {
+  position: relative;
   border-radius: 14px;
+}
+
+.nav-section-item::before,
+.nav-section-item::after {
+  content: "";
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(255, 217, 138, 0.95), rgba(76, 104, 255, 0.92));
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12), 0 8px 18px rgba(76, 104, 255, 0.24);
+  opacity: 0;
+  transform: scaleX(0.35);
+  transition: opacity 120ms ease, transform 120ms ease;
+  pointer-events: none;
+}
+
+.nav-section-item::before {
+  top: -6px;
+}
+
+.nav-section-item::after {
+  bottom: -6px;
+}
+
+.nav-section-item.is-drop-before::before,
+.nav-section-item.is-drop-after::after {
+  opacity: 1;
+  transform: scaleX(1);
 }
 
 .nav-section-button {
@@ -193,6 +224,10 @@ body.has-side-nav {
 
 .nav-section-button:hover {
   background: rgba(255, 255, 255, 0.12);
+}
+
+.nav-section-item.is-dragging .nav-section-button {
+  opacity: 0.64;
 }
 
 .nav-section-handle {

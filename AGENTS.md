@@ -20,3 +20,12 @@ Treat that document as the default design reference for:
 - Prefer file-backed, inspectable state when transparency matters.
 - Build for composition so new features can be achieved with prompts before new code.
 - Avoid bundling model judgment into single opaque tools.
+
+## Delivery Workflow
+
+- For any major task, land work on a branch, open a pull request, and merge back to `main` instead of leaving large changes unreviewed on the default branch.
+- Use the `codex/` branch prefix unless the user explicitly asks for a different naming scheme.
+- Major milestone commits should include a short `Rationale:` section in the commit body so architectural intent survives beyond chat history.
+- When opening a PR, document the user-facing changes, key technical decisions, verification steps, and any intentional follow-up work.
+- Leave a PR comment when a major decision tree deserves extra context that does not fit cleanly into the commit subject line.
+- If subagents are used for substantial work, keep ownership boundaries explicit, avoid overlapping file edits, and merge their work through PRs rather than direct branch drops.

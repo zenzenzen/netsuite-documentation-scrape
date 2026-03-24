@@ -556,6 +556,8 @@ class SectionLayoutController {
     this.pageContext = pageContext;
     this.pageBody = document.querySelector('[data-page-body]');
     this.draggingSectionId = null;
+    this.dropTargetSectionId = null;
+    this.dropPosition = null;
   }
 
   get storageKey() {
@@ -601,8 +603,8 @@ class SectionLayoutController {
     );
   }
 
-  moveSection(sourceId, targetId) {
-    if (!sourceId || !targetId || sourceId === targetId) {
+  moveSection(sourceId, targetId, placement = 'after') {
+    if (!sourceId || !targetId) {
       return;
     }
 
@@ -614,17 +616,45 @@ class SectionLayoutController {
       return;
     }
 
-    const sourceIndex = sections.indexOf(source);
-    const targetIndex = sections.indexOf(target);
-
-    if (sourceIndex < targetIndex) {
-      this.pageBody.insertBefore(source, target.nextSibling);
-    } else {
-      this.pageBody.insertBefore(source, target);
+    if (source === target) {
+      return;
     }
 
+    const insertionPoint = placement === 'before' ? target : target.nextSibling;
+    this.pageBody.insertBefore(source, insertionPoint);
+
     this.saveOrder();
+    this.clearDropIndicator();
     this.renderIntoNav();
+  }
+
+  updateDropIndicator(targetId, position) {
+    this.dropTargetSectionId = targetId;
+    this.dropPosition = position;
+    const container = document.querySelector('[data-nav-section-layout]');
+    if (!container) {
+      return;
+    }
+
+    container.querySelectorAll('[data-nav-section-item]').forEach((item) => {
+      const sectionId = item.getAttribute('data-section-id');
+      const active = sectionId === targetId && this.draggingSectionId && sectionId !== this.draggingSectionId;
+      item.classList.toggle('is-drop-before', active && position === 'before');
+      item.classList.toggle('is-drop-after', active && position === 'after');
+    });
+  }
+
+  clearDropIndicator() {
+    this.dropTargetSectionId = null;
+    this.dropPosition = null;
+    const container = document.querySelector('[data-nav-section-layout]');
+    if (!container) {
+      return;
+    }
+
+    container.querySelectorAll('[data-nav-section-item]').forEach((item) => {
+      item.classList.remove('is-drop-before', 'is-drop-after');
+    });
   }
 
   renderIntoNav() {
@@ -638,8 +668,18 @@ class SectionLayoutController {
       .map((section, index) => {
         const sectionId = section.getAttribute('data-section-id');
         const title = section.getAttribute('data-section-title') || `Section ${index + 1}`;
+        const isDropBefore =
+          this.draggingSectionId &&
+          this.dropTargetSectionId === sectionId &&
+          this.dropPosition === 'before' &&
+          this.draggingSectionId !== sectionId;
+        const isDropAfter =
+          this.draggingSectionId &&
+          this.dropTargetSectionId === sectionId &&
+          this.dropPosition === 'after' &&
+          this.draggingSectionId !== sectionId;
         return `
-          <div class="nav-section-item" draggable="true" data-nav-section-item data-section-id="${escapeHtml(sectionId)}">
+          <div class="nav-section-item ${isDropBefore ? 'is-drop-before' : ''} ${isDropAfter ? 'is-drop-after' : ''}" draggable="true" data-nav-section-item data-section-id="${escapeHtml(sectionId)}">
             <button class="nav-section-button" type="button" data-scroll-section="${escapeHtml(sectionId)}">
               <span class="nav-section-handle">::</span>
               <span class="nav-section-copy">${escapeHtml(title)}</span>
@@ -653,17 +693,37 @@ class SectionLayoutController {
       item.addEventListener('dragstart', (event) => {
         this.draggingSectionId = item.getAttribute('data-section-id');
         event.dataTransfer.effectAllowed = 'move';
+        item.classList.add('is-dragging');
       });
 
       item.addEventListener('dragover', (event) => {
         event.preventDefault();
         event.dataTransfer.dropEffect = 'move';
+        const rect = item.getBoundingClientRect();
+        const midpoint = rect.top + rect.height / 2;
+        const position = event.clientY < midpoint ? 'before' : 'after';
+        this.updateDropIndicator(item.getAttribute('data-section-id'), position);
+      });
+
+      item.addEventListener('dragleave', (event) => {
+        if (!item.contains(event.relatedTarget)) {
+          item.classList.remove('is-drop-before', 'is-drop-after');
+        }
       });
 
       item.addEventListener('drop', (event) => {
         event.preventDefault();
-        this.moveSection(this.draggingSectionId, item.getAttribute('data-section-id'));
+        const rect = item.getBoundingClientRect();
+        const midpoint = rect.top + rect.height / 2;
+        const position = event.clientY < midpoint ? 'before' : 'after';
+        this.moveSection(this.draggingSectionId, item.getAttribute('data-section-id'), position);
         this.draggingSectionId = null;
+      });
+
+      item.addEventListener('dragend', () => {
+        this.draggingSectionId = null;
+        item.classList.remove('is-dragging');
+        this.clearDropIndicator();
       });
     });
 
