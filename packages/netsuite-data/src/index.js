@@ -3,7 +3,19 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-export const GENERATED_ROOT = path.resolve(__dirname, '..', 'generated');
+
+function resolveGeneratedRoot() {
+  const candidates = [
+    path.resolve(__dirname, '..', 'generated'),
+    path.resolve(process.cwd(), 'packages/netsuite-data/generated'),
+    path.resolve(process.cwd(), '..', 'packages/netsuite-data/generated'),
+    path.resolve(process.cwd(), '..', '..', 'packages/netsuite-data/generated'),
+  ];
+
+  return candidates.find((candidate) => fs.existsSync(candidate)) || candidates[0];
+}
+
+export const GENERATED_ROOT = resolveGeneratedRoot();
 export const GENERATED_WORKFLOWS_ROOT = path.join(GENERATED_ROOT, 'workflows');
 
 function readJson(filePath, fallback = null) {
