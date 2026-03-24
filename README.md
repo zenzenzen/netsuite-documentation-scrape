@@ -16,6 +16,18 @@ This repo now includes npm workspaces so the current static docs flow can coexis
 
 Agentic tooling and build-tooling work in this repo should follow the stored reference at [`docs/agent-native-architecture.md`](/Users/dev/ai-gen-tooling/netsuite-documentation-scrape/docs/agent-native-architecture.md). Repo-local instructions also mirror that guidance in [`AGENTS.md`](/Users/dev/ai-gen-tooling/netsuite-documentation-scrape/AGENTS.md).
 
+## Delivery workflow
+
+- Ship major tasks on `codex/*` branches and merge them through pull requests.
+- Add `Rationale:` bullets to major milestone commits so the reasoning behind architecture and UX changes is preserved in git history.
+- Use PR descriptions to capture:
+  - user-facing changes
+  - implementation decisions
+  - verification steps
+  - intentional follow-up work
+- When a decision tree is especially important, add a PR comment so future contributors can recover that context quickly.
+- Keep [`AGENTS.md`](/Users/dev/ai-gen-tooling/netsuite-documentation-scrape/AGENTS.md) aligned with any process changes so future agent runs inherit the same expectations.
+
 ## Included
 
 - Local Playwright setup for browser automation
