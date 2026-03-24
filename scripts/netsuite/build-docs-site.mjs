@@ -2,6 +2,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {
   FOCUS_RECORDS,
+  GENERATED_DATA_DIR,
+  GENERATED_WORKFLOWS_DIR,
   PROJECT_ROOT,
   PUBLIC_DIR,
   PUBLIC_HOME_FILE,
@@ -18,8 +20,10 @@ import {
   slugify,
   toTitleCase,
   unique,
+  writeJson,
   writeText,
 } from './shared.mjs';
+import { buildLayeredWorkflow, enrichRecordCategory } from '../../packages/workflow-core/src/index.js';
 
 const rawIndex = readJson(path.join(RAW_ROOT, 'index.json'));
 
@@ -144,6 +148,30 @@ function buildWorkflowConfig(records, transforms) {
 }
 
 const workflowConfig = buildWorkflowConfig(allRecords, allTransforms);
+const generatedRecordsIndex = workflowConfig.records.map((record) => enrichRecordCategory(record));
+const generatedWorkflowIndex = generatedRecordsIndex
+  .filter((record) => record.stats?.outgoingTransforms)
+  .map((record) => ({
+    recordName: record.recordName,
+    slug: record.slug,
+    title: record.title,
+    category: record.category,
+    categoryLabel: record.categoryLabel,
+    outgoingTransforms: record.stats.outgoingTransforms,
+  }));
+
+function buildWorkflowLayouts() {
+  return generatedWorkflowIndex.map((record) => {
+    const layered = buildLayeredWorkflow(generatedRecordsIndex, workflowConfig.transforms, record.recordName);
+
+    return {
+      slug: record.slug,
+      ...layered,
+    };
+  });
+}
+
+const generatedWorkflowLayouts = buildWorkflowLayouts();
 
 function renderPinnedSection() {
   return `
@@ -1114,6 +1142,8 @@ function renderTransformsPage() {
 
 ensureDir(PUBLIC_DIR);
 ensureDir(PUBLIC_RECORDS_DIR);
+ensureDir(GENERATED_DATA_DIR);
+ensureDir(GENERATED_WORKFLOWS_DIR);
 
 for (const record of [...focusRecords, ...dependencyRecords]) {
   writeText(
@@ -1125,6 +1155,12 @@ for (const record of [...focusRecords, ...dependencyRecords]) {
 writeText(PUBLIC_HOME_FILE, renderOverviewPage());
 writeText(PUBLIC_TRANSFORMS_FILE, renderTransformsPage());
 writeText(WORKFLOW_CONFIG_FILE, `${JSON.stringify(workflowConfig, null, 2)}\n`);
+writeJson(path.join(GENERATED_DATA_DIR, 'records-index.json'), generatedRecordsIndex);
+writeJson(path.join(GENERATED_DATA_DIR, 'workflow-index.json'), generatedWorkflowIndex);
+
+for (const layout of generatedWorkflowLayouts) {
+  writeJson(path.join(GENERATED_WORKFLOWS_DIR, `${layout.slug}.json`), layout);
+}
 
 console.log(`Wrote ${PUBLIC_HOME_FILE}`);
 console.log(`Wrote ${PUBLIC_TRANSFORMS_FILE}`);

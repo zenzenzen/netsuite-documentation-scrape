@@ -2,8 +2,15 @@
   "name": "netsuite-documentation-scrape",
   "version": "0.1.0",
   "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "description": "Workspace for scraping and building local NetSuite documentation pages.",
   "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "docs:build": "npm run build --workspace @netsuite/docs",
+    "app:build": "npm run build --workspace @netsuite/app-shell",
     "playwright:open": "playwright open",
     "playwright:codegen": "playwright codegen",
     "playwright:test": "playwright test",
@@ -14,6 +21,13 @@
     "netsuite:serve": "node scripts/netsuite/serve-public.mjs"
   },
   "devDependencies": {
+    "@astrojs/react": "^5.0.1",
+    "astro": "^6.0.8",
+    "next": "^16.2.1",
     "playwright": "^1.52.0"
+  },
+  "dependencies": {
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
   }
 }
