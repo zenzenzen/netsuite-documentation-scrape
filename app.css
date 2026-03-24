@@ -97,7 +97,8 @@ body.has-side-nav {
 }
 
 .nav-link-list,
-.nav-favorites-list {
+.nav-favorites-list,
+.nav-section-list {
   display: grid;
   gap: 8px;
 }
@@ -170,6 +171,38 @@ body.has-side-nav {
 .nav-resize {
   display: grid;
   gap: 8px;
+}
+
+.nav-section-item {
+  border-radius: 14px;
+}
+
+.nav-section-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  color: inherit;
+  cursor: grab;
+  text-align: left;
+}
+
+.nav-section-button:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.nav-section-handle {
+  color: #ffd98a;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+.nav-section-copy {
+  font-size: 0.92rem;
 }
 
 .nav-resize-row {
@@ -314,6 +347,7 @@ body.nav-collapsed .nav-group details[open] > *:not(summary) {
 .workflow-studio {
   margin-top: 38px;
   padding-bottom: 24px;
+  scroll-margin-top: 28px;
 }
 
 .workflow-heading {

@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {
   FOCUS_RECORDS,
+  PROJECT_ROOT,
   PUBLIC_DIR,
   PUBLIC_HOME_FILE,
   PUBLIC_RECORDS_DIR,
@@ -146,7 +147,14 @@ const workflowConfig = buildWorkflowConfig(allRecords, allTransforms);
 
 function renderPinnedSection() {
   return `
-    <details class="tool-panel pinned-panel" data-favorites-panel open>
+    <details
+      class="tool-panel pinned-panel page-section"
+      data-favorites-panel
+      data-page-section
+      data-section-id="pinned-objects"
+      data-section-title="Pinned Objects"
+      open
+    >
       <summary>
         <span>Pinned Objects</span>
         <span class="panel-meta" data-favorites-count>0 pinned</span>
@@ -161,9 +169,17 @@ function renderPinnedSection() {
 
 function renderWorkflowStudioSection(defaultBaseRecord) {
   return `
-    <section class="workflow-studio" id="workflow-studio" data-workflow-studio data-default-base="${escapeHtml(
+    <section
+      class="workflow-studio page-section"
+      id="workflow-studio"
+      data-workflow-studio
+      data-page-section
+      data-section-id="workflow-studio"
+      data-section-title="Workflow Studio"
+      data-default-base="${escapeHtml(
       defaultBaseRecord
-    )}">
+    )}"
+    >
       <div class="section-heading workflow-heading">
         <h2>Workflow Studio</h2>
         <p>Start from a base object, preview the next transform fan-out at 50% opacity, then lock branches forward like a NetSuite skill tree.</p>
@@ -276,7 +292,7 @@ function pageShell({
       background:
         radial-gradient(circle at top left, rgba(242, 183, 65, 0.22), transparent 36%),
         radial-gradient(circle at top right, rgba(156, 77, 204, 0.18), transparent 34%),
-        linear-gradient(180deg, #efe6d6 0%, #f9f6ef 42%, #eef6f6 100%);
+        linear-gradient(180deg, #efe6d6 0%, #f9f6ef 42%, #eee7ff 100%);
     }
 
     a { color: inherit; }
@@ -288,11 +304,9 @@ function pageShell({
     }
 
     .hero {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      padding: 18px 0 8px;
-      backdrop-filter: blur(14px);
+      position: relative;
+      z-index: 1;
+      padding: 18px 0 12px;
     }
 
     .hero-card {
@@ -411,6 +425,15 @@ function pageShell({
       line-height: 1.6;
     }
 
+    .page-body {
+      display: grid;
+      gap: 22px;
+    }
+
+    .page-section {
+      scroll-margin-top: 28px;
+    }
+
     .record-grid {
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     }
@@ -435,12 +458,20 @@ function pageShell({
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      min-width: 0;
+      max-width: 100%;
       padding: 6px 10px;
       border-radius: 999px;
       font-size: 0.8rem;
       font-weight: 700;
       background: rgba(20, 143, 136, 0.12);
       color: var(--teal);
+    }
+
+    .pill.mono {
+      white-space: normal;
+      overflow-wrap: anywhere;
+      line-height: 1.45;
     }
 
     .record-copy, .muted {
@@ -653,9 +684,11 @@ function pageShell({
         </div>
       </div>
     </div>
-    ${renderPinnedSection()}
-    ${body}
-    ${renderWorkflowStudioSection(defaultBaseRecord)}
+    <main class="page-body" data-page-body>
+      ${renderPinnedSection()}
+      ${body}
+      ${renderWorkflowStudioSection(defaultBaseRecord)}
+    </main>
   </div>
   <script id="netsuite-page-context" type="application/json">${serializeJsonForHtml(pageContext)}</script>
   <script id="netsuite-workflow-config" type="application/json">${serializeJsonForHtml(
@@ -816,29 +849,37 @@ function renderRecordPage(record) {
       <a class="record-link secondary" href="#workflow-studio">Open in workflow studio</a>
     </div>`,
     body: `
-      <div class="section-heading">
-        <h2>${escapeHtml(toTitleCase(record.recordName))}</h2>
-        <p>Linked records surface here as navigable chips, so you can jump between record dependencies while you read the endpoint contracts.</p>
-      </div>
-      <div class="panel">
-        ${renderDependencyChips(record, relativeLinkFromRecord)}
-      </div>
+      <section class="page-section" data-page-section data-section-id="record-links" data-section-title="${escapeHtml(
+        toTitleCase(record.recordName)
+      )}">
+        <div class="section-heading">
+          <h2>${escapeHtml(toTitleCase(record.recordName))}</h2>
+          <p>Linked records surface here as navigable chips, so you can jump between record dependencies while you read the endpoint contracts.</p>
+        </div>
+        <div class="panel">
+          ${renderDependencyChips(record, relativeLinkFromRecord)}
+        </div>
+      </section>
 
-      <div class="section-heading">
-        <h2>Endpoints</h2>
-        <p>Transform routes are expanded by default because they usually drive the interesting cross-record workflows in NetSuite.</p>
-      </div>
-      <div class="accordion">
-        ${operationMarkup}
-      </div>
+      <section class="page-section" data-page-section data-section-id="record-endpoints" data-section-title="Endpoints">
+        <div class="section-heading">
+          <h2>Endpoints</h2>
+          <p>Transform routes are expanded by default because they usually drive the interesting cross-record workflows in NetSuite.</p>
+        </div>
+        <div class="accordion">
+          ${operationMarkup}
+        </div>
+      </section>
 
-      <div class="section-heading" id="schema">
-        <h2>Schema Snapshot</h2>
-        <p>The definition table highlights the first 40 captured rows from the record schema, which is usually enough to orient yourself before dropping into the raw JSON.</p>
-      </div>
-      <div class="panel">
-        ${renderSchemaTable(record)}
-      </div>
+      <section class="page-section" data-page-section data-section-id="record-schema" data-section-title="Schema Snapshot" id="schema">
+        <div class="section-heading">
+          <h2>Schema Snapshot</h2>
+          <p>The definition table highlights the first 40 captured rows from the record schema, which is usually enough to orient yourself before dropping into the raw JSON.</p>
+        </div>
+        <div class="panel">
+          ${renderSchemaTable(record)}
+        </div>
+      </section>
     `,
   });
 }
@@ -943,36 +984,44 @@ function renderOverviewPage() {
       rawIndex.sourceUrl
     )}. The overview stays focused on your requested records: customer, creditMemo, invoice, itemFulfillment, salesOrder, subsidiary, paymentItem, and partner. Dependency chips and transform routes link outward so you can follow related records without losing the main story.</div>`,
     body: `
-      <div class="grid stats-grid" style="margin-top:22px;">
-        <article class="stat-card"><p class="stat-label">Focus Records</p><p class="stat-value">${stats.focusRecords}</p></article>
-        <article class="stat-card"><p class="stat-label">Dependency Records</p><p class="stat-value">${stats.dependencyRecords}</p></article>
-        <article class="stat-card"><p class="stat-label">Transform Routes</p><p class="stat-value">${stats.transforms}</p></article>
-        <article class="stat-card"><p class="stat-label">Scraped Records</p><p class="stat-value">${stats.totalScraped}</p></article>
-      </div>
+      <section class="page-section" data-page-section data-section-id="overview-stats" data-section-title="Overview Stats">
+        <div class="grid stats-grid" style="margin-top:22px;">
+          <article class="stat-card"><p class="stat-label">Focus Records</p><p class="stat-value">${stats.focusRecords}</p></article>
+          <article class="stat-card"><p class="stat-label">Dependency Records</p><p class="stat-value">${stats.dependencyRecords}</p></article>
+          <article class="stat-card"><p class="stat-label">Transform Routes</p><p class="stat-value">${stats.transforms}</p></article>
+          <article class="stat-card"><p class="stat-label">Scraped Records</p><p class="stat-value">${stats.totalScraped}</p></article>
+        </div>
+      </section>
 
-      <div class="section-heading">
-        <h2>Focus Records</h2>
-        <p>Each record card links to a dedicated page with endpoint accordions, transform-first layouts, and linked dependency navigation.</p>
-      </div>
-      <div class="grid record-grid">
-        ${focusCards}
-      </div>
+      <section class="page-section" data-page-section data-section-id="focus-records" data-section-title="Focus Records">
+        <div class="section-heading">
+          <h2>Focus Records</h2>
+          <p>Each record card links to a dedicated page with endpoint accordions, transform-first layouts, and linked dependency navigation.</p>
+        </div>
+        <div class="grid record-grid">
+          ${focusCards}
+        </div>
+      </section>
 
-      <div class="section-heading">
-        <h2>Transform Highlights</h2>
-        <p>Cross-record transformations usually carry the most implementation nuance in NetSuite. This strip surfaces the ones touching your focus records first.</p>
-      </div>
-      <div class="grid record-grid">
-        ${workflowCards}
-      </div>
+      <section class="page-section" data-page-section data-section-id="transform-highlights" data-section-title="Transform Highlights">
+        <div class="section-heading">
+          <h2>Transform Highlights</h2>
+          <p>Cross-record transformations usually carry the most implementation nuance in NetSuite. This strip surfaces the ones touching your focus records first.</p>
+        </div>
+        <div class="grid record-grid">
+          ${workflowCards}
+        </div>
+      </section>
 
-      <div class="section-heading">
-        <h2>Dependency Pages</h2>
-        <p>These linked records showed up in the focus object schemas or endpoint contracts and got their own generated pages so the dependency links have somewhere useful to land.</p>
-      </div>
-      <div class="grid record-grid">
-        ${dependencyCards}
-      </div>
+      <section class="page-section" data-page-section data-section-id="dependency-pages" data-section-title="Dependency Pages">
+        <div class="section-heading">
+          <h2>Dependency Pages</h2>
+          <p>These linked records showed up in the focus object schemas or endpoint contracts and got their own generated pages so the dependency links have somewhere useful to land.</p>
+        </div>
+        <div class="grid record-grid">
+          ${dependencyCards}
+        </div>
+      </section>
     `,
   });
 }
@@ -1028,33 +1077,37 @@ function renderTransformsPage() {
     defaultBaseRecord: 'salesOrder',
     intro: `<div class="muted">This page separates transform workflows from the standard CRUD surface so you can scan the source-to-target routes faster. It is especially useful when you are tracing record creation chains like customer to salesOrder to invoice or salesOrder to itemFulfillment.</div>`,
     body: `
-      <div class="section-heading">
-        <h2>Workflow Groups</h2>
-        <p>The cards below cluster transform endpoints by their source record, which makes orchestration patterns easier to recognize.</p>
-      </div>
-      <div class="grid record-grid">
-        ${workflowMarkup}
-      </div>
+      <section class="page-section" data-page-section data-section-id="workflow-groups" data-section-title="Workflow Groups">
+        <div class="section-heading">
+          <h2>Workflow Groups</h2>
+          <p>The cards below cluster transform endpoints by their source record, which makes orchestration patterns easier to recognize.</p>
+        </div>
+        <div class="grid record-grid">
+          ${workflowMarkup}
+        </div>
+      </section>
 
-      <div class="section-heading">
-        <h2>Route Matrix</h2>
-        <p>Use this matrix when you need the exact transform endpoint path without opening each record page individually.</p>
-      </div>
-      <div class="matrix-card">
-        <table class="matrix">
-          <thead>
-            <tr>
-              <th>Source</th>
-              <th>Target</th>
-              <th>Endpoint</th>
-              <th>Summary</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${matrixRows}
-          </tbody>
-        </table>
-      </div>
+      <section class="page-section" data-page-section data-section-id="route-matrix" data-section-title="Route Matrix">
+        <div class="section-heading">
+          <h2>Route Matrix</h2>
+          <p>Use this matrix when you need the exact transform endpoint path without opening each record page individually.</p>
+        </div>
+        <div class="matrix-card">
+          <table class="matrix">
+            <thead>
+              <tr>
+                <th>Source</th>
+                <th>Target</th>
+                <th>Endpoint</th>
+                <th>Summary</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${matrixRows}
+            </tbody>
+          </table>
+        </div>
+      </section>
     `,
   });
 }
