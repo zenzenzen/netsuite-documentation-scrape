@@ -198,6 +198,38 @@
   isolation: isolate;
 }
 
+.workflow-catalog-stage {
+  min-height: 980px;
+  position: relative;
+  padding: 86px 24px 24px;
+  background:
+    radial-gradient(circle at 18% 16%, rgba(239, 141, 92, 0.12), transparent 18%),
+    radial-gradient(circle at 84% 20%, rgba(123, 100, 223, 0.14), transparent 20%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(245, 247, 251, 0.86));
+}
+
+.workflow-stage-note-static,
+.workflow-stage-meta-static {
+  position: absolute;
+  top: 18px;
+  z-index: 2;
+}
+
+.workflow-stage-note-static {
+  left: 18px;
+}
+
+.workflow-stage-meta-static {
+  right: 18px;
+}
+
+.workflow-catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(168px, 1fr));
+  gap: 16px;
+  align-content: start;
+}
+
 .workflow-loading-state {
   min-height: 900px;
   display: grid;
@@ -327,7 +359,9 @@
 }
 
 .workflow-node-shell.is-catalog {
-  min-width: 148px;
+  width: 100%;
+  min-width: 0;
+  max-width: none;
 }
 
 .workflow-node-shell.is-focus {
@@ -367,6 +401,11 @@
   font: inherit;
 }
 
+.workflow-node-shell.is-catalog .workflow-node-button {
+  max-width: none;
+  min-height: 64px;
+}
+
 .workflow-node-heading {
   display: grid;
   min-width: 0;
@@ -388,6 +427,14 @@
   height: 8px;
   background: var(--node-accent);
   border: 2px solid rgba(255, 255, 255, 0.92);
+}
+
+.react-flow__node-recordNode {
+  pointer-events: all !important;
+}
+
+.react-flow__node-recordNode .workflow-node-button {
+  pointer-events: auto;
 }
 
 body.workflow-overlay-open {

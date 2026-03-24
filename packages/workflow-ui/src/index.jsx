@@ -140,36 +140,6 @@ function buildImmediateTransformRequests(record, resolveRecord, routeStages) {
     });
 }
 
-function buildCatalogGraph(workflowIndex, handlers = {}) {
-  const nodes = sortByTitle(workflowIndex).map((record, index) => {
-    const columnCount = Math.max(4, Math.ceil(Math.sqrt(workflowIndex.length / 1.2)));
-    const column = index % columnCount;
-    const row = Math.floor(index / columnCount);
-    const jitter = hashString(record.recordName);
-
-    return {
-      id: record.recordName,
-      type: 'recordNode',
-      position: {
-        x: column * 208 + (row % 2) * 18 + (jitter % 14),
-        y: row * 92 + (column % 2) * 10 + ((jitter >> 3) % 12),
-      },
-      draggable: false,
-      selectable: false,
-        data: {
-          record,
-          mode: 'catalog',
-          state: 'catalog',
-          tone: categoryColor(record.category || 'other'),
-          favorite: false,
-          onPrimaryAction: handlers?.onAnchor,
-      },
-    };
-  });
-
-  return { nodes, edges: [], previewTargets: nodes.map((node) => node.id) };
-}
-
 function buildFocusedGraph(layout, favorites, handlers = {}) {
   const nodes = layout.layers.flatMap((layer) => {
     const count = Math.max(1, layer.nodes.length);
@@ -191,6 +161,7 @@ function buildFocusedGraph(layout, favorites, handlers = {}) {
         },
         draggable: false,
         selectable: false,
+        style: { pointerEvents: 'all' },
         data: {
           record: node,
           mode: 'focus',
@@ -478,6 +449,32 @@ function RecordOverlay({
   );
 }
 
+function CatalogGrid({ workflowIndex, favorites, onAnchor }) {
+  return (
+    <div className="workflow-catalog-grid">
+      {sortByTitle(workflowIndex).map((record) => {
+        const tone = categoryColor(record.category || 'other');
+        return (
+          <div
+            key={record.recordName}
+            className={`workflow-node-shell is-catalog${favorites.includes(record.recordName) ? ' is-favorite' : ''}`}
+            style={{ '--node-accent': tone.accent, '--node-surface': tone.surface }}
+          >
+            <TooltipButton
+              className="workflow-node-button"
+              tooltip="Anchor workflow on this object"
+              aria-label={`Anchor workflow on ${record.title}`}
+              onClick={() => onAnchor(record.recordName)}
+            >
+              <span className="workflow-node-title">{record.title}</span>
+            </TooltipButton>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 export function WorkflowStudio({ workflowIndex, initialWorkflow }) {
   const [workflowMap, setWorkflowMap] = useState(() => new Map());
   const [anchorRecordName, setAnchorRecordName] = useState(() => {
@@ -665,11 +662,11 @@ export function WorkflowStudio({ workflowIndex, initialWorkflow }) {
 
   const graph = useMemo(() => {
     if (!anchorRecord || !currentWorkflow) {
-      return buildCatalogGraph(workflowIndex, { onAnchor: handleAnchor });
+      return null;
     }
 
     return buildFocusedGraph(currentWorkflow, favorites, { onInspect: handleInspect });
-  }, [anchorRecord, currentWorkflow, favorites, workflowIndex]);
+  }, [anchorRecord, currentWorkflow, favorites]);
 
   const graphMode = anchorRecord ? 'focus' : 'catalog';
   const activeRecordName = inspectionRecordName || anchorRecord?.recordName || null;
@@ -761,6 +758,7 @@ export function WorkflowStudio({ workflowIndex, initialWorkflow }) {
                 minZoom={0.54}
                 maxZoom={1.42}
                 panOnScroll
+                panOnDrag
                 nodesDraggable={false}
                 nodesConnectable={false}
                 elementsSelectable={false}
@@ -783,30 +781,14 @@ export function WorkflowStudio({ workflowIndex, initialWorkflow }) {
               </div>
             )
           ) : (
-            <ReactFlow
-              nodes={graph.nodes}
-              edges={graph.edges}
-              nodeTypes={nodeTypes}
-              fitView
-              fitViewOptions={{ padding: 0.12, maxZoom: 1.06 }}
-              minZoom={0.5}
-              maxZoom={1.45}
-              panOnScroll
-              nodesDraggable={false}
-              nodesConnectable={false}
-              elementsSelectable={false}
-              proOptions={{ hideAttribution: true }}
-            >
-              <Background color="rgba(96, 108, 136, 0.12)" gap={24} />
-              <Controls showInteractive={false} />
-              <Panel position="top-left" className="workflow-stage-note">
-                {stageNote}
-              </Panel>
-              <Panel position="top-right" className="workflow-stage-meta">
-                <span>{graph.nodes.length} objects</span>
+            <div className="workflow-catalog-stage">
+              <div className="workflow-stage-note workflow-stage-note-static">{stageNote}</div>
+              <div className="workflow-stage-meta workflow-stage-meta-static">
+                <span>{workflowIndex.length} objects</span>
                 <span>Alphabetized</span>
-              </Panel>
-            </ReactFlow>
+              </div>
+              <CatalogGrid workflowIndex={workflowIndex} favorites={favorites} onAnchor={handleAnchor} />
+            </div>
           )}
         </div>
 
