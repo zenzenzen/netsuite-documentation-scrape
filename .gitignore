@@ -4,10 +4,17 @@ test-results/
 output/
 .DS_Store
 .npm-cache/
+
+# Secrets and credentials — never commit
 .env
 .env.*
+*.env
+
 .vercel/
 apps/docs/dist/
 apps/docs/.astro/
 apps/app/.next/
 .vercel
+
+# Browser auth session state (contains live cookies/tokens)
+data/netsuite/auth/
