@@ -42,6 +42,8 @@ function copyText(value) {
   return navigator.clipboard.writeText(value);
 }
 
+const POSTMAN_ACTIVE_QUERY_ROOT = 'https://8296871.suitetalk.api.netsuite.com/services/rest/record/v1';
+
 class LocalStateStore {
   constructor(prefix = 'netsuite-docs') {
     this.prefix = prefix;
@@ -103,13 +105,7 @@ class WorkflowRepository {
   listBaseRecords() {
     return [...(this.config.records || [])]
       .filter((record) => record.stats?.outgoingTransforms || record.stats?.transforms)
-      .sort((left, right) => {
-        const weight = { focus: 0, dependency: 1, extended: 2 };
-        return (
-          (weight[left.group] ?? 9) - (weight[right.group] ?? 9) ||
-          left.title.localeCompare(right.title)
-        );
-      });
+      .sort((left, right) => left.title.localeCompare(right.title) || left.recordName.localeCompare(right.recordName));
   }
 
   getOutgoing(recordNames) {
@@ -235,6 +231,17 @@ class WorkflowRepository {
       shareQuery: this.buildShareQuery(baseRecord, lockedLevels),
       selectedTransforms,
       requests,
+    };
+  }
+
+  buildActiveQuery(recordReference) {
+    const record = this.getRecord(recordReference);
+    const recordName = record?.recordName || recordReference;
+
+    return {
+      name: `GET ${recordName}`,
+      method: 'GET',
+      url: `${POSTMAN_ACTIVE_QUERY_ROOT}/${recordName}/{{${recordName}Id}}`,
     };
   }
 
@@ -840,7 +847,8 @@ class WorkflowStudioController {
     const backButton = this.root.querySelector('[data-workflow-back]');
     const resetButton = this.root.querySelector('[data-workflow-reset]');
     const shareQueryNode = this.root.querySelector('[data-share-query]');
-    const requestBundleNode = this.root.querySelector('[data-request-bundle]');
+    const activeQueryNode = this.root.querySelector('[data-active-query]');
+    const activeQueryNoteNode = this.root.querySelector('[data-active-query-note]');
     const configNode = this.root.querySelector('[data-workflow-config-output]');
 
     if (!baseSelect.dataset.ready) {
@@ -866,16 +874,19 @@ class WorkflowStudioController {
         const bundle = this.repository.buildRequestBundle(this.state.baseRecord, this.state.lockedLevels);
         await copyText(bundle.shareQuery).catch((error) => console.warn(error));
       });
-
-      this.root.querySelector('[data-copy-request-bundle]')?.addEventListener('click', async () => {
-        const bundle = this.repository.buildRequestBundle(this.state.baseRecord, this.state.lockedLevels);
-        await copyText(JSON.stringify(bundle, null, 2)).catch((error) => console.warn(error));
-      });
     }
 
     baseSelect.value = this.state.baseRecord;
     commitButton.disabled = this.pendingSelection.length === 0;
     backButton.disabled = this.pendingSelection.length === 0 && this.state.lockedLevels.length === 1;
+    commitButton.textContent = 'Lock selected objects';
+    backButton.textContent = this.pendingSelection.length ? 'Clear queued selection' : 'Step back one level';
+    resetButton.textContent = 'Reset to base';
+    commitButton.title = 'Promote the queued preview objects into the next locked level.';
+    backButton.title = this.pendingSelection.length
+      ? 'Clear the currently queued preview objects.'
+      : 'Step back one locked level.';
+    resetButton.title = 'Return the route to the base object.';
 
     const previewEdges = this.getPreviewEdges();
     const previewRecords = previewEdges
@@ -922,8 +933,10 @@ class WorkflowStudioController {
     });
 
     const bundle = this.repository.buildRequestBundle(this.state.baseRecord, this.state.lockedLevels);
+    const activeQuery = this.repository.buildActiveQuery(this.state.baseRecord);
     shareQueryNode.textContent = `?${bundle.shareQuery}`;
-    requestBundleNode.textContent = JSON.stringify(bundle, null, 2);
+    activeQueryNode.textContent = `${activeQuery.method} ${activeQuery.url}`;
+    activeQueryNoteNode.textContent = 'GET requests do not require request body data.';
     configNode.textContent = JSON.stringify(
       this.repository.buildAtomicConfig(this.state.baseRecord, this.state.lockedLevels),
       null,

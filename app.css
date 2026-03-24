@@ -634,6 +634,14 @@ body.nav-collapsed .nav-group details[open] > *:not(summary) {
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
 
+.workflow-output .muted,
+.workflow-query-note {
+  margin: 0;
+  color: #5d6472;
+  line-height: 1.5;
+  font-size: 0.9rem;
+}
+
 .workflow-code {
   margin: 0;
   min-height: 140px;

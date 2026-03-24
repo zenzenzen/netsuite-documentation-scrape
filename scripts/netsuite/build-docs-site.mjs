@@ -210,20 +210,20 @@ function renderWorkflowStudioSection(defaultBaseRecord) {
     >
       <div class="section-heading workflow-heading">
         <h2>Workflow Studio</h2>
-        <p>Start from a base object, preview the next transform fan-out at 50% opacity, then lock branches forward like a NetSuite skill tree.</p>
+        <p>Start from a base object, preview the next transform fan-out at 50% opacity, then lock branches forward. The active query below shows the GET route for the current base object.</p>
       </div>
       <div class="workflow-shell">
-        <div class="workflow-toolbar">
-          <label class="workflow-label">
-            <span>Base object</span>
-            <select class="workflow-select" data-workflow-base></select>
-          </label>
-          <div class="workflow-toolbar-actions">
-            <button class="record-link secondary workflow-action" type="button" data-workflow-commit>Lock selected objects</button>
-            <button class="record-link secondary workflow-action" type="button" data-workflow-back>Back one level</button>
-            <button class="record-link secondary workflow-action" type="button" data-workflow-reset>Reset</button>
-          </div>
+      <div class="workflow-toolbar">
+        <label class="workflow-label">
+          <span>Base object</span>
+          <select class="workflow-select" data-workflow-base></select>
+        </label>
+        <div class="workflow-toolbar-actions">
+          <button class="record-link secondary workflow-action" type="button" data-workflow-commit>Lock selected objects</button>
+          <button class="record-link secondary workflow-action" type="button" data-workflow-back>Step back one level</button>
+          <button class="record-link secondary workflow-action" type="button" data-workflow-reset>Reset to base</button>
         </div>
+      </div>
 
         <div class="workflow-legend">
           <span class="workflow-dot workflow-dot-locked"></span> locked branch
@@ -235,14 +235,15 @@ function renderWorkflowStudioSection(defaultBaseRecord) {
 
         <div class="workflow-output-grid">
           <section class="tool-panel workflow-output">
-            <summary class="static-summary">Postman-ready query bundle</summary>
+            <summary class="static-summary">Postman active query</summary>
             <div class="tool-panel-body">
               <div class="workflow-copy-row">
                 <button class="record-link secondary workflow-action" type="button" data-copy-share-query>Copy share query</button>
-                <button class="record-link secondary workflow-action" type="button" data-copy-request-bundle>Copy request bundle</button>
               </div>
               <pre class="workflow-code" data-share-query></pre>
-              <pre class="workflow-code" data-request-bundle></pre>
+              <pre class="workflow-code" data-active-query></pre>
+              <p class="muted">GET requests do not require request body data.</p>
+              <p class="workflow-query-note" data-active-query-note></p>
             </div>
           </section>
 
