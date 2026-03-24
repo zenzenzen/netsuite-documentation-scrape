@@ -14,7 +14,12 @@ const mimeTypes = {
 };
 
 const server = http.createServer((request, response) => {
-  const requestPath = request.url === '/' ? '/public.html' : request.url;
+  const requestPath =
+    request.url === '/'
+      ? '/public.html'
+      : request.url === '/favicon.ico'
+        ? '/favicon.svg'
+        : request.url;
   const resolvedPath = path.resolve(PROJECT_ROOT, `.${requestPath}`);
 
   if (!resolvedPath.startsWith(PROJECT_ROOT)) {

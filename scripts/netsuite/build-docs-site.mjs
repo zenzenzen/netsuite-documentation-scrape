@@ -48,6 +48,7 @@ const focusTransforms = allTransforms.filter(
   (transform) =>
     FOCUS_RECORDS.includes(transform.source) || FOCUS_RECORDS.includes(transform.target)
 );
+const WORKFLOW_CONFIG_FILE = path.join(PROJECT_ROOT, 'workflow-map.json');
 
 function escapeHtml(value) {
   return String(value ?? '')
@@ -58,6 +59,162 @@ function escapeHtml(value) {
     .replace(/'/g, '&#39;');
 }
 
+function serializeJsonForHtml(value) {
+  return JSON.stringify(value).replace(/</g, '\\u003c');
+}
+
+function summarizeRecord(record) {
+  const firstOperationSummary = (record.operations || []).find((operation) => operation.summary)?.summary;
+  const transformSummary = record.transforms?.length
+    ? `${record.transforms.length} transform workflow${record.transforms.length === 1 ? '' : 's'} available.`
+    : '';
+  const dependencySummary = record.dependencyRecords?.length
+    ? `${record.dependencyRecords.length} linked dependency record${record.dependencyRecords.length === 1 ? '' : 's'}.`
+    : '';
+
+  return (
+    compact([firstOperationSummary, transformSummary, dependencySummary]).join(' ') ||
+    'Generated from the NetSuite REST API Browser scrape.'
+  );
+}
+
+function buildWorkflowConfig(records, transforms) {
+  const focusSet = new Set(FOCUS_RECORDS);
+  const dependencySet = new Set(dependencyRecords.map((record) => record.recordName));
+
+  const transformEntries = transforms.map((transform, index) => ({
+    id: `${slugify(transform.source)}--${slugify(transform.target)}--${index + 1}`,
+    source: transform.source,
+    sourceSlug: slugify(transform.source),
+    target: transform.target,
+    targetSlug: slugify(transform.target),
+    method: transform.method,
+    path: transform.path,
+    summary: transform.summary || `Transform ${transform.source} to ${transform.target}.`,
+  }));
+
+  const outgoingCounts = new Map();
+  const incomingCounts = new Map();
+
+  for (const transform of transformEntries) {
+    outgoingCounts.set(transform.source, (outgoingCounts.get(transform.source) || 0) + 1);
+    incomingCounts.set(transform.target, (incomingCounts.get(transform.target) || 0) + 1);
+  }
+
+  const recordEntries = records
+    .map((record) => ({
+      recordName: record.recordName,
+      slug: slugify(record.recordName),
+      title: toTitleCase(record.recordName),
+      group: focusSet.has(record.recordName)
+        ? 'focus'
+        : dependencySet.has(record.recordName)
+          ? 'dependency'
+          : 'extended',
+      summary: summarizeRecord(record),
+      docsPath: relativeLinkFromRoot(record.recordName),
+      stats: {
+        operations: record.stats?.operations || 0,
+        transforms: record.stats?.transforms || 0,
+        schemaFields: record.stats?.schemaFields || 0,
+        outgoingTransforms: outgoingCounts.get(record.recordName) || 0,
+        incomingTransforms: incomingCounts.get(record.recordName) || 0,
+      },
+      dependencies: unique(record.dependencyRecords || []),
+      endpoints: (record.operations || []).slice(0, 12).map((operation) => ({
+        method: operation.method,
+        path: operation.path,
+        summary: operation.summary || 'Operation',
+        isTransform: Boolean(operation.isTransform),
+      })),
+    }))
+    .sort((left, right) => {
+      const weight = { focus: 0, dependency: 1, extended: 2 };
+      return weight[left.group] - weight[right.group] || left.title.localeCompare(right.title);
+    });
+
+  return {
+    version: 1,
+    generatedAt: new Date().toISOString(),
+    sourceUrl: rawIndex.sourceUrl,
+    records: recordEntries,
+    transforms: transformEntries,
+  };
+}
+
+const workflowConfig = buildWorkflowConfig(allRecords, allTransforms);
+
+function renderPinnedSection() {
+  return `
+    <details class="tool-panel pinned-panel" data-favorites-panel open>
+      <summary>
+        <span>Pinned Objects</span>
+        <span class="panel-meta" data-favorites-count>0 pinned</span>
+      </summary>
+      <div class="tool-panel-body">
+        <p class="muted">Pin records from cards, record pages, or the workflow studio to keep a reusable shortlist close by.</p>
+        <div class="favorites-grid" data-favorites-list></div>
+      </div>
+    </details>
+  `;
+}
+
+function renderWorkflowStudioSection(defaultBaseRecord) {
+  return `
+    <section class="workflow-studio" id="workflow-studio" data-workflow-studio data-default-base="${escapeHtml(
+      defaultBaseRecord
+    )}">
+      <div class="section-heading workflow-heading">
+        <h2>Workflow Studio</h2>
+        <p>Start from a base object, preview the next transform fan-out at 50% opacity, then lock branches forward like a NetSuite skill tree.</p>
+      </div>
+      <div class="workflow-shell">
+        <div class="workflow-toolbar">
+          <label class="workflow-label">
+            <span>Base object</span>
+            <select class="workflow-select" data-workflow-base></select>
+          </label>
+          <div class="workflow-toolbar-actions">
+            <button class="record-link secondary workflow-action" type="button" data-workflow-commit>Lock selected objects</button>
+            <button class="record-link secondary workflow-action" type="button" data-workflow-back>Back one level</button>
+            <button class="record-link secondary workflow-action" type="button" data-workflow-reset>Reset</button>
+          </div>
+        </div>
+
+        <div class="workflow-legend">
+          <span class="workflow-dot workflow-dot-locked"></span> locked branch
+          <span class="workflow-dot workflow-dot-preview"></span> preview branch
+          <span class="workflow-dot workflow-dot-selected"></span> queued for lock
+        </div>
+
+        <div class="workflow-canvas" data-workflow-tree></div>
+
+        <div class="workflow-output-grid">
+          <section class="tool-panel workflow-output">
+            <summary class="static-summary">Postman-ready query bundle</summary>
+            <div class="tool-panel-body">
+              <div class="workflow-copy-row">
+                <button class="record-link secondary workflow-action" type="button" data-copy-share-query>Copy share query</button>
+                <button class="record-link secondary workflow-action" type="button" data-copy-request-bundle>Copy request bundle</button>
+              </div>
+              <pre class="workflow-code" data-share-query></pre>
+              <pre class="workflow-code" data-request-bundle></pre>
+            </div>
+          </section>
+
+          <section class="tool-panel workflow-output">
+            <summary class="static-summary">Atomic workflow config</summary>
+            <div class="tool-panel-body">
+              <p class="muted">This lightweight JSON shape is the browser-safe config that can later move into a database or Atlas-backed service.</p>
+              <pre class="workflow-code" data-workflow-config-output></pre>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+  `;
+}
+
 function pageShell({
   title,
   eyebrow,
@@ -65,15 +222,31 @@ function pageShell({
   body,
   extraHead = '',
   script = '',
+  faviconHref = './favicon.svg',
+  rootPrefix = './',
+  pageKind = 'overview',
+  currentRecordName = '',
+  defaultBaseRecord = 'salesOrder',
   homeHref = './public.html',
   transformsHref = './transforms.html',
 }) {
+  const pageContext = {
+    pageKind,
+    currentRecordName,
+    defaultBaseRecord,
+    rootPrefix,
+    homeHref,
+    transformsHref,
+  };
+
   return `<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${escapeHtml(title)}</title>
+  <link rel="icon" type="image/svg+xml" href="${escapeHtml(faviconHref)}">
+  <link rel="stylesheet" href="${escapeHtml(rootPrefix)}app.css">
   <style>
     :root {
       --bg: #f6f1e8;
@@ -464,7 +637,10 @@ function pageShell({
   </style>
   ${extraHead}
 </head>
-<body>
+<body data-page-kind="${escapeHtml(pageKind)}" data-current-record="${escapeHtml(
+    currentRecordName
+  )}">
+  <aside class="nav-panel" data-nav-panel aria-label="NetSuite object navigation"></aside>
   <div class="shell">
     <div class="hero">
       <div class="hero-card">
@@ -477,9 +653,16 @@ function pageShell({
         </div>
       </div>
     </div>
+    ${renderPinnedSection()}
     ${body}
+    ${renderWorkflowStudioSection(defaultBaseRecord)}
   </div>
+  <script id="netsuite-page-context" type="application/json">${serializeJsonForHtml(pageContext)}</script>
+  <script id="netsuite-workflow-config" type="application/json">${serializeJsonForHtml(
+    workflowConfig
+  )}</script>
   ${script}
+  <script type="module" src="${escapeHtml(rootPrefix)}app.js"></script>
 </body>
 </html>`;
 }
@@ -613,6 +796,11 @@ function renderRecordPage(record) {
   return pageShell({
     title: `${record.recordName} | NetSuite REST API`,
     eyebrow: 'NetSuite Record Explorer',
+    faviconHref: '../../favicon.svg',
+    rootPrefix: '../../',
+    pageKind: 'record',
+    currentRecordName: record.recordName,
+    defaultBaseRecord: record.recordName,
     homeHref: '../../public.html',
     transformsHref: '../../transforms.html',
     intro: `<div class="record-meta">
@@ -620,7 +808,13 @@ function renderRecordPage(record) {
       <span class="pill">${record.stats.transforms} transforms</span>
       <span class="pill">${record.stats.schemaFields} schema rows</span>
     </div>
-    <div class="muted">This page is generated from the NetSuite REST API Browser scrape and tuned for fast scanning: endpoint cards, transform emphasis, and direct links to dependency records.</div>`,
+    <div class="muted">This page is generated from the NetSuite REST API Browser scrape and tuned for fast scanning: endpoint cards, transform emphasis, and direct links to dependency records.</div>
+    <div class="record-actions hero-actions">
+      <button class="record-link secondary favorite-toggle" type="button" data-favorite-toggle data-record-name="${escapeHtml(
+        record.recordName
+      )}">Pin favorite</button>
+      <a class="record-link secondary" href="#workflow-studio">Open in workflow studio</a>
+    </div>`,
     body: `
       <div class="section-heading">
         <h2>${escapeHtml(toTitleCase(record.recordName))}</h2>
@@ -688,7 +882,12 @@ function renderOverviewPage() {
             )
             .join('')}
         </div>
-        <a class="record-link" href="${escapeHtml(relativeLinkFromRoot(record.recordName))}">Open record page</a>
+        <div class="record-actions">
+          <a class="record-link" href="${escapeHtml(relativeLinkFromRoot(record.recordName))}">Open record page</a>
+          <button class="record-link secondary favorite-toggle" type="button" data-favorite-toggle data-record-name="${escapeHtml(
+            record.recordName
+          )}">Pin favorite</button>
+        </div>
       </article>`
     )
     .join('');
@@ -706,9 +905,14 @@ function renderOverviewPage() {
             record.dependencyRecords?.length || 0
           } linked records were captured.`
         )}</div>
-        <a class="record-link secondary" href="${escapeHtml(
-          relativeLinkFromRoot(record.recordName)
-        )}">Open dependency</a>
+        <div class="record-actions">
+          <a class="record-link secondary" href="${escapeHtml(
+            relativeLinkFromRoot(record.recordName)
+          )}">Open dependency</a>
+          <button class="record-link secondary favorite-toggle" type="button" data-favorite-toggle data-record-name="${escapeHtml(
+            record.recordName
+          )}">Pin favorite</button>
+        </div>
       </article>`
     )
     .join('');
@@ -733,6 +937,8 @@ function renderOverviewPage() {
   return pageShell({
     title: 'NetSuite REST API Browser Companion',
     eyebrow: 'Focus Objects + Workflow Links',
+    pageKind: 'overview',
+    defaultBaseRecord: 'salesOrder',
     intro: `<div class="muted">Generated from ${escapeHtml(
       rawIndex.sourceUrl
     )}. The overview stays focused on your requested records: customer, creditMemo, invoice, itemFulfillment, salesOrder, subsidiary, paymentItem, and partner. Dependency chips and transform routes link outward so you can follow related records without losing the main story.</div>`,
@@ -818,6 +1024,8 @@ function renderTransformsPage() {
   return pageShell({
     title: 'NetSuite Transform Workflows',
     eyebrow: 'Transform-Centric View',
+    pageKind: 'transforms',
+    defaultBaseRecord: 'salesOrder',
     intro: `<div class="muted">This page separates transform workflows from the standard CRUD surface so you can scan the source-to-target routes faster. It is especially useful when you are tracing record creation chains like customer to salesOrder to invoice or salesOrder to itemFulfillment.</div>`,
     body: `
       <div class="section-heading">
@@ -863,7 +1071,9 @@ for (const record of [...focusRecords, ...dependencyRecords]) {
 
 writeText(PUBLIC_HOME_FILE, renderOverviewPage());
 writeText(PUBLIC_TRANSFORMS_FILE, renderTransformsPage());
+writeText(WORKFLOW_CONFIG_FILE, `${JSON.stringify(workflowConfig, null, 2)}\n`);
 
 console.log(`Wrote ${PUBLIC_HOME_FILE}`);
 console.log(`Wrote ${PUBLIC_TRANSFORMS_FILE}`);
 console.log(`Wrote ${focusRecords.length + dependencyRecords.length} record pages to ${PUBLIC_RECORDS_DIR}`);
+console.log(`Wrote ${WORKFLOW_CONFIG_FILE}`);

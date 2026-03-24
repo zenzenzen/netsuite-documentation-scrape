@@ -2,6 +2,10 @@
 
 Workspace for scraping NetSuite REST API documentation and building local browsable docs pages.
 
+## Architecture guidance
+
+Agentic tooling and build-tooling work in this repo should follow the stored reference at [`docs/agent-native-architecture.md`](/Users/dev/ai-gen-tooling/netsuite-documentation-scrape/docs/agent-native-architecture.md). Repo-local instructions also mirror that guidance in [`AGENTS.md`](/Users/dev/ai-gen-tooling/netsuite-documentation-scrape/AGENTS.md).
+
 ## Included
 
 - Local Playwright setup for browser automation
