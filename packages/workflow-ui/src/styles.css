@@ -76,12 +76,20 @@
 }
 
 .workflow-select-label select {
+  width: 100%;
   min-height: 48px;
   border-radius: 16px;
   border: 1px solid rgba(31, 36, 48, 0.1);
   padding: 0 14px;
   font: inherit;
   background: rgba(255, 255, 255, 0.92);
+  color: #1f2430;
+  -webkit-text-fill-color: #1f2430;
+  appearance: auto;
+}
+
+.workflow-select-label option {
+  color: #1f2430;
 }
 
 .workflow-toolbar-actions,
@@ -194,6 +202,8 @@
 .workflow-stat-pill {
   display: inline-flex;
   align-items: center;
+  min-width: 0;
+  max-width: 100%;
   min-height: 28px;
   padding: 6px 10px;
   border-radius: 999px;
@@ -201,6 +211,9 @@
   color: #5d6472;
   font-size: 0.82rem;
   font-weight: 700;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+  white-space: normal;
 }
 
 .workflow-mini-pill.is-tinted,
@@ -268,6 +281,7 @@
 
 .workflow-node-button {
   display: grid;
+  min-width: 0;
   gap: 10px;
   padding: 0;
   border: 0;
@@ -280,6 +294,7 @@
 
 .workflow-node-heading {
   display: grid;
+  min-width: 0;
   gap: 8px;
 }
 
@@ -287,6 +302,7 @@
   font-size: 1.2rem;
   font-weight: 800;
   line-height: 1.08;
+  overflow-wrap: anywhere;
 }
 
 .workflow-node-category {

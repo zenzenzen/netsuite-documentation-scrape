@@ -192,9 +192,9 @@ export function parseShareQuery(search, workflowIndex) {
   };
 }
 
-export function buildShareQuery(baseRecord, lockedLevels) {
+export function buildShareQuery(baseReference, lockedLevels) {
   const params = new URLSearchParams();
-  params.set('base', baseRecord);
+  params.set('base', baseReference);
 
   if (lockedLevels.length > 1) {
     params.set(
