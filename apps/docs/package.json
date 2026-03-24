@@ -4,12 +4,14 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "astro build"
+    "build": "npm run sync:workflow-data && astro build",
+    "sync:workflow-data": "node ./scripts/sync-workflow-data.mjs"
   },
   "dependencies": {
     "@astrojs/react": "^5.0.1",
     "@netsuite/design-tokens": "0.1.0",
     "@netsuite/netsuite-data": "0.1.0",
+    "@netsuite/workflow-ui": "0.1.0",
     "astro": "^6.0.8",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"

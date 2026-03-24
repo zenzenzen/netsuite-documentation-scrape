@@ -1,0 +1,16 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+import { getWorkflowIndex } from '@netsuite/netsuite-data';
+import WorkflowStudioPage from '../../components/WorkflowStudioPage.astro';
+
+const workflowIndex = getWorkflowIndex();
+const defaultWorkflow = JSON.parse(
+  fs.readFileSync(
+    path.resolve(process.cwd(), '../../packages/netsuite-data/generated/workflows/sales-order.json'),
+    'utf8'
+  )
+);
+---
+
+<WorkflowStudioPage workflowIndex={workflowIndex} workflowLayout={defaultWorkflow} />

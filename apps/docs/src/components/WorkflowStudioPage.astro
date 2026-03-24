@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { WorkflowStudio } from '@netsuite/workflow-ui';
+
+const {
+  workflowIndex,
+  workflowLayout,
+  title = `${workflowLayout.layers?.[0]?.nodes?.[0]?.title || workflowLayout.baseRecord} Workflow Studio`,
+} = Astro.props;
+---
+
+<BaseLayout title={title}>
+  <section class="workflow-page-shell">
+    <WorkflowStudio
+      client:only="react"
+      workflowIndex={workflowIndex}
+      initialWorkflow={workflowLayout}
+      initialBaseSlug={workflowLayout.slug}
+    />
+  </section>
+</BaseLayout>
+
+<style is:global>
+  main:has(.workflow-page-shell) {
+    width: min(1520px, calc(100vw - 32px));
+  }
+
+  @media (max-width: 960px) {
+    main:has(.workflow-page-shell) {
+      width: min(1080px, calc(100vw - 24px));
+      padding-top: 24px;
+    }
+  }
+</style>
