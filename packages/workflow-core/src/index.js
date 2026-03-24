@@ -141,3 +141,139 @@ export function buildLayeredWorkflow(records, transforms, baseRecord) {
     edges: transforms.filter((transform) => recordMap.has(transform.source) && recordMap.has(transform.target)),
   };
 }
+
+export function categoryColor(category) {
+  return categoryPalette[category] || categoryPalette.other;
+}
+
+export function findRecordBySlug(records, slug) {
+  return records.find((record) => record.slug === slug) || null;
+}
+
+export function findRecordByName(records, recordName) {
+  return (
+    records.find(
+      (record) =>
+        record.recordName === recordName ||
+        record.slug === recordName ||
+        normalizeRecordName(record.recordName) === normalizeRecordName(recordName)
+    ) || null
+  );
+}
+
+export function parseShareQuery(search, workflowIndex) {
+  const params = new URLSearchParams(search || '');
+  const baseInput = params.get('base');
+  const levelsInput = params.get('levels');
+  const baseRecord = findRecordByName(workflowIndex, baseInput);
+
+  if (!baseRecord) {
+    return null;
+  }
+
+  const lockedLevels = [[baseRecord.recordName]];
+  if (levelsInput) {
+    for (const level of levelsInput.split(';')) {
+      const records = level
+        .split(',')
+        .map((item) => findRecordByName(workflowIndex, item)?.recordName)
+        .filter(Boolean);
+
+      if (records.length) {
+        lockedLevels.push(Array.from(new Set(records)));
+      }
+    }
+  }
+
+  return {
+    baseRecord: baseRecord.recordName,
+    baseSlug: baseRecord.slug,
+    lockedLevels,
+  };
+}
+
+export function buildShareQuery(baseRecord, lockedLevels) {
+  const params = new URLSearchParams();
+  params.set('base', baseRecord);
+
+  if (lockedLevels.length > 1) {
+    params.set(
+      'levels',
+      lockedLevels
+        .slice(1)
+        .map((level) => level.join(','))
+        .join(';')
+    );
+  }
+
+  return params.toString();
+}
+
+export function findTransform(edges, source, target) {
+  return edges.find((edge) => edge.source === source && edge.target === target) || null;
+}
+
+export function buildRequestBundle(workflowLayout, baseRecord, lockedLevels) {
+  const selectedTransforms = [];
+
+  for (let index = 0; index < lockedLevels.length - 1; index += 1) {
+    for (const source of lockedLevels[index]) {
+      for (const target of lockedLevels[index + 1]) {
+        const transform = findTransform(workflowLayout.edges, source, target);
+        if (transform) {
+          selectedTransforms.push(transform);
+        }
+      }
+    }
+  }
+
+  const seenRequests = new Set();
+  const requests = [];
+  for (const recordName of Array.from(new Set(lockedLevels.flat()))) {
+    const request = {
+      name: `GET ${recordName}`,
+      method: 'GET',
+      url: `{{NETSUITE_BASE_URL}}/services/rest/record/v1/${recordName}/{{${recordName}Id}}`,
+    };
+    const key = `${request.method}:${request.url}`;
+    if (!seenRequests.has(key)) {
+      seenRequests.add(key);
+      requests.push(request);
+    }
+  }
+
+  for (const transform of selectedTransforms) {
+    const request = {
+      name: `POST ${transform.source} -> ${transform.target}`,
+      method: 'POST',
+      url: `{{NETSUITE_BASE_URL}}/services/rest/record/v1${transform.path.replace('{id}', `{{${transform.source}Id}}`)}`,
+    };
+    const key = `${request.method}:${request.url}`;
+    if (!seenRequests.has(key)) {
+      seenRequests.add(key);
+      requests.push(request);
+    }
+  }
+
+  return {
+    shareQuery: buildShareQuery(baseRecord, lockedLevels),
+    selectedTransforms,
+    requests,
+  };
+}
+
+export function buildAtomicConfig(workflowLayout, baseRecord, lockedLevels) {
+  const bundle = buildRequestBundle(workflowLayout, baseRecord, lockedLevels);
+
+  return {
+    version: 1,
+    baseRecord,
+    vector: lockedLevels.map((records, depth) => ({ depth, records })),
+    selectedTransforms: bundle.selectedTransforms.map((transform) => ({
+      source: transform.source,
+      target: transform.target,
+      method: transform.method,
+      path: transform.path,
+    })),
+  };
+}
