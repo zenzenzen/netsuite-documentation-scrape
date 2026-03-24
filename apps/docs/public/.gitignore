@@ -1,2 +1,6 @@
 workflow-data/
+records/
+app.css
+app.js
+favicon.svg
 !.gitignore
