@@ -4,6 +4,9 @@ test-results/
 output/
 .DS_Store
 .npm-cache/
+.env
+.env.*
+.vercel/
 apps/docs/dist/
 apps/docs/.astro/
 apps/app/.next/
