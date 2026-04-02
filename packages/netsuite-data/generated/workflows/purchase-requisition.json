@@ -605,7 +605,7 @@
           "title": "Item Fulfillment",
           "group": "focus",
           "summary": "Get list of records. 12 linked dependency records.",
-          "docsPath": "./public/records/item-fulfillment.html",
+          "docsPath": "/records/item-fulfillment",
           "stats": {
             "operations": 6,
             "transforms": 0,

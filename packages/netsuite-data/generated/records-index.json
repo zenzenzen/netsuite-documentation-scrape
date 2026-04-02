@@ -5,7 +5,7 @@
     "title": "Credit Memo",
     "group": "focus",
     "summary": "Get list of records. 20 linked dependency records.",
-    "docsPath": "./public/records/credit-memo.html",
+    "docsPath": "/records/credit-memo",
     "stats": {
       "operations": 6,
       "transforms": 0,
@@ -82,7 +82,7 @@
     "title": "Customer",
     "group": "focus",
     "summary": "Get list of records. 7 transform workflows available. 20 linked dependency records.",
-    "docsPath": "./public/records/customer.html",
+    "docsPath": "/records/customer",
     "stats": {
       "operations": 13,
       "transforms": 7,
@@ -195,7 +195,7 @@
     "title": "Invoice",
     "group": "focus",
     "summary": "Get list of records. 3 transform workflows available. 25 linked dependency records.",
-    "docsPath": "./public/records/invoice.html",
+    "docsPath": "/records/invoice",
     "stats": {
       "operations": 9,
       "transforms": 3,
@@ -295,7 +295,7 @@
     "title": "Item Fulfillment",
     "group": "focus",
     "summary": "Get list of records. 12 linked dependency records.",
-    "docsPath": "./public/records/item-fulfillment.html",
+    "docsPath": "/records/item-fulfillment",
     "stats": {
       "operations": 6,
       "transforms": 0,
@@ -364,7 +364,7 @@
     "title": "Partner",
     "group": "focus",
     "summary": "Get list of records. 5 linked dependency records.",
-    "docsPath": "./public/records/partner.html",
+    "docsPath": "/records/partner",
     "stats": {
       "operations": 6,
       "transforms": 0,
@@ -426,7 +426,7 @@
     "title": "Payment Item",
     "group": "focus",
     "summary": "Get list of records. 5 linked dependency records.",
-    "docsPath": "./public/records/payment-item.html",
+    "docsPath": "/records/payment-item",
     "stats": {
       "operations": 6,
       "transforms": 0,
@@ -488,7 +488,7 @@
     "title": "Sales Order",
     "group": "focus",
     "summary": "Get list of records. 5 transform workflows available. 26 linked dependency records.",
-    "docsPath": "./public/records/sales-order.html",
+    "docsPath": "/records/sales-order",
     "stats": {
       "operations": 11,
       "transforms": 5,
@@ -601,7 +601,7 @@
     "title": "Subsidiary",
     "group": "focus",
     "summary": "Get list of records. 3 linked dependency records.",
-    "docsPath": "./public/records/subsidiary.html",
+    "docsPath": "/records/subsidiary",
     "stats": {
       "operations": 2,
       "transforms": 0,
@@ -637,7 +637,7 @@
     "title": "Account",
     "group": "dependency",
     "summary": "Get list of records. 5 linked dependency records.",
-    "docsPath": "./public/records/account.html",
+    "docsPath": "/records/account",
     "stats": {
       "operations": 6,
       "transforms": 0,
@@ -699,7 +699,7 @@
     "title": "Accounting Period",
     "group": "dependency",
     "summary": "Get list of records.",
-    "docsPath": "./public/records/accounting-period.html",
+    "docsPath": "/records/accounting-period",
     "stats": {
       "operations": 6,
       "transforms": 0,
@@ -755,7 +755,7 @@
     "title": "Billing Account",
     "group": "dependency",
     "summary": "Get list of records. 7 linked dependency records.",
-    "docsPath": "./public/records/billing-account.html",
+    "docsPath": "/records/billing-account",
     "stats": {
       "operations": 6,
       "transforms": 0,
@@ -819,7 +819,7 @@
     "title": "Billing Schedule",
     "group": "dependency",
     "summary": "Get list of records. 2 linked dependency records.",
-    "docsPath": "./public/records/billing-schedule.html",
+    "docsPath": "/records/billing-schedule",
     "stats": {
       "operations": 6,
       "transforms": 0,
@@ -878,7 +878,7 @@
     "title": "Cash Sale",
     "group": "dependency",
     "summary": "Get list of records. 2 transform workflows available. 23 linked dependency records.",
-    "docsPath": "./public/records/cash-sale.html",
+    "docsPath": "/records/cash-sale",
     "stats": {
       "operations": 8,
       "transforms": 2,
@@ -970,7 +970,7 @@
     "title": "Classification",
     "group": "dependency",
     "summary": "Get list of records.",
-    "docsPath": "./public/records/classification.html",
+    "docsPath": "/records/classification",
     "stats": {
       "operations": 6,
       "transforms": 0,
@@ -1026,7 +1026,7 @@
     "title": "Contact",
     "group": "dependency",
     "summary": "Get list of records. 5 linked dependency records.",
-    "docsPath": "./public/records/contact.html",
+    "docsPath": "/records/contact",
     "stats": {
       "operations": 6,
       "transforms": 0,
@@ -1088,7 +1088,7 @@
     "title": "Coupon Code",
     "group": "dependency",
     "summary": "Get list of records. 6 linked dependency records.",
-    "docsPath": "./public/records/coupon-code.html",
+    "docsPath": "/records/coupon-code",
     "stats": {
       "operations": 6,
       "transforms": 0,
@@ -1151,7 +1151,7 @@
     "title": "Currency",
     "group": "dependency",
     "summary": "Get list of records.",
-    "docsPath": "./public/records/currency.html",
+    "docsPath": "/records/currency",
     "stats": {
       "operations": 6,
       "transforms": 0,
@@ -1207,7 +1207,7 @@
     "title": "Customer Category",
     "group": "dependency",
     "summary": "Get list of records.",
-    "docsPath": "./public/records/customer-category.html",
+    "docsPath": "/records/customer-category",
     "stats": {
       "operations": 6,
       "transforms": 0,
@@ -1263,7 +1263,7 @@
     "title": "Customer Message",
     "group": "dependency",
     "summary": "Get list of records.",
-    "docsPath": "./public/records/customer-message.html",
+    "docsPath": "/records/customer-message",
     "stats": {
       "operations": 6,
       "transforms": 0,
@@ -1319,7 +1319,7 @@
     "title": "Customer Payment",
     "group": "dependency",
     "summary": "Get list of records. 1 transform workflow available. 14 linked dependency records.",
-    "docsPath": "./public/records/customer-payment.html",
+    "docsPath": "/records/customer-payment",
     "stats": {
       "operations": 7,
       "transforms": 1,
@@ -1396,7 +1396,7 @@
     "title": "Customer Status",
     "group": "dependency",
     "summary": "Get list of records.",
-    "docsPath": "./public/records/customer-status.html",
+    "docsPath": "/records/customer-status",
     "stats": {
       "operations": 6,
       "transforms": 0,
@@ -1452,7 +1452,7 @@
     "title": "Department",
     "group": "dependency",
     "summary": "Get list of records.",
-    "docsPath": "./public/records/department.html",
+    "docsPath": "/records/department",
     "stats": {
       "operations": 6,
       "transforms": 0,
@@ -1508,7 +1508,7 @@
     "title": "Discount Item",
     "group": "dependency",
     "summary": "Get list of records. 4 linked dependency records.",
-    "docsPath": "./public/records/discount-item.html",
+    "docsPath": "/records/discount-item",
     "stats": {
       "operations": 6,
       "transforms": 0,
@@ -1569,7 +1569,7 @@
     "title": "Employee",
     "group": "dependency",
     "summary": "Get list of records. 2 transform workflows available. 10 linked dependency records.",
-    "docsPath": "./public/records/employee.html",
+    "docsPath": "/records/employee",
     "stats": {
       "operations": 8,
       "transforms": 2,
@@ -1648,7 +1648,7 @@
     "title": "Estimate",
     "group": "dependency",
     "summary": "Get list of records. 3 transform workflows available. 23 linked dependency records.",
-    "docsPath": "./public/records/estimate.html",
+    "docsPath": "/records/estimate",
     "stats": {
       "operations": 9,
       "transforms": 3,
@@ -1746,7 +1746,7 @@
     "title": "Fulfillment Request",
     "group": "dependency",
     "summary": "Get list of records. 8 linked dependency records.",
-    "docsPath": "./public/records/fulfillment-request.html",
+    "docsPath": "/records/fulfillment-request",
     "stats": {
       "operations": 6,
       "transforms": 0,
@@ -1811,7 +1811,7 @@
     "title": "Location",
     "group": "dependency",
     "summary": "Get list of records.",
-    "docsPath": "./public/records/location.html",
+    "docsPath": "/records/location",
     "stats": {
       "operations": 6,
       "transforms": 0,
@@ -1867,7 +1867,7 @@
     "title": "Nexus",
     "group": "dependency",
     "summary": "Get list of records. 1 linked dependency record.",
-    "docsPath": "./public/records/nexus.html",
+    "docsPath": "/records/nexus",
     "stats": {
       "operations": 6,
       "transforms": 0,
@@ -1925,7 +1925,7 @@
     "title": "Opportunity",
     "group": "dependency",
     "summary": "Get list of records. 4 transform workflows available. 16 linked dependency records.",
-    "docsPath": "./public/records/opportunity.html",
+    "docsPath": "/records/opportunity",
     "stats": {
       "operations": 10,
       "transforms": 4,
@@ -2022,7 +2022,7 @@
     "title": "Payment Method",
     "group": "dependency",
     "summary": "Get list of records. 1 linked dependency record.",
-    "docsPath": "./public/records/payment-method.html",
+    "docsPath": "/records/payment-method",
     "stats": {
       "operations": 6,
       "transforms": 0,
@@ -2080,7 +2080,7 @@
     "title": "Price Level",
     "group": "dependency",
     "summary": "Get list of records.",
-    "docsPath": "./public/records/price-level.html",
+    "docsPath": "/records/price-level",
     "stats": {
       "operations": 6,
       "transforms": 0,
@@ -2136,7 +2136,7 @@
     "title": "Promotion Code",
     "group": "dependency",
     "summary": "Get list of records. 22 linked dependency records.",
-    "docsPath": "./public/records/promotion-code.html",
+    "docsPath": "/records/promotion-code",
     "stats": {
       "operations": 6,
       "transforms": 0,
@@ -2215,7 +2215,7 @@
     "title": "Return Authorization",
     "group": "dependency",
     "summary": "Get list of records. 3 transform workflows available. 19 linked dependency records.",
-    "docsPath": "./public/records/return-authorization.html",
+    "docsPath": "/records/return-authorization",
     "stats": {
       "operations": 9,
       "transforms": 3,
@@ -2309,7 +2309,7 @@
     "title": "Ship Item",
     "group": "dependency",
     "summary": "Get list of records. 3 linked dependency records.",
-    "docsPath": "./public/records/ship-item.html",
+    "docsPath": "/records/ship-item",
     "stats": {
       "operations": 6,
       "transforms": 0,
@@ -2369,7 +2369,7 @@
     "title": "Term",
     "group": "dependency",
     "summary": "Get list of records.",
-    "docsPath": "./public/records/term.html",
+    "docsPath": "/records/term",
     "stats": {
       "operations": 6,
       "transforms": 0,
@@ -2425,7 +2425,7 @@
     "title": "Vendor",
     "group": "dependency",
     "summary": "Get list of records. 4 transform workflows available. 10 linked dependency records.",
-    "docsPath": "./public/records/vendor.html",
+    "docsPath": "/records/vendor",
     "stats": {
       "operations": 10,
       "transforms": 4,
@@ -2516,7 +2516,7 @@
     "title": "Web Site",
     "group": "dependency",
     "summary": "Get list of records. 3 linked dependency records.",
-    "docsPath": "./public/records/web-site.html",
+    "docsPath": "/records/web-site",
     "stats": {
       "operations": 6,
       "transforms": 0,

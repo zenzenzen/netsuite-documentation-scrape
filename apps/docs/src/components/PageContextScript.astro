@@ -1,0 +1,27 @@
+---
+const {
+  pageKind = 'overview',
+  currentRecordName = '',
+  defaultBaseRecord = 'salesOrder',
+  rootPrefix = '/',
+  homeHref = '/',
+  transformsHref = '/transforms',
+  workflowConfigHref = '/workflow-config.json',
+} = Astro.props;
+
+const pageContext = {
+  pageKind,
+  currentRecordName,
+  defaultBaseRecord,
+  rootPrefix,
+  homeHref,
+  transformsHref,
+  workflowConfigHref,
+};
+---
+
+<script
+  id="netsuite-page-context"
+  type="application/json"
+  set:html={JSON.stringify(pageContext).replace(/</g, '\\u003c')}
+></script>

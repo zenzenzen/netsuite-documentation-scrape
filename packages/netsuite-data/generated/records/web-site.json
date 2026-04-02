@@ -1,0 +1,918 @@
+{
+  "recordName": "webSite",
+  "slug": "web-site",
+  "title": "Web Site",
+  "summary": "Get list of records. 3 linked dependency records.",
+  "docsPath": "/records/web-site",
+  "stats": {
+    "operations": 6,
+    "transforms": 0,
+    "schemaFields": 0
+  },
+  "dependencyRecords": [
+    "customerCategory",
+    "shipItem",
+    "priceLevel"
+  ],
+  "operations": [
+    {
+      "id": "operation--webSite-get",
+      "summary": "Get list of records.",
+      "tag": "webSite",
+      "method": "GET",
+      "path": "/webSite",
+      "isTransform": false,
+      "transformTarget": null,
+      "requestBody": [],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "q:\nstring",
+          "name": "q:\nstring\n in query",
+          "description": "The search query that is used to filter results.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "limit:\ninteger\n(int32)\n1000",
+          "name": "limit:\ninteger\n(int32)\n1000\n in query",
+          "description": "The limit used to specify the number of results on a single page.",
+          "type": "integer\n(int32)\n1000\n integer (int32)",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "offset:\ninteger\n(int32)\n0",
+          "name": "offset:\ninteger\n(int32)\n0\n in query",
+          "description": "The offset used for selecting a specific page of results.",
+          "type": "integer\n(int32)\n0\n integer (int32)",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "200 OK",
+          "name": "200 OK\nwebSiteCollection",
+          "description": "List of records.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "webSiteCollection",
+              "href": "#/definitions/webSiteCollection",
+              "definitionId": "webSiteCollection"
+            }
+          ],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "webSiteCollection",
+          "href": "#/definitions/webSiteCollection",
+          "definitionId": "webSiteCollection"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [],
+      "rawText": "webSite\nGet list of records.\nGET /webSite\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nq: string\nin query\nThe search query that is used to filter results.\nlimit: integer (int32) 1000\nin query\nThe limit used to specify the number of results on a single page.\noffset: integer (int32) 0\nin query\nThe offset used for selecting a specific page of results.\napplication/vnd.oracle.resource+json; type=collection application/vnd.oracle.resource+json; type=error\n200 OK\nwebSiteCollection\nList of records.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--webSite-post",
+      "summary": "Insert record.",
+      "tag": "webSite",
+      "method": "POST",
+      "path": "/webSite",
+      "isTransform": false,
+      "transformTarget": null,
+      "requestBody": [
+        {
+          "label": "webSite",
+          "name": "webSite",
+          "description": "Request body.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "webSite",
+              "href": "#/definitions/webSite",
+              "definitionId": "webSite"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replace:\nstring",
+          "name": "replace:\nstring\n in query",
+          "description": "The names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning",
+          "name": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning\n in header",
+          "description": "Sets the strictness of property name validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nWarning\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError",
+          "name": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError\n in header",
+          "description": "Sets the strictness of property value validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nError\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "204 No Content",
+          "name": "204 No Content",
+          "description": "Inserted record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "webSite",
+          "href": "#/definitions/webSite",
+          "definitionId": "webSite"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [
+        "webSite"
+      ],
+      "rawText": "webSite\nInsert record.\nPOST /webSite\nwebSite\nRequest body.\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nreplace: string\nin query\nThe names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.\nX-NetSuite-PropertyNameValidation: string Error , Warning , Ignore Warning\nin header\nSets the strictness of property name validation.\nX-NetSuite-PropertyValueValidation: string Error , Warning , Ignore Error\nin header\nSets the strictness of property value validation.\napplication/vnd.oracle.resource+json; type=error\n204 No Content\nInserted record.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--webSite--id--delete",
+      "summary": "Remove record.",
+      "tag": "webSite",
+      "method": "DELETE",
+      "path": "/webSite/{id}",
+      "isTransform": false,
+      "transformTarget": null,
+      "requestBody": [],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "id:\ninteger\n(int32)",
+          "name": "id:\ninteger\n(int32)\n in path",
+          "description": "Internal identifier.",
+          "type": "integer\n(int32)\n integer (int32)",
+          "subtitle": "in path",
+          "required": true,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "204 No Content",
+          "name": "204 No Content",
+          "description": "Removed record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [],
+      "rawText": "webSite\nRemove record.\nDELETE /webSite/{id}\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nid: integer (int32)\nin path\nInternal identifier.\napplication/vnd.oracle.resource+json; type=error\n204 No Content\nRemoved record.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--webSite--id--get",
+      "summary": "Get record.",
+      "tag": "webSite",
+      "method": "GET",
+      "path": "/webSite/{id}",
+      "isTransform": false,
+      "transformTarget": null,
+      "requestBody": [],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "id:\ninteger\n(int32)",
+          "name": "id:\ninteger\n(int32)\n in path",
+          "description": "Internal identifier.",
+          "type": "integer\n(int32)\n integer (int32)",
+          "subtitle": "in path",
+          "required": true,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "expandSubResources:\nboolean\nfalse",
+          "name": "expandSubResources:\nboolean\nfalse\n in query",
+          "description": "Set to 'true' to automatically expand all sublists, sublist lines, and subrecords on this record.",
+          "type": "boolean\nfalse\n boolean",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "simpleEnumFormat:\nboolean\nfalse",
+          "name": "simpleEnumFormat:\nboolean\nfalse\n in query",
+          "description": "Set to true to return enumeration values in a format that only shows the internal ID value.",
+          "type": "boolean\nfalse\n boolean",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "fields:\nstring",
+          "name": "fields:\nstring\n in query",
+          "description": "The names of the fields and sublists on the record. Only the selected fields and sublists will be returned in the response.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "200 OK",
+          "name": "200 OK\nwebSite",
+          "description": "Retrieved record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "webSite",
+              "href": "#/definitions/webSite",
+              "definitionId": "webSite"
+            }
+          ],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "webSite",
+          "href": "#/definitions/webSite",
+          "definitionId": "webSite"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [
+        "webSite"
+      ],
+      "rawText": "webSite\nGet record.\nGET /webSite/{id}\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nid: integer (int32)\nin path\nInternal identifier.\nexpandSubResources: boolean false\nin query\nSet to 'true' to automatically expand all sublists, sublist lines, and subrecords on this record.\nsimpleEnumFormat: boolean false\nin query\nSet to true to return enumeration values in a format that only shows the internal ID value.\nfields: string\nin query\nThe names of the fields and sublists on the record. Only the selected fields and sublists will be returned in the response.\napplication/vnd.oracle.resource+json; type=singular application/vnd.oracle.resource+json; type=error\n200 OK\nwebSite\nRetrieved record.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--webSite--id--patch",
+      "summary": "Update record.",
+      "tag": "webSite",
+      "method": "PATCH",
+      "path": "/webSite/{id}",
+      "isTransform": false,
+      "transformTarget": null,
+      "requestBody": [
+        {
+          "label": "webSite",
+          "name": "webSite",
+          "description": "Request body.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "webSite",
+              "href": "#/definitions/webSite",
+              "definitionId": "webSite"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "id:\ninteger\n(int32)",
+          "name": "id:\ninteger\n(int32)\n in path",
+          "description": "Internal identifier.",
+          "type": "integer\n(int32)\n integer (int32)",
+          "subtitle": "in path",
+          "required": true,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning",
+          "name": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning\n in header",
+          "description": "Sets the strictness of property name validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nWarning\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError",
+          "name": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError\n in header",
+          "description": "Sets the strictness of property value validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nError\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replace:\nstring",
+          "name": "replace:\nstring\n in query",
+          "description": "The names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replaceSelectedFields:\nboolean\nfalse",
+          "name": "replaceSelectedFields:\nboolean\nfalse\n in query",
+          "description": "If set to 'true', all fields that should be deleted in the update request, including body fields, must be included in the 'replace' query parameter.",
+          "type": "boolean\nfalse\n boolean",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "204 No Content",
+          "name": "204 No Content",
+          "description": "Updated record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "webSite",
+          "href": "#/definitions/webSite",
+          "definitionId": "webSite"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [
+        "webSite"
+      ],
+      "rawText": "webSite\nUpdate record.\nPATCH /webSite/{id}\nwebSite\nRequest body.\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nid: integer (int32)\nin path\nInternal identifier.\nX-NetSuite-PropertyNameValidation: string Error , Warning , Ignore Warning\nin header\nSets the strictness of property name validation.\nX-NetSuite-PropertyValueValidation: string Error , Warning , Ignore Error\nin header\nSets the strictness of property value validation.\nreplace: string\nin query\nThe names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.\nreplaceSelectedFields: boolean false\nin query\nIf set to 'true', all fields that should be deleted in the update request, including body fields, must be included in the 'replace' query parameter.\napplication/vnd.oracle.resource+json; type=error\n204 No Content\nUpdated record.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--webSite--id--put",
+      "summary": "Insert or update record.",
+      "tag": "webSite",
+      "method": "PUT",
+      "path": "/webSite/{id}",
+      "isTransform": false,
+      "transformTarget": null,
+      "requestBody": [
+        {
+          "label": "webSite",
+          "name": "webSite",
+          "description": "Request body.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "webSite",
+              "href": "#/definitions/webSite",
+              "definitionId": "webSite"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "id:\nstring",
+          "name": "id:\nstring\n in path",
+          "description": "External identifier.",
+          "type": "string\n string",
+          "subtitle": "in path",
+          "required": true,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning",
+          "name": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning\n in header",
+          "description": "Sets the strictness of property name validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nWarning\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError",
+          "name": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError\n in header",
+          "description": "Sets the strictness of property value validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nError\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replace:\nstring",
+          "name": "replace:\nstring\n in query",
+          "description": "The names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replaceSelectedFields:\nboolean\nfalse",
+          "name": "replaceSelectedFields:\nboolean\nfalse\n in query",
+          "description": "If set to 'true', all fields that should be deleted in the update request, including body fields, must be included in the 'replace' query parameter.",
+          "type": "boolean\nfalse\n boolean",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "204 No Content",
+          "name": "204 No Content",
+          "description": "Upserted record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "webSite",
+          "href": "#/definitions/webSite",
+          "definitionId": "webSite"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [
+        "webSite"
+      ],
+      "rawText": "webSite\nInsert or update record.\nPUT /webSite/{id}\nwebSite\nRequest body.\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nid: string\nin path\nExternal identifier.\nX-NetSuite-PropertyNameValidation: string Error , Warning , Ignore Warning\nin header\nSets the strictness of property name validation.\nX-NetSuite-PropertyValueValidation: string Error , Warning , Ignore Error\nin header\nSets the strictness of property value validation.\nreplace: string\nin query\nThe names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.\nreplaceSelectedFields: boolean false\nin query\nIf set to 'true', all fields that should be deleted in the update request, including body fields, must be included in the 'replace' query parameter.\napplication/vnd.oracle.resource+json; type=error\n204 No Content\nUpserted record.\ndefault\nnsError\nError response."
+    }
+  ],
+  "definition": {
+    "id": "definition-webSite",
+    "refs": [
+      {
+        "text": "nsResource",
+        "href": "#/definitions/nsResource",
+        "definitionId": "nsResource"
+      },
+      {
+        "text": "customerCategory",
+        "href": "#/definitions/customerCategory",
+        "definitionId": "customerCategory"
+      },
+      {
+        "text": "shipItem",
+        "href": "#/definitions/shipItem",
+        "definitionId": "shipItem"
+      },
+      {
+        "text": "webSite-entryPointsCollection",
+        "href": "#/definitions/webSite-entryPointsCollection",
+        "definitionId": "webSite-entryPointsCollection"
+      },
+      {
+        "text": "webSite-fieldsetCollection",
+        "href": "#/definitions/webSite-fieldsetCollection",
+        "definitionId": "webSite-fieldsetCollection"
+      },
+      {
+        "text": "nsLink",
+        "href": "#/definitions/nsLink",
+        "definitionId": "nsLink"
+      },
+      {
+        "text": "priceLevel",
+        "href": "#/definitions/priceLevel",
+        "definitionId": "priceLevel"
+      },
+      {
+        "text": "nsResourceCollection",
+        "href": "#/definitions/nsResourceCollection",
+        "definitionId": "nsResourceCollection"
+      }
+    ],
+    "fields": [],
+    "rawText": "webSite\nanalyticsClickAttributes Analytics Click Attributes: string\nAdd attributes for the Add To Cart button in this field. You can capture analytics data before your shopper gets to the shopping cart. For example: onclick=\"handleLink(this.href); return false;\" The code inside handleLink() should be implemented to reconstruct the URL such that shopper identification parameters needed for your analytics package are added to the href.\nanalyticsSubmitAttributes Analytics Submit Attributes: string\nAdd attributes for the Proceed to Checkout button in this field. You can capture analytics data when your shoppers go to checkout from the shopping cart. For example: onsubmit=\"handlePost(this); return true;\" The code inside handlePost () should be implemented to add fields to the form such that shopper identification parameters needed for your analytics package are posted with the form.\nassignNewCustomersToSite Assign New Customers to this Site: boolean\nCheck this box to restrict customer access to this web site. All customers who register on this web site get access to a customer account on this website only. Note: Customers who were already registered on your site are not affected by this setting.\nautoDownloadMedia Automatically download published site media items: boolean\nCheck this box to automatically download a file or folder when you click the Download link in the file cabinet.\nbSendCheckoutErrorEmail Send email of Checkout errors: boolean\nYou can receive alerts if errors occur during checkout and customers are unable to complete a purchase. Email alerts include a ticket number that refers to the error logged in NetSuite. If you are receiving several alerts, please contact NetSuite Customer Support with these ticket numbers to expedite a resolution. Email alerts can indicate any of the following problems: * Sales order creation failure * Transaction is out of balance * Custom field error - This can occur if an item option selected for an item in the shopping cart has been deleted or inactivated since it was added to the card. * Credit card processor error * Other problems that may prevent customers from checking out\nbSendDownloadAvailableEmail Send email that Download is available: boolean\nCheck this box to send an email message informing the web customer that a file is ready for download.\nbSendGiftCertificateConfEmail Send Gift Certificate Confirmation email: boolean\nCheck this box to send an email message to the web customer, confirming that a gift certificate was purchased.\nbSendGiftCertificateEmail Send Gift Certificate email: boolean\nCheck this box to send an email message to gift certificate recipients.\nbSendLicenseCodeEmail Send License Code email: boolean\nCheck this box to send an email message providing the web customer with a licence code.\nbSendOrderApprovedConfEmail Send email when order is approved: boolean\nCheck this box to send email to customers when their orders are approved.\nbSendOrderCancelledConfEmail Send email when order is cancelled: boolean\nCheck this box to send email to customers when their orders are canceled.\nbSendOrderFulfilledConfEmail Send email when order is fulfilled: boolean\nCheck this box to send email to customers when their orders are fulfilled.\nbSendOrderReceivedConfEmail Send email when order is received: boolean\nCheck this box to send an email message to customers when an order is received.\nbSendPasswordRecoveryEmail Send Password Recovery email: boolean\nCheck this box to send password recovery email.\nbSendRegistrationConfEmail Send Registration Confirmation Email: boolean\nCheck this box to send a registration confirmation email message to customers who sign up on your website.\nbStrApproveOrderCopy Send BCC Order Approved Emails: boolean\nSelect this box and enter your email address into the following text area if you want to receive copies of the Order Approved emails sent to your customers. If you do not select this, you won't receive copies of customers' email confirmation messages.\nbStrCancelOrderCopy Send BCC Order Cancelled Emails: boolean\nSelect this box and enter your email address into the following text area if you want to receive copies of the Order Canceled emails sent to your customers. If you do not select this, you won't receive copies of customers' email confirmation messages.\nbStrEmailCopy Send BCC Order Received Emails: boolean\nSelect this box and enter your email address into the following text area if you want to receive copies of the Order Received emails sent to your customers. If you do not select this, you won't receive copies of customers' email confirmation messages.\nbStrEmailGiftConfCopy Send BCC Gift Certificate Confirmation Emails: boolean\nSelect this box and enter your email address into the following text area if you want to receive copies of the Gift Certificate Confirmation emails sent to your customers. If you do not select this, you won't receive copies of customers' email confirmation messages.\nbStrEmailGiftCopy Send BCC Gift Certificate Emails: boolean\nSelect this box and enter your email address into the following text area to receive copies of the message sent to your customers when a gift certificate is purchased on your website. If you do not select this, you won't receive copies of customers' email confirmation messages.\nbStrFulfillOrderCopy Send BCC Order Fulfilled Emails: boolean\nSelect this box and enter your email address into the following text area if you want to receive copies of the Order Fulfilled emails sent to your customers. If you do not select this, you won't receive copies of customers' email confirmation messages.\nbStrRegistrationConfCopy Send BCC Registration Confirmation Emails: boolean\nCheck this box to receive copies of the message sent to your customers when they register on your website. If you do not check this, you will not receive copies of registration confirmation messages.\ncartDisplayOrder: object\nid Internal identifier: string RECENT_LAST , RECENT_FIRST\nrefName Reference Name: string\ncartUpsellItems: object\nid Internal identifier: string UPSELL_FIRST_RELATED_NEXT , ONLY_UPSELL_ITEMS , RELATED_FIRST_UPSELL_NEXT , ONLY_RELATED_ITEMS\nrefName Reference Name: string\ncategoryListLayout: nsResource\nccFormTemplate: object\nid Internal identifier: string 88 , 89 , 110 , -9960 , 90 , 91 , -9965 , 92 , -9966 , 93 ,\nrefName Reference Name: string\nccRequireAuth Process an online payment with Sales Order creation: boolean\nCheck this box to require authorization for your customer's credit card before you accept an order. This preference only applies to sales orders generated by transactions on your web site.\ncheckoutErrorEmail: nsResource\nchromaSubsampling Chroma Subsampling: boolean\nCheck this box to apply chroma subsampling to the images. Chroma subsampling reduces the color information in favor of luminance data and results in image files that look the same but are smaller in size.\ncolorSet: object\nid Internal identifier: string 88 , 89 , -380 , -10 , -11 , -12 , -13 , -651 , -376 , -134 ,\nrefName Reference Name: string\ncompressedImageQuality Compressed Image Quality: string\nSelect the quality level you want the compressed images to have: * Low (maximum compression) - minor reduction in quality * Standard - minor reduction in quality when images are zoomed * Optimum (recommended) – occasional minor reduction in quality when images are zoomed * Very High (minimum compression) - no noticeable reduction in quality at any time\nconfPageTrackingHtml Order Tracking Script HTML: string\nEnter any tracking HTML you want to use in the header of the order confirmation page. This allows you to track the number of order you receive a day, for example.\ncookiePolicy: nsResource\ncreateCustomersAsCompanies Create Customers as Companies: boolean\nCheck this box to have all customers who register in your site created as Company type. You must also check the Mandatory box to have customers created as companies. Clear this box to have all customers created as Individuals. Customers created as individuals can also be saved as contacts and have a first and last name saved on record with an optional Company field. Customers created as companies have a Contacts subtab for individuals in the company and a mandatory Company field.\ncustromeRegistrationType: object\nid Internal identifier: string OPTANON , MANDATORY , DISALLOWED , ALLANON\nrefName Reference Name: string\ndefaultCustomerCategory: customerCategory\ndefaultHostingRoot: nsResource\ndefaultShippingMethod: shipItem\ndescriptionFontSize Description Font Size: integer (int64)\nEnter the font size you want to use for item and category descriptions in your Web site.\ndispFirstLastnameSeparately Display First and Last Name in Separate Fields on Registration Page: boolean\nCheck this box to display separate fields for first and last name on the registration page. When this box is cleared, one field appears in which customers can enter their names. Note: Even when one Name field is displayed, both first and last names are required. Note also that this check box only affects Site Builder websites where the My Account extension is not applied.\ndisplayCompanyField Display Company Field on Registration Page: boolean\nCheck this box to let customers enter a company name during the checkout process.\ndisplayName Display Name: string\nThis is the name for your site that displays in the heading of your Web store and in customers' browser windows.\ndisplayUnsubscribe Display Unsubscribe to Email Checkbox on Registration Page: boolean\nCheck this box if you want to give customers the option to unsubscribe from your e-mail campaigns on your Web site when they register. To set the default for this field in your site, set the marketing preference at Setup > Marketing > Marketing Preferences.\ndoctypeHtml Document Type: string\nEnter the code for the document type declaration of your Web site. This tells the browser the type of code you are using in your site. For example, if you are using HTML5, the document type declaration is: <!DOCTYPE html>\ndownloadAvailableEmail: nsResource\nemailFooter Footer Text: string\nemailHeader Header Text: string\nenableGAIntegration Enable Google Analytics Integration: boolean\nCheck this box to pass Google tracking cookies from shopping to checkout. This along with the fields on the Analytics subtab are required for cross-domain analytics tracking to integrate NetSuite with your Google Analytics account. Clear this box if Google Analytics Integration interferes with a custom solution you have already implemented for cross-domain tracking.\nentryPoints: webSite-entryPointsCollection\nexternalId External ID: string\nfieldset: webSite-fieldsetCollection\nfont: object\nid Internal identifier: string OCRB , Garamond , Trebuchet , Times-Roman , Univers , OCRA , MS Gothic , Myriad Pro , BARCODE , Helvetica ,\nrefName Reference Name: string\ngiftCerteAffectsMinAmount Gift Certificate Affects Minimum Order Amount: boolean\nThis preference is for e-commerce merchants who require a minimum order amount for web store checkout. * When the box is checked, the gift certificate amount counts against the minimum order amount. Customers are not allowed to submit an order with a total order amount below the minimum requirement. * If you clear this box, a customer can successfully submit an order on your web site when a gift certificate brings the total order amount below the minimum requirement. The gift certificate amount and other credits (such as coupons) are excluded from the calculation of the total order amount.\ngiftCertificateConfEmail: nsResource\ngiftCertificateEmail: nsResource\nhidePaymentPageWhenNoBalance Hide Payment Page If Order Total Equals Zero: boolean\nCheck this box to hide the payment page in the checkout process if the order is equal to zero. Some e-commerce sites offer promotional products for free. This preference allows web customers to put a promotional item in the cart, and complete checkout without being required to input payment information.\nid Internal ID: string\nigniteEdition: object\nid Internal identifier: string STANDARD , ADVANCED\nrefName Reference Name: string\nincludeUncategorizedItems Show Uncategorized Items: boolean\nCheck this box to display items in search results that have the Display in Web Site box checked, even if they are not published in your Web site. This can be useful if you have not categorized an item that is for sale. Clear this box to only allow search results to return items published on tabs and categories in your site.\nincludeVatWithPrices Prices Include Tax: boolean\nFor UK accounts, check this box to include VAT in the item prices on lists and descriptions in your site as follows: £100.00 (Incl. VAT).\ninternalId Internal ID: integer (int64)\ninternalName Internal Name: string\nThis is the name for your site that displays on lists in your NetSuite account. This name is not exposed to external customers.\ninvoiceFormTemplate: object\nid Internal identifier: string 88 , 89 , 110 , -9960 , 90 , 91 , -9965 , 92 , -9966 , 93 ,\nrefName Reference Name: string\nisInactive Inactive: boolean\nCheck the Inactive box if you want to make a website inaccessible to users but you do not want to delete it permanently. An inactive site still retains internal references to other areas of NetSuite. For more information, see Making a Website Inactive.\nisPrimary Primary: string\nisScriptableCartAndCheckout Scriptable Cart and Checkout: boolean\nCheck this box to run SuiteScript on the sales order form submitted during the web store checkout. To use scriptable checkout, you must customize a Standard Online Order form by adding your script to the transaction form. Check this box to activate your script during Web store checkout. Note: If you use terms for your customers, you must attach your checkout script to both a customized Online Order - Invoice form, and an Online Order - Cash Sales form.\nisWebstoreOffline Take Website Offline for Maintenance: boolean\nCheck this box to temporarily take your store or site offline for maintenance. When you have finished making changes, clear this check box and your store or site will be available for shoppers.\nisWsdk WSDK: boolean\nSelect this check box to make this site an external catalog site. You can use the scripts available from the Web Site Developer's Kit (WSDK) to make the items in your NetSuite account display up-to-date pricing and availability information on your Web site. Go to Setup > Web Site > Preview Web Site for the WSDK links and scripts that integrate your site with NetSuite.\nitemListLayout: nsResource\nitemTemplateAccountingtItem: object\nid Internal identifier: string -134 , -178 , -133 , -177 , -136 , -179 , -135 , -130 , -174 , -173 ,\nrefName Reference Name: string\nitemTemplateInformationItem: object\nid Internal identifier: string -134 , -178 , -133 , -177 , -136 , -179 , -135 , -130 , -174 , -173 ,\nrefName Reference Name: string\nlegacyCategoryDescriptions Legacy Category Descriptions: boolean\nlegacyDenseListSupport Legacy Dense List Layout: boolean\nlegacyImageAttributeTags Legacy Tag Support for Images: boolean\nIf this box is checked, tags that access any image attribute (image, thumbnail, or image custom field) return the file name. If this box is cleared, the URL the image is hosted from is returned. Clearing this box is preferred. By providing you with the complete URL, you can use the tag to construct embedded images or links to popup windows.\nlegacyNavigationLinks Legacy Navigation Style: boolean\nlegacyWelcomePage Legacy Welcome Page Style: boolean\nlicenseCodeEmail: nsResource\nlinks Links: nsLink\nnsLink\nloginAllowed Allow Login / Register: boolean\nminimumOrderAmount Minimum Order Amount: number (double)\nnoActivateTabOnHostedPages Don't Activate Hosted Page Tabs: boolean\nCheck this box if you do not want hosted pages to be associated with a tab in your store. For example, if you link to a hosted site from a tab, the hosted page does not inherit settings from the tab, such as custom tags. In addition, the tab is not highlighted as the tab being viewed.\nnonCcPayMethodsAllowed Allow non-credit card payment methods during Checkout: boolean\nCheck this box to display custom payment methods that you create as alternatives to credit card payment methods. If you use Site Builder, checking this box will automatically display the payment method on the Payment Information page in the checkout process. If you operate a SuiteCommerce Advanced web site, a web developer can use the Commerce API to store the payment method selected on the web order. Additional customization is required. For more information, visit the Help Center, and read Creating an Alternative to Credit Card Payment Methods for Web Store Orders.\nonlinePriceLevel: priceLevel\norderApprovedConfEmail: nsResource\norderCancelledConfEmail: nsResource\norderFulfilledConfEmail: nsResource\norderReceivedConfEmail: nsResource\noutputLineBreaksAsBr Output Line Breaks as &lt;br&gt;: boolean\nCheck this box to covert any line break in descriptions fields for items, tabs or categories you've created in NetSuite to the BR tag.\npageWidth Page Width: string\nTo set a fixed width for your site, enter the width in pixels. When you set a fixed width, your site content stays the same width when site visitors change the browser window size.\npassPromoCodeToCheckout Pass URL Promotion Code to Checkout: boolean\nCheck this box to automatically apply promotion codes passed through a link to items added to the shopping cart. When a shopper clicks a link with an appended promotion code that has an associated discount, the shopper will see the discount itemized and reflected in the order total on the last page of checkout. Create promotion codes at Commerce > Marketing > Promotions > New. Append codes for promo codes to URL links using &promocode=[promotioncode]. For example, you can append the promo code for the fall clearance sale on t-shirts, http://shop.mywebsite.com/tshirts&promocode=FALLSALE. LIST_REFERRALCODE_COMMERCE\npasswordRecoveryEmail: nsResource\npaymentProcessingProfiles: nsResourceCollection\nrefName Reference Name: string\nregistrationConfEmail: nsResource\nrelatedItemsDescription Related Items Description: string\nEnter a brief description of the list of Related Items, that you set up in NetSuite. A list of related items will show on the item details page. For example, you can enter “If you like these items, you may also like:”\nrelatedItemsLayout: nsResource\nrequestShippingAddressFirst Ask For Shipping Address First: boolean\nCheck this box to ask for customers' shipping addresses before their billing addresses during the Web store checkout process.\nrequireCompanyField Mandatory Company Field on Registration Page: boolean\nIf you checked the field named Display Company Field on Registration Page, then check this box to make the Company field mandatory. Clear this box to make this field optional. You must check this box to create customer records of company type.\nrequireLoginForPricing Require Login For Pricing: boolean\nCheck this box if you want item prices and the Add to Cart button hidden from customers who have not logged in. All item prices display the message “Please log in for price.” to customers who have not logged in. To change or translate this message, go to the Messages subtab at either: * Commerce > Content Management > Customize Text, or * Commerce > Site Builder > Customize Text Note: Checking this box restricts most users from viewing prices on your website. However, pricing information can still be accessed using specific URLs that call the underlying APIs.\nrequireShippingInformation Shipping Information is Required: boolean\nCheck this box to require shipping information to be entered before checking out of your Web store.\nrequireTermsAndConditions Require Terms and Conditions: boolean\nCheck this box to have customers to agree to the terms of the product or service they are buying before checking out of your store. This places an “I Agree” checkbox that customers must check to show that they agree to your terms. They can view the full terms and conditions by clicking a link that opens a popup window. If you use the Advanced Site Customization feature, you can customize the name of this checkbox at Commerce > Content Management > Customize Text or Commerce > Site Builder > Customize Text.\nsApproveOrderCopyEmail BCC Order Approved Recipient Emails: string\nsCancelOrderCopyEmail BCC Order Canceled Recipient Emails: string\nsEmailAddrForError Send email of Checkout errors to address: string\nIf you opt to receive checkout error email, enter the email address where you would like to receive the error alerts.\nsFromCheckoutErrorEmail Send email of Checkout errors from address: string\nEnter the email address that should show in the From field when email messages are sent to Web store customers. If you operate multiple Web sites, you can enter a different address for each site.\nsFromDownloadAvailableEmail Download availability email sent from address: string\nEnter the email address that should show in the From field when email messages are sent to Web store customers. If you operate multiple Web sites, you can enter a different address for each site.\nsFromGiftCertificateConfEmail Gift Certificate Confirmation sent from email address: string\nEnter the email address that should show in the From field when email messages are sent to Web store customers. If you operate multiple Web sites, you can enter a different address for each site.\nsFromGiftCertificateEmail Gift Certificate sent from email address: string\nEnter the email address that should show in the From field when email messages are sent to Web store customers. If you operate multiple Web sites, you can enter a different address for each site.\nsFromLicenseCodeEmail Send License Code email from this address: string\nEnter the email address that should show in the From field when email messages are sent to Web store customers. If you operate multiple Web sites, you can enter a different address for each site.\nsFromOrderApprovedConfEmail Order approval email sent from address: string\nEnter the email address that should show in the From field when email messages are sent to Web store customers. If you operate multiple Web sites, you can enter a different address for each site.\nsFromOrderCancelledConfEmail Canceled order email sent from address: string\nEnter the email address that should show in the From field when email messages are sent to Web store customers. If you operate multiple Web sites, you can enter a different address for each site.\nsFromOrderFulfilledConfEmail Order fulfillment email sent from address: string\nEnter the email address that should show in the From field when email messages are sent to Web store customers. If you operate multiple Web sites, you can enter a different address for each site.\nsFromOrderReceivedConfEmail Order received email sent from address: string\nEnter the email address that should show in the From field when email messages are sent to web store customers. If you operate multiple web sites, you can enter a different address for each site.\nsFromPasswordRecoveryEmail Send Password Recovery email from this address: string\nEnter the email address that should show in the From field when email messages are sent to Web store customers. If you operate multiple Web sites, you can enter a different address for each site.\nsFromRegistrationConfEmail Registration Confirmation email sent from address: string\nEnter the email address that should show in the From field when email messages are sent to Web store customers. If you operate multiple Web sites, you can enter a different address for each site.\nsFulfillOrderCopyEmail BCC Order Fulfilled Recipient Emails: string\nsRegistrationConfEmailCopy BCC Registration Confirmation Recipient Emails: string\nIf you checked the BCC Confirmation Email box, enter the email address here that you want to receive web store registration confirmation email. You can enter more than one address separated by a comma.\nsStoreEmailAddrForCopy BCC Order Received Recipient Emails: string\nIf you checked the BCC Confirmation Email box, enter the email address here that you want to receive store order confirmation email. You can enter more than one address separated by a comma.\nsStoreEmailAddrForGiftConfCopy BCC Gift Certificate Confirmation Recipient Emails: string\nsStoreEmailAddrForGiftCopy BCC Gift Certificate Recipient Emails: string\nIf you checked the BCC Order Received Email box or the BCC Gift Certificate Emails box, enter the email address where you want to send copies of the message. You can enter more than one address separated by a comma.\nsalesOrderType: object\nid Internal identifier: string 88 , 89 , 110 , -9960 , 90 , 91 , -9965 , 92 , -9966 , 93 ,\nrefName Reference Name: string\nsaveCreditInfo Save Credit Card Info by Default: boolean\nCheck this box to save customer credit card information by default. If you check the Display Save My Credit Card Infor Field box, customers can still opt to clear this box in your site if they do not want card information saved. Note: If you have website customers that are companies with multiple contacts, do not check this box. A contact is a company-owned entity. A credit card created by a contact will be available to other contacts associated with that company.\nscriptTemplateCreditCard: object\nid Internal identifier: string 88 , 89 , 110 , -9960 , 90 , 91 , -9965 , 92 , -9966 , 93 ,\nrefName Reference Name: string\nscriptTemplateInvoice: object\nid Internal identifier: string 88 , 89 , 110 , -9960 , 90 , 91 , -9965 , 92 , -9966 , 93 ,\nrefName Reference Name: string\nsearchCategoryListLayout: nsResource\nsearchForCategories Include Categories in Search Results: boolean\nCheck the Show Categories in Search Results box to include relevant categories in search results. Clearing this box returns only relevant items.\nsearchForInformationItems Include Information Items in Search Results: boolean\nCheck the Show Information Items in Search Results check box to include items of type Information Item in the search results when a global search is performed in the web store. If this box is unchecked, then, items of this type will not be included/displayed in the search results.\nsearchFormItemListLayout: nsResource\nsearchItemListLayout: nsResource\nsearchLinkForm: object\nid Internal identifier: string\nrefName Reference Name: string\nsearchPortletForm: object\nid Internal identifier: string\nrefName Reference Name: string\nshipsToAllCountries Website Ships to All Countries: boolean\nCheck this box to allow orders placed in the Web store to be shipped to any country. Clear this box to limit the countries you ship to using the Countries Web Store ships to field.\nshowBillingAddress Display Billing Address: boolean\nshowCartSummaryPortlet Show Cart Summary: boolean\nCheck this box to include the Shopping Cart portlet in your Web site.This portlet shows what customers currently have in their shopping carts.\nshowCookieConsentBanner Show Cookie Consent Banner: boolean\nCheck this box to publish a banner requesting that shoppers comply with the use of cookies on your site.\nshowCurrencyPortlet Show Website Currency: boolean\nCheck this box to allow web site customers to choose a currency for shopping in your store. When you check this box, an online shopper can select a currency on your site's Home page. After a currency is selected, all item prices will appear in the selected currency. For more information, visit SuiteAnswers, and read the topic, Multiple Currencies in the Web Store.\nshowExtendedCart Show Extended Cart: boolean\nThe extended cart allows shoppers to add the following information on the shopping cart page: * Coupon code * Gift certificate * Shipping information To display additional fields for entering shipping information, you must enable both preferences, Show Shipping Estimator in Cart and Show Extended Cart.\nshowNavigationPortlet Show Navigation Portlet: boolean\nCheck this box to include the Item Navigation portlet in your site. This portlet appears on the left side of your site and lets customers navigate between items and categories. You can set preferences for this portlet on site themes if you use the Advanced Site Customization feature.\nshowOrderTrackinglink Display Order Tracking Link: boolean\nshowPOFieldOnPayment Display Purchase Order Field on Payment Info Page: boolean\nCheck this box to show a text field on the Payment Information page of your store where customers can enter Purchase Order numbers. The Purchase Order number entered will automatically appear on sales orders generated from your Web store.\nshowQuantityPricinginLists Show Quantity Pricing in Lists: boolean\nCheck this box to show a table with item quantities and prices in lists for items that have price breaks in certain quantities. If you do not check this box, the pricing table shows when the item name is clicked to view details, but the single quantity price is displayed in lists.\nshowSaveCreditInfo Display 'Save My Credit Card Info' Field: boolean\nCheck this box to allow customers to save their credit card information wth their login for use the next time they shop with you. When customers opt to save credit card info during checkout, the credit card info is stored on the customer record and available as a payment choice the next time they check out. Note: If you have website customers that are companies with multiple contacts, do not check this box. A contact is a company-owned entity. A credit card created by a contact will be available to other contacts associated with that company.\nshowSearchPortlet Show Search: boolean\nCheck this box to display the Search portlet in your Web site. Customers can use this system-generated search entry field to search for products or information on your site.\nshowShippingEstimator Show Shipping Estimator in Cart: boolean\nIn Site Builder websites, check this box to give customers an estimate of shipping costs before they complete shipping information in checkout. The lowest estimated shipping cost is displayed by default. If you offer real-time rates, a customer can enter a zip code to receive an estimate. If the order qualifies for free shipping, “Free Shipping” is displayed. * In SuiteCommerce Advanced websites, you can check this box if you do not have a default Shipping Method chosen. The Shipping Estimator shows the lowest shipping cost from available Shipping Methods.\nshowTellAFriendLink Show \"Tell a Friend\" Link: boolean\nChecking this box adds a “Tell A Friend” link to the detailed description page for each item published to your site. When a shopper on your site clicks the Tell a Friend link, an email editor opens up. The subject of the email message is “Hi There,” by default. The content includes the text, “I thought you would like to have a look at this product at,” followed by a link to the item on your site. You can customize the text in the email message by going to > > Content > Customize Text.\nsiteLoginRequired Password-Protect Entire Site: boolean\nCheck this box to require a login and password to view any page in your site. Once visitors log in, they can navigate through pages in your site freely. You must give customers access in your account for them to be able to view your site if you check this box. Note: Checking this box restricts most users from being able to access your website without logging in. However, item information and other website content can still be accessed using specific URLs that call the underlying APIs.\nsitePortletStyle: object\nid Internal identifier: string HEADERBAR , HEADERBARSM , JOINED , ROUNDEDCAPS , TRANSPARENT , BOXED\nrefName Reference Name: string\nsiteTabAlignment: object\nid Internal identifier: string CENTER , LEFT , RIGHT\nrefName Reference Name: string\nsiteTabStyle: object\nid Internal identifier: string STANDARDTABS , TABBAR , LINKS , BUTTONBAR , RECTTABS , CURVEDTABS , DEFAULT\nrefName Reference Name: string\nsiteUsesCartTags Site Uses Cart Summary Tags: boolean\nCheck this box if you use Web site tags to display the list of items in the shopping cart.\nsiteUsesDropShadows Site Uses Drop Shadows: boolean\nstoreEmail Default Website Email From Address: string\nEnter the email address that should show in the From field when email notification and confirmation is sent to Web site customers. This field is optional. Note: This address is only used if you leave the Email From Address field blank on any of the email template subtabs.\nstripMetadata Strip metadata: boolean\nCheck this box to remove all metadata (such as camera details, caption, copyright information) from the images.\ntermsAndConditionsHtml Terms and Conditions HTML: string\nEnter HTML code for the terms and conditions text that should be available from your Web site. Customers can click a link to view this text in a popup window before agreeing to the terms.\ntitleFontSize Title Font Size: integer (int64)\nEnter the font size you want to use for item and category titles in your Web site.\nupsellDescription Upsell Description: string\nEnter a brief description of the upsell correlated items list to show above the list of recommended items in your site. For example, you can enter “Customers Who Bought This Item Also Bought:”\nupsellItems: object\nid Internal identifier: string UPSELL_FIRST_RELATED_NEXT , ONLY_UPSELL_ITEMS , RELATED_FIRST_UPSELL_NEXT , ONLY_RELATED_ITEMS\nrefName Reference Name: string\nupsellItemsLayout: nsResource\nupsellMinimumCorrelation Minimum Correlation % for Upsell: number (double)\nEnter the minimum correlation percentage an item should have to the item being viewed or items in the cart. Correlation percentage measures how often items are purchased together.\nupsellMinimumCount Minimum Number of Buyers for Upsell: integer (int64)\nOnly items with a greater count than what you set here are displayed. Count represents the number of customers that have purchased both the items being viewed or in the cart and the upsell item recommendations.\nupsellMinimumLift Minimum Lift % for Upsell: number (double)\nOnly items with greater lift than what you set here are displayed. Lift is the degree to which the item's correlation exceeds its overall purchase frequency. A high lift implies a more reliable correlation.\nuseUrlFileExtension Use File Extension: boolean\nCheck this box to optimize descriptive URLs. This preference does the following: * On a file hosted in the file cabinet, it includes the extension for the image, or HTML file in the URL. * On URLs that point to tabs and categories, it includes a trailing slash.\nwebsiteLogo: nsResource\nwebsiteLogoAlign: object\nid Internal identifier: string CENTER , LEFT , RIGHT\nrefName Reference Name: string\nwebsiteLogoLinkUrl Logo Link URL: string\nEnter the URL you want to use as a hyperlink when site visitors click your logo. If you don't want to create a hyperlink for your logo, leave this field blank.\nwebsiteScope: object\nid Internal identifier: string SUITE_COMMERCE_IN_STORE , SUITE_COMMERCE , FULL_WEB_STORE , INFO_CATALOG_PRICING , INFO_CATALOG , SUITE_COMMERCE_MY_ACCOUNT , INFO_ONLY , SUITE_COMMERCE_ADVANCED\nrefName Reference Name: string\nwebsiteTheme: nsResource\nwebstoreAddItemBehavior: object\nid Internal identifier: string SHOWCART , SAMEPAGE\nrefName Reference Name: string\nwebstoreMetaTags Addition to <head>: string\nEnter data for the header in this field. You can enter a script to capture web analytics. For information, see the Web Analytics Tools Preferences help topic. In this field, you can also add Meta Tag HTML to appear in the < head > section of all your Web store pages. Note that Meta tags entered on Category and Tab pages are more effective for the purpose of search engine optimization (SEO).\nwsdkCancelCartUrl Shopping cart page Continue Shopping link URL: string\nThe URL you provide is a link back into your website. When shoppers on your site click the Continue Shopping link displayed in NetSuite checkout, they are redirected to the page defined in the URL you enter in this field. By defining the link back to the appropriate page of your site, you complete integration of the NetSuite checkout pages with your site.\nwsdkCancelCheckoutUrl Checkout page Cancel link URL: string\nThe URL you provide is a link from the Cancel link on the Checkout page back to your website. If a customer on your website chooses to cancel checkout, they will be redirected to your website. By defining the link back to the appropriate page of your site, you complete integration of the NetSuite checkout page with your site.\nwsdkCancelLoginUrl Login/registration page Cancel link URL: string\nThe URL you provide is for the Cancel link on the Login/Registration page. If shoppers on your site choose not to complete registration on your site, they can click the Cancel link, and be redirected back to your website. By defining the link back to the appropriate page of your site, you complete integration of the NetSuite Login/Registration page with your site.\nwsdkCompleteCheckoutUrl URL to go to after checkout is complete: string\nThe URL you provide is a link from the Checkout page back to your website. By defining the link back to the appropriate page of your site, you complete integration of the NetSuite checkout page with your site.\nwsdkCompleteLoginUrl URL to go to after login/registration is complete: string\nThe URL you provide is a link from the Login/Registration page back into your website. By defining the link back to the appropriate page of your site, you complete integration of the NetSuite shopping cart."
+  }
+}

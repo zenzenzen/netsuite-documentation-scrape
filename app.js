@@ -12,6 +12,20 @@ function readJsonScript(id, fallback) {
   }
 }
 
+function resolveDocHref(docsPath, rootPrefix = './') {
+  const value = String(docsPath || '');
+
+  if (!value) {
+    return '#';
+  }
+
+  if (value.startsWith('/')) {
+    return value;
+  }
+
+  return `${rootPrefix}${value.replace(/^\.\//, '')}`;
+}
+
 function escapeHtml(value) {
   return String(value ?? '')
     .replace(/&/g, '&amp;')
@@ -127,9 +141,7 @@ class WorkflowRepository {
 
   getDocHref(recordReference) {
     const record = this.getRecord(recordReference);
-    return record
-      ? `${this.pageContext.rootPrefix || './'}${String(record.docsPath || '').replace(/^\.\//, '')}`
-      : '#';
+    return record ? resolveDocHref(record.docsPath, this.pageContext.rootPrefix || './') : '#';
   }
 
   findTransform(source, target) {
@@ -389,6 +401,7 @@ class NavPanelController {
 
   render() {
     const currentRecord = this.repository.getRecord(this.pageContext.currentRecordName);
+    const currentRecordHref = document.querySelector('#schema') ? '#schema' : '#record-links';
 
     this.root.innerHTML = `
       <div class="nav-panel-inner">
@@ -419,7 +432,7 @@ class NavPanelController {
           ${
             currentRecord
               ? `
-            <a class="nav-record-link nav-current-record" href="#schema">
+            <a class="nav-record-link nav-current-record" href="${escapeHtml(currentRecordHref)}">
               <span class="nav-link-icon">CR</span>
               <span class="nav-record-copy">
                 <strong>${escapeHtml(currentRecord.title)}</strong>
@@ -1018,26 +1031,58 @@ class WorkflowStudioController {
 }
 
 const pageContext = readJsonScript('netsuite-page-context', {});
-const workflowConfig = readJsonScript('netsuite-workflow-config', { records: [], transforms: [] });
-const store = new LocalStateStore();
-const repository = new WorkflowRepository(workflowConfig, pageContext);
-const favorites = new FavoritesController(store, repository);
 
-document.addEventListener('click', (event) => {
-  const favoriteToggle = event.target.closest('[data-favorite-toggle]');
-  if (favoriteToggle) {
-    favorites.toggle(favoriteToggle.getAttribute('data-record-name'));
+async function loadWorkflowConfig(currentPageContext) {
+  const inlineConfig = readJsonScript('netsuite-workflow-config', null);
+
+  if (inlineConfig?.records && inlineConfig?.transforms) {
+    return inlineConfig;
   }
-});
 
-document.querySelectorAll('[data-favorites-panel]').forEach((panel) => favorites.attachPanel(panel));
-favorites.sync();
+  if (!currentPageContext.workflowConfigHref) {
+    return { records: [], transforms: [] };
+  }
 
-const nav = new NavPanelController(store, pageContext, repository, favorites);
-nav.mount();
+  try {
+    const response = await fetch(currentPageContext.workflowConfigHref, {
+      credentials: 'same-origin',
+    });
 
-const sectionLayout = new SectionLayoutController(store, pageContext);
-sectionLayout.mount();
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
 
-const workflowStudio = new WorkflowStudioController(store, repository, favorites, pageContext);
-workflowStudio.mount();
+    return await response.json();
+  } catch (error) {
+    console.error('Failed to load workflow config payload.', error);
+    return { records: [], transforms: [] };
+  }
+}
+
+async function bootstrap() {
+  const workflowConfig = await loadWorkflowConfig(pageContext);
+  const store = new LocalStateStore();
+  const repository = new WorkflowRepository(workflowConfig, pageContext);
+  const favorites = new FavoritesController(store, repository);
+
+  document.addEventListener('click', (event) => {
+    const favoriteToggle = event.target.closest('[data-favorite-toggle]');
+    if (favoriteToggle) {
+      favorites.toggle(favoriteToggle.getAttribute('data-record-name'));
+    }
+  });
+
+  document.querySelectorAll('[data-favorites-panel]').forEach((panel) => favorites.attachPanel(panel));
+  favorites.sync();
+
+  const nav = new NavPanelController(store, pageContext, repository, favorites);
+  nav.mount();
+
+  const sectionLayout = new SectionLayoutController(store, pageContext);
+  sectionLayout.mount();
+
+  const workflowStudio = new WorkflowStudioController(store, repository, favorites, pageContext);
+  workflowStudio.mount();
+}
+
+bootstrap();

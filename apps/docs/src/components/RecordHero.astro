@@ -1,0 +1,19 @@
+---
+const { record } = Astro.props;
+---
+
+<div class="record-meta">
+  <span class="pill">{record.stats?.operations || 0} endpoints</span>
+  <span class="pill">{record.stats?.transforms || 0} transforms</span>
+  <span class="pill">{record.stats?.schemaFields || 0} schema rows</span>
+</div>
+<div class="muted">
+  This page is generated from the NetSuite REST API Browser scrape and tuned for fast scanning: endpoint
+  cards, transform emphasis, and direct links to dependency records.
+</div>
+<div class="record-actions hero-actions">
+  <button class="record-link secondary favorite-toggle" type="button" data-favorite-toggle data-record-name={record.recordName}>
+    Pin favorite
+  </button>
+  <a class="record-link secondary" href="#workflow-studio">Open in workflow studio</a>
+</div>

@@ -1,0 +1,104 @@
+---
+const { operation, docsByRecord } = Astro.props;
+
+const paramRows = operation.parameters || [];
+const bodyRows = operation.requestBody || [];
+const responseRows = operation.responses || [];
+const dependencies = operation.dependencyRecords || [];
+
+function methodTone(method) {
+  switch (method) {
+    case 'GET':
+      return 'tone-get';
+    case 'POST':
+      return 'tone-post';
+    case 'PATCH':
+      return 'tone-patch';
+    case 'PUT':
+      return 'tone-put';
+    case 'DELETE':
+      return 'tone-delete';
+    default:
+      return 'tone-neutral';
+  }
+}
+---
+
+<details class="endpoint" open={operation.isTransform}>
+  <summary>
+    <div class="endpoint-top">
+      <span class={`method-badge ${methodTone(operation.method)}`}>{operation.method}</span>
+      {operation.isTransform ? <span class="pill">Transform route</span> : null}
+      <span class="endpoint-path">{operation.path}</span>
+    </div>
+    <div class="endpoint-summary">{operation.summary || 'Operation'}</div>
+    {
+      dependencies.length ? (
+        <div class="chip-row">
+          {dependencies.map((dependency) => (
+            <a class="chip" href={docsByRecord.get(dependency) || '#'}>
+              <strong>{dependency}</strong>
+              <small>dependency</small>
+            </a>
+          ))}
+        </div>
+      ) : null
+    }
+  </summary>
+  <div class="endpoint-body">
+    <div class="split">
+      <div class="subpanel">
+        <h4>Request Parameters</h4>
+        {
+          paramRows.length ? (
+            <ul>
+              {paramRows.map((row) => (
+                <li>
+                  <strong>{row.label}</strong>
+                  {row.type ? <span class="mono"> {row.type}</span> : null}
+                  <br />
+                  {row.description || 'No parameter description captured.'}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <div class="muted">No explicit parameter rows were found for this endpoint.</div>
+          )
+        }
+      </div>
+      <div class="subpanel">
+        <h4>Request / Response Schemas</h4>
+        <ul>
+          {
+            bodyRows.length ? (
+              bodyRows.map((row) => (
+                <li>
+                  <strong>{row.label}</strong>
+                  {row.refs?.length ? <span class="mono"> {row.refs.map((ref) => ref.text).join(', ')}</span> : null}
+                  <br />
+                  {row.description || 'Request body row.'}
+                </li>
+              ))
+            ) : (
+              <li>No request body rows detected.</li>
+            )
+          }
+          {
+            responseRows.length ? (
+              responseRows.slice(0, 5).map((row) => (
+                <li>
+                  <strong>{row.label}</strong>
+                  {row.refs?.length ? <span class="mono"> {row.refs.map((ref) => ref.text).join(', ')}</span> : null}
+                  <br />
+                  {row.description || 'Response row.'}
+                </li>
+              ))
+            ) : (
+              <li>No response rows detected.</li>
+            )
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</details>

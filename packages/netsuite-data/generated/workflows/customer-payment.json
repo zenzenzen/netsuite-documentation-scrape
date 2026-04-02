@@ -11,7 +11,7 @@
           "title": "Customer Payment",
           "group": "dependency",
           "summary": "Get list of records. 1 transform workflow available. 14 linked dependency records.",
-          "docsPath": "./public/records/customer-payment.html",
+          "docsPath": "/records/customer-payment",
           "stats": {
             "operations": 7,
             "transforms": 1,

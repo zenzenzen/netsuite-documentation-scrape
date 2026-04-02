@@ -5,12 +5,16 @@ import { GENERATED_WORKFLOWS_ROOT, getWorkflowIndex } from '@netsuite/netsuite-d
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const publicWorkflowRoot = path.resolve(__dirname, '..', 'public', 'workflow-data');
-const rootRecordsDirectory = path.resolve(__dirname, '..', '..', '..', 'public', 'records');
-const docsRecordsDirectory = path.resolve(__dirname, '..', 'public', 'records');
+const legacyDocsRecordsDirectory = path.resolve(__dirname, '..', 'public', 'records');
+const workflowConfigSourcePath = path.resolve(__dirname, '..', '..', '..', 'workflow-map.json');
+const workflowConfigTargetPath = path.resolve(__dirname, '..', 'public', 'workflow-config.json');
 const sharedRootAssets = ['app.css', 'app.js', 'favicon.svg'];
 
 fs.mkdirSync(publicWorkflowRoot, { recursive: true });
-fs.mkdirSync(docsRecordsDirectory, { recursive: true });
+
+if (fs.existsSync(legacyDocsRecordsDirectory)) {
+  fs.rmSync(legacyDocsRecordsDirectory, { recursive: true, force: true });
+}
 
 for (const workflow of getWorkflowIndex()) {
   const sourcePath = path.join(GENERATED_WORKFLOWS_ROOT, `${workflow.slug}.json`);
@@ -23,8 +27,8 @@ for (const workflow of getWorkflowIndex()) {
   fs.copyFileSync(sourcePath, targetPath);
 }
 
-if (fs.existsSync(rootRecordsDirectory)) {
-  fs.cpSync(rootRecordsDirectory, docsRecordsDirectory, { recursive: true });
+if (fs.existsSync(workflowConfigSourcePath)) {
+  fs.copyFileSync(workflowConfigSourcePath, workflowConfigTargetPath);
 }
 
 for (const assetName of sharedRootAssets) {

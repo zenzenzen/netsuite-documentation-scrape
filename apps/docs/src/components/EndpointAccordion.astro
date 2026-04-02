@@ -1,0 +1,9 @@
+---
+import EndpointDetail from './EndpointDetail.astro';
+
+const { operations = [], docsByRecord } = Astro.props;
+---
+
+<div class="accordion">
+  {operations.map((operation) => <EndpointDetail operation={operation} docsByRecord={docsByRecord} />)}
+</div>

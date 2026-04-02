@@ -1,0 +1,1901 @@
+{
+  "recordName": "salesOrder",
+  "slug": "sales-order",
+  "title": "Sales Order",
+  "summary": "Get list of records. 5 transform workflows available. 26 linked dependency records.",
+  "docsPath": "/records/sales-order",
+  "stats": {
+    "operations": 11,
+    "transforms": 5,
+    "schemaFields": 0
+  },
+  "dependencyRecords": [
+    "cashSale",
+    "fulfillmentRequest",
+    "invoice",
+    "itemFulfillment",
+    "returnAuthorization",
+    "billingSchedule",
+    "classification",
+    "couponCode",
+    "currency",
+    "department",
+    "discountItem",
+    "account",
+    "customer",
+    "partner",
+    "vendor",
+    "employee",
+    "contact",
+    "location",
+    "customerMessage",
+    "nexus",
+    "opportunity",
+    "promotionCode",
+    "shipItem",
+    "webSite",
+    "subsidiary",
+    "term"
+  ],
+  "operations": [
+    {
+      "id": "operation--salesOrder-get",
+      "summary": "Get list of records.",
+      "tag": "salesOrder",
+      "method": "GET",
+      "path": "/salesOrder",
+      "isTransform": false,
+      "transformTarget": null,
+      "requestBody": [],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "q:\nstring",
+          "name": "q:\nstring\n in query",
+          "description": "The search query that is used to filter results.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "limit:\ninteger\n(int32)\n1000",
+          "name": "limit:\ninteger\n(int32)\n1000\n in query",
+          "description": "The limit used to specify the number of results on a single page.",
+          "type": "integer\n(int32)\n1000\n integer (int32)",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "offset:\ninteger\n(int32)\n0",
+          "name": "offset:\ninteger\n(int32)\n0\n in query",
+          "description": "The offset used for selecting a specific page of results.",
+          "type": "integer\n(int32)\n0\n integer (int32)",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "200 OK",
+          "name": "200 OK\nsalesOrderCollection",
+          "description": "List of records.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "salesOrderCollection",
+              "href": "#/definitions/salesOrderCollection",
+              "definitionId": "salesOrderCollection"
+            }
+          ],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "salesOrderCollection",
+          "href": "#/definitions/salesOrderCollection",
+          "definitionId": "salesOrderCollection"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [],
+      "rawText": "salesOrder\nGet list of records.\nGET /salesOrder\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nq: string\nin query\nThe search query that is used to filter results.\nlimit: integer (int32) 1000\nin query\nThe limit used to specify the number of results on a single page.\noffset: integer (int32) 0\nin query\nThe offset used for selecting a specific page of results.\napplication/vnd.oracle.resource+json; type=collection application/vnd.oracle.resource+json; type=error\n200 OK\nsalesOrderCollection\nList of records.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--salesOrder-post",
+      "summary": "Insert record.",
+      "tag": "salesOrder",
+      "method": "POST",
+      "path": "/salesOrder",
+      "isTransform": false,
+      "transformTarget": null,
+      "requestBody": [
+        {
+          "label": "salesOrder",
+          "name": "salesOrder",
+          "description": "Request body.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "salesOrder",
+              "href": "#/definitions/salesOrder",
+              "definitionId": "salesOrder"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replace:\nstring",
+          "name": "replace:\nstring\n in query",
+          "description": "The names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning",
+          "name": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning\n in header",
+          "description": "Sets the strictness of property name validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nWarning\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError",
+          "name": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError\n in header",
+          "description": "Sets the strictness of property value validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nError\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "204 No Content",
+          "name": "204 No Content",
+          "description": "Inserted record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "salesOrder",
+          "href": "#/definitions/salesOrder",
+          "definitionId": "salesOrder"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [
+        "salesOrder"
+      ],
+      "rawText": "salesOrder\nInsert record.\nPOST /salesOrder\nsalesOrder\nRequest body.\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nreplace: string\nin query\nThe names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.\nX-NetSuite-PropertyNameValidation: string Error , Warning , Ignore Warning\nin header\nSets the strictness of property name validation.\nX-NetSuite-PropertyValueValidation: string Error , Warning , Ignore Error\nin header\nSets the strictness of property value validation.\napplication/vnd.oracle.resource+json; type=error\n204 No Content\nInserted record.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--salesOrder--id--delete",
+      "summary": "Remove record.",
+      "tag": "salesOrder",
+      "method": "DELETE",
+      "path": "/salesOrder/{id}",
+      "isTransform": false,
+      "transformTarget": null,
+      "requestBody": [],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "id:\ninteger\n(int32)",
+          "name": "id:\ninteger\n(int32)\n in path",
+          "description": "Internal identifier.",
+          "type": "integer\n(int32)\n integer (int32)",
+          "subtitle": "in path",
+          "required": true,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "204 No Content",
+          "name": "204 No Content",
+          "description": "Removed record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [],
+      "rawText": "salesOrder\nRemove record.\nDELETE /salesOrder/{id}\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nid: integer (int32)\nin path\nInternal identifier.\napplication/vnd.oracle.resource+json; type=error\n204 No Content\nRemoved record.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--salesOrder--id--get",
+      "summary": "Get record.",
+      "tag": "salesOrder",
+      "method": "GET",
+      "path": "/salesOrder/{id}",
+      "isTransform": false,
+      "transformTarget": null,
+      "requestBody": [],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "id:\ninteger\n(int32)",
+          "name": "id:\ninteger\n(int32)\n in path",
+          "description": "Internal identifier.",
+          "type": "integer\n(int32)\n integer (int32)",
+          "subtitle": "in path",
+          "required": true,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "expandSubResources:\nboolean\nfalse",
+          "name": "expandSubResources:\nboolean\nfalse\n in query",
+          "description": "Set to 'true' to automatically expand all sublists, sublist lines, and subrecords on this record.",
+          "type": "boolean\nfalse\n boolean",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "simpleEnumFormat:\nboolean\nfalse",
+          "name": "simpleEnumFormat:\nboolean\nfalse\n in query",
+          "description": "Set to true to return enumeration values in a format that only shows the internal ID value.",
+          "type": "boolean\nfalse\n boolean",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "fields:\nstring",
+          "name": "fields:\nstring\n in query",
+          "description": "The names of the fields and sublists on the record. Only the selected fields and sublists will be returned in the response.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "200 OK",
+          "name": "200 OK\nsalesOrder",
+          "description": "Retrieved record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "salesOrder",
+              "href": "#/definitions/salesOrder",
+              "definitionId": "salesOrder"
+            }
+          ],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "salesOrder",
+          "href": "#/definitions/salesOrder",
+          "definitionId": "salesOrder"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [
+        "salesOrder"
+      ],
+      "rawText": "salesOrder\nGet record.\nGET /salesOrder/{id}\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nid: integer (int32)\nin path\nInternal identifier.\nexpandSubResources: boolean false\nin query\nSet to 'true' to automatically expand all sublists, sublist lines, and subrecords on this record.\nsimpleEnumFormat: boolean false\nin query\nSet to true to return enumeration values in a format that only shows the internal ID value.\nfields: string\nin query\nThe names of the fields and sublists on the record. Only the selected fields and sublists will be returned in the response.\napplication/vnd.oracle.resource+json; type=singular application/vnd.oracle.resource+json; type=error\n200 OK\nsalesOrder\nRetrieved record.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--salesOrder--id--patch",
+      "summary": "Update record.",
+      "tag": "salesOrder",
+      "method": "PATCH",
+      "path": "/salesOrder/{id}",
+      "isTransform": false,
+      "transformTarget": null,
+      "requestBody": [
+        {
+          "label": "salesOrder",
+          "name": "salesOrder",
+          "description": "Request body.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "salesOrder",
+              "href": "#/definitions/salesOrder",
+              "definitionId": "salesOrder"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "id:\ninteger\n(int32)",
+          "name": "id:\ninteger\n(int32)\n in path",
+          "description": "Internal identifier.",
+          "type": "integer\n(int32)\n integer (int32)",
+          "subtitle": "in path",
+          "required": true,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning",
+          "name": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning\n in header",
+          "description": "Sets the strictness of property name validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nWarning\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError",
+          "name": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError\n in header",
+          "description": "Sets the strictness of property value validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nError\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replace:\nstring",
+          "name": "replace:\nstring\n in query",
+          "description": "The names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replaceSelectedFields:\nboolean\nfalse",
+          "name": "replaceSelectedFields:\nboolean\nfalse\n in query",
+          "description": "If set to 'true', all fields that should be deleted in the update request, including body fields, must be included in the 'replace' query parameter.",
+          "type": "boolean\nfalse\n boolean",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "204 No Content",
+          "name": "204 No Content",
+          "description": "Updated record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "salesOrder",
+          "href": "#/definitions/salesOrder",
+          "definitionId": "salesOrder"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [
+        "salesOrder"
+      ],
+      "rawText": "salesOrder\nUpdate record.\nPATCH /salesOrder/{id}\nsalesOrder\nRequest body.\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nid: integer (int32)\nin path\nInternal identifier.\nX-NetSuite-PropertyNameValidation: string Error , Warning , Ignore Warning\nin header\nSets the strictness of property name validation.\nX-NetSuite-PropertyValueValidation: string Error , Warning , Ignore Error\nin header\nSets the strictness of property value validation.\nreplace: string\nin query\nThe names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.\nreplaceSelectedFields: boolean false\nin query\nIf set to 'true', all fields that should be deleted in the update request, including body fields, must be included in the 'replace' query parameter.\napplication/vnd.oracle.resource+json; type=error\n204 No Content\nUpdated record.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--salesOrder--id--put",
+      "summary": "Insert or update record.",
+      "tag": "salesOrder",
+      "method": "PUT",
+      "path": "/salesOrder/{id}",
+      "isTransform": false,
+      "transformTarget": null,
+      "requestBody": [
+        {
+          "label": "salesOrder",
+          "name": "salesOrder",
+          "description": "Request body.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "salesOrder",
+              "href": "#/definitions/salesOrder",
+              "definitionId": "salesOrder"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "id:\nstring",
+          "name": "id:\nstring\n in path",
+          "description": "External identifier.",
+          "type": "string\n string",
+          "subtitle": "in path",
+          "required": true,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning",
+          "name": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning\n in header",
+          "description": "Sets the strictness of property name validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nWarning\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError",
+          "name": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError\n in header",
+          "description": "Sets the strictness of property value validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nError\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replace:\nstring",
+          "name": "replace:\nstring\n in query",
+          "description": "The names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replaceSelectedFields:\nboolean\nfalse",
+          "name": "replaceSelectedFields:\nboolean\nfalse\n in query",
+          "description": "If set to 'true', all fields that should be deleted in the update request, including body fields, must be included in the 'replace' query parameter.",
+          "type": "boolean\nfalse\n boolean",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "204 No Content",
+          "name": "204 No Content",
+          "description": "Upserted record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "salesOrder",
+          "href": "#/definitions/salesOrder",
+          "definitionId": "salesOrder"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [
+        "salesOrder"
+      ],
+      "rawText": "salesOrder\nInsert or update record.\nPUT /salesOrder/{id}\nsalesOrder\nRequest body.\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nid: string\nin path\nExternal identifier.\nX-NetSuite-PropertyNameValidation: string Error , Warning , Ignore Warning\nin header\nSets the strictness of property name validation.\nX-NetSuite-PropertyValueValidation: string Error , Warning , Ignore Error\nin header\nSets the strictness of property value validation.\nreplace: string\nin query\nThe names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.\nreplaceSelectedFields: boolean false\nin query\nIf set to 'true', all fields that should be deleted in the update request, including body fields, must be included in the 'replace' query parameter.\napplication/vnd.oracle.resource+json; type=error\n204 No Content\nUpserted record.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--salesOrder--id---transform-cashSale-post",
+      "summary": "Transform to cashSale.",
+      "tag": "salesOrder",
+      "method": "POST",
+      "path": "/salesOrder/{id}/!transform/cashSale",
+      "isTransform": true,
+      "transformTarget": "cashSale",
+      "requestBody": [
+        {
+          "label": "cashSale",
+          "name": "cashSale",
+          "description": "Request body.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "cashSale",
+              "href": "#/definitions/cashSale",
+              "definitionId": "cashSale"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning",
+          "name": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning\n in header",
+          "description": "Sets the strictness of property name validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nWarning\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError",
+          "name": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError\n in header",
+          "description": "Sets the strictness of property value validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nError\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replace:\nstring",
+          "name": "replace:\nstring\n in query",
+          "description": "The names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "id:\ninteger\n(int32)",
+          "name": "id:\ninteger\n(int32)\n in path",
+          "description": "Internal identifier.",
+          "type": "integer\n(int32)\n integer (int32)",
+          "subtitle": "in path",
+          "required": true,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "204 No Content",
+          "name": "204 No Content\ncashSale",
+          "description": "Transformed record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "cashSale",
+              "href": "#/definitions/cashSale",
+              "definitionId": "cashSale"
+            }
+          ],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "cashSale",
+          "href": "#/definitions/cashSale",
+          "definitionId": "cashSale"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [
+        "cashSale"
+      ],
+      "rawText": "salesOrder\nTransform to cashSale.\nPOST /salesOrder/{id}/!transform/cashSale\ncashSale\nRequest body.\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nX-NetSuite-PropertyNameValidation: string Error , Warning , Ignore Warning\nin header\nSets the strictness of property name validation.\nX-NetSuite-PropertyValueValidation: string Error , Warning , Ignore Error\nin header\nSets the strictness of property value validation.\nreplace: string\nin query\nThe names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.\nid: integer (int32)\nin path\nInternal identifier.\napplication/vnd.oracle.resource+json; type=singular application/vnd.oracle.resource+json; type=error\n204 No Content\ncashSale\nTransformed record.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--salesOrder--id---transform-fulfillmentRequest-post",
+      "summary": "Transform to fulfillmentRequest.",
+      "tag": "salesOrder",
+      "method": "POST",
+      "path": "/salesOrder/{id}/!transform/fulfillmentRequest",
+      "isTransform": true,
+      "transformTarget": "fulfillmentRequest",
+      "requestBody": [
+        {
+          "label": "fulfillmentRequest",
+          "name": "fulfillmentRequest",
+          "description": "Request body.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "fulfillmentRequest",
+              "href": "#/definitions/fulfillmentRequest",
+              "definitionId": "fulfillmentRequest"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning",
+          "name": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning\n in header",
+          "description": "Sets the strictness of property name validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nWarning\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError",
+          "name": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError\n in header",
+          "description": "Sets the strictness of property value validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nError\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replace:\nstring",
+          "name": "replace:\nstring\n in query",
+          "description": "The names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "id:\ninteger\n(int32)",
+          "name": "id:\ninteger\n(int32)\n in path",
+          "description": "Internal identifier.",
+          "type": "integer\n(int32)\n integer (int32)",
+          "subtitle": "in path",
+          "required": true,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "204 No Content",
+          "name": "204 No Content\nfulfillmentRequest",
+          "description": "Transformed record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "fulfillmentRequest",
+              "href": "#/definitions/fulfillmentRequest",
+              "definitionId": "fulfillmentRequest"
+            }
+          ],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "fulfillmentRequest",
+          "href": "#/definitions/fulfillmentRequest",
+          "definitionId": "fulfillmentRequest"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [
+        "fulfillmentRequest"
+      ],
+      "rawText": "salesOrder\nTransform to fulfillmentRequest.\nPOST /salesOrder/{id}/!transform/fulfillmentRequest\nfulfillmentRequest\nRequest body.\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nX-NetSuite-PropertyNameValidation: string Error , Warning , Ignore Warning\nin header\nSets the strictness of property name validation.\nX-NetSuite-PropertyValueValidation: string Error , Warning , Ignore Error\nin header\nSets the strictness of property value validation.\nreplace: string\nin query\nThe names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.\nid: integer (int32)\nin path\nInternal identifier.\napplication/vnd.oracle.resource+json; type=singular application/vnd.oracle.resource+json; type=error\n204 No Content\nfulfillmentRequest\nTransformed record.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--salesOrder--id---transform-invoice-post",
+      "summary": "Transform to invoice.",
+      "tag": "salesOrder",
+      "method": "POST",
+      "path": "/salesOrder/{id}/!transform/invoice",
+      "isTransform": true,
+      "transformTarget": "invoice",
+      "requestBody": [
+        {
+          "label": "invoice",
+          "name": "invoice",
+          "description": "Request body.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "invoice",
+              "href": "#/definitions/invoice",
+              "definitionId": "invoice"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning",
+          "name": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning\n in header",
+          "description": "Sets the strictness of property name validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nWarning\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError",
+          "name": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError\n in header",
+          "description": "Sets the strictness of property value validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nError\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replace:\nstring",
+          "name": "replace:\nstring\n in query",
+          "description": "The names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "id:\ninteger\n(int32)",
+          "name": "id:\ninteger\n(int32)\n in path",
+          "description": "Internal identifier.",
+          "type": "integer\n(int32)\n integer (int32)",
+          "subtitle": "in path",
+          "required": true,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "204 No Content",
+          "name": "204 No Content\ninvoice",
+          "description": "Transformed record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "invoice",
+              "href": "#/definitions/invoice",
+              "definitionId": "invoice"
+            }
+          ],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "invoice",
+          "href": "#/definitions/invoice",
+          "definitionId": "invoice"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [
+        "invoice"
+      ],
+      "rawText": "salesOrder\nTransform to invoice.\nPOST /salesOrder/{id}/!transform/invoice\ninvoice\nRequest body.\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nX-NetSuite-PropertyNameValidation: string Error , Warning , Ignore Warning\nin header\nSets the strictness of property name validation.\nX-NetSuite-PropertyValueValidation: string Error , Warning , Ignore Error\nin header\nSets the strictness of property value validation.\nreplace: string\nin query\nThe names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.\nid: integer (int32)\nin path\nInternal identifier.\napplication/vnd.oracle.resource+json; type=singular application/vnd.oracle.resource+json; type=error\n204 No Content\ninvoice\nTransformed record.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--salesOrder--id---transform-itemFulfillment-post",
+      "summary": "Transform to itemFulfillment.",
+      "tag": "salesOrder",
+      "method": "POST",
+      "path": "/salesOrder/{id}/!transform/itemFulfillment",
+      "isTransform": true,
+      "transformTarget": "itemFulfillment",
+      "requestBody": [
+        {
+          "label": "itemFulfillment",
+          "name": "itemFulfillment",
+          "description": "Request body.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "itemFulfillment",
+              "href": "#/definitions/itemFulfillment",
+              "definitionId": "itemFulfillment"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning",
+          "name": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning\n in header",
+          "description": "Sets the strictness of property name validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nWarning\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError",
+          "name": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError\n in header",
+          "description": "Sets the strictness of property value validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nError\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replace:\nstring",
+          "name": "replace:\nstring\n in query",
+          "description": "The names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "id:\ninteger\n(int32)",
+          "name": "id:\ninteger\n(int32)\n in path",
+          "description": "Internal identifier.",
+          "type": "integer\n(int32)\n integer (int32)",
+          "subtitle": "in path",
+          "required": true,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "204 No Content",
+          "name": "204 No Content\nitemFulfillment",
+          "description": "Transformed record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "itemFulfillment",
+              "href": "#/definitions/itemFulfillment",
+              "definitionId": "itemFulfillment"
+            }
+          ],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "itemFulfillment",
+          "href": "#/definitions/itemFulfillment",
+          "definitionId": "itemFulfillment"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [
+        "itemFulfillment"
+      ],
+      "rawText": "salesOrder\nTransform to itemFulfillment.\nPOST /salesOrder/{id}/!transform/itemFulfillment\nitemFulfillment\nRequest body.\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nX-NetSuite-PropertyNameValidation: string Error , Warning , Ignore Warning\nin header\nSets the strictness of property name validation.\nX-NetSuite-PropertyValueValidation: string Error , Warning , Ignore Error\nin header\nSets the strictness of property value validation.\nreplace: string\nin query\nThe names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.\nid: integer (int32)\nin path\nInternal identifier.\napplication/vnd.oracle.resource+json; type=singular application/vnd.oracle.resource+json; type=error\n204 No Content\nitemFulfillment\nTransformed record.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--salesOrder--id---transform-returnAuthorization-post",
+      "summary": "Transform to returnAuthorization.",
+      "tag": "salesOrder",
+      "method": "POST",
+      "path": "/salesOrder/{id}/!transform/returnAuthorization",
+      "isTransform": true,
+      "transformTarget": "returnAuthorization",
+      "requestBody": [
+        {
+          "label": "returnAuthorization",
+          "name": "returnAuthorization",
+          "description": "Request body.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "returnAuthorization",
+              "href": "#/definitions/returnAuthorization",
+              "definitionId": "returnAuthorization"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning",
+          "name": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning\n in header",
+          "description": "Sets the strictness of property name validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nWarning\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError",
+          "name": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError\n in header",
+          "description": "Sets the strictness of property value validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nError\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replace:\nstring",
+          "name": "replace:\nstring\n in query",
+          "description": "The names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "id:\ninteger\n(int32)",
+          "name": "id:\ninteger\n(int32)\n in path",
+          "description": "Internal identifier.",
+          "type": "integer\n(int32)\n integer (int32)",
+          "subtitle": "in path",
+          "required": true,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "204 No Content",
+          "name": "204 No Content\nreturnAuthorization",
+          "description": "Transformed record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "returnAuthorization",
+              "href": "#/definitions/returnAuthorization",
+              "definitionId": "returnAuthorization"
+            }
+          ],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "returnAuthorization",
+          "href": "#/definitions/returnAuthorization",
+          "definitionId": "returnAuthorization"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [
+        "returnAuthorization"
+      ],
+      "rawText": "salesOrder\nTransform to returnAuthorization.\nPOST /salesOrder/{id}/!transform/returnAuthorization\nreturnAuthorization\nRequest body.\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nX-NetSuite-PropertyNameValidation: string Error , Warning , Ignore Warning\nin header\nSets the strictness of property name validation.\nX-NetSuite-PropertyValueValidation: string Error , Warning , Ignore Error\nin header\nSets the strictness of property value validation.\nreplace: string\nin query\nThe names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.\nid: integer (int32)\nin path\nInternal identifier.\napplication/vnd.oracle.resource+json; type=singular application/vnd.oracle.resource+json; type=error\n204 No Content\nreturnAuthorization\nTransformed record.\ndefault\nnsError\nError response."
+    }
+  ],
+  "definition": {
+    "id": "definition-salesOrder",
+    "refs": [
+      {
+        "text": "salesOrder-accountingBookDetailCollection",
+        "href": "#/definitions/salesOrder-accountingBookDetailCollection",
+        "definitionId": "salesOrder-accountingBookDetailCollection"
+      },
+      {
+        "text": "nsResource",
+        "href": "#/definitions/nsResource",
+        "definitionId": "nsResource"
+      },
+      {
+        "text": "salesOrder-appliedRulesCollection",
+        "href": "#/definitions/salesOrder-appliedRulesCollection",
+        "definitionId": "salesOrder-appliedRulesCollection"
+      },
+      {
+        "text": "salesOrder-billingAddress",
+        "href": "#/definitions/salesOrder-billingAddress",
+        "definitionId": "salesOrder-billingAddress"
+      },
+      {
+        "text": "billingSchedule",
+        "href": "#/definitions/billingSchedule",
+        "definitionId": "billingSchedule"
+      },
+      {
+        "text": "classification",
+        "href": "#/definitions/classification",
+        "definitionId": "classification"
+      },
+      {
+        "text": "couponCode",
+        "href": "#/definitions/couponCode",
+        "definitionId": "couponCode"
+      },
+      {
+        "text": "currency",
+        "href": "#/definitions/currency",
+        "definitionId": "currency"
+      },
+      {
+        "text": "department",
+        "href": "#/definitions/department",
+        "definitionId": "department"
+      },
+      {
+        "text": "discountItem",
+        "href": "#/definitions/discountItem",
+        "definitionId": "discountItem"
+      },
+      {
+        "text": "account",
+        "href": "#/definitions/account",
+        "definitionId": "account"
+      },
+      {
+        "text": "customer",
+        "href": "#/definitions/customer",
+        "definitionId": "customer"
+      },
+      {
+        "text": "partner",
+        "href": "#/definitions/partner",
+        "definitionId": "partner"
+      },
+      {
+        "text": "vendor",
+        "href": "#/definitions/vendor",
+        "definitionId": "vendor"
+      },
+      {
+        "text": "employee",
+        "href": "#/definitions/employee",
+        "definitionId": "employee"
+      },
+      {
+        "text": "contact",
+        "href": "#/definitions/contact",
+        "definitionId": "contact"
+      },
+      {
+        "text": "salesOrder-giftCertRedemptionCollection",
+        "href": "#/definitions/salesOrder-giftCertRedemptionCollection",
+        "definitionId": "salesOrder-giftCertRedemptionCollection"
+      },
+      {
+        "text": "salesOrder-itemCollection",
+        "href": "#/definitions/salesOrder-itemCollection",
+        "definitionId": "salesOrder-itemCollection"
+      },
+      {
+        "text": "nsLink",
+        "href": "#/definitions/nsLink",
+        "definitionId": "nsLink"
+      },
+      {
+        "text": "location",
+        "href": "#/definitions/location",
+        "definitionId": "location"
+      },
+      {
+        "text": "customerMessage",
+        "href": "#/definitions/customerMessage",
+        "definitionId": "customerMessage"
+      },
+      {
+        "text": "nexus",
+        "href": "#/definitions/nexus",
+        "definitionId": "nexus"
+      },
+      {
+        "text": "opportunity",
+        "href": "#/definitions/opportunity",
+        "definitionId": "opportunity"
+      },
+      {
+        "text": "salesOrder-partnersCollection",
+        "href": "#/definitions/salesOrder-partnersCollection",
+        "definitionId": "salesOrder-partnersCollection"
+      },
+      {
+        "text": "promotionCode",
+        "href": "#/definitions/promotionCode",
+        "definitionId": "promotionCode"
+      },
+      {
+        "text": "salesOrder-salesTeamCollection",
+        "href": "#/definitions/salesOrder-salesTeamCollection",
+        "definitionId": "salesOrder-salesTeamCollection"
+      },
+      {
+        "text": "salesOrder-shipGroupCollection",
+        "href": "#/definitions/salesOrder-shipGroupCollection",
+        "definitionId": "salesOrder-shipGroupCollection"
+      },
+      {
+        "text": "shipItem",
+        "href": "#/definitions/shipItem",
+        "definitionId": "shipItem"
+      },
+      {
+        "text": "salesOrder-shippingAddress",
+        "href": "#/definitions/salesOrder-shippingAddress",
+        "definitionId": "salesOrder-shippingAddress"
+      },
+      {
+        "text": "webSite",
+        "href": "#/definitions/webSite",
+        "definitionId": "webSite"
+      },
+      {
+        "text": "subsidiary",
+        "href": "#/definitions/subsidiary",
+        "definitionId": "subsidiary"
+      },
+      {
+        "text": "salesOrder-taxDetailsCollection",
+        "href": "#/definitions/salesOrder-taxDetailsCollection",
+        "definitionId": "salesOrder-taxDetailsCollection"
+      },
+      {
+        "text": "term",
+        "href": "#/definitions/term",
+        "definitionId": "term"
+      }
+    ],
+    "fields": [],
+    "rawText": "salesOrder\naccountingBookDetail: salesOrder-accountingBookDetailCollection\nalaConfiguration: nsResource\naltHandlingCost Handling Cost: number (double)\nThe handling cost automatically calculates depending on the shipping method you select in the Ship Via field. To change the cost of handling, go to Lists > Shipping Items and select the shipping method with the handling cost you want to change.\naltSalesTotal Alt. Sales Total: number (double)\nThe alternate sales amount total is shown here.\naltShippingCost Shipping Cost: number (double)\nThe shipping cost automatically calculates depending on the shipping method you select in the Ship Via field above. To change the cost of a shipping method, go to Lists > Shipping Items and select the shipping method you want to change. If you use UPS Real-Time rates, shipments over 150lbs are broken up into shipments less than or equal to 150lbs for charging.\namountAuthorized Amount Authorized: number (double)\namountCovered Amount Covered: number (double)\namountDeposited Amount Deposited: number (double)\namountNotCovered Amount Not Covered: number (double)\namountPendingAuthorization Amount Pending Authorization: number (double)\namountPendingDeposit Amount Pending Deposit: number (double)\namountPotentiallyCovered Amount Potentially Covered: number (double)\namountRequiringCoverage Amount Requiring Coverage: number (double)\nappliedRules: salesOrder-appliedRulesCollection\nbillAddr1 Billing Address Line 1: string\nbillAddr2 Billing Address Line 2: string\nbillAddr3 Billing Address Line 3: string\nbillAddress Bill To: string\nThe default billing address autofills this field from the customer's record. To enter a different address: * Select another address in the Bill To Select field. * Select New in the Bill To Select field to enter a new billing address to be used for this transaction and saved with the associated entity record. * Select Custom in the Bill To Select field to enter a new billing address to be used for this transaction only (and not saved with the associated entity record). * Click the Edit icon for the Bill To Select field to modify an existing billing address.\nbillAddressList: nsResource\nbillAddressee Billing Addressee: string\nbillAttention Billing Attention: string\nbillCity Billing Address City: string\nbillCountry: object\nid Internal identifier: string PR , PS , PT , PW , PY , QA , AD , AE , AF , AG ,\nrefName Reference Name: string\nbillOverride Override: string\nbillPhone Billing Phone: string\nbillState Billing Address State: string\nbillZip Billing Address Zip Code: string\nbillingAddress: salesOrder-billingAddress\nbillingAddress_text Billing Address: string\nbillingSchedule: billingSchedule\ncanBeUnapproved Can Be Unapproved: boolean\ncanHaveStackable Can Stack Promotions: boolean\ncardSwipe Card Swipe: string\ncardholderAuthentication: nsResource\ncheckNumber Check #: string\nclass: classification\ncontribPct Contribution Percentage: string\ncouponCode: couponCode\ncreatedDate Date Created: string (date-time)\ncreatedFrom: nsResource\ncurrency: currency\ncustomForm: object\nid Internal identifier: string 88 , 89 , 68 , -9914 , 110 , 100 , 102 , 103 , 106 , 107 ,\nrefName Reference Name: string\ncustomerPaymentAuthorization: nsResource\ndebitKsn Debit KSN: string\ndebitPinBlock Debit Pin Block: string\ndefaultILBAShipAddrVal: string\ndefaultILBAShippingAddressKey: string\ndefaultILShipMethKey Default Shipping Method Key: integer (int64)\ndeferredRevenue Deferred Revenue: number (double)\nDeferred Revenue: amount of revenue deferred on this transaction\ndepartment: department\ndiscountAmount Discount Amount: number (double)\ndiscountDate Discount Date: string (date)\ndiscountItem: discountItem\ndiscountRate Rate: number (double)\nNetSuite enters the rate for the discount item you selected. You can change the discount rate for this transaction. To have the discount subtracted from your total, enter a negative currency amount (for example -10.00) or a negative percentage (for example -10%).\ndiscountTotal Discount Total: number (double)\nNetSuite enters the amount discounted on this sales order. If this discount item is taxable, the discount is applied before taxes. If it is not taxable, the discount is applied after taxes.\ndrAccount: account\ndueDate Due Date: string (date)\ndynamicDescriptor Soft Descriptor: string\nemail Email: string\nendDate End Date: string (date)\nIf this order has an end date, enter or pick it here. If a sales order includes a Start Date and End Date, those dates autofill on the invoice or cash sale when the order is billed.\nentity: one of: [ customer, partner, vendor, nsResource, employee, contact ]\nentityTaxRegNum Customer Tax Reg. Number: string\nSelect the customer's tax registration number associated with this sales order.\nestGrossProfit Est. Gross Profit: number (double)\nEstimated Gross Profit: Read-only field that equals the revenue amount minus the Est. Cost. At the transaction level, it equals the gross profit of all lines, factoring transaction-level discounts and markups.\nestGrossProfitPercent Est. Gross Profit Percent: number (double)\nEstimated Gross Profit Margin, as a percentage: Read-only field that equals the Est. Gross Profit divided by revenue, expressed as a percentage. At the transaction level, it equals the gross profit percent of all lines, factoring transaction-level discounts and markups.\nestimate Estimate: integer (int64)\nexchangeRate Exchange Rate: number (double)\nThe currency's exchange rate is shown in this field. You can edit the exchange rate for this transaction only, or you can update the currency record with the exchange rate you enter here.\nexcludeCommission Exclude Commissions: boolean\nCheck this option to exclude this transaction and its subordinate transactions from inclusion in all commission calculations.\nexternalId External ID: string\nfob FOB: string\nEnter the location where the customers technically acquire ownership. For example, if your customers own goods as soon as they ship and pay the shipping costs from your location to theirs, you might enter Our warehouse.\nforInvoiceGrouping For Invoice Grouping: boolean\nfxAccount: account\nfxAltSalesTotal Foreign Alt. Sales Total: number (double)\nfxNetAltSalesTotal Foreign Net Alt. Sales Total: number (double)\ngiftCertApplied Gift Certificate: number (double)\ngiftCertRedemption: salesOrder-giftCertRedemptionCollection\ngroupedTo: nsResource\nhandlingCost Handling Cost: number (double)\nThe handling costs displayed in this field are calculated by applying the values pre-defined in the selected Shipping Method. For example you may have a flat rate handling charge for all items sent by US Mail of $1.50. To change handling rates, go to Shipping > Lists > Shipping Items, and select the required shipping method. Click on the Handling Rate subtab.\nhandlingMode: object\nid Internal identifier: string MIMIC , PROCESS , SAVE_ONLY\nrefName Reference Name: string\nhandlingTaxAmount Handling Tax Amount: number (double)\nThis field displays the handling tax amount for this sales order.\nid Internal ID: string\ninputReferenceCode Input P/N Ref.: string\nintegrationId: string\nintercoStatus: object\nid Internal identifier: string 1 , 2 , 3\nrefName Reference Name: string\nintercoTransaction: nsResource\nisCrossSubTransaction Allow Cross-Subsidiary Fulfillment: boolean\nisDefaultShippingRequest Is Default Shipping Request: boolean\nisMultiShipTo Enable Item Line Shipping: boolean\nCheck this box to enter multiple shipping routes on this order. In the Ship To field, select a shipping address for the customer. The Default Billing address, from the customer record, is automatically displayed in the field. You can add a New address which is saved to the customer record, or enter a Custom address, which only stays on the transaction, and is not saved to the customer record. In the Ship Via field, select the shipping method you want to use for that address.\nitem: salesOrder-itemCollection\njob: one of: [ customer, partner, vendor, nsResource, employee, contact ]\nlastModifiedDate Date Last Modified: string (date-time)\nleadSource: nsResource\nlinkedTrackingNumbers Linked Tracking Numbers: string\nlinks Links: nsLink\nnsLink\nlocation: location\nmemo Memo: string\nIf you wish, enter a memo to describe this sales order. It will appear on reports such as the 2-line Sales Orders register.\nmessage Customer Message: string\nThe text of the customer message you select in the Select Message field appears here. You can edit the message or enter a new customer message for only this transaction.\nmessageSel: customerMessage\nmuccPromoCodeInstance Promo Code: string\nneedsPick Needs Pick: boolean\nneedsRevCommitment: boolean\nnetAltSalesTotal Net Alt. Sales Total: number (double)\nnextBill Next Bill Date: string (date)\nnexus: nexus\noneTime One Time: number (double)\noppcreatedfrom: string\noppcreatedfromtitle: string\nopportunity: opportunity\nordRevCommitted: boolean\norderStatus: object\nid Internal identifier: string A , B\nrefName Reference Name: string\norderType: nsResource\noriginator Originator: string\notherRefNum PO/Check Number: string\nIf your customer is paying by check, enter the number here. If your customer is issuing a purchase order, enter the PO number here.\noutputAuthCode Auth. Code: string\noutputReferenceCode P/N Ref.: string\noverrideShippingCost Override Shipping Cost: number (float)\npartner: partner\npartners: salesOrder-partnersCollection\npayPalAuthId Authorization ID: string\nAuthorization identification number. Populated from the PayPal response.\npayPalTranId PayPal Tran. ID: string\nUnique transaction identification number of the payment. Populated from the PayPal response.\npaymentCardCsc CSC: string\npaymentDeviceId Payment Device ID: string\npaymentInstrumentLimit Payment Instrument Limit: number (double)\npaymentOperation: object\nid Internal identifier: string SALE , VOID , AUTHORIZATION\nrefName Reference Name: string\npaymentOption: nsResource\npaymentProcessingProfile: nsResource\npaymentsDue Payments Due: number (double)\nprevDate Previous Effective Date: string (date)\nprevPartner Previous Partner: integer (int64)\nprevRep Previous Representative: integer (int64)\npreviousOpportunity Previous Opportunity: string\npromoCode: promotionCode\npromoCodePluginImpl Promo Code: string\nrecognizedRevenue Recognized Revenue: number (double)\nRecognized Revenue: cumulative amount of revenue recognized for this transaction\nrecurAnnually Annually: number (double)\nrecurMonthly Monthly: number (double)\nrecurQuarterly Quarterly: number (double)\nrecurWeekly Weekly: number (double)\nrefName Reference Name: string\nrefreshFromSubscription: string\nrequiredDepositAmount Required Deposit Amount: number (double)\nrequiredDepositDue Required Deposit Due: number (double)\nrequiredDepositPercentage Required Deposit Percentage: number (double)\nrevCommitStatus Revenue Commitment Status: string\nThis field provides information about Revenue Commitment(s) in the case of a Sales Order or Revenue Commitment Reversal(s) in the case of a Return Authorization. If you uncheck the Rev Rec on Rev Commit. Field, the Rev. Commit. Status field displays information about the related Invoice(s) or Credit Memo(s). The possible values for this field and definitions are as follows: 1. Pending Commitment - No related revenue transactions have been created. 2. Partially Committed - Some related revenue transactions have been created. 3. Committed - All related revenue transactions have been created.\nrevCommitStatusDescr Revenue Commitment Status: string\nrevRecOnRevCommitment Rev Rec on Rev Commit.: boolean\nCheck this check box to create a Revenue Commitment or Revenue Commitment Reversal. * On a Sales Order, the Revenue Commitment replaces an invoice * On a Return Authorization, the Revenue Commitment Reversal replaces a credit memo. NetSuite creates all applicable Revenue Recognition schedules the Revenue Commitment or Revenue Commitment Reversal.\nrevenueStatus Revenue Status: string\nThe possible values for this field are: 1. Pending: indicates that no recognition has occurred. All revenue is still deferred. 2. In Progress: indicates that some recognition has occurred. 3. Completed: indicates that all recognition has occurred. No deferred revenue remains.\nrevenueStatusDescr Revenue Status: string\nsalesChannel: nsResource\nsalesEffectiveDate Sales Effective Date: string (date)\nYou can change the sales effective date for this transaction. The sales effective date determines which commission plan and historical sales team this transaction applies to.\nsalesGroup: nsResource\nsalesRep: one of: [ customer, partner, vendor, nsResource, employee, contact ]\nsalesTeam: salesOrder-salesTeamCollection\nsaleschannelorderpriority: string\nshipAddress Ship To: string\nThe default shipping address autofills this field from the customer's record. To enter a different address: * Select another address in the Ship To Select field. * Select New in the Ship To Select field to enter a new shipping address to be used for this transaction and saved with the associated entity record. * Select Custom in the Ship To Select field to enter a new shipping address to be used for this transaction only (and not saved with the associated entity record). * Click the Edit icon for the Ship To Select field to edit an existing shipping address.\nshipAddressList: nsResource\nshipComplete Ship Complete: boolean\nCheck this box if you want to ship this order only when complete. This will prevent multiple shipments of part-orders. When fulfilling orders in bulk, you can filter the list to include those orders marked Ship Complete that can be completely fulfilled by selecting Respect Ship Complete in the Filter By field.\nshipDate Ship Date: string (date)\nType or pick a shipping date for this order.\nshipGroup: salesOrder-shipGroupCollection\nshipIsResidential Shipping address is residential: boolean\nshipMethod: shipItem\nshipOverride Override: boolean\nshippingAddress: salesOrder-shippingAddress\nshippingAddress_text Shipping Address: string\nshippingCost Shipping Cost: number (double)\nThis field displays the shipping costs associated with the transaction. If you have set up your account to automatically calculate shipping, shipping costs are calculated according to the shipping method selected in the Shipping Method field. To automatically charge for shipping, go to Setup > Accounting > Shipping. Check the Charge for Shipping box. In addition, you need to set up charge details for your shipping items. Go to Lists > Accounting > Shipping Items. UPS Real-Time rates If you use this service and a package is over 150lbs, the package is charged as multiple packages equal to or less than 150lbs.\nshippingCostOverridden Shipping Cost Overridden: boolean\nshippingTaxAmount Shipping Tax Amount: number (double)\nThis field displays the shipping tax amount for this sales order.\nsource: object\nid Internal identifier: string SuitePhone , smbXML , CSV , ADP , QIF , QB , PERQUEST , Yahoo , PaymentLink , customerCenter ,\nrefName Reference Name: string\nsourceWebSite: webSite\nstartDate Start Date: string (date)\nIf you use the Advanced Billing feature, enter the date for the first invoice to be created. If a sales order includes a Start Date and End Date, those dates autofill on the invoice or cash sale when the order is billed.\nstatus: object\nid Internal identifier: string A , B , C , D , E , F , G , H\nrefName Reference Name: string\nstoreOrder: string\nsubsidiary: subsidiary\nsubsidiaryTaxRegNum Subsidiary Tax Reg. Number: string\nThis field shows the tax registration number of the transaction nexus. NetSuite automatically populates this field based on the nexus lookup logic. You can override the transaction nexus and tax registration number that NetSuite automatically selects by checking the Nexus Override box. When you select a different tax registration number in the dropdown list, the corresponding nexus is automatically selected in the Nexus field.\nsubtotal Subtotal: number (double)\nThis field shows the total of the items on this sales order. This is the total before any discounts, shipping cost, handling cost or tax is added to the order.\nsuppressUserEventsAndEmails: string\nsyncPartnerTeams Update Customer: boolean\nCheck this box if you want to update the sales team on the customer's record with changes you make here.\nsyncSalesTeams Update Customer: boolean\nCheck this box if you want to update the sales team on the customer's record with changes you make here.\ntaxDetails: salesOrder-taxDetailsCollection\ntaxDetailsOverride Tax Details Override: boolean\nCheck this box to override the tax information on the Tax Details subtab of the transaction. Only roles with at least the Edit level of the Tax Details Tab permission can override the tax details.\ntaxPointDate Tax Point Date: string (date)\nTax point date is a legal requirement in many countries. It is the date of transaction that determines the taxability. It may be different from the transaction date that determines the GL impact. Specific rules then consider the reporting of transactions based on tax point date and other factors.\ntaxPointDateOverride Tax Point Date Override: boolean\nCheck this box to override the tax point date.\ntaxRegOverride Tax Registration Override: boolean\nCheck this box to override the values in the Nexus and Subsidiary Tax Reg. Number fields. Only roles with at least the Edit level of the Tax Details Tab permission can override the values that NetSuite automatically selects in these fields.\ntaxTotal Tax: number (double)\nNetSuite multiplies the tax rate by the taxable total of line items and enters it here.\nterms: term\nthirdPartyAcct 3rd Party Account: string\ntoBeEmailed To Be Emailed: boolean\nCheck this box if you want to email this sales order. Then enter the email address in the space to the right of the check box. You can enter multiple email addresses by separating them with a semicolon. It is important to separate the addresses with only a semicolon and do not include any spaces.\ntoBeFaxed To Be Faxed: boolean\nCheck this box if you want to fax this transaction. Enter the fax number in the space to the right of the check box if it doesn't already appear. To fax NetSuite forms, an administrator must first set up fax service at Setup > Company > Printing, Fax and Email Preferences.\ntoBePrinted To Be Printed: boolean\nCheck this box if you want to save this in a queue of sales orders and picking tickets you can later chose to print. On new individual sales orders, you can click Save and Print to submit and print the sales order at once. On existing individual sales orders, you can click Print to submit and print the sales order at once.\ntotal Total: number (double)\nNetSuite computes the total of line items, tax and shipping costs, and then enters it here.\ntotalAfterTaxes Total After Taxes: number (double)\ntotalCostEstimate Est. Cost: number (double)\nEstimated Cost: Estimated cost of the specific number of items; estimated rate x quantity = estimated cost.\ntranDate Date: string (date)\nNetSuite inserts today's date for the posting date of this sales order. You can type or pick another date. What you enter here determines the date range in which this transaction appears on the Sales Order Register. You can select or enter custom date ranges on registers.\ntranId Order #: string\nNetSuite increases the largest sales order number by one. If you wish, you can type another number. The next order number will revert to the standard pattern. Note: The maximum number of characters you can enter in this field is 45.\ntranIsVsoeBundle Transaction Is VSOE Bundle: boolean\nCheck this box to include all items on this transaction as a VSOE bundle. Note: If Rev Rec Dates Specified on Sales Order is the Revenue Recognition Template term source used to allocate revenue, then NetSuite uses the Start and End Dates from the sales order to calculate the Revenue Recognition Schedule.\ntransactionNumber Transaction Number: string\nThis field displays the system-generated number for the transaction.\ntransactionToRefund: nsResource\nupdateDropshipOrderQty: string\nvsoeAutoCalc Auto Calculate VSOE Allocation: boolean\nCheck this box to automatically calculate allocation amounts when you save the transaction. Allocation determines the revenue amount for individual transaction lines.\nwebSite: string\nwebStore Web Store: string"
+  }
+}

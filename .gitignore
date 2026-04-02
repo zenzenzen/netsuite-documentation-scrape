@@ -10,3 +10,4 @@ output/
 apps/docs/dist/
 apps/docs/.astro/
 apps/app/.next/
+.vercel

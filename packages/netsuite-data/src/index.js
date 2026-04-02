@@ -16,6 +16,7 @@ function resolveGeneratedRoot() {
 }
 
 export const GENERATED_ROOT = resolveGeneratedRoot();
+export const GENERATED_RECORDS_ROOT = path.join(GENERATED_ROOT, 'records');
 export const GENERATED_WORKFLOWS_ROOT = path.join(GENERATED_ROOT, 'workflows');
 
 function readJson(filePath, fallback = null) {
@@ -36,4 +37,14 @@ export function getWorkflowIndex() {
 
 export function getWorkflowLayout(slug) {
   return readJson(path.join(GENERATED_WORKFLOWS_ROOT, `${slug}.json`), null);
+}
+
+export function getRecordDetail(slug) {
+  return readJson(path.join(GENERATED_RECORDS_ROOT, `${slug}.json`), null);
+}
+
+export function getMigratedRecordSlugs() {
+  return getRecordsIndex()
+    .filter((record) => String(record.docsPath || '').startsWith('/records/'))
+    .map((record) => record.slug);
 }

@@ -15,6 +15,7 @@ export const PUBLIC_RECORDS_DIR = path.join(PUBLIC_DIR, 'records');
 export const PUBLIC_HOME_FILE = path.join(PROJECT_ROOT, 'public.html');
 export const PUBLIC_TRANSFORMS_FILE = path.join(PROJECT_ROOT, 'transforms.html');
 export const GENERATED_DATA_DIR = path.join(PROJECT_ROOT, 'packages', 'netsuite-data', 'generated');
+export const GENERATED_RECORDS_DIR = path.join(GENERATED_DATA_DIR, 'records');
 export const GENERATED_WORKFLOWS_DIR = path.join(GENERATED_DATA_DIR, 'workflows');
 
 export const DEFAULT_DOCS_URL =

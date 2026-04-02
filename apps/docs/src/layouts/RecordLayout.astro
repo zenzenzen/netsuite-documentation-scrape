@@ -1,0 +1,470 @@
+---
+import PageContextScript from '../components/PageContextScript.astro';
+import PinnedPanel from '../components/PinnedPanel.astro';
+import WorkflowStudioSection from '../components/WorkflowStudioSection.astro';
+
+const {
+  title,
+  eyebrow,
+  pageKind = 'overview',
+  currentRecordName = '',
+  defaultBaseRecord = 'salesOrder',
+  homeHref = '/',
+  transformsHref = '/transforms',
+  workflowConfigHref = '/workflow-config.json',
+  showWorkflow = true,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/app.css" />
+    <style is:global>
+      :root {
+        --bg: #f6f1e8;
+        --paper: rgba(255, 255, 255, 0.84);
+        --paper-strong: rgba(255, 255, 255, 0.96);
+        --ink: #1f2430;
+        --muted: #5d6472;
+        --line: rgba(31, 36, 48, 0.12);
+        --gold: #f2b741;
+        --teal: #148f88;
+        --coral: #e46b53;
+        --blue: #2e71d1;
+        --berry: #9c4dcc;
+        --shadow: 0 18px 48px rgba(28, 36, 54, 0.12);
+        --radius: 24px;
+        --mono: "SFMono-Regular", "Menlo", "Monaco", monospace;
+        --sans: "Avenir Next", "Segoe UI", sans-serif;
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: var(--sans);
+        color: var(--ink);
+        background:
+          radial-gradient(circle at top left, rgba(242, 183, 65, 0.22), transparent 36%),
+          radial-gradient(circle at top right, rgba(156, 77, 204, 0.18), transparent 34%),
+          linear-gradient(180deg, #efe6d6 0%, #f9f6ef 42%, #eee7ff 100%);
+      }
+
+      a { color: inherit; }
+
+      .shell {
+        width: min(1260px, calc(100vw - 32px));
+        margin: 0 auto;
+        padding: 28px 0 72px;
+      }
+
+      .hero {
+        position: relative;
+        z-index: 1;
+        padding: 18px 0 12px;
+      }
+
+      .hero-card {
+        display: grid;
+        gap: 14px;
+        padding: 24px 28px;
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        border-radius: 28px;
+        background: linear-gradient(135deg, rgba(255,255,255,0.92), rgba(255,248,237,0.78));
+        box-shadow: var(--shadow);
+      }
+
+      .eyebrow {
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--teal);
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2rem, 4vw, 3.6rem);
+        line-height: 0.95;
+        letter-spacing: -0.04em;
+      }
+
+      .intro {
+        max-width: 780px;
+        color: var(--muted);
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+
+      .top-nav, .chip-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .top-link, .chip {
+        display: inline-flex;
+        align-items: center;
+        min-width: 0;
+        max-width: 100%;
+        gap: 8px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        text-decoration: none;
+        border: 1px solid var(--line);
+        background: rgba(255,255,255,0.78);
+        color: var(--ink);
+        line-height: 1.4;
+        transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+      }
+
+      .top-link:hover, .chip:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 10px 22px rgba(28, 36, 54, 0.08);
+        border-color: rgba(20, 143, 136, 0.34);
+      }
+
+      .top-link strong { font-size: 0.95rem; }
+      .top-link span, .chip small { color: var(--muted); }
+      .top-link strong, .top-link span, .chip strong, .chip small {
+        min-width: 0;
+        overflow-wrap: anywhere;
+        white-space: normal;
+      }
+
+      .grid {
+        display: grid;
+        gap: 18px;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      }
+
+      .stat-card, .panel, .record-card, .workflow-card, .matrix-card {
+        border-radius: var(--radius);
+        background: var(--paper);
+        border: 1px solid rgba(255,255,255,0.7);
+        box-shadow: var(--shadow);
+      }
+
+      .stat-card {
+        padding: 20px;
+      }
+
+      .stat-label {
+        margin: 0 0 6px;
+        color: var(--muted);
+        font-size: 0.84rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .stat-value {
+        margin: 0;
+        font-size: 2rem;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+      }
+
+      .section-heading {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 16px;
+        margin: 38px 0 16px;
+      }
+
+      .section-heading h2 {
+        margin: 0;
+        font-size: 1.8rem;
+        letter-spacing: -0.04em;
+      }
+
+      .section-heading p {
+        margin: 0;
+        color: var(--muted);
+        max-width: 620px;
+        line-height: 1.6;
+      }
+
+      .page-body {
+        display: grid;
+        gap: 22px;
+      }
+
+      .page-section {
+        scroll-margin-top: 28px;
+      }
+
+      .record-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      }
+
+      .record-card, .workflow-card, .matrix-card {
+        padding: 22px;
+      }
+
+      .record-card h3, .workflow-card h3, .matrix-card h3 {
+        margin: 0 0 10px;
+        font-size: 1.3rem;
+      }
+
+      .record-meta {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 14px;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        min-width: 0;
+        max-width: 100%;
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        background: rgba(20, 143, 136, 0.12);
+        color: var(--teal);
+      }
+
+      .pill.mono {
+        white-space: normal;
+        overflow-wrap: anywhere;
+        line-height: 1.45;
+      }
+
+      .record-copy, .muted {
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .record-link {
+        display: inline-flex;
+        margin-top: 14px;
+        padding: 11px 14px;
+        border-radius: 14px;
+        background: linear-gradient(135deg, rgba(20, 143, 136, 0.9), rgba(46, 113, 209, 0.9));
+        color: white;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .record-link.secondary {
+        background: rgba(255, 255, 255, 0.9);
+        color: var(--ink);
+        border: 1px solid var(--line);
+      }
+
+      .panel {
+        padding: 24px;
+      }
+
+      .accordion {
+        display: grid;
+        gap: 12px;
+      }
+
+      details.endpoint {
+        overflow: hidden;
+        border: 1px solid rgba(31, 36, 48, 0.08);
+        border-radius: 20px;
+        background: rgba(255,255,255,0.86);
+      }
+
+      details.endpoint[open] {
+        border-color: rgba(46, 113, 209, 0.26);
+        box-shadow: 0 16px 32px rgba(28, 36, 54, 0.08);
+      }
+
+      details.endpoint summary {
+        list-style: none;
+        cursor: pointer;
+        padding: 18px 20px;
+        display: grid;
+        gap: 10px;
+      }
+
+      details.endpoint summary::-webkit-details-marker { display: none; }
+
+      .endpoint-top {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .method-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 72px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        font-family: var(--mono);
+        font-weight: 700;
+        font-size: 0.82rem;
+        color: white;
+      }
+
+      .tone-get { background: linear-gradient(135deg, #148f88, #28b6ad); }
+      .tone-post { background: linear-gradient(135deg, #2e71d1, #46a0ff); }
+      .tone-patch { background: linear-gradient(135deg, #c35d15, #f39237); }
+      .tone-put { background: linear-gradient(135deg, #7a4de0, #ab67ff); }
+      .tone-delete { background: linear-gradient(135deg, #bf3148, #f1677d); }
+      .tone-neutral { background: linear-gradient(135deg, #4d5566, #7a8396); }
+
+      .endpoint-path {
+        font-family: var(--mono);
+        font-size: 0.96rem;
+        word-break: break-word;
+      }
+
+      .endpoint-summary {
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      .endpoint-body {
+        border-top: 1px solid rgba(31, 36, 48, 0.08);
+        padding: 0 20px 18px;
+        display: grid;
+        gap: 14px;
+      }
+
+      .split {
+        display: grid;
+        gap: 14px;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      }
+
+      .subpanel {
+        padding: 16px;
+        border-radius: 18px;
+        background: rgba(247, 247, 247, 0.72);
+        border: 1px solid rgba(31, 36, 48, 0.06);
+      }
+
+      .subpanel h4 {
+        margin: 0 0 10px;
+        font-size: 1rem;
+      }
+
+      .subpanel ul {
+        margin: 0;
+        padding-left: 18px;
+        color: var(--muted);
+      }
+
+      .subpanel li {
+        margin-bottom: 8px;
+        line-height: 1.5;
+      }
+
+      .schema-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 8px;
+      }
+
+      .schema-table th,
+      .schema-table td {
+        text-align: left;
+        padding: 10px 12px;
+        border-bottom: 1px solid rgba(31, 36, 48, 0.08);
+        vertical-align: top;
+      }
+
+      .schema-table th {
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .schema-table code,
+      .mono {
+        font-family: var(--mono);
+        font-size: 0.92rem;
+      }
+
+      .matrix {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 14px;
+      }
+
+      .matrix th, .matrix td {
+        padding: 12px 10px;
+        border-bottom: 1px solid rgba(31, 36, 48, 0.08);
+        text-align: left;
+      }
+
+      .matrix th {
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+      }
+
+      .kicker {
+        display: inline-flex;
+        padding: 6px 10px;
+        border-radius: 999px;
+        margin-bottom: 10px;
+        background: rgba(242, 183, 65, 0.18);
+        color: #8a5b00;
+        font-weight: 700;
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      @media (max-width: 760px) {
+        .shell { width: min(100vw - 20px, 1260px); }
+        .hero-card, .panel, .record-card, .workflow-card, .matrix-card { padding: 18px; }
+        details.endpoint summary, .endpoint-body { padding-left: 16px; padding-right: 16px; }
+      }
+    </style>
+  </head>
+  <body data-page-kind={pageKind} data-current-record={currentRecordName}>
+    <aside class="nav-panel" data-nav-panel aria-label="NetSuite object navigation"></aside>
+    <div class="shell">
+      <div class="hero">
+        <div class="hero-card">
+          <div class="eyebrow">{eyebrow}</div>
+          <h1>{title}</h1>
+          <div class="intro"><slot name="intro" /></div>
+          <div class="top-nav">
+            <a class="top-link" href={homeHref}><strong>Overview</strong> <span>Focus objects</span></a>
+            <a class="top-link" href={transformsHref}><strong>Transforms</strong> <span>Workflow map</span></a>
+          </div>
+        </div>
+      </div>
+      <main class="page-body" data-page-body>
+        <PinnedPanel />
+        <slot />
+        {showWorkflow ? <WorkflowStudioSection defaultBaseRecord={defaultBaseRecord} /> : null}
+      </main>
+    </div>
+    <PageContextScript
+      pageKind={pageKind}
+      currentRecordName={currentRecordName}
+      defaultBaseRecord={defaultBaseRecord}
+      rootPrefix="/"
+      homeHref={homeHref}
+      transformsHref={transformsHref}
+      workflowConfigHref={workflowConfigHref}
+    />
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

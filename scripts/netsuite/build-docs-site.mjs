@@ -3,6 +3,7 @@ import path from 'node:path';
 import {
   FOCUS_RECORDS,
   GENERATED_DATA_DIR,
+  GENERATED_RECORDS_DIR,
   GENERATED_WORKFLOWS_DIR,
   PROJECT_ROOT,
   PUBLIC_DIR,
@@ -47,6 +48,8 @@ const dependencyRecords = focusDependencyRecords
   .map((recordName) => recordMap.get(recordName))
   .filter(Boolean)
   .slice(0, 30);
+const migratedRecords = unique([...focusRecords, ...dependencyRecords]);
+const migratedRecordSet = new Set(migratedRecords.map((record) => record.recordName));
 
 const allTransforms = allRecords.flatMap((record) => record.transforms || []);
 const focusTransforms = allTransforms.filter(
@@ -83,6 +86,14 @@ function summarizeRecord(record) {
   );
 }
 
+function buildRecordDocsPath(recordName) {
+  if (migratedRecordSet.has(recordName)) {
+    return `/records/${slugify(recordName)}`;
+  }
+
+  return relativeLinkFromRoot(recordName);
+}
+
 function buildWorkflowConfig(records, transforms) {
   const focusSet = new Set(FOCUS_RECORDS);
   const dependencySet = new Set(dependencyRecords.map((record) => record.recordName));
@@ -117,7 +128,7 @@ function buildWorkflowConfig(records, transforms) {
           ? 'dependency'
           : 'extended',
       summary: summarizeRecord(record),
-      docsPath: relativeLinkFromRoot(record.recordName),
+      docsPath: buildRecordDocsPath(record.recordName),
       stats: {
         operations: record.stats?.operations || 0,
         transforms: record.stats?.transforms || 0,
@@ -172,6 +183,27 @@ function buildWorkflowLayouts() {
 }
 
 const generatedWorkflowLayouts = buildWorkflowLayouts();
+
+function buildRecordDetail(record) {
+  return {
+    recordName: record.recordName,
+    slug: slugify(record.recordName),
+    title: toTitleCase(record.recordName),
+    summary: summarizeRecord(record),
+    docsPath: buildRecordDocsPath(record.recordName),
+    stats: record.stats || {
+      operations: 0,
+      transforms: 0,
+      schemaFields: 0,
+    },
+    dependencyRecords: unique(record.dependencyRecords || []),
+    operations: record.operations || [],
+    definition: {
+      ...(record.definition || {}),
+      fields: (record.definition?.fields || []).slice(0, 40),
+    },
+  };
+}
 
 function renderPinnedSection() {
   return `
@@ -1152,6 +1184,7 @@ function renderTransformsPage() {
 ensureDir(PUBLIC_DIR);
 ensureDir(PUBLIC_RECORDS_DIR);
 ensureDir(GENERATED_DATA_DIR);
+ensureDir(GENERATED_RECORDS_DIR);
 ensureDir(GENERATED_WORKFLOWS_DIR);
 
 for (const record of [...focusRecords, ...dependencyRecords]) {
@@ -1167,6 +1200,10 @@ writeText(WORKFLOW_CONFIG_FILE, `${JSON.stringify(workflowConfig, null, 2)}\n`);
 writeJson(path.join(GENERATED_DATA_DIR, 'records-index.json'), generatedRecordsIndex);
 writeJson(path.join(GENERATED_DATA_DIR, 'workflow-index.json'), generatedWorkflowIndex);
 
+for (const record of migratedRecords) {
+  writeJson(path.join(GENERATED_RECORDS_DIR, `${slugify(record.recordName)}.json`), buildRecordDetail(record));
+}
+
 for (const layout of generatedWorkflowLayouts) {
   writeJson(path.join(GENERATED_WORKFLOWS_DIR, `${layout.slug}.json`), layout);
 }
@@ -1174,4 +1211,5 @@ for (const layout of generatedWorkflowLayouts) {
 console.log(`Wrote ${PUBLIC_HOME_FILE}`);
 console.log(`Wrote ${PUBLIC_TRANSFORMS_FILE}`);
 console.log(`Wrote ${focusRecords.length + dependencyRecords.length} record pages to ${PUBLIC_RECORDS_DIR}`);
+console.log(`Wrote ${migratedRecords.length} record detail payloads to ${GENERATED_RECORDS_DIR}`);
 console.log(`Wrote ${WORKFLOW_CONFIG_FILE}`);

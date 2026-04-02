@@ -612,6 +612,15 @@ function RecordOverlay({
           >
             Open docs
           </TooltipButton>
+          <a
+            className="workflow-overlay-action"
+            href={`https://system.netsuite.com/help/helpcenter/en_US/APIs/REST_API_Browser/record/v1/2023.1/index.html#section/${record.recordName}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            title="View this record in the NetSuite REST API Browser"
+          >
+            NetSuite docs ↗
+          </a>
           <TooltipButton
             className="workflow-overlay-action"
             tooltip={favorite ? 'Unpin this record from favorites' : 'Pin this record to favorites'}
@@ -1030,12 +1039,6 @@ export function WorkflowStudio({ workflowIndex }) {
                   <GraphActionButton tooltip="Reset back to the full object catalog" onClick={handleBrowseAll}>
                     Reset graph
                   </GraphActionButton>
-                  <GraphActionButton
-                    tooltip="Copy the current page link"
-                    onClick={() => handleCopy(window.location.href, 'Page link')}
-                  >
-                    Copy link
-                  </GraphActionButton>
                 </Panel>
               </ReactFlow>
             ) : (
@@ -1047,14 +1050,6 @@ export function WorkflowStudio({ workflowIndex }) {
           ) : (
             <div className="workflow-catalog-stage">
               <div className="workflow-stage-note workflow-stage-note-static">{stageNote}</div>
-              <div className="workflow-stage-actions workflow-stage-actions-static">
-                <GraphActionButton
-                  tooltip="Copy the current page link"
-                  onClick={() => handleCopy(window.location.href, 'Page link')}
-                >
-                  Copy link
-                </GraphActionButton>
-              </div>
               <div className="workflow-stage-meta workflow-stage-meta-static">
                 <span>{workflowIndex.length} objects</span>
                 <span>Alphabetized</span>

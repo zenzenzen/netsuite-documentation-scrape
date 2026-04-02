@@ -1,0 +1,22 @@
+---
+const { rows = [] } = Astro.props;
+---
+
+<table class="schema-table">
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    {rows.map((row) => (
+      <tr>
+        <td><code>{row.label || row.name}</code></td>
+        <td>{row.type || '-'}</td>
+        <td>{row.description || row.subtitle || 'No description captured.'}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
