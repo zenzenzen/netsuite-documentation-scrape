@@ -1,0 +1,91 @@
+---
+import { getRecordsIndex } from '@netsuite/netsuite-data';
+import RecordLayout from '../../layouts/RecordLayout.astro';
+import { buildDocsPathMap } from '../../lib/docs.js';
+import { readWorkflowConfig } from '../../lib/server-data.js';
+
+const records = getRecordsIndex();
+const docsByRecord = buildDocsPathMap(records);
+const workflowConfig = readWorkflowConfig();
+const focusSet = new Set(records.filter((record) => record.group === 'focus').map((record) => record.recordName));
+const focusTransforms = workflowConfig.transforms.filter(
+  (transform) => focusSet.has(transform.source) || focusSet.has(transform.target)
+);
+
+const groupedTransforms = Array.from(
+  focusTransforms.reduce((map, transform) => {
+    if (!map.has(transform.source)) {
+      map.set(transform.source, []);
+    }
+
+    map.get(transform.source).push(transform);
+    return map;
+  }, new Map())
+);
+---
+
+<RecordLayout
+  title="NetSuite Transform Workflows"
+  eyebrow="Transform-Centric View"
+  pageKind="transforms"
+  defaultBaseRecord="salesOrder"
+>
+  <Fragment slot="intro">
+    This page separates transform workflows from the standard CRUD surface so you can scan the
+    source-to-target routes faster. It is especially useful when you are tracing record creation chains like
+    customer to salesOrder to invoice or salesOrder to itemFulfillment.
+  </Fragment>
+
+  <section class="page-section" data-page-section data-section-id="workflow-groups" data-section-title="Workflow Groups">
+    <div class="section-heading">
+      <h2>Workflow Groups</h2>
+      <p>The cards below cluster transform endpoints by their source record, which makes orchestration patterns easier to recognize.</p>
+    </div>
+    <div class="grid record-grid">
+      {groupedTransforms.map(([source, transforms]) => (
+        <article class="workflow-card">
+          <div class="kicker">{source}</div>
+          <h3>{source.replace(/([a-z])([A-Z])/g, '$1 $2')}</h3>
+          <div class="muted">These are the transform destinations that surfaced in the REST API browser for this source record.</div>
+          <div class="chip-row" style="margin-top:14px;">
+            {transforms.map((transform) => (
+              <a class="chip" href={docsByRecord.get(transform.target) || '#'}>
+                <strong>{transform.source}</strong>
+                <small>to {transform.target}</small>
+              </a>
+            ))}
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="page-section" data-page-section data-section-id="route-matrix" data-section-title="Route Matrix">
+    <div class="section-heading">
+      <h2>Route Matrix</h2>
+      <p>Use this matrix when you need the exact transform endpoint path without opening each record page individually.</p>
+    </div>
+    <div class="matrix-card">
+      <table class="matrix">
+        <thead>
+          <tr>
+            <th>Source</th>
+            <th>Target</th>
+            <th>Endpoint</th>
+            <th>Summary</th>
+          </tr>
+        </thead>
+        <tbody>
+          {focusTransforms.map((transform) => (
+            <tr>
+              <td><a href={docsByRecord.get(transform.source) || '#'}>{transform.source}</a></td>
+              <td><a href={docsByRecord.get(transform.target) || '#'}>{transform.target}</a></td>
+              <td><code>{transform.path}</code></td>
+              <td>{transform.summary || 'Transform route'}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+</RecordLayout>

@@ -1,0 +1,78 @@
+---
+import { getMigratedRecordSlugs, getRecordDetail, getRecordsIndex } from '@netsuite/netsuite-data';
+import RecordLayout from '../../layouts/RecordLayout.astro';
+import RecordHero from '../../components/RecordHero.astro';
+import RecordDependencies from '../../components/RecordDependencies.astro';
+import EndpointAccordion from '../../components/EndpointAccordion.astro';
+import SchemaSnapshot from '../../components/SchemaSnapshot.astro';
+import { buildDocsPathMap } from '../../lib/docs.js';
+
+export function getStaticPaths() {
+  return getMigratedRecordSlugs().map((slug) => ({ params: { slug } }));
+}
+
+const slug = Astro.params.slug;
+const record = getRecordDetail(slug);
+
+if (!record) {
+  throw new Error(`Missing generated record detail for slug "${slug}". Run npm run netsuite:build first.`);
+}
+
+const records = getRecordsIndex();
+const docsByRecord = buildDocsPathMap(records);
+const schemaRows = record.definition?.fields || [];
+---
+
+<RecordLayout
+  title={record.title}
+  eyebrow="NetSuite Record Explorer"
+  pageKind="record"
+  currentRecordName={record.recordName}
+  defaultBaseRecord={record.recordName}
+>
+  <RecordHero slot="intro" record={record} />
+
+  <section
+    class="page-section"
+    data-page-section
+    data-section-id="record-links"
+    data-section-title={record.title}
+    id="record-links"
+  >
+    <div class="section-heading">
+      <h2>{record.title}</h2>
+      <p>Linked records surface here as navigable chips, so you can jump between record dependencies while you read the endpoint contracts.</p>
+    </div>
+    <div class="panel">
+      <RecordDependencies dependencies={record.dependencyRecords} docsByRecord={docsByRecord} />
+    </div>
+  </section>
+
+  <section class="page-section" data-page-section data-section-id="record-endpoints" data-section-title="Endpoints">
+    <div class="section-heading">
+      <h2>Endpoints</h2>
+      <p>Transform routes are expanded by default because they usually drive the interesting cross-record workflows in NetSuite.</p>
+    </div>
+    <EndpointAccordion operations={record.operations} docsByRecord={docsByRecord} />
+  </section>
+
+  {
+    schemaRows.length ? (
+      <section
+        class="page-section"
+        data-page-section
+        data-section-id="record-schema"
+        data-section-title="Schema Snapshot"
+        id="schema"
+      >
+        <div class="section-heading">
+          <h2>Schema Snapshot</h2>
+          <p>The definition table highlights the first 40 captured rows from the record schema, which is usually enough to orient yourself before dropping into the raw JSON.</p>
+        </div>
+        <div class="panel">
+          <SchemaSnapshot rows={schemaRows} />
+        </div>
+      </section>
+    ) : null
+  }
+</RecordLayout>

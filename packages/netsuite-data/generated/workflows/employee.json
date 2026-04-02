@@ -11,7 +11,7 @@
           "title": "Employee",
           "group": "dependency",
           "summary": "Get list of records. 2 transform workflows available. 10 linked dependency records.",
-          "docsPath": "./public/records/employee.html",
+          "docsPath": "/records/employee",
           "stats": {
             "operations": 8,
             "transforms": 2,

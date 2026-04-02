@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "dev": "npm run sync:workflow-data && astro dev --host 127.0.0.1",
     "build": "npm run sync:workflow-data && astro build",
     "sync:workflow-data": "node ./scripts/sync-workflow-data.mjs"
   },

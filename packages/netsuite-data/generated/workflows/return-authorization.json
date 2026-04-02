@@ -11,7 +11,7 @@
           "title": "Return Authorization",
           "group": "dependency",
           "summary": "Get list of records. 3 transform workflows available. 19 linked dependency records.",
-          "docsPath": "./public/records/return-authorization.html",
+          "docsPath": "/records/return-authorization",
           "stats": {
             "operations": 9,
             "transforms": 3,
@@ -202,7 +202,7 @@
           "title": "Credit Memo",
           "group": "focus",
           "summary": "Get list of records. 20 linked dependency records.",
-          "docsPath": "./public/records/credit-memo.html",
+          "docsPath": "/records/credit-memo",
           "stats": {
             "operations": 6,
             "transforms": 0,

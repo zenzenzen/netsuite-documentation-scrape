@@ -1,24 +1,122 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { getRecordsIndex, getWorkflowIndex } from '@netsuite/netsuite-data';
+import { getRecordsIndex } from '@netsuite/netsuite-data';
+import RecordLayout from '../layouts/RecordLayout.astro';
+import { buildDocsPathMap } from '../lib/docs.js';
+import { readWorkflowConfig } from '../lib/server-data.js';
 
 const records = getRecordsIndex();
-const workflows = getWorkflowIndex();
+const workflowConfig = readWorkflowConfig();
+const docsByRecord = buildDocsPathMap(records);
+
+const focusRecords = records.filter((record) => record.group === 'focus');
+const dependencyRecords = records.filter((record) => record.group === 'dependency');
+const focusSet = new Set(focusRecords.map((record) => record.recordName));
+const focusTransforms = workflowConfig.transforms.filter(
+  (transform) => focusSet.has(transform.source) || focusSet.has(transform.target)
+);
 ---
 
-<BaseLayout title="NetSuite Docs Shell">
-  <section class="card stack">
-    <p class="eyebrow">Astro Docs Shell</p>
-    <h1>Foundation ready for the shared docs shell</h1>
-    <p class="muted">
-      This app is intentionally thin in the foundation branch. It proves Astro can consume shared generated
-      NetSuite data without replacing the current static docs pages yet.
-    </p>
-    <div class="pill-row">
-      <span class="pill">{records.length} records indexed</span>
-      <span class="pill">{workflows.length} workflow bases cached</span>
-      <a class="pill" href="../../../public.html">Current static docs</a>
-      <a class="pill" href="/workflow">Workflow Studio</a>
+<RecordLayout
+  title="NetSuite REST API Browser Companion"
+  eyebrow="Focus Objects + Workflow Links"
+  pageKind="overview"
+  defaultBaseRecord="salesOrder"
+>
+  <Fragment slot="intro">
+    Generated from {workflowConfig.sourceUrl}. The overview stays focused on your requested records: customer,
+    creditMemo, invoice, itemFulfillment, salesOrder, subsidiary, paymentItem, and partner. Dependency chips
+    and transform routes link outward so you can follow related records without losing the main story.
+  </Fragment>
+
+  <section class="page-section" data-page-section data-section-id="overview-stats" data-section-title="Overview Stats">
+    <div class="grid stats-grid" style="margin-top:22px;">
+      <article class="stat-card"><p class="stat-label">Focus Records</p><p class="stat-value">{focusRecords.length}</p></article>
+      <article class="stat-card"><p class="stat-label">Dependency Records</p><p class="stat-value">{dependencyRecords.length}</p></article>
+      <article class="stat-card"><p class="stat-label">Transform Routes</p><p class="stat-value">{focusTransforms.length}</p></article>
+      <article class="stat-card"><p class="stat-label">Scraped Records</p><p class="stat-value">{records.length}</p></article>
     </div>
   </section>
-</BaseLayout>
+
+  <section class="page-section" data-page-section data-section-id="focus-records" data-section-title="Focus Records">
+    <div class="section-heading">
+      <h2>Focus Records</h2>
+      <p>Each record card links to a dedicated page with endpoint accordions, transform-first layouts, and linked dependency navigation.</p>
+    </div>
+    <div class="grid record-grid">
+      {focusRecords.map((record) => (
+        <article class="record-card">
+          <div class="kicker">Focus object</div>
+          <h3>{record.title}</h3>
+          <div class="record-meta">
+            <span class="pill">{record.stats.operations} endpoints</span>
+            <span class="pill">{record.stats.transforms} transforms</span>
+            <span class="pill">{record.stats.schemaFields} schema rows</span>
+          </div>
+          <div class="record-copy">{record.summary}</div>
+          <div class="chip-row" style="margin-top:12px;">
+            {(record.endpoints || [])
+              .filter((endpoint) => endpoint.isTransform)
+              .slice(0, 4)
+              .map((endpoint) => (
+                <span class="chip">
+                  <strong>{record.recordName}</strong>
+                  <small>{endpoint.path.split('/!transform/')[1] ? `to ${endpoint.path.split('/!transform/')[1]}` : endpoint.path}</small>
+                </span>
+              ))}
+          </div>
+          <div class="record-actions">
+            <a class="record-link" href={docsByRecord.get(record.recordName)}>Open record page</a>
+            <button class="record-link secondary favorite-toggle" type="button" data-favorite-toggle data-record-name={record.recordName}>
+              Pin favorite
+            </button>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="page-section" data-page-section data-section-id="transform-highlights" data-section-title="Transform Highlights">
+    <div class="section-heading">
+      <h2>Transform Highlights</h2>
+      <p>Cross-record transformations usually carry the most implementation nuance in NetSuite. This strip surfaces the ones touching your focus records first.</p>
+    </div>
+    <div class="grid record-grid">
+      {focusTransforms.slice(0, 18).map((transform) => (
+        <article class="workflow-card">
+          <div class="kicker">Transform</div>
+          <h3>{transform.source.replace(/([a-z])([A-Z])/g, '$1 $2')} to {transform.target.replace(/([a-z])([A-Z])/g, '$1 $2')}</h3>
+          <div class="record-meta">
+            <span class="pill">{transform.method}</span>
+            <span class="pill mono">{transform.path}</span>
+          </div>
+          <div class="record-copy">{transform.summary || 'Transform route'}</div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="page-section" data-page-section data-section-id="dependency-pages" data-section-title="Dependency Pages">
+    <div class="section-heading">
+      <h2>Dependency Pages</h2>
+      <p>These linked records showed up in the focus object schemas or endpoint contracts and got their own generated pages so the dependency links have somewhere useful to land.</p>
+    </div>
+    <div class="grid record-grid">
+      {dependencyRecords.map((record) => (
+        <article class="record-card">
+          <h3>{record.title}</h3>
+          <div class="record-meta">
+            <span class="pill">{record.stats.operations} endpoints</span>
+            <span class="pill">{record.stats.transforms} transforms</span>
+          </div>
+          <div class="record-copy">{record.summary}</div>
+          <div class="record-actions">
+            <a class="record-link secondary" href={docsByRecord.get(record.recordName)}>Open dependency</a>
+            <button class="record-link secondary favorite-toggle" type="button" data-favorite-toggle data-record-name={record.recordName}>
+              Pin favorite
+            </button>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+</RecordLayout>

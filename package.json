@@ -10,6 +10,7 @@
   "scripts": {
     "build": "npm run build --workspaces --if-present",
     "docs:build": "npm run build --workspace @netsuite/docs",
+    "docs:dev": "npm run dev --workspace @netsuite/docs",
     "app:build": "npm run build --workspace @netsuite/app-shell",
     "playwright:open": "playwright open",
     "playwright:codegen": "playwright codegen",

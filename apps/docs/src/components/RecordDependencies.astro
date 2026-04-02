@@ -1,0 +1,18 @@
+---
+const { dependencies = [], docsByRecord } = Astro.props;
+---
+
+{
+  !dependencies.length ? (
+    <div class="muted">No linked record dependencies were detected in the scraped schema and operations.</div>
+  ) : (
+    <div class="chip-row">
+      {dependencies.map((dependency) => (
+        <a class="chip" href={docsByRecord.get(dependency) || '#'}>
+          <strong>{dependency}</strong>
+          <small>{dependency.replace(/([a-z])([A-Z])/g, '$1 $2')}</small>
+        </a>
+      ))}
+    </div>
+  )
+}

@@ -152,11 +152,26 @@
   opacity: 0;
   pointer-events: none;
   transition: opacity 140ms ease, transform 140ms ease;
-  z-index: 30;
+  z-index: 9999;
 }
 
 .workflow-button-tooltip.is-visible {
   opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.workflow-node-button .workflow-button-tooltip {
+  background: rgba(21, 29, 42, 0.40);
+  z-index: 9999;
+}
+
+.workflow-graph-stage .workflow-button-tooltip {
+  bottom: auto;
+  top: calc(100% + 10px);
+  transform: translate(-50%, -8px);
+}
+
+.workflow-graph-stage .workflow-button-tooltip.is-visible {
   transform: translate(-50%, 0);
 }
 
@@ -187,19 +202,18 @@
 
 .workflow-layout-shell {
   display: grid;
-  grid-template-columns: minmax(0, 1.56fr) minmax(280px, 0.76fr);
+  grid-template-columns: minmax(0, 1.76fr) minmax(280px, 0.76fr);
   gap: 18px;
 }
 
 .workflow-graph-stage {
-  min-height: 980px;
+  min-height: 1260px;
   overflow: hidden;
   position: relative;
-  isolation: isolate;
 }
 
 .workflow-catalog-stage {
-  min-height: 980px;
+  min-height: 1260px;
   position: relative;
   padding: 86px 24px 24px;
   background:
@@ -482,7 +496,7 @@
   position: absolute;
   top: -10px;
   right: -6px;
-  z-index: 8;
+  z-index: 200;
 }
 
 .workflow-node-menu-trigger {
@@ -502,6 +516,11 @@
   transform: translateY(4px);
   transition: opacity 140ms ease, transform 140ms ease;
   box-shadow: 0 10px 24px rgba(28, 36, 54, 0.12);
+}
+
+.workflow-node-shell:hover,
+.workflow-node-shell:focus-within {
+  z-index: 100;
 }
 
 .workflow-node-shell:hover .workflow-node-menu-trigger,
@@ -615,6 +634,9 @@ body.workflow-overlay-open {
   font: inherit;
   font-weight: 700;
   cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
 }
 
 .workflow-overlay-action.is-primary {
