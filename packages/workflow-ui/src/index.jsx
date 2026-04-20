@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { startTransition, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Background, Controls, Handle, Panel, Position, ReactFlow } from '@xyflow/react';
 import { animate, stagger } from 'animejs';
@@ -35,6 +35,32 @@ function hashString(value) {
 
 function sortByTitle(records) {
   return [...records].sort((left, right) => left.title.localeCompare(right.title));
+}
+
+function useMediaQuery(query) {
+  const [matches, setMatches] = useState(() => {
+    if (typeof window === 'undefined') {
+      return false;
+    }
+
+    return window.matchMedia(query).matches;
+  });
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return undefined;
+    }
+
+    const mediaQuery = window.matchMedia(query);
+    const handleChange = (event) => setMatches(event.matches);
+
+    setMatches(mediaQuery.matches);
+    mediaQuery.addEventListener('change', handleChange);
+
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, [query]);
+
+  return matches;
 }
 
 function buildRecordCatalog(workflowMap, workflowIndex) {
@@ -167,7 +193,7 @@ function buildImmediateTransformRequests(layout, selectedPath, recordName, resol
     });
 }
 
-function buildFocusedGraph(layout, selectedPath, favorites, handlers = {}) {
+function buildFocusedGraph(layout, selectedPath, favorites, focusedRecordName, handlers = {}) {
   const nodeMap = getNodeMap(layout);
   const latestSelected = selectedPath[selectedPath.length - 1] || layout.baseRecord;
   const frontier = sortByTitle(getOutgoingNodes(layout, latestSelected));
@@ -198,11 +224,14 @@ function buildFocusedGraph(layout, selectedPath, favorites, handlers = {}) {
                 ? 'selected'
                 : 'path',
           favorite: favorites.includes(node.recordName),
+          focused: focusedRecordName === node.recordName,
           tone,
           canAdvance: false,
+          canFocus: true,
           canInspect: true,
           canUndoLatest: index === selectedPath.length - 1 && selectedPath.length > 1,
           onAdvance: handlers.onAdvance,
+          onFocusRecord: handlers.onFocusRecord,
           onInspect: handlers.onInspect,
           onUndoLatest: handlers.onUndoLatest,
         },
@@ -230,11 +259,14 @@ function buildFocusedGraph(layout, selectedPath, favorites, handlers = {}) {
         mode: 'focus',
         state: 'frontier',
         favorite: favorites.includes(node.recordName),
+        focused: focusedRecordName === node.recordName,
         tone,
         canAdvance: true,
+        canFocus: false,
         canInspect: true,
         canUndoLatest: false,
         onAdvance: handlers.onAdvance,
+        onFocusRecord: handlers.onFocusRecord,
         onInspect: handlers.onInspect,
         onUndoLatest: handlers.onUndoLatest,
       },
@@ -439,7 +471,7 @@ function NodeActionMenu({
                 setOpen(false);
               }}
             >
-              Scope details
+              Open inspector
             </button>
           ) : null}
           {canUndoLatest ? (
@@ -453,7 +485,7 @@ function NodeActionMenu({
                 setOpen(false);
               }}
             >
-              Unclick latest node
+              Step back
             </button>
           ) : null}
         </div>
@@ -467,11 +499,14 @@ function RecordPill({
   mode,
   state,
   favorite,
+  focused,
   tone,
   canAdvance,
+  canFocus,
   canInspect,
   canUndoLatest,
   onAdvance,
+  onFocusRecord,
   onInspect,
   onUndoLatest,
 }) {
@@ -479,12 +514,16 @@ function RecordPill({
     mode === 'catalog'
       ? 'Anchor workflow on this object'
       : canAdvance
-        ? 'Select this node and prune sibling branches'
-        : 'Use the menu for details';
+        ? 'Extend the path with this node'
+        : canFocus
+          ? 'Refocus the query card on this node'
+          : 'Use the menu for more actions';
 
   return (
     <div
-      className={`workflow-node-shell is-${mode} is-${state}${favorite ? ' is-favorite' : ''}`}
+      className={`workflow-node-shell is-${mode} is-${state}${favorite ? ' is-favorite' : ''}${
+        focused ? ' is-focused' : ''
+      }`}
       style={{ '--node-accent': tone.accent, '--node-surface': tone.surface }}
     >
       <NodeActionMenu
@@ -496,12 +535,18 @@ function RecordPill({
       />
       {mode === 'focus' ? <Handle type="target" position={Position.Left} className="workflow-handle" /> : null}
       <TooltipButton
-        className={`workflow-node-button${canAdvance ? ' is-advance' : ' is-static'}`}
+        className={`workflow-node-button${canAdvance || canFocus ? ' is-advance' : ' is-static'}`}
         tooltip={primaryTooltip}
         aria-label={primaryTooltip}
+        aria-pressed={canFocus && focused ? 'true' : undefined}
         onClick={() => {
           if (canAdvance) {
             onAdvance(record.recordName);
+            return;
+          }
+
+          if (canFocus) {
+            onFocusRecord(record.recordName);
           }
         }}
       >
@@ -538,6 +583,7 @@ function RecordOverlay({
     outgoingTransforms: 0,
     incomingTransforms: 0,
   };
+  const dependencyCount = record.dependencies?.length || 0;
   const docsPath = record.docsPath || `./records/${record.slug || record.recordName}.html`;
 
   useEffect(() => {
@@ -573,102 +619,118 @@ function RecordOverlay({
           <div>
             <p className="workflow-kicker">Workflow Inspector</p>
             <h2 id="workflow-overlay-title">{record.title}</h2>
-            <p className="workflow-overlay-summary">{record.summary || 'Inspect this object, its active GET query, and the immediate transform route into it.'}</p>
+            <p className="workflow-overlay-summary">
+              Inspect this object, its active GET request, and the immediate transform route into it.
+            </p>
           </div>
           <TooltipButton
             className="workflow-overlay-close"
-            tooltip="Close the overlay"
-            aria-label="Close record overlay"
+            tooltip="Close the inspector"
+            aria-label="Close inspector"
             onClick={onClose}
           >
             ×
           </TooltipButton>
         </div>
 
-        <div className="workflow-pill-row">
-          <span className="workflow-mini-pill is-tinted">{record.categoryLabel}</span>
-          <span className="workflow-mini-pill">{stats.operations} endpoints</span>
-          <span className="workflow-mini-pill">{stats.outgoingTransforms} outgoing</span>
-          <span className="workflow-mini-pill">{stats.incomingTransforms} incoming</span>
-          {anchorRecord?.recordName === record.recordName ? (
-            <span className="workflow-mini-pill">Current anchor</span>
-          ) : null}
-        </div>
+        <div className="workflow-overlay-scroll">
+          <div className="workflow-pill-row">
+            <span className="workflow-mini-pill is-tinted">{record.categoryLabel}</span>
+            <span className="workflow-mini-pill">Endpoints: {stats.operations}</span>
+            <span className="workflow-mini-pill">Transforms: {stats.outgoingTransforms}</span>
+            <span className="workflow-mini-pill">Dependencies: {dependencyCount}</span>
+            {anchorRecord?.recordName === record.recordName ? (
+              <span className="workflow-mini-pill">Current anchor</span>
+            ) : null}
+          </div>
 
-        <div className="workflow-overlay-actions">
-          {anchorRecord?.recordName !== record.recordName ? (
+          <div className="workflow-overlay-actions">
+            {anchorRecord?.recordName !== record.recordName ? (
+              <TooltipButton
+                className="workflow-overlay-action is-primary"
+                tooltip="Restart the workflow with this object as the anchor"
+                onClick={() => onAnchor(record.recordName)}
+              >
+                Use as anchor
+              </TooltipButton>
+            ) : null}
             <TooltipButton
-              className="workflow-overlay-action is-primary"
-              tooltip="Make this record the new anchor"
-              onClick={() => onAnchor(record.recordName)}
+              className="workflow-overlay-action"
+              tooltip="Open the record documentation in a new tab"
+              onClick={() => onOpenDocs(docsPath)}
             >
-              Use as anchor
+              Open docs
             </TooltipButton>
-          ) : null}
-          <TooltipButton
-            className="workflow-overlay-action"
-            tooltip="Open the record documentation in a new tab"
-            onClick={() => onOpenDocs(docsPath)}
-          >
-            Open docs
-          </TooltipButton>
-          <a
-            className="workflow-overlay-action"
-            href={`https://system.netsuite.com/help/helpcenter/en_US/APIs/REST_API_Browser/record/v1/2023.1/index.html#section/${record.recordName}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            title="View this record in the NetSuite REST API Browser"
-          >
-            NetSuite docs ↗
-          </a>
-          <TooltipButton
-            className="workflow-overlay-action"
-            tooltip={favorite ? 'Unpin this record from favorites' : 'Pin this record to favorites'}
-            onClick={() => onPin(record.recordName)}
-          >
-            {favorite ? 'Unpin record' : 'Pin record'}
-          </TooltipButton>
-          <TooltipButton
-            className="workflow-overlay-action"
-            tooltip="Copy the current GET query for this object"
-            onClick={() => onCopy(activeQuery.url, 'Active query')}
-          >
-            Copy active query
-          </TooltipButton>
+            <a
+              className="workflow-overlay-action"
+              href={`https://system.netsuite.com/help/helpcenter/en_US/APIs/REST_API_Browser/record/v1/2023.1/index.html#section/${record.recordName}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              title="View this record in the NetSuite REST API Browser"
+            >
+              NetSuite docs ↗
+            </a>
+            <TooltipButton
+              className="workflow-overlay-action"
+              tooltip={favorite ? 'Unpin this record from favorites' : 'Pin this record to favorites'}
+              onClick={() => onPin(record.recordName)}
+            >
+              {favorite ? 'Unpin record' : 'Pin record'}
+            </TooltipButton>
+          </div>
+
+          <div className="workflow-overlay-grid">
+            <section className="workflow-overlay-panel">
+              <span className="workflow-overlay-label">Active query</span>
+              <CodeBlock
+                value={`${activeQuery.method} ${activeQuery.url}`}
+                label="Copy active query"
+                onCopy={() => onCopy(`${activeQuery.method} ${activeQuery.url}`, 'Active query')}
+              />
+              <p className="muted">GET requests do not require request body data.</p>
+            </section>
+
+            <section className="workflow-overlay-panel">
+              <span className="workflow-overlay-label">Immediate transform endpoints</span>
+              <div className="workflow-overlay-endpoints">
+                {transformRequests.length ? (
+                  transformRequests.map((item) => (
+                    <article className="workflow-endpoint-card" key={item.id}>
+                      <strong>{item.label}</strong>
+                      <p>{item.summary || 'Transform endpoint'}</p>
+                      <CodeBlock
+                        value={`${item.request.method} ${item.request.url}`}
+                        label={`Copy ${item.label}`}
+                        onCopy={() => onCopy(`${item.request.method} ${item.request.url}`, item.label)}
+                      />
+                    </article>
+                  ))
+                ) : (
+                  <p className="muted">
+                    No immediate transform is required for this object yet. Pick a downstream node to reveal its exact
+                    transform request.
+                  </p>
+                )}
+              </div>
+            </section>
+          </div>
+
+          {copyState ? <p className="workflow-copy-note">{copyState}</p> : null}
         </div>
-
-        <div className="workflow-overlay-grid">
-          <section className="workflow-overlay-panel">
-            <span className="workflow-overlay-label">Active query</span>
-            <pre>{`${activeQuery.method} ${activeQuery.url}`}</pre>
-            <p className="muted">GET requests do not require request body data.</p>
-          </section>
-
-          <section className="workflow-overlay-panel">
-            <span className="workflow-overlay-label">Immediate transform endpoints</span>
-            <div className="workflow-overlay-endpoints">
-              {transformRequests.length ? (
-                transformRequests.map((item) => (
-                  <article className="workflow-endpoint-card" key={item.id}>
-                    <strong>{item.label}</strong>
-                    <p>{item.summary || 'Transform endpoint'}</p>
-                    <pre>{`${item.request.method} ${item.request.url}`}</pre>
-                  </article>
-                ))
-              ) : (
-                <p className="muted">
-                  No upstream transform is required for this object yet. Pick a downstream node to see its exact
-                  transform endpoint.
-                </p>
-              )}
-            </div>
-          </section>
-        </div>
-
-        {copyState ? <p className="workflow-copy-note">{copyState}</p> : null}
       </section>
     </div>,
     document.body
+  );
+}
+
+function CodeBlock({ value, label, onCopy }) {
+  return (
+    <div className="workflow-code-block">
+      <pre>{value}</pre>
+      <TooltipButton className="workflow-code-copy" tooltip={label} onClick={onCopy} aria-label={label}>
+        Copy
+      </TooltipButton>
+    </div>
   );
 }
 
@@ -706,6 +768,45 @@ function GraphActionButton({ tooltip, children, ...props }) {
   );
 }
 
+function FrontierPillList({ records, onAdvance }) {
+  const listRef = useRef(null);
+
+  function handleArrowNavigation(event) {
+    if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(event.key)) {
+      return;
+    }
+
+    const buttons = [...(listRef.current?.querySelectorAll('[data-frontier-pill]') || [])];
+    const currentIndex = buttons.indexOf(event.currentTarget);
+
+    if (currentIndex === -1 || !buttons.length) {
+      return;
+    }
+
+    event.preventDefault();
+    const direction = event.key === 'ArrowLeft' || event.key === 'ArrowUp' ? -1 : 1;
+    const nextIndex = (currentIndex + direction + buttons.length) % buttons.length;
+    buttons[nextIndex]?.focus();
+  }
+
+  return (
+    <div className="workflow-pill-stack" ref={listRef}>
+      {records.map((record) => (
+        <button
+          type="button"
+          className="workflow-mini-pill workflow-frontier-pill is-category"
+          key={record.recordName}
+          data-frontier-pill
+          onClick={() => onAdvance(record.recordName)}
+          onKeyDown={handleArrowNavigation}
+        >
+          {record.title}
+        </button>
+      ))}
+    </div>
+  );
+}
+
 export function WorkflowStudio({ workflowIndex }) {
   const [workflowMap, setWorkflowMap] = useState(() => new Map());
   const [selectedPath, setSelectedPath] = useState(() => {
@@ -717,6 +818,7 @@ export function WorkflowStudio({ workflowIndex }) {
     return parsed ? parsed.lockedLevels.flat() : [];
   });
   const [inspectionRecordName, setInspectionRecordName] = useState(null);
+  const [focusedRecordName, setFocusedRecordName] = useState(null);
   const [favorites, setFavorites] = useState(() => {
     if (typeof window === 'undefined') {
       return [];
@@ -731,6 +833,10 @@ export function WorkflowStudio({ workflowIndex }) {
   const [copyState, setCopyState] = useState('');
   const [loadingSlug, setLoadingSlug] = useState(null);
   const graphRef = useRef(null);
+  const reactFlowInstanceRef = useRef(null);
+  const fitViewFrameRef = useRef(0);
+  const previousNodeRectsRef = useRef(new Map());
+  const isCompactViewport = useMediaQuery('(max-width: 767px)');
   const recordCatalog = useMemo(() => buildRecordCatalog(workflowMap, workflowIndex), [workflowMap, workflowIndex]);
 
   function resolveRecord(recordName) {
@@ -825,24 +931,113 @@ export function WorkflowStudio({ workflowIndex }) {
   }, [currentWorkflow, inspectionRecordName, selectedPath]);
 
   useEffect(() => {
-    if (!graphRef.current) {
+    if (!graphRef.current || !reactFlowInstanceRef.current || !currentWorkflow || isCompactViewport) {
       return;
     }
 
-    const nodes = graphRef.current.querySelectorAll('.workflow-node-shell');
-    if (!nodes.length) {
-      return;
-    }
-
-    animate(nodes, {
-      opacity: [0, 1],
-      translateY: [18, 0],
-      scale: [0.985, 1],
-      delay: stagger(18),
-      duration: 320,
-      ease: 'out(3)',
+    window.cancelAnimationFrame(fitViewFrameRef.current);
+    fitViewFrameRef.current = window.requestAnimationFrame(() => {
+      reactFlowInstanceRef.current?.fitView({
+        padding: 0.24,
+        maxZoom: 1.08,
+        duration: 280,
+      });
     });
-  }, [selectedPath, currentWorkflow, favorites, workflowIndex]);
+
+    return () => window.cancelAnimationFrame(fitViewFrameRef.current);
+  }, [currentWorkflow, isCompactViewport, selectedPath]);
+
+  useEffect(() => {
+    if (!anchorRecord || isCompactViewport || !reactFlowInstanceRef.current) {
+      return undefined;
+    }
+
+    function handleResize() {
+      window.cancelAnimationFrame(fitViewFrameRef.current);
+      fitViewFrameRef.current = window.requestAnimationFrame(() => {
+        reactFlowInstanceRef.current?.fitView({
+          padding: 0.24,
+          maxZoom: 1.08,
+          duration: 220,
+        });
+      });
+    }
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [anchorRecord, isCompactViewport]);
+
+  useLayoutEffect(() => {
+    if (!graphRef.current || !currentWorkflow || isCompactViewport) {
+      previousNodeRectsRef.current = new Map();
+      return;
+    }
+
+    const wrappers = [...graphRef.current.querySelectorAll('.react-flow__node[data-id]')];
+    const currentRects = new Map(
+      wrappers.map((wrapper) => [wrapper.getAttribute('data-id'), wrapper.getBoundingClientRect()])
+    );
+    const enteringNodes = [];
+
+    for (const wrapper of wrappers) {
+      const id = wrapper.getAttribute('data-id');
+      const shell = wrapper.querySelector('.workflow-node-shell');
+
+      if (!id || !shell) {
+        continue;
+      }
+
+      const previousRect = previousNodeRectsRef.current.get(id);
+      const nextRect = currentRects.get(id);
+
+      if (previousRect && nextRect) {
+        const deltaX = previousRect.left - nextRect.left;
+        const deltaY = previousRect.top - nextRect.top;
+
+        if (Math.abs(deltaX) > 1 || Math.abs(deltaY) > 1) {
+          animate(shell, {
+            translateX: [deltaX, 0],
+            translateY: [deltaY, 0],
+            duration: 300,
+            ease: 'out(3)',
+          });
+        }
+      } else {
+        enteringNodes.push(shell);
+      }
+    }
+
+    if (enteringNodes.length) {
+      animate(enteringNodes, {
+        opacity: [0, 1],
+        scale: [0.98, 1],
+        translateY: [12, 0],
+        delay: stagger(22),
+        duration: 260,
+        ease: 'out(3)',
+      });
+    }
+
+    previousNodeRectsRef.current = currentRects;
+  }, [currentWorkflow, isCompactViewport, selectedPath]);
+
+  useEffect(() => {
+    if (!focusedRecordName || !currentWorkflow) {
+      return;
+    }
+
+    const normalized = normalizeSelectedPath(currentWorkflow, selectedPath);
+    const latestSelected = normalized[normalized.length - 1] || null;
+    const visible = new Set(normalized);
+
+    for (const node of getOutgoingNodes(currentWorkflow, latestSelected)) {
+      visible.add(node.recordName);
+    }
+
+    if (!visible.has(focusedRecordName)) {
+      setFocusedRecordName(null);
+    }
+  }, [currentWorkflow, focusedRecordName, selectedPath]);
 
   async function ensureWorkflow(slug) {
     if (workflowMap.has(slug)) {
@@ -872,8 +1067,11 @@ export function WorkflowStudio({ workflowIndex }) {
     }
 
     setLoadingSlug(record.slug || record.recordName);
-    setInspectionRecordName(null);
-    setSelectedPath([record.recordName]);
+    startTransition(() => {
+      setInspectionRecordName(null);
+      setFocusedRecordName(null);
+      setSelectedPath([record.recordName]);
+    });
   }
 
   function handleAdvance(recordName) {
@@ -886,23 +1084,37 @@ export function WorkflowStudio({ workflowIndex }) {
       return;
     }
 
-    setInspectionRecordName(null);
-    setSelectedPath((current) => [...current, recordName]);
+    startTransition(() => {
+      setInspectionRecordName(null);
+      setFocusedRecordName(null);
+      setSelectedPath((current) => [...current, recordName]);
+    });
   }
 
   function handleUndoLatest() {
-    setInspectionRecordName(null);
-    setSelectedPath((current) => (current.length > 1 ? current.slice(0, -1) : current));
+    startTransition(() => {
+      setInspectionRecordName(null);
+      setFocusedRecordName(null);
+      setSelectedPath((current) => (current.length > 1 ? current.slice(0, -1) : current));
+    });
   }
 
   function handleBrowseAll() {
-    setInspectionRecordName(null);
-    setSelectedPath([]);
-    setLoadingSlug(null);
+    startTransition(() => {
+      setInspectionRecordName(null);
+      setFocusedRecordName(null);
+      setSelectedPath([]);
+      setLoadingSlug(null);
+    });
   }
 
   function handleInspect(recordName) {
+    setFocusedRecordName(recordName);
     setInspectionRecordName(recordName);
+  }
+
+  function handleFocusRecord(recordName) {
+    setFocusedRecordName(recordName);
   }
 
   function handlePin(recordName) {
@@ -934,15 +1146,16 @@ export function WorkflowStudio({ workflowIndex }) {
       return null;
     }
 
-    return buildFocusedGraph(currentWorkflow, selectedPath, favorites, {
+    return buildFocusedGraph(currentWorkflow, selectedPath, favorites, focusedRecordName, {
       onAdvance: handleAdvance,
+      onFocusRecord: handleFocusRecord,
       onInspect: handleInspect,
       onUndoLatest: handleUndoLatest,
     });
-  }, [anchorRecord, currentWorkflow, favorites, selectedPath]);
+  }, [anchorRecord, currentWorkflow, favorites, focusedRecordName, selectedPath]);
 
   const latestSelectedName = selectedPath[selectedPath.length - 1] || null;
-  const activeRecordName = inspectionRecordName || latestSelectedName || null;
+  const activeRecordName = focusedRecordName || latestSelectedName || null;
   const activeRecord = activeRecordName ? resolveRecord(activeRecordName) : null;
   const activeQuery = activeRecord ? buildRecordRequest(activeRecord.recordName) : null;
   const inspectionRecord = inspectionRecordName ? resolveRecord(inspectionRecordName) : null;
@@ -965,8 +1178,8 @@ export function WorkflowStudio({ workflowIndex }) {
   const heroTitle = anchorRecord ? `${anchorRecord.title} transform atlas` : 'Workflow Studio';
   const heroCopy = anchorRecord
     ? latestSelected && latestSelected.recordName !== anchorRecord.recordName
-      ? `Scoped path: ${selectedPath.map((recordName) => resolveRecord(recordName)?.title || recordName).join(' -> ')}. Click any frontier node to keep pruning the graph, or use the menu on the latest node to step back.`
-      : `Focused on ${anchorRecord.title}. Click a frontier node to persist that relationship and prune the sibling branches away.`
+      ? `Scoped path: ${selectedPath.map((recordName) => resolveRecord(recordName)?.title || recordName).join(' -> ')}. Click a frontier node to extend the path, or click any visible node to refocus the query card.`
+      : `Focused on ${anchorRecord.title}. Extend the path with any frontier node, or click a visible node to refocus the query card.`
     : 'Alphabetized object catalog. Pick a name to anchor the workflow, then click downstream pills to persist a visible path through the graph.';
   const stageNote = anchorRecord
     ? loadingSlug
@@ -976,7 +1189,7 @@ export function WorkflowStudio({ workflowIndex }) {
   const railPrompt = anchorRecord
     ? latestSelected?.recordName === anchorRecord.recordName
       ? `The first downstream layer shows the objects that can be created from ${anchorRecord.title}.`
-      : `Latest selected node: ${latestSelected?.title || latestSelectedName}. Use the menu on that pill to inspect or step back.`
+      : `Latest path node: ${latestSelected?.title || latestSelectedName}. Click any visible node to refocus the query card, or use the menu to open the inspector.`
     : 'Pick any object to anchor the workflow and reveal the first downstream layer.';
 
   return (
@@ -994,27 +1207,52 @@ export function WorkflowStudio({ workflowIndex }) {
             <strong>{anchorRecord ? anchorRecord.title : `${workflowIndex.length} objects available`}</strong>
             <span className="muted">{railPrompt}</span>
           </div>
-
-          <div className="workflow-toolbar-actions">
-            {anchorRecord ? (
-              <TooltipButton tooltip="Reset the workflow back to the full catalog" onClick={handleBrowseAll}>
-                Reset graph
-              </TooltipButton>
-            ) : null}
-            <TooltipButton
-              tooltip="Copy the current page link"
-              onClick={() => handleCopy(window.location.href, 'Page link')}
-            >
-              Copy link
-            </TooltipButton>
-          </div>
         </div>
       </header>
 
       <div className="workflow-layout-shell">
         <div className="workflow-graph-stage" ref={graphRef}>
           {anchorRecord ? (
-            currentWorkflow && graph ? (
+            isCompactViewport ? (
+              <div className="workflow-mobile-stage">
+                <strong>Desktop graph hidden below 768px</strong>
+                <p>
+                  The graph layout is desktop-optimized, so the canvas is replaced here with list navigation. Use the
+                  frontier buttons below to keep extending the path.
+                </p>
+                <div className="workflow-pill-stack">
+                  {selectedPath.map((recordName) => {
+                    const record = resolveRecord(recordName);
+                    return (
+                      <button
+                        type="button"
+                        className={`workflow-mini-pill workflow-frontier-pill${
+                          activeRecordName === recordName ? ' is-active' : ''
+                        }`}
+                        key={recordName}
+                        onClick={() => handleFocusRecord(recordName)}
+                      >
+                        {record?.title || recordName}
+                      </button>
+                    );
+                  })}
+                </div>
+                <div className="workflow-stage-actions workflow-stage-actions-mobile">
+                  <GraphActionButton tooltip="Step back one node" onClick={handleUndoLatest}>
+                    Step back
+                  </GraphActionButton>
+                  <GraphActionButton
+                    tooltip="Copy the current page link"
+                    onClick={() => handleCopy(window.location.href, 'Page link')}
+                  >
+                    Copy link
+                  </GraphActionButton>
+                  <GraphActionButton tooltip="Reset back to the full object catalog" onClick={handleBrowseAll}>
+                    Reset graph
+                  </GraphActionButton>
+                </div>
+              </div>
+            ) : currentWorkflow && graph ? (
               <ReactFlow
                 nodes={graph.nodes}
                 edges={graph.edges}
@@ -1029,6 +1267,9 @@ export function WorkflowStudio({ workflowIndex }) {
                 nodesConnectable={false}
                 elementsSelectable={false}
                 proOptions={{ hideAttribution: true }}
+                onInit={(instance) => {
+                  reactFlowInstanceRef.current = instance;
+                }}
               >
                 <Background color="rgba(96, 108, 136, 0.12)" gap={28} />
                 <Controls showInteractive={false} />
@@ -1036,6 +1277,12 @@ export function WorkflowStudio({ workflowIndex }) {
                   {stageNote}
                 </Panel>
                 <Panel position="top-right" className="workflow-stage-actions">
+                  <GraphActionButton
+                    tooltip="Copy the current page link"
+                    onClick={() => handleCopy(window.location.href, 'Page link')}
+                  >
+                    Copy link
+                  </GraphActionButton>
                   <GraphActionButton tooltip="Reset back to the full object catalog" onClick={handleBrowseAll}>
                     Reset graph
                   </GraphActionButton>
@@ -1069,14 +1316,23 @@ export function WorkflowStudio({ workflowIndex }) {
             <h2>{anchorRecord ? 'Focused query' : 'Anchor prompt'}</h2>
             {activeQuery ? (
               <>
-                <pre>{`${activeQuery.method} ${activeQuery.url}`}</pre>
+                <span className="workflow-active-record-label">{activeRecord?.title || activeRecordName}</span>
+                <CodeBlock
+                  value={`${activeQuery.method} ${activeQuery.url}`}
+                  label="Copy the current GET query"
+                  onCopy={() => handleCopy(`${activeQuery.method} ${activeQuery.url}`, 'Active query')}
+                />
                 <p className="muted">GET requests do not require request body data.</p>
-                <TooltipButton
-                  tooltip="Copy the current GET query"
-                  onClick={() => handleCopy(activeQuery.url, 'Active query')}
-                >
-                  Copy active query
-                </TooltipButton>
+                <div className="workflow-toolbar-actions">
+                  {activeRecord ? (
+                    <TooltipButton
+                      tooltip="Open the inspector for this record"
+                      onClick={() => handleInspect(activeRecord.recordName)}
+                    >
+                      Open inspector
+                    </TooltipButton>
+                  ) : null}
+                </div>
               </>
             ) : (
               <p className="muted">Pick an object from the catalog to anchor the workflow and reveal its query.</p>
@@ -1085,14 +1341,11 @@ export function WorkflowStudio({ workflowIndex }) {
 
           <section className="workflow-rail-card">
             <h2>Next frontier</h2>
-            <div className="workflow-pill-stack">
+            <p className="muted">Choose a frontier record to extend the path.</p>
+            <div>
               {anchorRecord ? (
                 nextFrontier.length ? (
-                  nextFrontier.map((record) => (
-                    <span className="workflow-mini-pill is-category" key={record.recordName}>
-                      {record.title}
-                    </span>
-                  ))
+                  <FrontierPillList records={nextFrontier} onAdvance={handleAdvance} />
                 ) : (
                   <span className="muted">No further transforms from this selected node.</span>
                 )
@@ -1112,8 +1365,30 @@ export function WorkflowStudio({ workflowIndex }) {
                   </span>
                 ))
               ) : (
-                <span className="muted">Pin records from the overlay to keep them close.</span>
+                <span className="muted">Pin records from the inspector to keep them close.</span>
               )}
+            </div>
+          </section>
+
+          <section className="workflow-rail-card">
+            <h2>Visual key</h2>
+            <div className="workflow-legend-stack">
+              <span className="workflow-legend-item">
+                <i className="tone-base" />
+                Warm-toned nodes show the anchor and locked route.
+              </span>
+              <span className="workflow-legend-item">
+                <i className="tone-preview" />
+                Blue pills and nodes are the next frontier.
+              </span>
+              <span className="workflow-legend-item">
+                <span className="workflow-edge-key is-solid" />
+                Solid teal edges are the route you already locked in.
+              </span>
+              <span className="workflow-legend-item">
+                <span className="workflow-edge-key is-soft" />
+                Soft blue edges are the next possible extension.
+              </span>
             </div>
           </section>
         </aside>
