@@ -9,9 +9,9 @@
           "recordName": "vendorReturnAuthorization",
           "slug": "vendor-return-authorization",
           "title": "Vendor Return Authorization",
-          "group": "extended",
+          "group": "focus",
           "summary": "Get list of records. 2 transform workflows available. 13 linked dependency records.",
-          "docsPath": "./public/records/vendor-return-authorization.html",
+          "docsPath": "/records/vendor-return-authorization",
           "stats": {
             "operations": 8,
             "transforms": 2,
@@ -173,9 +173,9 @@
           "recordName": "vendorCredit",
           "slug": "vendor-credit",
           "title": "Vendor Credit",
-          "group": "extended",
+          "group": "focus",
           "summary": "Get list of records. 13 linked dependency records.",
-          "docsPath": "./public/records/vendor-credit.html",
+          "docsPath": "/records/vendor-credit",
           "stats": {
             "operations": 6,
             "transforms": 0,

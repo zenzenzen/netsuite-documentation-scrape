@@ -632,6 +632,1045 @@
     "categoryLabel": "Organization"
   },
   {
+    "recordName": "vendor",
+    "slug": "vendor",
+    "title": "Vendor",
+    "group": "focus",
+    "summary": "Get list of records. 4 transform workflows available. 10 linked dependency records.",
+    "docsPath": "/records/vendor",
+    "stats": {
+      "operations": 10,
+      "transforms": 4,
+      "schemaFields": 0,
+      "outgoingTransforms": 4,
+      "incomingTransforms": 1
+    },
+    "dependencies": [
+      "customer",
+      "purchaseOrder",
+      "vendorBill",
+      "vendorPayment",
+      "vendorCategory",
+      "contact",
+      "currency",
+      "account",
+      "subsidiary",
+      "term"
+    ],
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/vendor",
+        "summary": "Get list of records.",
+        "isTransform": false
+      },
+      {
+        "method": "POST",
+        "path": "/vendor",
+        "summary": "Insert record.",
+        "isTransform": false
+      },
+      {
+        "method": "DELETE",
+        "path": "/vendor/{id}",
+        "summary": "Remove record.",
+        "isTransform": false
+      },
+      {
+        "method": "GET",
+        "path": "/vendor/{id}",
+        "summary": "Get record.",
+        "isTransform": false
+      },
+      {
+        "method": "PATCH",
+        "path": "/vendor/{id}",
+        "summary": "Update record.",
+        "isTransform": false
+      },
+      {
+        "method": "PUT",
+        "path": "/vendor/{id}",
+        "summary": "Insert or update record.",
+        "isTransform": false
+      },
+      {
+        "method": "POST",
+        "path": "/vendor/{id}/!transform/customer",
+        "summary": "Transform to customer.",
+        "isTransform": true
+      },
+      {
+        "method": "POST",
+        "path": "/vendor/{id}/!transform/purchaseOrder",
+        "summary": "Transform to purchaseOrder.",
+        "isTransform": true
+      },
+      {
+        "method": "POST",
+        "path": "/vendor/{id}/!transform/vendorBill",
+        "summary": "Transform to vendorBill.",
+        "isTransform": true
+      },
+      {
+        "method": "POST",
+        "path": "/vendor/{id}/!transform/vendorPayment",
+        "summary": "Transform to vendorPayment.",
+        "isTransform": true
+      }
+    ],
+    "category": "entity",
+    "categoryLabel": "Entity"
+  },
+  {
+    "recordName": "vendorBill",
+    "slug": "vendor-bill",
+    "title": "Vendor Bill",
+    "group": "focus",
+    "summary": "Get list of records. 3 transform workflows available. 17 linked dependency records.",
+    "docsPath": "/records/vendor-bill",
+    "stats": {
+      "operations": 9,
+      "transforms": 3,
+      "schemaFields": 0,
+      "outgoingTransforms": 3,
+      "incomingTransforms": 2
+    },
+    "dependencies": [
+      "vendorCredit",
+      "vendorPayment",
+      "vendorReturnAuthorization",
+      "account",
+      "classification",
+      "currency",
+      "department",
+      "customer",
+      "partner",
+      "vendor",
+      "employee",
+      "contact",
+      "location",
+      "nexus",
+      "accountingPeriod",
+      "subsidiary",
+      "term"
+    ],
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/vendorBill",
+        "summary": "Get list of records.",
+        "isTransform": false
+      },
+      {
+        "method": "POST",
+        "path": "/vendorBill",
+        "summary": "Insert record.",
+        "isTransform": false
+      },
+      {
+        "method": "DELETE",
+        "path": "/vendorBill/{id}",
+        "summary": "Remove record.",
+        "isTransform": false
+      },
+      {
+        "method": "GET",
+        "path": "/vendorBill/{id}",
+        "summary": "Get record.",
+        "isTransform": false
+      },
+      {
+        "method": "PATCH",
+        "path": "/vendorBill/{id}",
+        "summary": "Update record.",
+        "isTransform": false
+      },
+      {
+        "method": "PUT",
+        "path": "/vendorBill/{id}",
+        "summary": "Insert or update record.",
+        "isTransform": false
+      },
+      {
+        "method": "POST",
+        "path": "/vendorBill/{id}/!transform/vendorCredit",
+        "summary": "Transform to vendorCredit.",
+        "isTransform": true
+      },
+      {
+        "method": "POST",
+        "path": "/vendorBill/{id}/!transform/vendorPayment",
+        "summary": "Transform to vendorPayment.",
+        "isTransform": true
+      },
+      {
+        "method": "POST",
+        "path": "/vendorBill/{id}/!transform/vendorReturnAuthorization",
+        "summary": "Transform to vendorReturnAuthorization.",
+        "isTransform": true
+      }
+    ],
+    "category": "transaction",
+    "categoryLabel": "Transaction"
+  },
+  {
+    "recordName": "vendorCategory",
+    "slug": "vendor-category",
+    "title": "Vendor Category",
+    "group": "focus",
+    "summary": "Get list of records.",
+    "docsPath": "/records/vendor-category",
+    "stats": {
+      "operations": 6,
+      "transforms": 0,
+      "schemaFields": 0,
+      "outgoingTransforms": 0,
+      "incomingTransforms": 0
+    },
+    "dependencies": [],
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/vendorCategory",
+        "summary": "Get list of records.",
+        "isTransform": false
+      },
+      {
+        "method": "POST",
+        "path": "/vendorCategory",
+        "summary": "Insert record.",
+        "isTransform": false
+      },
+      {
+        "method": "DELETE",
+        "path": "/vendorCategory/{id}",
+        "summary": "Remove record.",
+        "isTransform": false
+      },
+      {
+        "method": "GET",
+        "path": "/vendorCategory/{id}",
+        "summary": "Get record.",
+        "isTransform": false
+      },
+      {
+        "method": "PATCH",
+        "path": "/vendorCategory/{id}",
+        "summary": "Update record.",
+        "isTransform": false
+      },
+      {
+        "method": "PUT",
+        "path": "/vendorCategory/{id}",
+        "summary": "Insert or update record.",
+        "isTransform": false
+      }
+    ],
+    "category": "entity",
+    "categoryLabel": "Entity"
+  },
+  {
+    "recordName": "vendorCredit",
+    "slug": "vendor-credit",
+    "title": "Vendor Credit",
+    "group": "focus",
+    "summary": "Get list of records. 13 linked dependency records.",
+    "docsPath": "/records/vendor-credit",
+    "stats": {
+      "operations": 6,
+      "transforms": 0,
+      "schemaFields": 0,
+      "outgoingTransforms": 0,
+      "incomingTransforms": 2
+    },
+    "dependencies": [
+      "account",
+      "classification",
+      "currency",
+      "department",
+      "customer",
+      "partner",
+      "vendor",
+      "employee",
+      "contact",
+      "location",
+      "nexus",
+      "accountingPeriod",
+      "subsidiary"
+    ],
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/vendorCredit",
+        "summary": "Get list of records.",
+        "isTransform": false
+      },
+      {
+        "method": "POST",
+        "path": "/vendorCredit",
+        "summary": "Insert record.",
+        "isTransform": false
+      },
+      {
+        "method": "DELETE",
+        "path": "/vendorCredit/{id}",
+        "summary": "Remove record.",
+        "isTransform": false
+      },
+      {
+        "method": "GET",
+        "path": "/vendorCredit/{id}",
+        "summary": "Get record.",
+        "isTransform": false
+      },
+      {
+        "method": "PATCH",
+        "path": "/vendorCredit/{id}",
+        "summary": "Update record.",
+        "isTransform": false
+      },
+      {
+        "method": "PUT",
+        "path": "/vendorCredit/{id}",
+        "summary": "Insert or update record.",
+        "isTransform": false
+      }
+    ],
+    "category": "entity",
+    "categoryLabel": "Entity"
+  },
+  {
+    "recordName": "vendorPayment",
+    "slug": "vendor-payment",
+    "title": "Vendor Payment",
+    "group": "focus",
+    "summary": "Get list of records. 14 linked dependency records.",
+    "docsPath": "/records/vendor-payment",
+    "stats": {
+      "operations": 6,
+      "transforms": 0,
+      "schemaFields": 0,
+      "outgoingTransforms": 0,
+      "incomingTransforms": 2
+    },
+    "dependencies": [
+      "account",
+      "classification",
+      "currency",
+      "department",
+      "customer",
+      "partner",
+      "vendor",
+      "employee",
+      "contact",
+      "location",
+      "nexus",
+      "accountingPeriod",
+      "subsidiary",
+      "journalEntry"
+    ],
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/vendorPayment",
+        "summary": "Get list of records.",
+        "isTransform": false
+      },
+      {
+        "method": "POST",
+        "path": "/vendorPayment",
+        "summary": "Insert record.",
+        "isTransform": false
+      },
+      {
+        "method": "DELETE",
+        "path": "/vendorPayment/{id}",
+        "summary": "Remove record.",
+        "isTransform": false
+      },
+      {
+        "method": "GET",
+        "path": "/vendorPayment/{id}",
+        "summary": "Get record.",
+        "isTransform": false
+      },
+      {
+        "method": "PATCH",
+        "path": "/vendorPayment/{id}",
+        "summary": "Update record.",
+        "isTransform": false
+      },
+      {
+        "method": "PUT",
+        "path": "/vendorPayment/{id}",
+        "summary": "Insert or update record.",
+        "isTransform": false
+      }
+    ],
+    "category": "transaction",
+    "categoryLabel": "Transaction"
+  },
+  {
+    "recordName": "vendorReturnAuthorization",
+    "slug": "vendor-return-authorization",
+    "title": "Vendor Return Authorization",
+    "group": "focus",
+    "summary": "Get list of records. 2 transform workflows available. 13 linked dependency records.",
+    "docsPath": "/records/vendor-return-authorization",
+    "stats": {
+      "operations": 8,
+      "transforms": 2,
+      "schemaFields": 0,
+      "outgoingTransforms": 2,
+      "incomingTransforms": 2
+    },
+    "dependencies": [
+      "itemFulfillment",
+      "vendorCredit",
+      "classification",
+      "currency",
+      "department",
+      "customer",
+      "partner",
+      "vendor",
+      "employee",
+      "contact",
+      "location",
+      "nexus",
+      "subsidiary"
+    ],
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/vendorReturnAuthorization",
+        "summary": "Get list of records.",
+        "isTransform": false
+      },
+      {
+        "method": "POST",
+        "path": "/vendorReturnAuthorization",
+        "summary": "Insert record.",
+        "isTransform": false
+      },
+      {
+        "method": "DELETE",
+        "path": "/vendorReturnAuthorization/{id}",
+        "summary": "Remove record.",
+        "isTransform": false
+      },
+      {
+        "method": "GET",
+        "path": "/vendorReturnAuthorization/{id}",
+        "summary": "Get record.",
+        "isTransform": false
+      },
+      {
+        "method": "PATCH",
+        "path": "/vendorReturnAuthorization/{id}",
+        "summary": "Update record.",
+        "isTransform": false
+      },
+      {
+        "method": "PUT",
+        "path": "/vendorReturnAuthorization/{id}",
+        "summary": "Insert or update record.",
+        "isTransform": false
+      },
+      {
+        "method": "POST",
+        "path": "/vendorReturnAuthorization/{id}/!transform/itemFulfillment",
+        "summary": "Transform to itemFulfillment.",
+        "isTransform": true
+      },
+      {
+        "method": "POST",
+        "path": "/vendorReturnAuthorization/{id}/!transform/vendorCredit",
+        "summary": "Transform to vendorCredit.",
+        "isTransform": true
+      }
+    ],
+    "category": "transaction",
+    "categoryLabel": "Transaction"
+  },
+  {
+    "recordName": "vendorSubsidiaryRelationship",
+    "slug": "vendor-subsidiary-relationship",
+    "title": "Vendor Subsidiary Relationship",
+    "group": "focus",
+    "summary": "Get list of records. 3 linked dependency records.",
+    "docsPath": "/records/vendor-subsidiary-relationship",
+    "stats": {
+      "operations": 6,
+      "transforms": 0,
+      "schemaFields": 0,
+      "outgoingTransforms": 0,
+      "incomingTransforms": 0
+    },
+    "dependencies": [
+      "currency",
+      "vendor",
+      "subsidiary"
+    ],
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/vendorSubsidiaryRelationship",
+        "summary": "Get list of records.",
+        "isTransform": false
+      },
+      {
+        "method": "POST",
+        "path": "/vendorSubsidiaryRelationship",
+        "summary": "Insert record.",
+        "isTransform": false
+      },
+      {
+        "method": "DELETE",
+        "path": "/vendorSubsidiaryRelationship/{id}",
+        "summary": "Remove record.",
+        "isTransform": false
+      },
+      {
+        "method": "GET",
+        "path": "/vendorSubsidiaryRelationship/{id}",
+        "summary": "Get record.",
+        "isTransform": false
+      },
+      {
+        "method": "PATCH",
+        "path": "/vendorSubsidiaryRelationship/{id}",
+        "summary": "Update record.",
+        "isTransform": false
+      },
+      {
+        "method": "PUT",
+        "path": "/vendorSubsidiaryRelationship/{id}",
+        "summary": "Insert or update record.",
+        "isTransform": false
+      }
+    ],
+    "category": "entity",
+    "categoryLabel": "Entity"
+  },
+  {
+    "recordName": "billingAccount",
+    "slug": "billing-account",
+    "title": "Billing Account",
+    "group": "billing",
+    "summary": "Get list of records. 7 linked dependency records.",
+    "docsPath": "/records/billing-account",
+    "stats": {
+      "operations": 6,
+      "transforms": 0,
+      "schemaFields": 0,
+      "outgoingTransforms": 0,
+      "incomingTransforms": 0
+    },
+    "dependencies": [
+      "billingSchedule",
+      "classification",
+      "currency",
+      "customer",
+      "department",
+      "location",
+      "subsidiary"
+    ],
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/billingAccount",
+        "summary": "Get list of records.",
+        "isTransform": false
+      },
+      {
+        "method": "POST",
+        "path": "/billingAccount",
+        "summary": "Insert record.",
+        "isTransform": false
+      },
+      {
+        "method": "DELETE",
+        "path": "/billingAccount/{id}",
+        "summary": "Remove record.",
+        "isTransform": false
+      },
+      {
+        "method": "GET",
+        "path": "/billingAccount/{id}",
+        "summary": "Get record.",
+        "isTransform": false
+      },
+      {
+        "method": "PATCH",
+        "path": "/billingAccount/{id}",
+        "summary": "Update record.",
+        "isTransform": false
+      },
+      {
+        "method": "PUT",
+        "path": "/billingAccount/{id}",
+        "summary": "Insert or update record.",
+        "isTransform": false
+      }
+    ],
+    "category": "financial",
+    "categoryLabel": "Financial"
+  },
+  {
+    "recordName": "billingRevenueEvent",
+    "slug": "billing-revenue-event",
+    "title": "Billing Revenue Event",
+    "group": "billing",
+    "summary": "Get list of records. 1 linked dependency record.",
+    "docsPath": "/records/billing-revenue-event",
+    "stats": {
+      "operations": 6,
+      "transforms": 0,
+      "schemaFields": 0,
+      "outgoingTransforms": 0,
+      "incomingTransforms": 0
+    },
+    "dependencies": [
+      "subscriptionLine"
+    ],
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/billingRevenueEvent",
+        "summary": "Get list of records.",
+        "isTransform": false
+      },
+      {
+        "method": "POST",
+        "path": "/billingRevenueEvent",
+        "summary": "Insert record.",
+        "isTransform": false
+      },
+      {
+        "method": "DELETE",
+        "path": "/billingRevenueEvent/{id}",
+        "summary": "Remove record.",
+        "isTransform": false
+      },
+      {
+        "method": "GET",
+        "path": "/billingRevenueEvent/{id}",
+        "summary": "Get record.",
+        "isTransform": false
+      },
+      {
+        "method": "PATCH",
+        "path": "/billingRevenueEvent/{id}",
+        "summary": "Update record.",
+        "isTransform": false
+      },
+      {
+        "method": "PUT",
+        "path": "/billingRevenueEvent/{id}",
+        "summary": "Insert or update record.",
+        "isTransform": false
+      }
+    ],
+    "category": "financial",
+    "categoryLabel": "Financial"
+  },
+  {
+    "recordName": "billingSchedule",
+    "slug": "billing-schedule",
+    "title": "Billing Schedule",
+    "group": "billing",
+    "summary": "Get list of records. 2 linked dependency records.",
+    "docsPath": "/records/billing-schedule",
+    "stats": {
+      "operations": 6,
+      "transforms": 0,
+      "schemaFields": 0,
+      "outgoingTransforms": 0,
+      "incomingTransforms": 0
+    },
+    "dependencies": [
+      "term",
+      "job"
+    ],
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/billingSchedule",
+        "summary": "Get list of records.",
+        "isTransform": false
+      },
+      {
+        "method": "POST",
+        "path": "/billingSchedule",
+        "summary": "Insert record.",
+        "isTransform": false
+      },
+      {
+        "method": "DELETE",
+        "path": "/billingSchedule/{id}",
+        "summary": "Remove record.",
+        "isTransform": false
+      },
+      {
+        "method": "GET",
+        "path": "/billingSchedule/{id}",
+        "summary": "Get record.",
+        "isTransform": false
+      },
+      {
+        "method": "PATCH",
+        "path": "/billingSchedule/{id}",
+        "summary": "Update record.",
+        "isTransform": false
+      },
+      {
+        "method": "PUT",
+        "path": "/billingSchedule/{id}",
+        "summary": "Insert or update record.",
+        "isTransform": false
+      }
+    ],
+    "category": "financial",
+    "categoryLabel": "Financial"
+  },
+  {
+    "recordName": "subscription",
+    "slug": "subscription",
+    "title": "Subscription",
+    "group": "billing",
+    "summary": "Get list of records. 12 linked dependency records.",
+    "docsPath": "/records/subscription",
+    "stats": {
+      "operations": 6,
+      "transforms": 0,
+      "schemaFields": 0,
+      "outgoingTransforms": 0,
+      "incomingTransforms": 0
+    },
+    "dependencies": [
+      "billingAccount",
+      "billingSchedule",
+      "classification",
+      "currency",
+      "customer",
+      "subscriptionPlan",
+      "priceBook",
+      "subscriptionTerm",
+      "department",
+      "location",
+      "salesOrder",
+      "subsidiary"
+    ],
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/subscription",
+        "summary": "Get list of records.",
+        "isTransform": false
+      },
+      {
+        "method": "POST",
+        "path": "/subscription",
+        "summary": "Insert record.",
+        "isTransform": false
+      },
+      {
+        "method": "DELETE",
+        "path": "/subscription/{id}",
+        "summary": "Remove record.",
+        "isTransform": false
+      },
+      {
+        "method": "GET",
+        "path": "/subscription/{id}",
+        "summary": "Get record.",
+        "isTransform": false
+      },
+      {
+        "method": "PATCH",
+        "path": "/subscription/{id}",
+        "summary": "Update record.",
+        "isTransform": false
+      },
+      {
+        "method": "PUT",
+        "path": "/subscription/{id}",
+        "summary": "Insert or update record.",
+        "isTransform": false
+      }
+    ],
+    "category": "other",
+    "categoryLabel": "Other"
+  },
+  {
+    "recordName": "subscriptionChangeOrder",
+    "slug": "subscription-change-order",
+    "title": "Subscription Change Order",
+    "group": "billing",
+    "summary": "Get list of records. 8 linked dependency records.",
+    "docsPath": "/records/subscription-change-order",
+    "stats": {
+      "operations": 6,
+      "transforms": 0,
+      "schemaFields": 0,
+      "outgoingTransforms": 0,
+      "incomingTransforms": 0
+    },
+    "dependencies": [
+      "billingAccount",
+      "customer",
+      "subscriptionPlan",
+      "priceBook",
+      "subscriptionTerm",
+      "employee",
+      "subscription",
+      "subsidiary"
+    ],
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/subscriptionChangeOrder",
+        "summary": "Get list of records.",
+        "isTransform": false
+      },
+      {
+        "method": "POST",
+        "path": "/subscriptionChangeOrder",
+        "summary": "Insert record.",
+        "isTransform": false
+      },
+      {
+        "method": "DELETE",
+        "path": "/subscriptionChangeOrder/{id}",
+        "summary": "Remove record.",
+        "isTransform": false
+      },
+      {
+        "method": "GET",
+        "path": "/subscriptionChangeOrder/{id}",
+        "summary": "Get record.",
+        "isTransform": false
+      },
+      {
+        "method": "PATCH",
+        "path": "/subscriptionChangeOrder/{id}",
+        "summary": "Update record.",
+        "isTransform": false
+      },
+      {
+        "method": "PUT",
+        "path": "/subscriptionChangeOrder/{id}",
+        "summary": "Insert or update record.",
+        "isTransform": false
+      }
+    ],
+    "category": "other",
+    "categoryLabel": "Other"
+  },
+  {
+    "recordName": "subscriptionLine",
+    "slug": "subscription-line",
+    "title": "Subscription Line",
+    "group": "billing",
+    "summary": "Get list of records. 27 linked dependency records.",
+    "docsPath": "/records/subscription-line",
+    "stats": {
+      "operations": 6,
+      "transforms": 0,
+      "schemaFields": 0,
+      "outgoingTransforms": 0,
+      "incomingTransforms": 0
+    },
+    "dependencies": [
+      "classification",
+      "department",
+      "inventoryItem",
+      "assemblyItem",
+      "kitItem",
+      "discountItem",
+      "markupItem",
+      "subtotalItem",
+      "descriptionItem",
+      "paymentItem",
+      "salesTaxItem",
+      "shipItem",
+      "downloadItem",
+      "giftCertificateItem",
+      "subscriptionPlan",
+      "nonInventorySaleItem",
+      "nonInventoryResaleItem",
+      "nonInventoryPurchaseItem",
+      "serviceSaleItem",
+      "serviceResaleItem",
+      "servicePurchaseItem",
+      "otherChargeSaleItem",
+      "otherChargeResaleItem",
+      "otherChargePurchaseItem",
+      "location",
+      "salesOrder",
+      "subscription"
+    ],
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/subscriptionLine",
+        "summary": "Get list of records.",
+        "isTransform": false
+      },
+      {
+        "method": "POST",
+        "path": "/subscriptionLine",
+        "summary": "Insert record.",
+        "isTransform": false
+      },
+      {
+        "method": "DELETE",
+        "path": "/subscriptionLine/{id}",
+        "summary": "Remove record.",
+        "isTransform": false
+      },
+      {
+        "method": "GET",
+        "path": "/subscriptionLine/{id}",
+        "summary": "Get record.",
+        "isTransform": false
+      },
+      {
+        "method": "PATCH",
+        "path": "/subscriptionLine/{id}",
+        "summary": "Update record.",
+        "isTransform": false
+      },
+      {
+        "method": "PUT",
+        "path": "/subscriptionLine/{id}",
+        "summary": "Insert or update record.",
+        "isTransform": false
+      }
+    ],
+    "category": "other",
+    "categoryLabel": "Other"
+  },
+  {
+    "recordName": "subscriptionPlan",
+    "slug": "subscription-plan",
+    "title": "Subscription Plan",
+    "group": "billing",
+    "summary": "Get list of records. 5 linked dependency records.",
+    "docsPath": "/records/subscription-plan",
+    "stats": {
+      "operations": 6,
+      "transforms": 0,
+      "schemaFields": 0,
+      "outgoingTransforms": 0,
+      "incomingTransforms": 0
+    },
+    "dependencies": [
+      "classification",
+      "subscriptionTerm",
+      "department",
+      "account",
+      "location"
+    ],
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/subscriptionPlan",
+        "summary": "Get list of records.",
+        "isTransform": false
+      },
+      {
+        "method": "POST",
+        "path": "/subscriptionPlan",
+        "summary": "Insert record.",
+        "isTransform": false
+      },
+      {
+        "method": "DELETE",
+        "path": "/subscriptionPlan/{id}",
+        "summary": "Remove record.",
+        "isTransform": false
+      },
+      {
+        "method": "GET",
+        "path": "/subscriptionPlan/{id}",
+        "summary": "Get record.",
+        "isTransform": false
+      },
+      {
+        "method": "PATCH",
+        "path": "/subscriptionPlan/{id}",
+        "summary": "Update record.",
+        "isTransform": false
+      },
+      {
+        "method": "PUT",
+        "path": "/subscriptionPlan/{id}",
+        "summary": "Insert or update record.",
+        "isTransform": false
+      }
+    ],
+    "category": "other",
+    "categoryLabel": "Other"
+  },
+  {
+    "recordName": "subscriptionTerm",
+    "slug": "subscription-term",
+    "title": "Subscription Term",
+    "group": "billing",
+    "summary": "Get list of records.",
+    "docsPath": "/records/subscription-term",
+    "stats": {
+      "operations": 6,
+      "transforms": 0,
+      "schemaFields": 0,
+      "outgoingTransforms": 0,
+      "incomingTransforms": 0
+    },
+    "dependencies": [],
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/subscriptionTerm",
+        "summary": "Get list of records.",
+        "isTransform": false
+      },
+      {
+        "method": "POST",
+        "path": "/subscriptionTerm",
+        "summary": "Insert record.",
+        "isTransform": false
+      },
+      {
+        "method": "DELETE",
+        "path": "/subscriptionTerm/{id}",
+        "summary": "Remove record.",
+        "isTransform": false
+      },
+      {
+        "method": "GET",
+        "path": "/subscriptionTerm/{id}",
+        "summary": "Get record.",
+        "isTransform": false
+      },
+      {
+        "method": "PATCH",
+        "path": "/subscriptionTerm/{id}",
+        "summary": "Update record.",
+        "isTransform": false
+      },
+      {
+        "method": "PUT",
+        "path": "/subscriptionTerm/{id}",
+        "summary": "Insert or update record.",
+        "isTransform": false
+      }
+    ],
+    "category": "reference",
+    "categoryLabel": "Reference"
+  },
+  {
     "recordName": "account",
     "slug": "account",
     "title": "Account",
@@ -748,129 +1787,6 @@
     ],
     "category": "organization",
     "categoryLabel": "Organization"
-  },
-  {
-    "recordName": "billingAccount",
-    "slug": "billing-account",
-    "title": "Billing Account",
-    "group": "dependency",
-    "summary": "Get list of records. 7 linked dependency records.",
-    "docsPath": "/records/billing-account",
-    "stats": {
-      "operations": 6,
-      "transforms": 0,
-      "schemaFields": 0,
-      "outgoingTransforms": 0,
-      "incomingTransforms": 0
-    },
-    "dependencies": [
-      "billingSchedule",
-      "classification",
-      "currency",
-      "customer",
-      "department",
-      "location",
-      "subsidiary"
-    ],
-    "endpoints": [
-      {
-        "method": "GET",
-        "path": "/billingAccount",
-        "summary": "Get list of records.",
-        "isTransform": false
-      },
-      {
-        "method": "POST",
-        "path": "/billingAccount",
-        "summary": "Insert record.",
-        "isTransform": false
-      },
-      {
-        "method": "DELETE",
-        "path": "/billingAccount/{id}",
-        "summary": "Remove record.",
-        "isTransform": false
-      },
-      {
-        "method": "GET",
-        "path": "/billingAccount/{id}",
-        "summary": "Get record.",
-        "isTransform": false
-      },
-      {
-        "method": "PATCH",
-        "path": "/billingAccount/{id}",
-        "summary": "Update record.",
-        "isTransform": false
-      },
-      {
-        "method": "PUT",
-        "path": "/billingAccount/{id}",
-        "summary": "Insert or update record.",
-        "isTransform": false
-      }
-    ],
-    "category": "financial",
-    "categoryLabel": "Financial"
-  },
-  {
-    "recordName": "billingSchedule",
-    "slug": "billing-schedule",
-    "title": "Billing Schedule",
-    "group": "dependency",
-    "summary": "Get list of records. 2 linked dependency records.",
-    "docsPath": "/records/billing-schedule",
-    "stats": {
-      "operations": 6,
-      "transforms": 0,
-      "schemaFields": 0,
-      "outgoingTransforms": 0,
-      "incomingTransforms": 0
-    },
-    "dependencies": [
-      "term",
-      "job"
-    ],
-    "endpoints": [
-      {
-        "method": "GET",
-        "path": "/billingSchedule",
-        "summary": "Get list of records.",
-        "isTransform": false
-      },
-      {
-        "method": "POST",
-        "path": "/billingSchedule",
-        "summary": "Insert record.",
-        "isTransform": false
-      },
-      {
-        "method": "DELETE",
-        "path": "/billingSchedule/{id}",
-        "summary": "Remove record.",
-        "isTransform": false
-      },
-      {
-        "method": "GET",
-        "path": "/billingSchedule/{id}",
-        "summary": "Get record.",
-        "isTransform": false
-      },
-      {
-        "method": "PATCH",
-        "path": "/billingSchedule/{id}",
-        "summary": "Update record.",
-        "isTransform": false
-      },
-      {
-        "method": "PUT",
-        "path": "/billingSchedule/{id}",
-        "summary": "Insert or update record.",
-        "isTransform": false
-      }
-    ],
-    "category": "financial",
-    "categoryLabel": "Financial"
   },
   {
     "recordName": "cashSale",
@@ -1806,6 +2722,71 @@
     "categoryLabel": "Inventory"
   },
   {
+    "recordName": "journalEntry",
+    "slug": "journal-entry",
+    "title": "Journal Entry",
+    "group": "dependency",
+    "summary": "Get list of records. 8 linked dependency records.",
+    "docsPath": "/records/journal-entry",
+    "stats": {
+      "operations": 6,
+      "transforms": 0,
+      "schemaFields": 0,
+      "outgoingTransforms": 0,
+      "incomingTransforms": 0
+    },
+    "dependencies": [
+      "classification",
+      "currency",
+      "department",
+      "location",
+      "employee",
+      "nexus",
+      "accountingPeriod",
+      "subsidiary"
+    ],
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/journalEntry",
+        "summary": "Get list of records.",
+        "isTransform": false
+      },
+      {
+        "method": "POST",
+        "path": "/journalEntry",
+        "summary": "Insert record.",
+        "isTransform": false
+      },
+      {
+        "method": "DELETE",
+        "path": "/journalEntry/{id}",
+        "summary": "Remove record.",
+        "isTransform": false
+      },
+      {
+        "method": "GET",
+        "path": "/journalEntry/{id}",
+        "summary": "Get record.",
+        "isTransform": false
+      },
+      {
+        "method": "PATCH",
+        "path": "/journalEntry/{id}",
+        "summary": "Update record.",
+        "isTransform": false
+      },
+      {
+        "method": "PUT",
+        "path": "/journalEntry/{id}",
+        "summary": "Insert or update record.",
+        "isTransform": false
+      }
+    ],
+    "category": "transaction",
+    "categoryLabel": "Transaction"
+  },
+  {
     "recordName": "location",
     "slug": "location",
     "title": "Location",
@@ -2210,6 +3191,98 @@
     "categoryLabel": "Catalog"
   },
   {
+    "recordName": "purchaseOrder",
+    "slug": "purchase-order",
+    "title": "Purchase Order",
+    "group": "dependency",
+    "summary": "Get list of records. 3 transform workflows available. 17 linked dependency records.",
+    "docsPath": "/records/purchase-order",
+    "stats": {
+      "operations": 9,
+      "transforms": 3,
+      "schemaFields": 0,
+      "outgoingTransforms": 3,
+      "incomingTransforms": 2
+    },
+    "dependencies": [
+      "itemReceipt",
+      "vendorBill",
+      "vendorReturnAuthorization",
+      "classification",
+      "currency",
+      "department",
+      "employee",
+      "customer",
+      "partner",
+      "vendor",
+      "contact",
+      "location",
+      "nexus",
+      "purchaseContract",
+      "shipItem",
+      "subsidiary",
+      "term"
+    ],
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/purchaseOrder",
+        "summary": "Get list of records.",
+        "isTransform": false
+      },
+      {
+        "method": "POST",
+        "path": "/purchaseOrder",
+        "summary": "Insert record.",
+        "isTransform": false
+      },
+      {
+        "method": "DELETE",
+        "path": "/purchaseOrder/{id}",
+        "summary": "Remove record.",
+        "isTransform": false
+      },
+      {
+        "method": "GET",
+        "path": "/purchaseOrder/{id}",
+        "summary": "Get record.",
+        "isTransform": false
+      },
+      {
+        "method": "PATCH",
+        "path": "/purchaseOrder/{id}",
+        "summary": "Update record.",
+        "isTransform": false
+      },
+      {
+        "method": "PUT",
+        "path": "/purchaseOrder/{id}",
+        "summary": "Insert or update record.",
+        "isTransform": false
+      },
+      {
+        "method": "POST",
+        "path": "/purchaseOrder/{id}/!transform/itemReceipt",
+        "summary": "Transform to itemReceipt.",
+        "isTransform": true
+      },
+      {
+        "method": "POST",
+        "path": "/purchaseOrder/{id}/!transform/vendorBill",
+        "summary": "Transform to vendorBill.",
+        "isTransform": true
+      },
+      {
+        "method": "POST",
+        "path": "/purchaseOrder/{id}/!transform/vendorReturnAuthorization",
+        "summary": "Transform to vendorReturnAuthorization.",
+        "isTransform": true
+      }
+    ],
+    "category": "transaction",
+    "categoryLabel": "Transaction"
+  },
+  {
     "recordName": "returnAuthorization",
     "slug": "return-authorization",
     "title": "Return Authorization",
@@ -2418,97 +3491,6 @@
     ],
     "category": "reference",
     "categoryLabel": "Reference"
-  },
-  {
-    "recordName": "vendor",
-    "slug": "vendor",
-    "title": "Vendor",
-    "group": "dependency",
-    "summary": "Get list of records. 4 transform workflows available. 10 linked dependency records.",
-    "docsPath": "/records/vendor",
-    "stats": {
-      "operations": 10,
-      "transforms": 4,
-      "schemaFields": 0,
-      "outgoingTransforms": 4,
-      "incomingTransforms": 1
-    },
-    "dependencies": [
-      "customer",
-      "purchaseOrder",
-      "vendorBill",
-      "vendorPayment",
-      "vendorCategory",
-      "contact",
-      "currency",
-      "account",
-      "subsidiary",
-      "term"
-    ],
-    "endpoints": [
-      {
-        "method": "GET",
-        "path": "/vendor",
-        "summary": "Get list of records.",
-        "isTransform": false
-      },
-      {
-        "method": "POST",
-        "path": "/vendor",
-        "summary": "Insert record.",
-        "isTransform": false
-      },
-      {
-        "method": "DELETE",
-        "path": "/vendor/{id}",
-        "summary": "Remove record.",
-        "isTransform": false
-      },
-      {
-        "method": "GET",
-        "path": "/vendor/{id}",
-        "summary": "Get record.",
-        "isTransform": false
-      },
-      {
-        "method": "PATCH",
-        "path": "/vendor/{id}",
-        "summary": "Update record.",
-        "isTransform": false
-      },
-      {
-        "method": "PUT",
-        "path": "/vendor/{id}",
-        "summary": "Insert or update record.",
-        "isTransform": false
-      },
-      {
-        "method": "POST",
-        "path": "/vendor/{id}/!transform/customer",
-        "summary": "Transform to customer.",
-        "isTransform": true
-      },
-      {
-        "method": "POST",
-        "path": "/vendor/{id}/!transform/purchaseOrder",
-        "summary": "Transform to purchaseOrder.",
-        "isTransform": true
-      },
-      {
-        "method": "POST",
-        "path": "/vendor/{id}/!transform/vendorBill",
-        "summary": "Transform to vendorBill.",
-        "isTransform": true
-      },
-      {
-        "method": "POST",
-        "path": "/vendor/{id}/!transform/vendorPayment",
-        "summary": "Transform to vendorPayment.",
-        "isTransform": true
-      }
-    ],
-    "category": "entity",
-    "categoryLabel": "Entity"
   },
   {
     "recordName": "webSite",
@@ -2988,64 +3970,6 @@
     ],
     "category": "inventory",
     "categoryLabel": "Inventory"
-  },
-  {
-    "recordName": "billingRevenueEvent",
-    "slug": "billing-revenue-event",
-    "title": "Billing Revenue Event",
-    "group": "extended",
-    "summary": "Get list of records. 1 linked dependency record.",
-    "docsPath": "./public/records/billing-revenue-event.html",
-    "stats": {
-      "operations": 6,
-      "transforms": 0,
-      "schemaFields": 0,
-      "outgoingTransforms": 0,
-      "incomingTransforms": 0
-    },
-    "dependencies": [
-      "subscriptionLine"
-    ],
-    "endpoints": [
-      {
-        "method": "GET",
-        "path": "/billingRevenueEvent",
-        "summary": "Get list of records.",
-        "isTransform": false
-      },
-      {
-        "method": "POST",
-        "path": "/billingRevenueEvent",
-        "summary": "Insert record.",
-        "isTransform": false
-      },
-      {
-        "method": "DELETE",
-        "path": "/billingRevenueEvent/{id}",
-        "summary": "Remove record.",
-        "isTransform": false
-      },
-      {
-        "method": "GET",
-        "path": "/billingRevenueEvent/{id}",
-        "summary": "Get record.",
-        "isTransform": false
-      },
-      {
-        "method": "PATCH",
-        "path": "/billingRevenueEvent/{id}",
-        "summary": "Update record.",
-        "isTransform": false
-      },
-      {
-        "method": "PUT",
-        "path": "/billingRevenueEvent/{id}",
-        "summary": "Insert or update record.",
-        "isTransform": false
-      }
-    ],
-    "category": "financial",
-    "categoryLabel": "Financial"
   },
   {
     "recordName": "bin",
@@ -6670,71 +7594,6 @@
     "categoryLabel": "Entity"
   },
   {
-    "recordName": "journalEntry",
-    "slug": "journal-entry",
-    "title": "Journal Entry",
-    "group": "extended",
-    "summary": "Get list of records. 8 linked dependency records.",
-    "docsPath": "./public/records/journal-entry.html",
-    "stats": {
-      "operations": 6,
-      "transforms": 0,
-      "schemaFields": 0,
-      "outgoingTransforms": 0,
-      "incomingTransforms": 0
-    },
-    "dependencies": [
-      "classification",
-      "currency",
-      "department",
-      "location",
-      "employee",
-      "nexus",
-      "accountingPeriod",
-      "subsidiary"
-    ],
-    "endpoints": [
-      {
-        "method": "GET",
-        "path": "/journalEntry",
-        "summary": "Get list of records.",
-        "isTransform": false
-      },
-      {
-        "method": "POST",
-        "path": "/journalEntry",
-        "summary": "Insert record.",
-        "isTransform": false
-      },
-      {
-        "method": "DELETE",
-        "path": "/journalEntry/{id}",
-        "summary": "Remove record.",
-        "isTransform": false
-      },
-      {
-        "method": "GET",
-        "path": "/journalEntry/{id}",
-        "summary": "Get record.",
-        "isTransform": false
-      },
-      {
-        "method": "PATCH",
-        "path": "/journalEntry/{id}",
-        "summary": "Update record.",
-        "isTransform": false
-      },
-      {
-        "method": "PUT",
-        "path": "/journalEntry/{id}",
-        "summary": "Insert or update record.",
-        "isTransform": false
-      }
-    ],
-    "category": "transaction",
-    "categoryLabel": "Transaction"
-  },
-  {
     "recordName": "kitItem",
     "slug": "kit-item",
     "title": "Kit Item",
@@ -8398,98 +9257,6 @@
     "categoryLabel": "Other"
   },
   {
-    "recordName": "purchaseOrder",
-    "slug": "purchase-order",
-    "title": "Purchase Order",
-    "group": "extended",
-    "summary": "Get list of records. 3 transform workflows available. 17 linked dependency records.",
-    "docsPath": "./public/records/purchase-order.html",
-    "stats": {
-      "operations": 9,
-      "transforms": 3,
-      "schemaFields": 0,
-      "outgoingTransforms": 3,
-      "incomingTransforms": 2
-    },
-    "dependencies": [
-      "itemReceipt",
-      "vendorBill",
-      "vendorReturnAuthorization",
-      "classification",
-      "currency",
-      "department",
-      "employee",
-      "customer",
-      "partner",
-      "vendor",
-      "contact",
-      "location",
-      "nexus",
-      "purchaseContract",
-      "shipItem",
-      "subsidiary",
-      "term"
-    ],
-    "endpoints": [
-      {
-        "method": "GET",
-        "path": "/purchaseOrder",
-        "summary": "Get list of records.",
-        "isTransform": false
-      },
-      {
-        "method": "POST",
-        "path": "/purchaseOrder",
-        "summary": "Insert record.",
-        "isTransform": false
-      },
-      {
-        "method": "DELETE",
-        "path": "/purchaseOrder/{id}",
-        "summary": "Remove record.",
-        "isTransform": false
-      },
-      {
-        "method": "GET",
-        "path": "/purchaseOrder/{id}",
-        "summary": "Get record.",
-        "isTransform": false
-      },
-      {
-        "method": "PATCH",
-        "path": "/purchaseOrder/{id}",
-        "summary": "Update record.",
-        "isTransform": false
-      },
-      {
-        "method": "PUT",
-        "path": "/purchaseOrder/{id}",
-        "summary": "Insert or update record.",
-        "isTransform": false
-      },
-      {
-        "method": "POST",
-        "path": "/purchaseOrder/{id}/!transform/itemReceipt",
-        "summary": "Transform to itemReceipt.",
-        "isTransform": true
-      },
-      {
-        "method": "POST",
-        "path": "/purchaseOrder/{id}/!transform/vendorBill",
-        "summary": "Transform to vendorBill.",
-        "isTransform": true
-      },
-      {
-        "method": "POST",
-        "path": "/purchaseOrder/{id}/!transform/vendorReturnAuthorization",
-        "summary": "Transform to vendorReturnAuthorization.",
-        "isTransform": true
-      }
-    ],
-    "category": "transaction",
-    "categoryLabel": "Transaction"
-  },
-  {
     "recordName": "purchaseRequisition",
     "slug": "purchase-requisition",
     "title": "Purchase Requisition",
@@ -9111,342 +9878,6 @@
     ],
     "category": "transaction",
     "categoryLabel": "Transaction"
-  },
-  {
-    "recordName": "subscription",
-    "slug": "subscription",
-    "title": "Subscription",
-    "group": "extended",
-    "summary": "Get list of records. 12 linked dependency records.",
-    "docsPath": "./public/records/subscription.html",
-    "stats": {
-      "operations": 6,
-      "transforms": 0,
-      "schemaFields": 0,
-      "outgoingTransforms": 0,
-      "incomingTransforms": 0
-    },
-    "dependencies": [
-      "billingAccount",
-      "billingSchedule",
-      "classification",
-      "currency",
-      "customer",
-      "subscriptionPlan",
-      "priceBook",
-      "subscriptionTerm",
-      "department",
-      "location",
-      "salesOrder",
-      "subsidiary"
-    ],
-    "endpoints": [
-      {
-        "method": "GET",
-        "path": "/subscription",
-        "summary": "Get list of records.",
-        "isTransform": false
-      },
-      {
-        "method": "POST",
-        "path": "/subscription",
-        "summary": "Insert record.",
-        "isTransform": false
-      },
-      {
-        "method": "DELETE",
-        "path": "/subscription/{id}",
-        "summary": "Remove record.",
-        "isTransform": false
-      },
-      {
-        "method": "GET",
-        "path": "/subscription/{id}",
-        "summary": "Get record.",
-        "isTransform": false
-      },
-      {
-        "method": "PATCH",
-        "path": "/subscription/{id}",
-        "summary": "Update record.",
-        "isTransform": false
-      },
-      {
-        "method": "PUT",
-        "path": "/subscription/{id}",
-        "summary": "Insert or update record.",
-        "isTransform": false
-      }
-    ],
-    "category": "other",
-    "categoryLabel": "Other"
-  },
-  {
-    "recordName": "subscriptionChangeOrder",
-    "slug": "subscription-change-order",
-    "title": "Subscription Change Order",
-    "group": "extended",
-    "summary": "Get list of records. 8 linked dependency records.",
-    "docsPath": "./public/records/subscription-change-order.html",
-    "stats": {
-      "operations": 6,
-      "transforms": 0,
-      "schemaFields": 0,
-      "outgoingTransforms": 0,
-      "incomingTransforms": 0
-    },
-    "dependencies": [
-      "billingAccount",
-      "customer",
-      "subscriptionPlan",
-      "priceBook",
-      "subscriptionTerm",
-      "employee",
-      "subscription",
-      "subsidiary"
-    ],
-    "endpoints": [
-      {
-        "method": "GET",
-        "path": "/subscriptionChangeOrder",
-        "summary": "Get list of records.",
-        "isTransform": false
-      },
-      {
-        "method": "POST",
-        "path": "/subscriptionChangeOrder",
-        "summary": "Insert record.",
-        "isTransform": false
-      },
-      {
-        "method": "DELETE",
-        "path": "/subscriptionChangeOrder/{id}",
-        "summary": "Remove record.",
-        "isTransform": false
-      },
-      {
-        "method": "GET",
-        "path": "/subscriptionChangeOrder/{id}",
-        "summary": "Get record.",
-        "isTransform": false
-      },
-      {
-        "method": "PATCH",
-        "path": "/subscriptionChangeOrder/{id}",
-        "summary": "Update record.",
-        "isTransform": false
-      },
-      {
-        "method": "PUT",
-        "path": "/subscriptionChangeOrder/{id}",
-        "summary": "Insert or update record.",
-        "isTransform": false
-      }
-    ],
-    "category": "other",
-    "categoryLabel": "Other"
-  },
-  {
-    "recordName": "subscriptionLine",
-    "slug": "subscription-line",
-    "title": "Subscription Line",
-    "group": "extended",
-    "summary": "Get list of records. 27 linked dependency records.",
-    "docsPath": "./public/records/subscription-line.html",
-    "stats": {
-      "operations": 6,
-      "transforms": 0,
-      "schemaFields": 0,
-      "outgoingTransforms": 0,
-      "incomingTransforms": 0
-    },
-    "dependencies": [
-      "classification",
-      "department",
-      "inventoryItem",
-      "assemblyItem",
-      "kitItem",
-      "discountItem",
-      "markupItem",
-      "subtotalItem",
-      "descriptionItem",
-      "paymentItem",
-      "salesTaxItem",
-      "shipItem",
-      "downloadItem",
-      "giftCertificateItem",
-      "subscriptionPlan",
-      "nonInventorySaleItem",
-      "nonInventoryResaleItem",
-      "nonInventoryPurchaseItem",
-      "serviceSaleItem",
-      "serviceResaleItem",
-      "servicePurchaseItem",
-      "otherChargeSaleItem",
-      "otherChargeResaleItem",
-      "otherChargePurchaseItem",
-      "location",
-      "salesOrder",
-      "subscription"
-    ],
-    "endpoints": [
-      {
-        "method": "GET",
-        "path": "/subscriptionLine",
-        "summary": "Get list of records.",
-        "isTransform": false
-      },
-      {
-        "method": "POST",
-        "path": "/subscriptionLine",
-        "summary": "Insert record.",
-        "isTransform": false
-      },
-      {
-        "method": "DELETE",
-        "path": "/subscriptionLine/{id}",
-        "summary": "Remove record.",
-        "isTransform": false
-      },
-      {
-        "method": "GET",
-        "path": "/subscriptionLine/{id}",
-        "summary": "Get record.",
-        "isTransform": false
-      },
-      {
-        "method": "PATCH",
-        "path": "/subscriptionLine/{id}",
-        "summary": "Update record.",
-        "isTransform": false
-      },
-      {
-        "method": "PUT",
-        "path": "/subscriptionLine/{id}",
-        "summary": "Insert or update record.",
-        "isTransform": false
-      }
-    ],
-    "category": "other",
-    "categoryLabel": "Other"
-  },
-  {
-    "recordName": "subscriptionPlan",
-    "slug": "subscription-plan",
-    "title": "Subscription Plan",
-    "group": "extended",
-    "summary": "Get list of records. 5 linked dependency records.",
-    "docsPath": "./public/records/subscription-plan.html",
-    "stats": {
-      "operations": 6,
-      "transforms": 0,
-      "schemaFields": 0,
-      "outgoingTransforms": 0,
-      "incomingTransforms": 0
-    },
-    "dependencies": [
-      "classification",
-      "subscriptionTerm",
-      "department",
-      "account",
-      "location"
-    ],
-    "endpoints": [
-      {
-        "method": "GET",
-        "path": "/subscriptionPlan",
-        "summary": "Get list of records.",
-        "isTransform": false
-      },
-      {
-        "method": "POST",
-        "path": "/subscriptionPlan",
-        "summary": "Insert record.",
-        "isTransform": false
-      },
-      {
-        "method": "DELETE",
-        "path": "/subscriptionPlan/{id}",
-        "summary": "Remove record.",
-        "isTransform": false
-      },
-      {
-        "method": "GET",
-        "path": "/subscriptionPlan/{id}",
-        "summary": "Get record.",
-        "isTransform": false
-      },
-      {
-        "method": "PATCH",
-        "path": "/subscriptionPlan/{id}",
-        "summary": "Update record.",
-        "isTransform": false
-      },
-      {
-        "method": "PUT",
-        "path": "/subscriptionPlan/{id}",
-        "summary": "Insert or update record.",
-        "isTransform": false
-      }
-    ],
-    "category": "other",
-    "categoryLabel": "Other"
-  },
-  {
-    "recordName": "subscriptionTerm",
-    "slug": "subscription-term",
-    "title": "Subscription Term",
-    "group": "extended",
-    "summary": "Get list of records.",
-    "docsPath": "./public/records/subscription-term.html",
-    "stats": {
-      "operations": 6,
-      "transforms": 0,
-      "schemaFields": 0,
-      "outgoingTransforms": 0,
-      "incomingTransforms": 0
-    },
-    "dependencies": [],
-    "endpoints": [
-      {
-        "method": "GET",
-        "path": "/subscriptionTerm",
-        "summary": "Get list of records.",
-        "isTransform": false
-      },
-      {
-        "method": "POST",
-        "path": "/subscriptionTerm",
-        "summary": "Insert record.",
-        "isTransform": false
-      },
-      {
-        "method": "DELETE",
-        "path": "/subscriptionTerm/{id}",
-        "summary": "Remove record.",
-        "isTransform": false
-      },
-      {
-        "method": "GET",
-        "path": "/subscriptionTerm/{id}",
-        "summary": "Get record.",
-        "isTransform": false
-      },
-      {
-        "method": "PATCH",
-        "path": "/subscriptionTerm/{id}",
-        "summary": "Update record.",
-        "isTransform": false
-      },
-      {
-        "method": "PUT",
-        "path": "/subscriptionTerm/{id}",
-        "summary": "Insert or update record.",
-        "isTransform": false
-      }
-    ],
-    "category": "reference",
-    "categoryLabel": "Reference"
   },
   {
     "recordName": "subtotalItem",
@@ -10156,295 +10587,6 @@
     "categoryLabel": "Other"
   },
   {
-    "recordName": "vendorBill",
-    "slug": "vendor-bill",
-    "title": "Vendor Bill",
-    "group": "extended",
-    "summary": "Get list of records. 3 transform workflows available. 17 linked dependency records.",
-    "docsPath": "./public/records/vendor-bill.html",
-    "stats": {
-      "operations": 9,
-      "transforms": 3,
-      "schemaFields": 0,
-      "outgoingTransforms": 3,
-      "incomingTransforms": 2
-    },
-    "dependencies": [
-      "vendorCredit",
-      "vendorPayment",
-      "vendorReturnAuthorization",
-      "account",
-      "classification",
-      "currency",
-      "department",
-      "customer",
-      "partner",
-      "vendor",
-      "employee",
-      "contact",
-      "location",
-      "nexus",
-      "accountingPeriod",
-      "subsidiary",
-      "term"
-    ],
-    "endpoints": [
-      {
-        "method": "GET",
-        "path": "/vendorBill",
-        "summary": "Get list of records.",
-        "isTransform": false
-      },
-      {
-        "method": "POST",
-        "path": "/vendorBill",
-        "summary": "Insert record.",
-        "isTransform": false
-      },
-      {
-        "method": "DELETE",
-        "path": "/vendorBill/{id}",
-        "summary": "Remove record.",
-        "isTransform": false
-      },
-      {
-        "method": "GET",
-        "path": "/vendorBill/{id}",
-        "summary": "Get record.",
-        "isTransform": false
-      },
-      {
-        "method": "PATCH",
-        "path": "/vendorBill/{id}",
-        "summary": "Update record.",
-        "isTransform": false
-      },
-      {
-        "method": "PUT",
-        "path": "/vendorBill/{id}",
-        "summary": "Insert or update record.",
-        "isTransform": false
-      },
-      {
-        "method": "POST",
-        "path": "/vendorBill/{id}/!transform/vendorCredit",
-        "summary": "Transform to vendorCredit.",
-        "isTransform": true
-      },
-      {
-        "method": "POST",
-        "path": "/vendorBill/{id}/!transform/vendorPayment",
-        "summary": "Transform to vendorPayment.",
-        "isTransform": true
-      },
-      {
-        "method": "POST",
-        "path": "/vendorBill/{id}/!transform/vendorReturnAuthorization",
-        "summary": "Transform to vendorReturnAuthorization.",
-        "isTransform": true
-      }
-    ],
-    "category": "transaction",
-    "categoryLabel": "Transaction"
-  },
-  {
-    "recordName": "vendorCategory",
-    "slug": "vendor-category",
-    "title": "Vendor Category",
-    "group": "extended",
-    "summary": "Get list of records.",
-    "docsPath": "./public/records/vendor-category.html",
-    "stats": {
-      "operations": 6,
-      "transforms": 0,
-      "schemaFields": 0,
-      "outgoingTransforms": 0,
-      "incomingTransforms": 0
-    },
-    "dependencies": [],
-    "endpoints": [
-      {
-        "method": "GET",
-        "path": "/vendorCategory",
-        "summary": "Get list of records.",
-        "isTransform": false
-      },
-      {
-        "method": "POST",
-        "path": "/vendorCategory",
-        "summary": "Insert record.",
-        "isTransform": false
-      },
-      {
-        "method": "DELETE",
-        "path": "/vendorCategory/{id}",
-        "summary": "Remove record.",
-        "isTransform": false
-      },
-      {
-        "method": "GET",
-        "path": "/vendorCategory/{id}",
-        "summary": "Get record.",
-        "isTransform": false
-      },
-      {
-        "method": "PATCH",
-        "path": "/vendorCategory/{id}",
-        "summary": "Update record.",
-        "isTransform": false
-      },
-      {
-        "method": "PUT",
-        "path": "/vendorCategory/{id}",
-        "summary": "Insert or update record.",
-        "isTransform": false
-      }
-    ],
-    "category": "entity",
-    "categoryLabel": "Entity"
-  },
-  {
-    "recordName": "vendorCredit",
-    "slug": "vendor-credit",
-    "title": "Vendor Credit",
-    "group": "extended",
-    "summary": "Get list of records. 13 linked dependency records.",
-    "docsPath": "./public/records/vendor-credit.html",
-    "stats": {
-      "operations": 6,
-      "transforms": 0,
-      "schemaFields": 0,
-      "outgoingTransforms": 0,
-      "incomingTransforms": 2
-    },
-    "dependencies": [
-      "account",
-      "classification",
-      "currency",
-      "department",
-      "customer",
-      "partner",
-      "vendor",
-      "employee",
-      "contact",
-      "location",
-      "nexus",
-      "accountingPeriod",
-      "subsidiary"
-    ],
-    "endpoints": [
-      {
-        "method": "GET",
-        "path": "/vendorCredit",
-        "summary": "Get list of records.",
-        "isTransform": false
-      },
-      {
-        "method": "POST",
-        "path": "/vendorCredit",
-        "summary": "Insert record.",
-        "isTransform": false
-      },
-      {
-        "method": "DELETE",
-        "path": "/vendorCredit/{id}",
-        "summary": "Remove record.",
-        "isTransform": false
-      },
-      {
-        "method": "GET",
-        "path": "/vendorCredit/{id}",
-        "summary": "Get record.",
-        "isTransform": false
-      },
-      {
-        "method": "PATCH",
-        "path": "/vendorCredit/{id}",
-        "summary": "Update record.",
-        "isTransform": false
-      },
-      {
-        "method": "PUT",
-        "path": "/vendorCredit/{id}",
-        "summary": "Insert or update record.",
-        "isTransform": false
-      }
-    ],
-    "category": "entity",
-    "categoryLabel": "Entity"
-  },
-  {
-    "recordName": "vendorPayment",
-    "slug": "vendor-payment",
-    "title": "Vendor Payment",
-    "group": "extended",
-    "summary": "Get list of records. 14 linked dependency records.",
-    "docsPath": "./public/records/vendor-payment.html",
-    "stats": {
-      "operations": 6,
-      "transforms": 0,
-      "schemaFields": 0,
-      "outgoingTransforms": 0,
-      "incomingTransforms": 2
-    },
-    "dependencies": [
-      "account",
-      "classification",
-      "currency",
-      "department",
-      "customer",
-      "partner",
-      "vendor",
-      "employee",
-      "contact",
-      "location",
-      "nexus",
-      "accountingPeriod",
-      "subsidiary",
-      "journalEntry"
-    ],
-    "endpoints": [
-      {
-        "method": "GET",
-        "path": "/vendorPayment",
-        "summary": "Get list of records.",
-        "isTransform": false
-      },
-      {
-        "method": "POST",
-        "path": "/vendorPayment",
-        "summary": "Insert record.",
-        "isTransform": false
-      },
-      {
-        "method": "DELETE",
-        "path": "/vendorPayment/{id}",
-        "summary": "Remove record.",
-        "isTransform": false
-      },
-      {
-        "method": "GET",
-        "path": "/vendorPayment/{id}",
-        "summary": "Get record.",
-        "isTransform": false
-      },
-      {
-        "method": "PATCH",
-        "path": "/vendorPayment/{id}",
-        "summary": "Update record.",
-        "isTransform": false
-      },
-      {
-        "method": "PUT",
-        "path": "/vendorPayment/{id}",
-        "summary": "Insert or update record.",
-        "isTransform": false
-      }
-    ],
-    "category": "transaction",
-    "categoryLabel": "Transaction"
-  },
-  {
     "recordName": "vendorPrepayment",
     "slug": "vendor-prepayment",
     "title": "Vendor Prepayment",
@@ -10591,148 +10733,6 @@
     ],
     "category": "transaction",
     "categoryLabel": "Transaction"
-  },
-  {
-    "recordName": "vendorReturnAuthorization",
-    "slug": "vendor-return-authorization",
-    "title": "Vendor Return Authorization",
-    "group": "extended",
-    "summary": "Get list of records. 2 transform workflows available. 13 linked dependency records.",
-    "docsPath": "./public/records/vendor-return-authorization.html",
-    "stats": {
-      "operations": 8,
-      "transforms": 2,
-      "schemaFields": 0,
-      "outgoingTransforms": 2,
-      "incomingTransforms": 2
-    },
-    "dependencies": [
-      "itemFulfillment",
-      "vendorCredit",
-      "classification",
-      "currency",
-      "department",
-      "customer",
-      "partner",
-      "vendor",
-      "employee",
-      "contact",
-      "location",
-      "nexus",
-      "subsidiary"
-    ],
-    "endpoints": [
-      {
-        "method": "GET",
-        "path": "/vendorReturnAuthorization",
-        "summary": "Get list of records.",
-        "isTransform": false
-      },
-      {
-        "method": "POST",
-        "path": "/vendorReturnAuthorization",
-        "summary": "Insert record.",
-        "isTransform": false
-      },
-      {
-        "method": "DELETE",
-        "path": "/vendorReturnAuthorization/{id}",
-        "summary": "Remove record.",
-        "isTransform": false
-      },
-      {
-        "method": "GET",
-        "path": "/vendorReturnAuthorization/{id}",
-        "summary": "Get record.",
-        "isTransform": false
-      },
-      {
-        "method": "PATCH",
-        "path": "/vendorReturnAuthorization/{id}",
-        "summary": "Update record.",
-        "isTransform": false
-      },
-      {
-        "method": "PUT",
-        "path": "/vendorReturnAuthorization/{id}",
-        "summary": "Insert or update record.",
-        "isTransform": false
-      },
-      {
-        "method": "POST",
-        "path": "/vendorReturnAuthorization/{id}/!transform/itemFulfillment",
-        "summary": "Transform to itemFulfillment.",
-        "isTransform": true
-      },
-      {
-        "method": "POST",
-        "path": "/vendorReturnAuthorization/{id}/!transform/vendorCredit",
-        "summary": "Transform to vendorCredit.",
-        "isTransform": true
-      }
-    ],
-    "category": "transaction",
-    "categoryLabel": "Transaction"
-  },
-  {
-    "recordName": "vendorSubsidiaryRelationship",
-    "slug": "vendor-subsidiary-relationship",
-    "title": "Vendor Subsidiary Relationship",
-    "group": "extended",
-    "summary": "Get list of records. 3 linked dependency records.",
-    "docsPath": "./public/records/vendor-subsidiary-relationship.html",
-    "stats": {
-      "operations": 6,
-      "transforms": 0,
-      "schemaFields": 0,
-      "outgoingTransforms": 0,
-      "incomingTransforms": 0
-    },
-    "dependencies": [
-      "currency",
-      "vendor",
-      "subsidiary"
-    ],
-    "endpoints": [
-      {
-        "method": "GET",
-        "path": "/vendorSubsidiaryRelationship",
-        "summary": "Get list of records.",
-        "isTransform": false
-      },
-      {
-        "method": "POST",
-        "path": "/vendorSubsidiaryRelationship",
-        "summary": "Insert record.",
-        "isTransform": false
-      },
-      {
-        "method": "DELETE",
-        "path": "/vendorSubsidiaryRelationship/{id}",
-        "summary": "Remove record.",
-        "isTransform": false
-      },
-      {
-        "method": "GET",
-        "path": "/vendorSubsidiaryRelationship/{id}",
-        "summary": "Get record.",
-        "isTransform": false
-      },
-      {
-        "method": "PATCH",
-        "path": "/vendorSubsidiaryRelationship/{id}",
-        "summary": "Update record.",
-        "isTransform": false
-      },
-      {
-        "method": "PUT",
-        "path": "/vendorSubsidiaryRelationship/{id}",
-        "summary": "Insert or update record.",
-        "isTransform": false
-      }
-    ],
-    "category": "entity",
-    "categoryLabel": "Entity"
   },
   {
     "recordName": "workOrder",

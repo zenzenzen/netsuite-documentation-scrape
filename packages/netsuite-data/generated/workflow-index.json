@@ -24,6 +24,30 @@
     "outgoingTransforms": 5
   },
   {
+    "recordName": "vendor",
+    "slug": "vendor",
+    "title": "Vendor",
+    "category": "entity",
+    "categoryLabel": "Entity",
+    "outgoingTransforms": 4
+  },
+  {
+    "recordName": "vendorBill",
+    "slug": "vendor-bill",
+    "title": "Vendor Bill",
+    "category": "transaction",
+    "categoryLabel": "Transaction",
+    "outgoingTransforms": 3
+  },
+  {
+    "recordName": "vendorReturnAuthorization",
+    "slug": "vendor-return-authorization",
+    "title": "Vendor Return Authorization",
+    "category": "transaction",
+    "categoryLabel": "Transaction",
+    "outgoingTransforms": 2
+  },
+  {
     "recordName": "cashSale",
     "slug": "cash-sale",
     "title": "Cash Sale",
@@ -64,20 +88,20 @@
     "outgoingTransforms": 4
   },
   {
+    "recordName": "purchaseOrder",
+    "slug": "purchase-order",
+    "title": "Purchase Order",
+    "category": "transaction",
+    "categoryLabel": "Transaction",
+    "outgoingTransforms": 3
+  },
+  {
     "recordName": "returnAuthorization",
     "slug": "return-authorization",
     "title": "Return Authorization",
     "category": "transaction",
     "categoryLabel": "Transaction",
     "outgoingTransforms": 3
-  },
-  {
-    "recordName": "vendor",
-    "slug": "vendor",
-    "title": "Vendor",
-    "category": "entity",
-    "categoryLabel": "Entity",
-    "outgoingTransforms": 4
   },
   {
     "recordName": "assemblyBuild",
@@ -128,14 +152,6 @@
     "outgoingTransforms": 4
   },
   {
-    "recordName": "purchaseOrder",
-    "slug": "purchase-order",
-    "title": "Purchase Order",
-    "category": "transaction",
-    "categoryLabel": "Transaction",
-    "outgoingTransforms": 3
-  },
-  {
     "recordName": "purchaseRequisition",
     "slug": "purchase-requisition",
     "title": "Purchase Requisition",
@@ -152,28 +168,12 @@
     "outgoingTransforms": 2
   },
   {
-    "recordName": "vendorBill",
-    "slug": "vendor-bill",
-    "title": "Vendor Bill",
-    "category": "transaction",
-    "categoryLabel": "Transaction",
-    "outgoingTransforms": 3
-  },
-  {
     "recordName": "vendorPrepayment",
     "slug": "vendor-prepayment",
     "title": "Vendor Prepayment",
     "category": "transaction",
     "categoryLabel": "Transaction",
     "outgoingTransforms": 1
-  },
-  {
-    "recordName": "vendorReturnAuthorization",
-    "slug": "vendor-return-authorization",
-    "title": "Vendor Return Authorization",
-    "category": "transaction",
-    "categoryLabel": "Transaction",
-    "outgoingTransforms": 2
   },
   {
     "recordName": "workOrder",
