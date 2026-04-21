@@ -7,7 +7,6 @@ import { readWorkflowConfig } from '../lib/server-data.js';
 const records = getRecordsIndex();
 const workflowConfig = readWorkflowConfig();
 const docsByRecord = buildDocsPathMap(records);
-
 const focusRecords = records.filter((record) => record.group === 'focus');
 const recordsByName = new Map(records.map((record) => [record.recordName, record]));
 const dependencyRecords = records.filter((record) => record.group === 'dependency');
@@ -15,6 +14,16 @@ const focusSet = new Set(focusRecords.map((record) => record.recordName));
 const focusTransforms = workflowConfig.transforms.filter(
   (transform) => focusSet.has(transform.source) || focusSet.has(transform.target)
 );
+
+function toRecordLabel(recordName) {
+  return recordName.replace(/([a-z])([A-Z])/g, '$1 $2');
+}
+
+function getRoutedDocHref(recordName) {
+  const record = recordsByName.get(recordName);
+
+  return record?.docsPath?.startsWith('/records/') ? docsByRecord.get(recordName) || null : null;
+}
 const recurringBillingCards = [
   {
     recordName: 'customer',
@@ -154,17 +163,36 @@ const recurringAmountFieldCards = [
       <p>Cross-record transformations usually carry the most implementation nuance in NetSuite. This strip surfaces the ones touching your focus records first.</p>
     </div>
     <div class="grid record-grid">
-      {focusTransforms.slice(0, 18).map((transform) => (
-        <article class="workflow-card">
-          <div class="kicker">Transform</div>
-          <h3>{transform.source.replace(/([a-z])([A-Z])/g, '$1 $2')} to {transform.target.replace(/([a-z])([A-Z])/g, '$1 $2')}</h3>
-          <div class="record-meta">
-            <span class="pill">{transform.method}</span>
-            <span class="pill mono">{transform.path}</span>
-          </div>
-          <div class="record-copy">{transform.summary || 'Transform route'}</div>
-        </article>
-      ))}
+      {focusTransforms.slice(0, 18).map((transform) => {
+        const sourceHref = getRoutedDocHref(transform.source);
+        const targetHref = getRoutedDocHref(transform.target);
+
+        return (
+          <article class="workflow-card">
+            <div class="kicker">Transform</div>
+            <h3>
+              {targetHref ? (
+                <a href={targetHref}>
+                  {toRecordLabel(transform.source)} to {toRecordLabel(transform.target)}
+                </a>
+              ) : (
+                `${toRecordLabel(transform.source)} to ${toRecordLabel(transform.target)}`
+              )}
+            </h3>
+            <div class="record-meta">
+              <span class="pill">{transform.method}</span>
+              <span class="pill mono">{transform.path}</span>
+            </div>
+            <div class="record-copy">{transform.summary || 'Transform route'}</div>
+            {sourceHref || targetHref ? (
+              <div class="record-actions">
+                {targetHref ? <a class="record-link" href={targetHref}>Open target record</a> : null}
+                {sourceHref ? <a class="record-link secondary" href={sourceHref}>Open source record</a> : null}
+              </div>
+            ) : null}
+          </article>
+        );
+      })}
     </div>
   </section>
 
