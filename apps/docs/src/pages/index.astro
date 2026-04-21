@@ -9,11 +9,84 @@ const workflowConfig = readWorkflowConfig();
 const docsByRecord = buildDocsPathMap(records);
 
 const focusRecords = records.filter((record) => record.group === 'focus');
+const recordsByName = new Map(records.map((record) => [record.recordName, record]));
 const dependencyRecords = records.filter((record) => record.group === 'dependency');
 const focusSet = new Set(focusRecords.map((record) => record.recordName));
 const focusTransforms = workflowConfig.transforms.filter(
   (transform) => focusSet.has(transform.source) || focusSet.has(transform.target)
 );
+const recurringBillingCards = [
+  {
+    recordName: 'customer',
+    kicker: 'Relationship anchor',
+    summary:
+      'Owns the commercial relationship and exposes billing schedule plus subscription-related sublists that feed the recurring billing setup path.',
+  },
+  {
+    recordName: 'billingSchedule',
+    kicker: 'Cadence definition',
+    summary:
+      'Defines first-bill behavior, recurrence frequency, repeat interval, and arrears vs advance billing for recurring charges.',
+  },
+  {
+    recordName: 'billingAccount',
+    kicker: 'Customer billing context',
+    summary:
+      'Binds the customer, billing schedule, currency, and billing start date into the account that the subscription will actually bill through.',
+  },
+  {
+    recordName: 'subscriptionPlan',
+    kicker: 'Default template',
+    summary:
+      'Carries the default line, renewal, and uplift behavior that draft subscriptions inherit before any customer-specific edits.',
+  },
+  {
+    recordName: 'subscriptionTerm',
+    kicker: 'Duration model',
+    summary:
+      'Defines the term type, unit, and duration that shape the subscription lifecycle and renewal defaults.',
+  },
+  {
+    recordName: 'subscription',
+    kicker: 'Recurring contract',
+    summary:
+      'The main draft/create surface for the recurring contract, connecting customer, billing account, plan, price book, and term.',
+  },
+  {
+    recordName: 'subscriptionLine',
+    kicker: 'Line-level behavior',
+    summary:
+      'Controls renewal inclusion, proration, billing mode, and line activation details after the subscription shell exists.',
+  },
+  {
+    recordName: 'subscriptionChangeOrder',
+    kicker: 'Lifecycle changes',
+    summary:
+      'Handles renew, modify pricing, suspend, reactivate, and terminate workflows after the base subscription is already in play.',
+  },
+  {
+    recordName: 'billingRevenueEvent',
+    kicker: 'Downstream event',
+    summary:
+      'Represents downstream billing or revenue activity tied to subscription lines rather than the initial recurring contract setup itself.',
+  },
+];
+const recurringAmountFieldCards = [
+  {
+    recordName: 'estimate',
+    field: 'recurMonthly',
+    title: 'Estimate.recurMonthly',
+    summary:
+      'A sales-pipeline recurring amount signal on an estimate. Useful for forecasting and quoting context, but not the primary SuiteBilling setup endpoint.',
+  },
+  {
+    recordName: 'opportunity',
+    field: 'recurMonthly',
+    title: 'Opportunity.recurMonthly',
+    summary:
+      'A recurring revenue hint on the opportunity record. It helps frame monthly value during pipeline work, but the actual recurring billing setup happens on SuiteBilling records.',
+  },
+];
 ---
 
 <RecordLayout
@@ -90,6 +163,63 @@ const focusTransforms = workflowConfig.transforms.filter(
             <span class="pill mono">{transform.path}</span>
           </div>
           <div class="record-copy">{transform.summary || 'Transform route'}</div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="page-section" data-page-section data-section-id="recurring-billing" data-section-title="Recurring Billing">
+    <div class="section-heading">
+      <h2>Recurring Billing</h2>
+      <p>This curated slice surfaces the actual SuiteBilling setup objects so the monthly billing implementation story stays separate from the sales-order transform graph.</p>
+    </div>
+    <div class="grid record-grid">
+      {recurringBillingCards.map((card) => {
+        const record = recordsByName.get(card.recordName);
+
+        if (!record) {
+          return null;
+        }
+
+        return (
+          <article class="record-card">
+            <div class="kicker">{card.kicker}</div>
+            <h3>{record.title}</h3>
+            <div class="record-meta">
+              <span class="pill">{record.stats.operations} endpoints</span>
+              <span class="pill">{record.stats.transforms} transforms</span>
+            </div>
+            <div class="record-copy">{card.summary}</div>
+            <div class="record-actions">
+              <a class="record-link secondary" href={docsByRecord.get(record.recordName)}>Open record page</a>
+              <button class="record-link secondary favorite-toggle" type="button" data-favorite-toggle data-record-name={record.recordName}>
+                Pin favorite
+              </button>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </section>
+
+  <section class="page-section" data-page-section data-section-id="recurring-amount-field-explainers" data-section-title="Recurring Amount Field Explainers">
+    <div class="section-heading">
+      <h2>Recurring Amount Field Explainers</h2>
+      <p>These fields describe recurring value on pipeline records, but they are not the primary REST records used to stand up SuiteBilling subscriptions and monthly billing operations.</p>
+    </div>
+    <div class="grid record-grid">
+      {recurringAmountFieldCards.map((card) => (
+        <article class="record-card">
+          <div class="kicker">Field explainer</div>
+          <h3>{card.title}</h3>
+          <div class="record-meta">
+            <span class="pill">{card.field}</span>
+            <span class="pill">Sales pipeline signal</span>
+          </div>
+          <div class="record-copy">{card.summary}</div>
+          <div class="record-actions">
+            <a class="record-link secondary" href={docsByRecord.get(card.recordName)}>Open {recordsByName.get(card.recordName)?.title || card.recordName}</a>
+          </div>
         </article>
       ))}
     </div>
