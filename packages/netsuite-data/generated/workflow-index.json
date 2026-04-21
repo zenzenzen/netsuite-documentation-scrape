@@ -1,5 +1,13 @@
 [
   {
+    "recordName": "creditMemo",
+    "slug": "credit-memo",
+    "title": "Credit Memo",
+    "category": "transaction",
+    "categoryLabel": "Transaction",
+    "outgoingTransforms": 0
+  },
+  {
     "recordName": "customer",
     "slug": "customer",
     "title": "Customer",
@@ -16,12 +24,44 @@
     "outgoingTransforms": 3
   },
   {
+    "recordName": "itemFulfillment",
+    "slug": "item-fulfillment",
+    "title": "Item Fulfillment",
+    "category": "inventory",
+    "categoryLabel": "Inventory",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "partner",
+    "slug": "partner",
+    "title": "Partner",
+    "category": "entity",
+    "categoryLabel": "Entity",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "paymentItem",
+    "slug": "payment-item",
+    "title": "Payment Item",
+    "category": "transaction",
+    "categoryLabel": "Transaction",
+    "outgoingTransforms": 0
+  },
+  {
     "recordName": "salesOrder",
     "slug": "sales-order",
     "title": "Sales Order",
     "category": "transaction",
     "categoryLabel": "Transaction",
     "outgoingTransforms": 5
+  },
+  {
+    "recordName": "subsidiary",
+    "slug": "subsidiary",
+    "title": "Subsidiary",
+    "category": "organization",
+    "categoryLabel": "Organization",
+    "outgoingTransforms": 0
   },
   {
     "recordName": "vendor",
@@ -40,12 +80,124 @@
     "outgoingTransforms": 3
   },
   {
+    "recordName": "vendorCategory",
+    "slug": "vendor-category",
+    "title": "Vendor Category",
+    "category": "entity",
+    "categoryLabel": "Entity",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "vendorCredit",
+    "slug": "vendor-credit",
+    "title": "Vendor Credit",
+    "category": "entity",
+    "categoryLabel": "Entity",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "vendorPayment",
+    "slug": "vendor-payment",
+    "title": "Vendor Payment",
+    "category": "transaction",
+    "categoryLabel": "Transaction",
+    "outgoingTransforms": 0
+  },
+  {
     "recordName": "vendorReturnAuthorization",
     "slug": "vendor-return-authorization",
     "title": "Vendor Return Authorization",
     "category": "transaction",
     "categoryLabel": "Transaction",
     "outgoingTransforms": 2
+  },
+  {
+    "recordName": "vendorSubsidiaryRelationship",
+    "slug": "vendor-subsidiary-relationship",
+    "title": "Vendor Subsidiary Relationship",
+    "category": "entity",
+    "categoryLabel": "Entity",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "billingAccount",
+    "slug": "billing-account",
+    "title": "Billing Account",
+    "category": "financial",
+    "categoryLabel": "Financial",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "billingRevenueEvent",
+    "slug": "billing-revenue-event",
+    "title": "Billing Revenue Event",
+    "category": "financial",
+    "categoryLabel": "Financial",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "billingSchedule",
+    "slug": "billing-schedule",
+    "title": "Billing Schedule",
+    "category": "financial",
+    "categoryLabel": "Financial",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "subscription",
+    "slug": "subscription",
+    "title": "Subscription",
+    "category": "other",
+    "categoryLabel": "Other",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "subscriptionChangeOrder",
+    "slug": "subscription-change-order",
+    "title": "Subscription Change Order",
+    "category": "other",
+    "categoryLabel": "Other",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "subscriptionLine",
+    "slug": "subscription-line",
+    "title": "Subscription Line",
+    "category": "other",
+    "categoryLabel": "Other",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "subscriptionPlan",
+    "slug": "subscription-plan",
+    "title": "Subscription Plan",
+    "category": "other",
+    "categoryLabel": "Other",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "subscriptionTerm",
+    "slug": "subscription-term",
+    "title": "Subscription Term",
+    "category": "reference",
+    "categoryLabel": "Reference",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "account",
+    "slug": "account",
+    "title": "Account",
+    "category": "financial",
+    "categoryLabel": "Financial",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "accountingPeriod",
+    "slug": "accounting-period",
+    "title": "Accounting Period",
+    "category": "organization",
+    "categoryLabel": "Organization",
+    "outgoingTransforms": 0
   },
   {
     "recordName": "cashSale",
@@ -56,12 +208,84 @@
     "outgoingTransforms": 2
   },
   {
+    "recordName": "classification",
+    "slug": "classification",
+    "title": "Classification",
+    "category": "organization",
+    "categoryLabel": "Organization",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "contact",
+    "slug": "contact",
+    "title": "Contact",
+    "category": "entity",
+    "categoryLabel": "Entity",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "couponCode",
+    "slug": "coupon-code",
+    "title": "Coupon Code",
+    "category": "catalog",
+    "categoryLabel": "Catalog",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "currency",
+    "slug": "currency",
+    "title": "Currency",
+    "category": "financial",
+    "categoryLabel": "Financial",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "customerCategory",
+    "slug": "customer-category",
+    "title": "Customer Category",
+    "category": "entity",
+    "categoryLabel": "Entity",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "customerMessage",
+    "slug": "customer-message",
+    "title": "Customer Message",
+    "category": "entity",
+    "categoryLabel": "Entity",
+    "outgoingTransforms": 0
+  },
+  {
     "recordName": "customerPayment",
     "slug": "customer-payment",
     "title": "Customer Payment",
     "category": "transaction",
     "categoryLabel": "Transaction",
     "outgoingTransforms": 1
+  },
+  {
+    "recordName": "customerStatus",
+    "slug": "customer-status",
+    "title": "Customer Status",
+    "category": "entity",
+    "categoryLabel": "Entity",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "department",
+    "slug": "department",
+    "title": "Department",
+    "category": "organization",
+    "categoryLabel": "Organization",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "discountItem",
+    "slug": "discount-item",
+    "title": "Discount Item",
+    "category": "inventory",
+    "categoryLabel": "Inventory",
+    "outgoingTransforms": 0
   },
   {
     "recordName": "employee",
@@ -80,12 +304,68 @@
     "outgoingTransforms": 3
   },
   {
+    "recordName": "fulfillmentRequest",
+    "slug": "fulfillment-request",
+    "title": "Fulfillment Request",
+    "category": "inventory",
+    "categoryLabel": "Inventory",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "journalEntry",
+    "slug": "journal-entry",
+    "title": "Journal Entry",
+    "category": "transaction",
+    "categoryLabel": "Transaction",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "location",
+    "slug": "location",
+    "title": "Location",
+    "category": "organization",
+    "categoryLabel": "Organization",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "nexus",
+    "slug": "nexus",
+    "title": "Nexus",
+    "category": "reference",
+    "categoryLabel": "Reference",
+    "outgoingTransforms": 0
+  },
+  {
     "recordName": "opportunity",
     "slug": "opportunity",
     "title": "Opportunity",
     "category": "other",
     "categoryLabel": "Other",
     "outgoingTransforms": 4
+  },
+  {
+    "recordName": "paymentMethod",
+    "slug": "payment-method",
+    "title": "Payment Method",
+    "category": "transaction",
+    "categoryLabel": "Transaction",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "priceLevel",
+    "slug": "price-level",
+    "title": "Price Level",
+    "category": "catalog",
+    "categoryLabel": "Catalog",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "promotionCode",
+    "slug": "promotion-code",
+    "title": "Promotion Code",
+    "category": "catalog",
+    "categoryLabel": "Catalog",
+    "outgoingTransforms": 0
   },
   {
     "recordName": "purchaseOrder",
@@ -104,6 +384,46 @@
     "outgoingTransforms": 3
   },
   {
+    "recordName": "shipItem",
+    "slug": "ship-item",
+    "title": "Ship Item",
+    "category": "inventory",
+    "categoryLabel": "Inventory",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "term",
+    "slug": "term",
+    "title": "Term",
+    "category": "reference",
+    "categoryLabel": "Reference",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "webSite",
+    "slug": "web-site",
+    "title": "Web Site",
+    "category": "catalog",
+    "categoryLabel": "Catalog",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "advIntercompanyJournalEntry",
+    "slug": "adv-intercompany-journal-entry",
+    "title": "Adv Intercompany Journal Entry",
+    "category": "transaction",
+    "categoryLabel": "Transaction",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "analyticalImpact",
+    "slug": "analytical-impact",
+    "title": "Analytical Impact",
+    "category": "other",
+    "categoryLabel": "Other",
+    "outgoingTransforms": 0
+  },
+  {
     "recordName": "assemblyBuild",
     "slug": "assembly-build",
     "title": "Assembly Build",
@@ -120,12 +440,188 @@
     "outgoingTransforms": 2
   },
   {
+    "recordName": "assemblyUnbuild",
+    "slug": "assembly-unbuild",
+    "title": "Assembly Unbuild",
+    "category": "inventory",
+    "categoryLabel": "Inventory",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "bin",
+    "slug": "bin",
+    "title": "Bin",
+    "category": "inventory",
+    "categoryLabel": "Inventory",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "binTransfer",
+    "slug": "bin-transfer",
+    "title": "Bin Transfer",
+    "category": "inventory",
+    "categoryLabel": "Inventory",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "binWorksheet",
+    "slug": "bin-worksheet",
+    "title": "Bin Worksheet",
+    "category": "inventory",
+    "categoryLabel": "Inventory",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "blanketPurchaseOrder",
+    "slug": "blanket-purchase-order",
+    "title": "Blanket Purchase Order",
+    "category": "transaction",
+    "categoryLabel": "Transaction",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "bom",
+    "slug": "bom",
+    "title": "Bom",
+    "category": "other",
+    "categoryLabel": "Other",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "bomRevision",
+    "slug": "bom-revision",
+    "title": "Bom Revision",
+    "category": "other",
+    "categoryLabel": "Other",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "budgetCategory",
+    "slug": "budget-category",
+    "title": "Budget Category",
+    "category": "reference",
+    "categoryLabel": "Reference",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "calendarEvent",
+    "slug": "calendar-event",
+    "title": "Calendar Event",
+    "category": "other",
+    "categoryLabel": "Other",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "campaign",
+    "slug": "campaign",
+    "title": "Campaign",
+    "category": "other",
+    "categoryLabel": "Other",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "campaignResponse",
+    "slug": "campaign-response",
+    "title": "Campaign Response",
+    "category": "other",
+    "categoryLabel": "Other",
+    "outgoingTransforms": 0
+  },
+  {
     "recordName": "cashRefund",
     "slug": "cash-refund",
     "title": "Cash Refund",
     "category": "transaction",
     "categoryLabel": "Transaction",
     "outgoingTransforms": 1
+  },
+  {
+    "recordName": "charge",
+    "slug": "charge",
+    "title": "Charge",
+    "category": "other",
+    "categoryLabel": "Other",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "check",
+    "slug": "check",
+    "title": "Check",
+    "category": "other",
+    "categoryLabel": "Other",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "commerceCategory",
+    "slug": "commerce-category",
+    "title": "Commerce Category",
+    "category": "reference",
+    "categoryLabel": "Reference",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "competitor",
+    "slug": "competitor",
+    "title": "Competitor",
+    "category": "other",
+    "categoryLabel": "Other",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "consolidatedExchangeRate",
+    "slug": "consolidated-exchange-rate",
+    "title": "Consolidated Exchange Rate",
+    "category": "other",
+    "categoryLabel": "Other",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "contactCategory",
+    "slug": "contact-category",
+    "title": "Contact Category",
+    "category": "entity",
+    "categoryLabel": "Entity",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "contactRole",
+    "slug": "contact-role",
+    "title": "Contact Role",
+    "category": "entity",
+    "categoryLabel": "Entity",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "costCategory",
+    "slug": "cost-category",
+    "title": "Cost Category",
+    "category": "reference",
+    "categoryLabel": "Reference",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "creditCardCharge",
+    "slug": "credit-card-charge",
+    "title": "Credit Card Charge",
+    "category": "other",
+    "categoryLabel": "Other",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "creditCardRefund",
+    "slug": "credit-card-refund",
+    "title": "Credit Card Refund",
+    "category": "other",
+    "categoryLabel": "Other",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "currencyRate",
+    "slug": "currency-rate",
+    "title": "Currency Rate",
+    "category": "financial",
+    "categoryLabel": "Financial",
+    "outgoingTransforms": 0
   },
   {
     "recordName": "customerDeposit",
@@ -136,12 +632,236 @@
     "outgoingTransforms": 2
   },
   {
+    "recordName": "customerRefund",
+    "slug": "customer-refund",
+    "title": "Customer Refund",
+    "category": "entity",
+    "categoryLabel": "Entity",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "customerSubsidiaryRelationship",
+    "slug": "customer-subsidiary-relationship",
+    "title": "Customer Subsidiary Relationship",
+    "category": "entity",
+    "categoryLabel": "Entity",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "deposit",
+    "slug": "deposit",
+    "title": "Deposit",
+    "category": "transaction",
+    "categoryLabel": "Transaction",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "depositApplication",
+    "slug": "deposit-application",
+    "title": "Deposit Application",
+    "category": "transaction",
+    "categoryLabel": "Transaction",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "descriptionItem",
+    "slug": "description-item",
+    "title": "Description Item",
+    "category": "inventory",
+    "categoryLabel": "Inventory",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "downloadItem",
+    "slug": "download-item",
+    "title": "Download Item",
+    "category": "inventory",
+    "categoryLabel": "Inventory",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "emailTemplate",
+    "slug": "email-template",
+    "title": "Email Template",
+    "category": "other",
+    "categoryLabel": "Other",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "expenseCategory",
+    "slug": "expense-category",
+    "title": "Expense Category",
+    "category": "financial",
+    "categoryLabel": "Financial",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "expenseReport",
+    "slug": "expense-report",
+    "title": "Expense Report",
+    "category": "financial",
+    "categoryLabel": "Financial",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "fairValuePrice",
+    "slug": "fair-value-price",
+    "title": "Fair Value Price",
+    "category": "catalog",
+    "categoryLabel": "Catalog",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "giftCertificate",
+    "slug": "gift-certificate",
+    "title": "Gift Certificate",
+    "category": "other",
+    "categoryLabel": "Other",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "giftCertificateItem",
+    "slug": "gift-certificate-item",
+    "title": "Gift Certificate Item",
+    "category": "inventory",
+    "categoryLabel": "Inventory",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "globalAccountMapping",
+    "slug": "global-account-mapping",
+    "title": "Global Account Mapping",
+    "category": "financial",
+    "categoryLabel": "Financial",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "hcmJob",
+    "slug": "hcm-job",
+    "title": "Hcm Job",
+    "category": "entity",
+    "categoryLabel": "Entity",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "impactSubcategory",
+    "slug": "impact-subcategory",
+    "title": "Impact Subcategory",
+    "category": "reference",
+    "categoryLabel": "Reference",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "inboundShipment",
+    "slug": "inbound-shipment",
+    "title": "Inbound Shipment",
+    "category": "inventory",
+    "categoryLabel": "Inventory",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "intercompanyJournalEntry",
+    "slug": "intercompany-journal-entry",
+    "title": "Intercompany Journal Entry",
+    "category": "transaction",
+    "categoryLabel": "Transaction",
+    "outgoingTransforms": 0
+  },
+  {
     "recordName": "intercompanyTransferOrder",
     "slug": "intercompany-transfer-order",
     "title": "Intercompany Transfer Order",
     "category": "transaction",
     "categoryLabel": "Transaction",
     "outgoingTransforms": 2
+  },
+  {
+    "recordName": "inventoryAdjustment",
+    "slug": "inventory-adjustment",
+    "title": "Inventory Adjustment",
+    "category": "inventory",
+    "categoryLabel": "Inventory",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "inventoryCostRevaluation",
+    "slug": "inventory-cost-revaluation",
+    "title": "Inventory Cost Revaluation",
+    "category": "inventory",
+    "categoryLabel": "Inventory",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "inventoryCount",
+    "slug": "inventory-count",
+    "title": "Inventory Count",
+    "category": "inventory",
+    "categoryLabel": "Inventory",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "inventoryItem",
+    "slug": "inventory-item",
+    "title": "Inventory Item",
+    "category": "inventory",
+    "categoryLabel": "Inventory",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "inventoryNumber",
+    "slug": "inventory-number",
+    "title": "Inventory Number",
+    "category": "inventory",
+    "categoryLabel": "Inventory",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "inventoryTransfer",
+    "slug": "inventory-transfer",
+    "title": "Inventory Transfer",
+    "category": "inventory",
+    "categoryLabel": "Inventory",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "issue",
+    "slug": "issue",
+    "title": "Issue",
+    "category": "other",
+    "categoryLabel": "Other",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "itemAccountMapping",
+    "slug": "item-account-mapping",
+    "title": "Item Account Mapping",
+    "category": "inventory",
+    "categoryLabel": "Inventory",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "itemGroup",
+    "slug": "item-group",
+    "title": "Item Group",
+    "category": "inventory",
+    "categoryLabel": "Inventory",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "itemReceipt",
+    "slug": "item-receipt",
+    "title": "Item Receipt",
+    "category": "inventory",
+    "categoryLabel": "Inventory",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "itemRevision",
+    "slug": "item-revision",
+    "title": "Item Revision",
+    "category": "inventory",
+    "categoryLabel": "Inventory",
+    "outgoingTransforms": 0
   },
   {
     "recordName": "job",
@@ -152,12 +872,372 @@
     "outgoingTransforms": 4
   },
   {
+    "recordName": "jobStatus",
+    "slug": "job-status",
+    "title": "Job Status",
+    "category": "entity",
+    "categoryLabel": "Entity",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "jobType",
+    "slug": "job-type",
+    "title": "Job Type",
+    "category": "entity",
+    "categoryLabel": "Entity",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "kitItem",
+    "slug": "kit-item",
+    "title": "Kit Item",
+    "category": "inventory",
+    "categoryLabel": "Inventory",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "manufacturingCostTemplate",
+    "slug": "manufacturing-cost-template",
+    "title": "Manufacturing Cost Template",
+    "category": "other",
+    "categoryLabel": "Other",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "manufacturingOperationTask",
+    "slug": "manufacturing-operation-task",
+    "title": "Manufacturing Operation Task",
+    "category": "other",
+    "categoryLabel": "Other",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "manufacturingRouting",
+    "slug": "manufacturing-routing",
+    "title": "Manufacturing Routing",
+    "category": "other",
+    "categoryLabel": "Other",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "markupItem",
+    "slug": "markup-item",
+    "title": "Markup Item",
+    "category": "inventory",
+    "categoryLabel": "Inventory",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "merchandiseHierarchyLevel",
+    "slug": "merchandise-hierarchy-level",
+    "title": "Merchandise Hierarchy Level",
+    "category": "other",
+    "categoryLabel": "Other",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "merchandiseHierarchyNode",
+    "slug": "merchandise-hierarchy-node",
+    "title": "Merchandise Hierarchy Node",
+    "category": "other",
+    "categoryLabel": "Other",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "merchandiseHierarchyVersion",
+    "slug": "merchandise-hierarchy-version",
+    "title": "Merchandise Hierarchy Version",
+    "category": "other",
+    "categoryLabel": "Other",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "message",
+    "slug": "message",
+    "title": "Message",
+    "category": "other",
+    "categoryLabel": "Other",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "nonInventoryPurchaseItem",
+    "slug": "non-inventory-purchase-item",
+    "title": "Non Inventory Purchase Item",
+    "category": "inventory",
+    "categoryLabel": "Inventory",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "nonInventoryResaleItem",
+    "slug": "non-inventory-resale-item",
+    "title": "Non Inventory Resale Item",
+    "category": "inventory",
+    "categoryLabel": "Inventory",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "nonInventorySaleItem",
+    "slug": "non-inventory-sale-item",
+    "title": "Non Inventory Sale Item",
+    "category": "inventory",
+    "categoryLabel": "Inventory",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "noteType",
+    "slug": "note-type",
+    "title": "Note Type",
+    "category": "reference",
+    "categoryLabel": "Reference",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "otherChargePurchaseItem",
+    "slug": "other-charge-purchase-item",
+    "title": "Other Charge Purchase Item",
+    "category": "inventory",
+    "categoryLabel": "Inventory",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "otherChargeResaleItem",
+    "slug": "other-charge-resale-item",
+    "title": "Other Charge Resale Item",
+    "category": "inventory",
+    "categoryLabel": "Inventory",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "otherChargeSaleItem",
+    "slug": "other-charge-sale-item",
+    "title": "Other Charge Sale Item",
+    "category": "inventory",
+    "categoryLabel": "Inventory",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "otherName",
+    "slug": "other-name",
+    "title": "Other Name",
+    "category": "other",
+    "categoryLabel": "Other",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "otherNameCategory",
+    "slug": "other-name-category",
+    "title": "Other Name Category",
+    "category": "reference",
+    "categoryLabel": "Reference",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "paycheck",
+    "slug": "paycheck",
+    "title": "Paycheck",
+    "category": "other",
+    "categoryLabel": "Other",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "payrollItem",
+    "slug": "payroll-item",
+    "title": "Payroll Item",
+    "category": "inventory",
+    "categoryLabel": "Inventory",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "periodEndJournal",
+    "slug": "period-end-journal",
+    "title": "Period End Journal",
+    "category": "transaction",
+    "categoryLabel": "Transaction",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "phoneCall",
+    "slug": "phone-call",
+    "title": "Phone Call",
+    "category": "other",
+    "categoryLabel": "Other",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "priceBook",
+    "slug": "price-book",
+    "title": "Price Book",
+    "category": "catalog",
+    "categoryLabel": "Catalog",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "pricePlan",
+    "slug": "price-plan",
+    "title": "Price Plan",
+    "category": "catalog",
+    "categoryLabel": "Catalog",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "pricingGroup",
+    "slug": "pricing-group",
+    "title": "Pricing Group",
+    "category": "other",
+    "categoryLabel": "Other",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "projectTask",
+    "slug": "project-task",
+    "title": "Project Task",
+    "category": "other",
+    "categoryLabel": "Other",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "purchaseContract",
+    "slug": "purchase-contract",
+    "title": "Purchase Contract",
+    "category": "other",
+    "categoryLabel": "Other",
+    "outgoingTransforms": 0
+  },
+  {
     "recordName": "purchaseRequisition",
     "slug": "purchase-requisition",
     "title": "Purchase Requisition",
     "category": "other",
     "categoryLabel": "Other",
     "outgoingTransforms": 1
+  },
+  {
+    "recordName": "resourceGroup",
+    "slug": "resource-group",
+    "title": "Resource Group",
+    "category": "other",
+    "categoryLabel": "Other",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "revRecSchedule",
+    "slug": "rev-rec-schedule",
+    "title": "Rev Rec Schedule",
+    "category": "reference",
+    "categoryLabel": "Reference",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "revRecTemplate",
+    "slug": "rev-rec-template",
+    "title": "Rev Rec Template",
+    "category": "other",
+    "categoryLabel": "Other",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "salesRole",
+    "slug": "sales-role",
+    "title": "Sales Role",
+    "category": "other",
+    "categoryLabel": "Other",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "salesTaxItem",
+    "slug": "sales-tax-item",
+    "title": "Sales Tax Item",
+    "category": "inventory",
+    "categoryLabel": "Inventory",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "servicePurchaseItem",
+    "slug": "service-purchase-item",
+    "title": "Service Purchase Item",
+    "category": "inventory",
+    "categoryLabel": "Inventory",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "serviceResaleItem",
+    "slug": "service-resale-item",
+    "title": "Service Resale Item",
+    "category": "inventory",
+    "categoryLabel": "Inventory",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "serviceSaleItem",
+    "slug": "service-sale-item",
+    "title": "Service Sale Item",
+    "category": "inventory",
+    "categoryLabel": "Inventory",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "statisticalJournalEntry",
+    "slug": "statistical-journal-entry",
+    "title": "Statistical Journal Entry",
+    "category": "transaction",
+    "categoryLabel": "Transaction",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "subtotalItem",
+    "slug": "subtotal-item",
+    "title": "Subtotal Item",
+    "category": "inventory",
+    "categoryLabel": "Inventory",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "supportCase",
+    "slug": "support-case",
+    "title": "Support Case",
+    "category": "other",
+    "categoryLabel": "Other",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "task",
+    "slug": "task",
+    "title": "Task",
+    "category": "other",
+    "categoryLabel": "Other",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "taxType",
+    "slug": "tax-type",
+    "title": "Tax Type",
+    "category": "financial",
+    "categoryLabel": "Financial",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "timeBill",
+    "slug": "time-bill",
+    "title": "Time Bill",
+    "category": "other",
+    "categoryLabel": "Other",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "timeSheet",
+    "slug": "time-sheet",
+    "title": "Time Sheet",
+    "category": "other",
+    "categoryLabel": "Other",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "topic",
+    "slug": "topic",
+    "title": "Topic",
+    "category": "other",
+    "categoryLabel": "Other",
+    "outgoingTransforms": 0
   },
   {
     "recordName": "transferOrder",
@@ -168,6 +1248,22 @@
     "outgoingTransforms": 2
   },
   {
+    "recordName": "unitsType",
+    "slug": "units-type",
+    "title": "Units Type",
+    "category": "reference",
+    "categoryLabel": "Reference",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "usage",
+    "slug": "usage",
+    "title": "Usage",
+    "category": "other",
+    "categoryLabel": "Other",
+    "outgoingTransforms": 0
+  },
+  {
     "recordName": "vendorPrepayment",
     "slug": "vendor-prepayment",
     "title": "Vendor Prepayment",
@@ -176,11 +1272,43 @@
     "outgoingTransforms": 1
   },
   {
+    "recordName": "vendorPrepaymentApplication",
+    "slug": "vendor-prepayment-application",
+    "title": "Vendor Prepayment Application",
+    "category": "transaction",
+    "categoryLabel": "Transaction",
+    "outgoingTransforms": 0
+  },
+  {
     "recordName": "workOrder",
     "slug": "work-order",
     "title": "Work Order",
     "category": "transaction",
     "categoryLabel": "Transaction",
     "outgoingTransforms": 4
+  },
+  {
+    "recordName": "workOrderClose",
+    "slug": "work-order-close",
+    "title": "Work Order Close",
+    "category": "transaction",
+    "categoryLabel": "Transaction",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "workOrderCompletion",
+    "slug": "work-order-completion",
+    "title": "Work Order Completion",
+    "category": "transaction",
+    "categoryLabel": "Transaction",
+    "outgoingTransforms": 0
+  },
+  {
+    "recordName": "workOrderIssue",
+    "slug": "work-order-issue",
+    "title": "Work Order Issue",
+    "category": "transaction",
+    "categoryLabel": "Transaction",
+    "outgoingTransforms": 0
   }
 ]

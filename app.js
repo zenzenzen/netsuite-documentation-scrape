@@ -778,15 +778,24 @@ class WorkflowStudioController {
 
     const queryState = this.repository.parseShareQuery();
     const savedState = this.store.read('workflow-state', null);
+    // Record pages should open anchored to the current record instead of inheriting stale catalog state.
+    const recordPageDefaultBase =
+      this.pageContext.pageKind === 'record'
+        ? this.root.getAttribute('data-default-base') || this.pageContext.currentRecordName || null
+        : null;
     const defaultBaseRecord =
       queryState?.baseRecord ||
+      recordPageDefaultBase ||
       savedState?.baseRecord ||
       this.root.getAttribute('data-default-base') ||
       'salesOrder';
 
     this.state = {
       baseRecord: defaultBaseRecord,
-      lockedLevels: queryState?.lockedLevels || savedState?.lockedLevels || [[defaultBaseRecord]],
+      lockedLevels:
+        queryState?.lockedLevels ||
+        (recordPageDefaultBase ? [[defaultBaseRecord]] : savedState?.lockedLevels) ||
+        [[defaultBaseRecord]],
     };
 
     if (!this.repository.getRecord(this.state.baseRecord)) {

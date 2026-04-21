@@ -214,16 +214,15 @@ function buildWorkflowConfig(records, transforms) {
 
 const workflowConfig = buildWorkflowConfig(allRecords, allTransforms);
 const generatedRecordsIndex = workflowConfig.records.map((record) => enrichRecordCategory(record));
-const generatedWorkflowIndex = generatedRecordsIndex
-  .filter((record) => record.stats?.outgoingTransforms)
-  .map((record) => ({
-    recordName: record.recordName,
-    slug: record.slug,
-    title: record.title,
-    category: record.category,
-    categoryLabel: record.categoryLabel,
-    outgoingTransforms: record.stats.outgoingTransforms,
-  }));
+// Every routed record should be a valid workflow anchor, even if it has no outgoing transforms.
+const generatedWorkflowIndex = generatedRecordsIndex.map((record) => ({
+  recordName: record.recordName,
+  slug: record.slug,
+  title: record.title,
+  category: record.category,
+  categoryLabel: record.categoryLabel,
+  outgoingTransforms: record.stats.outgoingTransforms,
+}));
 
 function buildWorkflowLayouts() {
   return generatedWorkflowIndex.map((record) => {
