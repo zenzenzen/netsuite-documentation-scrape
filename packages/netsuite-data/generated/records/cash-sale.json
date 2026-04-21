@@ -32,7 +32,16 @@
     "promotionCode",
     "shipItem",
     "subsidiary",
-    "term"
+    "term",
+    "cashSale"
+  ],
+  "referencedBy": [
+    "cashSale",
+    "customer",
+    "estimate",
+    "job",
+    "opportunity",
+    "salesOrder"
   ],
   "operations": [
     {

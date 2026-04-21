@@ -13,7 +13,36 @@
     "account",
     "classification",
     "department",
-    "location"
+    "location",
+    "discountItem"
+  ],
+  "referencedBy": [
+    "analyticalImpact",
+    "assemblyBuild",
+    "assemblyUnbuild",
+    "calendarEvent",
+    "cashRefund",
+    "cashSale",
+    "charge",
+    "creditMemo",
+    "discountItem",
+    "estimate",
+    "expenseCategory",
+    "fairValuePrice",
+    "inventoryCostRevaluation",
+    "inventoryNumber",
+    "invoice",
+    "issue",
+    "phoneCall",
+    "promotionCode",
+    "returnAuthorization",
+    "salesOrder",
+    "subscriptionLine",
+    "supportCase",
+    "task",
+    "timeBill",
+    "usage",
+    "workOrder"
   ],
   "operations": [
     {

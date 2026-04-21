@@ -21,7 +21,15 @@
     "accountingPeriod",
     "fulfillmentRequest",
     "shipItem",
-    "subsidiary"
+    "subsidiary",
+    "itemFulfillment"
+  ],
+  "referencedBy": [
+    "intercompanyTransferOrder",
+    "itemFulfillment",
+    "salesOrder",
+    "transferOrder",
+    "vendorReturnAuthorization"
   ],
   "operations": [
     {

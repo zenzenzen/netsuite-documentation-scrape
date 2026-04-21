@@ -22,7 +22,13 @@
     "location",
     "nexus",
     "accountingPeriod",
-    "subsidiary"
+    "subsidiary",
+    "vendorCredit"
+  ],
+  "referencedBy": [
+    "vendorBill",
+    "vendorCredit",
+    "vendorReturnAuthorization"
   ],
   "operations": [
     {

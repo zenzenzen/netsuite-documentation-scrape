@@ -17,7 +17,11 @@
     "subscriptionTerm",
     "employee",
     "subscription",
-    "subsidiary"
+    "subsidiary",
+    "subscriptionChangeOrder"
+  ],
+  "referencedBy": [
+    "subscriptionChangeOrder"
   ],
   "operations": [
     {

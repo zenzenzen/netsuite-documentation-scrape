@@ -31,7 +31,20 @@
     "servicePurchaseItem",
     "otherChargeSaleItem",
     "otherChargeResaleItem",
-    "otherChargePurchaseItem"
+    "otherChargePurchaseItem",
+    "promotionCode"
+  ],
+  "referencedBy": [
+    "campaign",
+    "cashRefund",
+    "cashSale",
+    "couponCode",
+    "creditMemo",
+    "estimate",
+    "invoice",
+    "promotionCode",
+    "returnAuthorization",
+    "salesOrder"
   ],
   "operations": [
     {

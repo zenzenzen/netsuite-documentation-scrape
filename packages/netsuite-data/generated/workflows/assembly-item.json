@@ -11,7 +11,7 @@
           "title": "Assembly Item",
           "group": "extended",
           "summary": "Get list of records. 2 transform workflows available. 13 linked dependency records.",
-          "docsPath": "./public/records/assembly-item.html",
+          "docsPath": "/records/assembly-item",
           "stats": {
             "operations": 8,
             "transforms": 2,
@@ -32,7 +32,8 @@
             "location",
             "pricingGroup",
             "unitsType",
-            "vendor"
+            "vendor",
+            "assemblyItem"
           ],
           "endpoints": [
             {
@@ -102,7 +103,7 @@
           "title": "Assembly Build",
           "group": "extended",
           "summary": "Get list of records. 1 transform workflow available. 33 linked dependency records.",
-          "docsPath": "./public/records/assembly-build.html",
+          "docsPath": "/records/assembly-build",
           "stats": {
             "operations": 7,
             "transforms": 1,
@@ -143,7 +144,8 @@
             "otherChargePurchaseItem",
             "accountingPeriod",
             "itemRevision",
-            "subsidiary"
+            "subsidiary",
+            "assemblyBuild"
           ],
           "endpoints": [
             {
@@ -202,7 +204,7 @@
           "title": "Work Order",
           "group": "extended",
           "summary": "Get list of records. 4 transform workflows available. 42 linked dependency records.",
-          "docsPath": "./public/records/work-order.html",
+          "docsPath": "/records/work-order",
           "stats": {
             "operations": 10,
             "transforms": 4,
@@ -252,7 +254,8 @@
             "otherChargePurchaseItem",
             "itemRevision",
             "subsidiary",
-            "term"
+            "term",
+            "workOrder"
           ],
           "endpoints": [
             {
@@ -334,7 +337,7 @@
           "title": "Assembly Unbuild",
           "group": "extended",
           "summary": "Get list of records. 30 linked dependency records.",
-          "docsPath": "./public/records/assembly-unbuild.html",
+          "docsPath": "/records/assembly-unbuild",
           "stats": {
             "operations": 6,
             "transforms": 0,
@@ -372,7 +375,8 @@
             "otherChargePurchaseItem",
             "accountingPeriod",
             "itemRevision",
-            "subsidiary"
+            "subsidiary",
+            "assemblyUnbuild"
           ],
           "endpoints": [
             {
@@ -425,7 +429,7 @@
           "title": "Work Order Close",
           "group": "extended",
           "summary": "Get list of records. 10 linked dependency records.",
-          "docsPath": "./public/records/work-order-close.html",
+          "docsPath": "/records/work-order-close",
           "stats": {
             "operations": 6,
             "transforms": 0,
@@ -443,7 +447,8 @@
             "location",
             "accountingPeriod",
             "itemRevision",
-            "subsidiary"
+            "subsidiary",
+            "workOrderClose"
           ],
           "endpoints": [
             {
@@ -496,7 +501,7 @@
           "title": "Work Order Completion",
           "group": "extended",
           "summary": "Get list of records. 12 linked dependency records.",
-          "docsPath": "./public/records/work-order-completion.html",
+          "docsPath": "/records/work-order-completion",
           "stats": {
             "operations": 6,
             "transforms": 0,
@@ -516,7 +521,8 @@
             "manufacturingRouting",
             "accountingPeriod",
             "itemRevision",
-            "subsidiary"
+            "subsidiary",
+            "workOrderCompletion"
           ],
           "endpoints": [
             {
@@ -569,7 +575,7 @@
           "title": "Work Order Issue",
           "group": "extended",
           "summary": "Get list of records. 12 linked dependency records.",
-          "docsPath": "./public/records/work-order-issue.html",
+          "docsPath": "/records/work-order-issue",
           "stats": {
             "operations": 6,
             "transforms": 0,
@@ -589,7 +595,8 @@
             "manufacturingRouting",
             "accountingPeriod",
             "itemRevision",
-            "subsidiary"
+            "subsidiary",
+            "workOrderIssue"
           ],
           "endpoints": [
             {

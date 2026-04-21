@@ -9,7 +9,15 @@
     "transforms": 0,
     "schemaFields": 0
   },
-  "dependencyRecords": [],
+  "dependencyRecords": [
+    "customerStatus"
+  ],
+  "referencedBy": [
+    "customer",
+    "customerStatus",
+    "estimate",
+    "opportunity"
+  ],
   "operations": [
     {
       "id": "operation--customerStatus-get",

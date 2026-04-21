@@ -10,7 +10,12 @@
     "schemaFields": 0
   },
   "dependencyRecords": [
-    "account"
+    "account",
+    "paymentMethod"
+  ],
+  "referencedBy": [
+    "paymentItem",
+    "paymentMethod"
   ],
   "operations": [
     {

@@ -34,7 +34,16 @@
     "shipItem",
     "webSite",
     "subsidiary",
-    "term"
+    "term",
+    "invoice"
+  ],
+  "referencedBy": [
+    "customer",
+    "estimate",
+    "invoice",
+    "job",
+    "opportunity",
+    "salesOrder"
   ],
   "operations": [
     {

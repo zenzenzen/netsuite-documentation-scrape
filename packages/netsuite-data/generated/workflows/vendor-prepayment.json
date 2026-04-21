@@ -11,7 +11,7 @@
           "title": "Vendor Prepayment",
           "group": "extended",
           "summary": "Get list of records. 1 transform workflow available. 15 linked dependency records.",
-          "docsPath": "./public/records/vendor-prepayment.html",
+          "docsPath": "/records/vendor-prepayment",
           "stats": {
             "operations": 7,
             "transforms": 1,
@@ -34,7 +34,8 @@
             "accountingPeriod",
             "purchaseOrder",
             "subsidiary",
-            "journalEntry"
+            "journalEntry",
+            "vendorPrepayment"
           ],
           "endpoints": [
             {
@@ -98,7 +99,7 @@
           "title": "Vendor Prepayment Application",
           "group": "extended",
           "summary": "Get list of records. 13 linked dependency records.",
-          "docsPath": "./public/records/vendor-prepayment-application.html",
+          "docsPath": "/records/vendor-prepayment-application",
           "stats": {
             "operations": 6,
             "transforms": 0,
@@ -119,7 +120,8 @@
             "location",
             "accountingPeriod",
             "subsidiary",
-            "vendorPrepayment"
+            "vendorPrepayment",
+            "vendorPrepaymentApplication"
           ],
           "endpoints": [
             {

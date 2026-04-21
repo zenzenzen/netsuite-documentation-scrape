@@ -11,7 +11,7 @@
           "title": "Cash Refund",
           "group": "extended",
           "summary": "Get list of records. 1 transform workflow available. 21 linked dependency records.",
-          "docsPath": "./public/records/cash-refund.html",
+          "docsPath": "/records/cash-refund",
           "stats": {
             "operations": 7,
             "transforms": 1,
@@ -40,7 +40,8 @@
             "promotionCode",
             "shipItem",
             "subsidiary",
-            "term"
+            "term",
+            "cashRefund"
           ],
           "endpoints": [
             {
@@ -132,7 +133,8 @@
             "promotionCode",
             "shipItem",
             "subsidiary",
-            "term"
+            "term",
+            "creditMemo"
           ],
           "endpoints": [
             {

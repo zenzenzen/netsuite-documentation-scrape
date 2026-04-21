@@ -10,7 +10,39 @@
     "schemaFields": 0
   },
   "dependencyRecords": [
-    "vendor"
+    "vendor",
+    "nexus"
+  ],
+  "referencedBy": [
+    "advIntercompanyJournalEntry",
+    "blanketPurchaseOrder",
+    "cashRefund",
+    "cashSale",
+    "check",
+    "creditCardCharge",
+    "creditCardRefund",
+    "creditMemo",
+    "customerDeposit",
+    "customerPayment",
+    "customerRefund",
+    "estimate",
+    "expenseReport",
+    "intercompanyJournalEntry",
+    "intercompanyTransferOrder",
+    "invoice",
+    "journalEntry",
+    "nexus",
+    "opportunity",
+    "purchaseContract",
+    "purchaseOrder",
+    "returnAuthorization",
+    "salesOrder",
+    "transferOrder",
+    "vendorBill",
+    "vendorCredit",
+    "vendorPayment",
+    "vendorReturnAuthorization",
+    "workOrder"
   ],
   "operations": [
     {

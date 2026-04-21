@@ -21,7 +21,14 @@
     "department",
     "location",
     "salesOrder",
-    "subsidiary"
+    "subsidiary",
+    "subscription"
+  ],
+  "referencedBy": [
+    "subscription",
+    "subscriptionChangeOrder",
+    "subscriptionLine",
+    "usage"
   ],
   "operations": [
     {

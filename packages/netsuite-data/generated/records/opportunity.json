@@ -25,7 +25,16 @@
     "customerStatus",
     "location",
     "nexus",
-    "subsidiary"
+    "subsidiary",
+    "opportunity"
+  ],
+  "referencedBy": [
+    "cashSale",
+    "customer",
+    "estimate",
+    "invoice",
+    "opportunity",
+    "salesOrder"
   ],
   "operations": [
     {

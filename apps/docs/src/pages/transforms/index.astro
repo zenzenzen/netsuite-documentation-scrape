@@ -1,6 +1,7 @@
 ---
 import { getRecordsIndex } from '@netsuite/netsuite-data';
 import RecordLayout from '../../layouts/RecordLayout.astro';
+import DocsLinkChip from '../../components/DocsLinkChip.astro';
 import { buildDocsPathMap } from '../../lib/docs.js';
 import { readWorkflowConfig } from '../../lib/server-data.js';
 
@@ -49,10 +50,11 @@ const groupedTransforms = Array.from(
           <div class="muted">These are the transform destinations that surfaced in the REST API browser for this source record.</div>
           <div class="chip-row" style="margin-top:14px;">
             {transforms.map((transform) => (
-              <a class="chip" href={docsByRecord.get(transform.target) || '#'}>
-                <strong>{transform.source}</strong>
-                <small>to {transform.target}</small>
-              </a>
+              <DocsLinkChip
+                recordName={transform.target}
+                docsByRecord={docsByRecord}
+                description={`from ${transform.source}`}
+              />
             ))}
           </div>
         </article>
@@ -78,8 +80,24 @@ const groupedTransforms = Array.from(
         <tbody>
           {focusTransforms.map((transform) => (
             <tr>
-              <td><a href={docsByRecord.get(transform.source) || '#'}>{transform.source}</a></td>
-              <td><a href={docsByRecord.get(transform.target) || '#'}>{transform.target}</a></td>
+              <td>
+                {
+                  docsByRecord.get(transform.source) ? (
+                    <a href={docsByRecord.get(transform.source)}>{transform.source}</a>
+                  ) : (
+                    <span title={`No page generated for ${transform.source}.`}>{transform.source}</span>
+                  )
+                }
+              </td>
+              <td>
+                {
+                  docsByRecord.get(transform.target) ? (
+                    <a href={docsByRecord.get(transform.target)}>{transform.target}</a>
+                  ) : (
+                    <span title={`No page generated for ${transform.target}.`}>{transform.target}</span>
+                  )
+                }
+              </td>
               <td><code>{transform.path}</code></td>
               <td>{transform.summary || 'Transform route'}</td>
             </tr>

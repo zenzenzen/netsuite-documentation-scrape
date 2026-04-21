@@ -28,7 +28,14 @@
     "customerMessage",
     "nexus",
     "promotionCode",
-    "subsidiary"
+    "subsidiary",
+    "returnAuthorization"
+  ],
+  "referencedBy": [
+    "cashSale",
+    "invoice",
+    "returnAuthorization",
+    "salesOrder"
   ],
   "operations": [
     {

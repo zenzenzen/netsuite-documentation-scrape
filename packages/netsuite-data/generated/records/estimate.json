@@ -32,7 +32,14 @@
     "promotionCode",
     "shipItem",
     "subsidiary",
-    "term"
+    "term",
+    "estimate"
+  ],
+  "referencedBy": [
+    "customer",
+    "estimate",
+    "job",
+    "opportunity"
   ],
   "operations": [
     {

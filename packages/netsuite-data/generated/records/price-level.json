@@ -9,7 +9,15 @@
     "transforms": 0,
     "schemaFields": 0
   },
-  "dependencyRecords": [],
+  "dependencyRecords": [
+    "priceLevel"
+  ],
+  "referencedBy": [
+    "customer",
+    "priceLevel",
+    "timeBill",
+    "webSite"
+  ],
   "operations": [
     {
       "id": "operation--priceLevel-get",

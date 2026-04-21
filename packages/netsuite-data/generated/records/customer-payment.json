@@ -23,7 +23,13 @@
     "location",
     "nexus",
     "accountingPeriod",
-    "subsidiary"
+    "subsidiary",
+    "customerPayment"
+  ],
+  "referencedBy": [
+    "customer",
+    "customerPayment",
+    "invoice"
   ],
   "operations": [
     {

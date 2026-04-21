@@ -36,7 +36,8 @@
             "purchaseContract",
             "shipItem",
             "subsidiary",
-            "term"
+            "term",
+            "purchaseOrder"
           ],
           "endpoints": [
             {
@@ -112,7 +113,7 @@
           "title": "Item Receipt",
           "group": "extended",
           "summary": "Get list of records. 12 linked dependency records.",
-          "docsPath": "./public/records/item-receipt.html",
+          "docsPath": "/records/item-receipt",
           "stats": {
             "operations": 6,
             "transforms": 0,
@@ -132,7 +133,8 @@
             "inboundShipment",
             "location",
             "accountingPeriod",
-            "subsidiary"
+            "subsidiary",
+            "itemReceipt"
           ],
           "endpoints": [
             {
@@ -210,7 +212,8 @@
             "nexus",
             "accountingPeriod",
             "subsidiary",
-            "term"
+            "term",
+            "vendorBill"
           ],
           "endpoints": [
             {
@@ -302,7 +305,8 @@
             "contact",
             "location",
             "nexus",
-            "subsidiary"
+            "subsidiary",
+            "vendorReturnAuthorization"
           ],
           "endpoints": [
             {
@@ -393,7 +397,8 @@
             "location",
             "nexus",
             "accountingPeriod",
-            "subsidiary"
+            "subsidiary",
+            "vendorCredit"
           ],
           "endpoints": [
             {
@@ -468,7 +473,8 @@
             "nexus",
             "accountingPeriod",
             "subsidiary",
-            "journalEntry"
+            "journalEntry",
+            "vendorPayment"
           ],
           "endpoints": [
             {
@@ -541,7 +547,8 @@
             "accountingPeriod",
             "fulfillmentRequest",
             "shipItem",
-            "subsidiary"
+            "subsidiary",
+            "itemFulfillment"
           ],
           "endpoints": [
             {

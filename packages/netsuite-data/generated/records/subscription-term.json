@@ -9,7 +9,15 @@
     "transforms": 0,
     "schemaFields": 0
   },
-  "dependencyRecords": [],
+  "dependencyRecords": [
+    "subscriptionTerm"
+  ],
+  "referencedBy": [
+    "subscription",
+    "subscriptionChangeOrder",
+    "subscriptionPlan",
+    "subscriptionTerm"
+  ],
   "operations": [
     {
       "id": "operation--subscriptionTerm-get",

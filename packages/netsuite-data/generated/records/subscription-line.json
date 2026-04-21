@@ -36,7 +36,14 @@
     "otherChargePurchaseItem",
     "location",
     "salesOrder",
-    "subscription"
+    "subscription",
+    "subscriptionLine"
+  ],
+  "referencedBy": [
+    "billingRevenueEvent",
+    "charge",
+    "subscriptionLine",
+    "usage"
   ],
   "operations": [
     {

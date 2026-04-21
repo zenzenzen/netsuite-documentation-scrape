@@ -26,7 +26,13 @@
     "nexus",
     "accountingPeriod",
     "subsidiary",
-    "term"
+    "term",
+    "vendorBill"
+  ],
+  "referencedBy": [
+    "purchaseOrder",
+    "vendor",
+    "vendorBill"
   ],
   "operations": [
     {

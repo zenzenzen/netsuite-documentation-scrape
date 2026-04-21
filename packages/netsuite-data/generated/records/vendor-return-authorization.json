@@ -22,7 +22,13 @@
     "contact",
     "location",
     "nexus",
-    "subsidiary"
+    "subsidiary",
+    "vendorReturnAuthorization"
+  ],
+  "referencedBy": [
+    "purchaseOrder",
+    "vendorBill",
+    "vendorReturnAuthorization"
   ],
   "operations": [
     {

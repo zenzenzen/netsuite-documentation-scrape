@@ -9,7 +9,13 @@
     "transforms": 0,
     "schemaFields": 0
   },
-  "dependencyRecords": [],
+  "dependencyRecords": [
+    "vendorCategory"
+  ],
+  "referencedBy": [
+    "vendor",
+    "vendorCategory"
+  ],
   "operations": [
     {
       "id": "operation--vendorCategory-get",

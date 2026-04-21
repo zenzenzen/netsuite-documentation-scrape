@@ -26,7 +26,15 @@
     "purchaseContract",
     "shipItem",
     "subsidiary",
-    "term"
+    "term",
+    "purchaseOrder"
+  ],
+  "referencedBy": [
+    "purchaseOrder",
+    "purchaseRequisition",
+    "vendor",
+    "vendorPrepayment",
+    "workOrder"
   ],
   "operations": [
     {
