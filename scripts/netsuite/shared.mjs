@@ -28,7 +28,12 @@ export const RECORD_ALIASES = {
   itemfulfillment: 'itemFulfillment',
   paymentitem: 'paymentItem',
   salesorder: 'salesOrder',
+  vendorbill: 'vendorBill',
+  vendorcategory: 'vendorCategory',
+  vendorcredit: 'vendorCredit',
+  vendorpayment: 'vendorPayment',
   vendorreturnauthorization: 'vendorReturnAuthorization',
+  vendorsubsidiaryrelationship: 'vendorSubsidiaryRelationship',
 };
 
 export const FOCUS_RECORD_INPUTS = [
@@ -40,10 +45,32 @@ export const FOCUS_RECORD_INPUTS = [
   'subsidiary',
   'paymentitem',
   'partner',
+  'vendor',
+  'vendorBill',
+  'vendorCategory',
+  'vendorCredit',
+  'vendorPayment',
+  'vendorReturnAuthorization',
+  'vendorSubsidiaryRelationship',
 ];
 
 export const FOCUS_RECORDS = Array.from(
   new Set(FOCUS_RECORD_INPUTS.map((name) => resolveRecordName(name)))
+);
+
+export const BILLING_RECORD_INPUTS = [
+  'billingAccount',
+  'billingSchedule',
+  'billingRevenueEvent',
+  'subscription',
+  'subscriptionChangeOrder',
+  'subscriptionLine',
+  'subscriptionPlan',
+  'subscriptionTerm',
+];
+
+export const BILLING_RECORDS = Array.from(
+  new Set(BILLING_RECORD_INPUTS.map((name) => resolveRecordName(name)))
 );
 
 export function resolveRecordName(name) {

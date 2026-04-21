@@ -20,6 +20,12 @@ test('overview and transforms navigation stays on Astro routes', async ({ page }
 test('overview and transforms pages render route content', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('a[href="/records/customer"]').first()).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Recurring Billing' })).toBeVisible();
+  await expect(page.locator('a[href="/records/subscription"]').first()).toBeVisible();
+  await expect(page.locator('a[href="/records/billing-account"]').first()).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Recurring Amount Field Explainers' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Estimate.recurMonthly' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Opportunity.recurMonthly' })).toBeVisible();
 
   await page.goto('/transforms');
   await expect(page.locator('.matrix')).toBeVisible();

@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {
+  BILLING_RECORDS,
   FOCUS_RECORDS,
   GENERATED_DATA_DIR,
   GENERATED_RECORDS_DIR,
@@ -41,15 +42,17 @@ function loadRecords(recordNames) {
 const allRecords = loadRecords(rawIndex.scrapedRecords);
 const recordMap = new Map(allRecords.map((record) => [record.recordName, record]));
 const focusRecords = FOCUS_RECORDS.map((name) => recordMap.get(name)).filter(Boolean);
+const billingRecords = BILLING_RECORDS.map((name) => recordMap.get(name)).filter(Boolean);
+const billingRecordSet = new Set(billingRecords.map((record) => record.recordName));
 const focusDependencyRecords = unique(
   focusRecords.flatMap((record) => record.dependencyRecords || [])
-).filter((recordName) => !FOCUS_RECORDS.includes(recordName));
+).filter((recordName) => !FOCUS_RECORDS.includes(recordName) && !billingRecordSet.has(recordName));
 const dependencyRecords = focusDependencyRecords
   .map((recordName) => recordMap.get(recordName))
   .filter(Boolean)
   .slice(0, 30);
-const migratedRecords = unique([...focusRecords, ...dependencyRecords]);
-const migratedRecordSet = new Set(migratedRecords.map((record) => record.recordName));
+const curatedRecords = unique([...focusRecords, ...dependencyRecords, ...billingRecords]);
+const curatedRecordSet = new Set(curatedRecords.map((record) => record.recordName));
 
 const allTransforms = allRecords.flatMap((record) => record.transforms || []);
 const focusTransforms = allTransforms.filter(
@@ -87,7 +90,7 @@ function summarizeRecord(record) {
 }
 
 function buildRecordDocsPath(recordName) {
-  if (migratedRecordSet.has(recordName)) {
+  if (curatedRecordSet.has(recordName)) {
     return `/records/${slugify(recordName)}`;
   }
 
@@ -96,6 +99,7 @@ function buildRecordDocsPath(recordName) {
 
 function buildWorkflowConfig(records, transforms) {
   const focusSet = new Set(FOCUS_RECORDS);
+  const billingSet = new Set(BILLING_RECORDS);
   const dependencySet = new Set(dependencyRecords.map((record) => record.recordName));
 
   const transformEntries = transforms.map((transform, index) => ({
@@ -124,6 +128,8 @@ function buildWorkflowConfig(records, transforms) {
       title: toTitleCase(record.recordName),
       group: focusSet.has(record.recordName)
         ? 'focus'
+        : billingSet.has(record.recordName)
+          ? 'billing'
         : dependencySet.has(record.recordName)
           ? 'dependency'
           : 'extended',
@@ -145,7 +151,7 @@ function buildWorkflowConfig(records, transforms) {
       })),
     }))
     .sort((left, right) => {
-      const weight = { focus: 0, dependency: 1, extended: 2 };
+      const weight = { focus: 0, billing: 1, dependency: 2, extended: 3 };
       return weight[left.group] - weight[right.group] || left.title.localeCompare(right.title);
     });
 
@@ -549,6 +555,78 @@ function renderOverviewPage() {
     transforms: focusTransforms.length,
     totalScraped: rawIndex.scrapedRecords.length,
   };
+  const billingCardMeta = [
+    {
+      recordName: 'customer',
+      kicker: 'Relationship anchor',
+      summary:
+        'Owns the commercial relationship and exposes billing schedule plus subscription-related sublists that feed the recurring billing setup path.',
+    },
+    {
+      recordName: 'billingSchedule',
+      kicker: 'Cadence definition',
+      summary:
+        'Defines first-bill behavior, recurrence frequency, repeat interval, and arrears vs advance billing for recurring charges.',
+    },
+    {
+      recordName: 'billingAccount',
+      kicker: 'Customer billing context',
+      summary:
+        'Binds the customer, billing schedule, currency, and billing start date into the account that the subscription will actually bill through.',
+    },
+    {
+      recordName: 'subscriptionPlan',
+      kicker: 'Default template',
+      summary:
+        'Carries the default line, renewal, and uplift behavior that draft subscriptions inherit before any customer-specific edits.',
+    },
+    {
+      recordName: 'subscriptionTerm',
+      kicker: 'Duration model',
+      summary:
+        'Defines the term type, unit, and duration that shape the subscription lifecycle and renewal defaults.',
+    },
+    {
+      recordName: 'subscription',
+      kicker: 'Recurring contract',
+      summary:
+        'The main draft/create surface for the recurring contract, connecting customer, billing account, plan, price book, and term.',
+    },
+    {
+      recordName: 'subscriptionLine',
+      kicker: 'Line-level behavior',
+      summary:
+        'Controls renewal inclusion, proration, billing mode, and line activation details after the subscription shell exists.',
+    },
+    {
+      recordName: 'subscriptionChangeOrder',
+      kicker: 'Lifecycle changes',
+      summary:
+        'Handles renew, modify pricing, suspend, reactivate, and terminate workflows after the base subscription is already in play.',
+    },
+    {
+      recordName: 'billingRevenueEvent',
+      kicker: 'Downstream event',
+      summary:
+        'Represents downstream billing or revenue activity tied to subscription lines rather than the initial recurring contract setup itself.',
+    },
+  ];
+  const recurringAmountFieldCards = [
+    {
+      recordName: 'estimate',
+      field: 'recurMonthly',
+      title: 'Estimate.recurMonthly',
+      summary:
+        'A sales-pipeline recurring amount signal on an estimate. Useful for forecasting and quoting context, but not the primary SuiteBilling setup endpoint.',
+    },
+    {
+      recordName: 'opportunity',
+      field: 'recurMonthly',
+      title: 'Opportunity.recurMonthly',
+      summary:
+        'A recurring revenue hint on the opportunity record. It helps frame monthly value during pipeline work, but the actual recurring billing setup happens on SuiteBilling records.',
+    },
+  ];
 
   const focusCards = focusRecords
     .map(
@@ -633,6 +711,53 @@ function renderOverviewPage() {
     )
     .join('');
 
+  const recurringBillingCards = billingCardMeta
+    .map((meta) => {
+      const record = recordMap.get(meta.recordName);
+
+      if (!record) {
+        return '';
+      }
+
+      return `<article class="record-card">
+        <div class="kicker">${escapeHtml(meta.kicker)}</div>
+        <h3>${escapeHtml(toTitleCase(record.recordName))}</h3>
+        <div class="record-meta">
+          <span class="pill">${record.stats.operations} endpoints</span>
+          <span class="pill">${record.stats.transforms} transforms</span>
+        </div>
+        <div class="record-copy">${escapeHtml(meta.summary)}</div>
+        <div class="record-actions">
+          <a class="record-link secondary" href="${escapeHtml(
+            relativeLinkFromRoot(record.recordName)
+          )}">Open record page</a>
+          <button class="record-link secondary favorite-toggle" type="button" data-favorite-toggle data-record-name="${escapeHtml(
+            record.recordName
+          )}">Pin favorite</button>
+        </div>
+      </article>`;
+    })
+    .join('');
+
+  const recurringAmountCards = recurringAmountFieldCards
+    .map(
+      (meta) => `<article class="record-card">
+        <div class="kicker">Field explainer</div>
+        <h3>${escapeHtml(meta.title)}</h3>
+        <div class="record-meta">
+          <span class="pill">${escapeHtml(meta.field)}</span>
+          <span class="pill">Sales pipeline signal</span>
+        </div>
+        <div class="record-copy">${escapeHtml(meta.summary)}</div>
+        <div class="record-actions">
+          <a class="record-link secondary" href="${escapeHtml(
+            relativeLinkFromRoot(meta.recordName)
+          )}">Open ${escapeHtml(toTitleCase(meta.recordName))}</a>
+        </div>
+      </article>`
+    )
+    .join('');
+
   return pageShell({
     title: 'NetSuite REST API Browser Companion',
     eyebrow: 'Focus Objects + Workflow Links',
@@ -668,6 +793,26 @@ function renderOverviewPage() {
         </div>
         <div class="grid record-grid">
           ${workflowCards}
+        </div>
+      </section>
+
+      <section class="page-section" data-page-section data-section-id="recurring-billing" data-section-title="Recurring Billing">
+        <div class="section-heading">
+          <h2>Recurring Billing</h2>
+          <p>This curated slice surfaces the actual SuiteBilling setup objects so the monthly billing implementation story stays separate from the sales-order transform graph.</p>
+        </div>
+        <div class="grid record-grid">
+          ${recurringBillingCards}
+        </div>
+      </section>
+
+      <section class="page-section" data-page-section data-section-id="recurring-amount-field-explainers" data-section-title="Recurring Amount Field Explainers">
+        <div class="section-heading">
+          <h2>Recurring Amount Field Explainers</h2>
+          <p>These fields describe recurring value on pipeline records, but they are not the primary REST records used to stand up SuiteBilling subscriptions and monthly billing operations.</p>
+        </div>
+        <div class="grid record-grid">
+          ${recurringAmountCards}
         </div>
       </section>
 
@@ -776,7 +921,7 @@ ensureDir(GENERATED_DATA_DIR);
 ensureDir(GENERATED_RECORDS_DIR);
 ensureDir(GENERATED_WORKFLOWS_DIR);
 
-for (const record of [...focusRecords, ...dependencyRecords]) {
+for (const record of curatedRecords) {
   writeText(
     path.join(PUBLIC_RECORDS_DIR, `${slugify(record.recordName)}.html`),
     renderRecordPage(record)
@@ -789,7 +934,7 @@ writeText(WORKFLOW_CONFIG_FILE, `${JSON.stringify(workflowConfig, null, 2)}\n`);
 writeJson(path.join(GENERATED_DATA_DIR, 'records-index.json'), generatedRecordsIndex);
 writeJson(path.join(GENERATED_DATA_DIR, 'workflow-index.json'), generatedWorkflowIndex);
 
-for (const record of migratedRecords) {
+for (const record of curatedRecords) {
   writeJson(path.join(GENERATED_RECORDS_DIR, `${slugify(record.recordName)}.json`), buildRecordDetail(record));
 }
 
@@ -799,6 +944,6 @@ for (const layout of generatedWorkflowLayouts) {
 
 console.log(`Wrote ${PUBLIC_HOME_FILE}`);
 console.log(`Wrote ${PUBLIC_TRANSFORMS_FILE}`);
-console.log(`Wrote ${focusRecords.length + dependencyRecords.length} record pages to ${PUBLIC_RECORDS_DIR}`);
-console.log(`Wrote ${migratedRecords.length} record detail payloads to ${GENERATED_RECORDS_DIR}`);
+console.log(`Wrote ${curatedRecords.length} record pages to ${PUBLIC_RECORDS_DIR}`);
+console.log(`Wrote ${curatedRecords.length} record detail payloads to ${GENERATED_RECORDS_DIR}`);
 console.log(`Wrote ${WORKFLOW_CONFIG_FILE}`);
