@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { WorkflowStudio } from '@netsuite/workflow-ui';
 
+const basePath = import.meta.env.BASE_URL || '/';
 const {
   workflowIndex,
   workflowLayout,
@@ -16,6 +17,7 @@ const {
       workflowIndex={workflowIndex}
       initialWorkflow={workflowLayout}
       initialBaseSlug={workflowLayout.slug}
+      basePath={basePath}
     />
   </section>
 </BaseLayout>

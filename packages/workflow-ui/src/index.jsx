@@ -37,6 +37,47 @@ function sortByTitle(records) {
   return [...records].sort((left, right) => left.title.localeCompare(right.title));
 }
 
+function normalizeBasePath(basePath = '/') {
+  const value = String(basePath || '').trim();
+
+  if (!value || value === '/') {
+    return '/';
+  }
+
+  return `/${value.replace(/^\/+|\/+$/g, '')}/`;
+}
+
+function resolveSiteHref(pathname, basePath = '/') {
+  const value = String(pathname || '').trim();
+
+  if (!value) {
+    return '#';
+  }
+
+  if (/^(?:[a-z]+:)?\/\//i.test(value) || value.startsWith('#')) {
+    return value;
+  }
+
+  const normalizedBasePath = normalizeBasePath(basePath);
+  const normalizedPath = `/${value.replace(/^\.\//, '').replace(/^\/+/, '')}`;
+
+  if (
+    normalizedBasePath !== '/' &&
+    (normalizedPath === normalizedBasePath.slice(0, -1) || normalizedPath.startsWith(normalizedBasePath))
+  ) {
+    return normalizedPath;
+  }
+
+  return normalizedBasePath === '/'
+    ? normalizedPath
+    : `${normalizedBasePath.slice(0, -1)}${normalizedPath}`;
+}
+
+function buildWorkflowDataHref(basePath, slug) {
+  // Workflow JSON is deployed under the docs site's base path, not always at the domain root.
+  return resolveSiteHref(`workflow-data/${slug}.json`, basePath);
+}
+
 function useMediaQuery(query) {
   const [matches, setMatches] = useState(() => {
     if (typeof window === 'undefined') {
@@ -827,7 +868,12 @@ function resolveInitialSelectedPath(workflowIndex, initialBaseSlug) {
   return initialRecord ? [initialRecord.recordName] : [];
 }
 
-export function WorkflowStudio({ workflowIndex, initialWorkflow = null, initialBaseSlug = null }) {
+export function WorkflowStudio({
+  workflowIndex,
+  initialWorkflow = null,
+  initialBaseSlug = null,
+  basePath = '/',
+}) {
   const [workflowMap, setWorkflowMap] = useState(() => {
     const next = new Map();
 
@@ -1071,7 +1117,7 @@ export function WorkflowStudio({ workflowIndex, initialWorkflow = null, initialB
     }
 
     setLoadingSlug(slug);
-    const response = await fetch(`/workflow-data/${slug}.json`);
+    const response = await fetch(buildWorkflowDataHref(basePath, slug));
     if (!response.ok) {
       throw new Error(`Failed to load cached workflow for ${slug}`);
     }
@@ -1157,10 +1203,11 @@ export function WorkflowStudio({ workflowIndex, initialWorkflow = null, initialB
   }
 
   function handleOpenDocs(docsPath) {
-    const nextPath = String(docsPath || '')
-      .replace(/^\.\//, '/')
-      .replace(/^\/public\//, '/');
-    window.open(nextPath, '_blank', 'noopener,noreferrer');
+    const nextPath = resolveSiteHref(docsPath, basePath);
+
+    if (nextPath !== '#') {
+      window.location.assign(nextPath);
+    }
   }
 
   async function handleCopy(value, label) {

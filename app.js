@@ -12,6 +12,16 @@ function readJsonScript(id, fallback) {
   }
 }
 
+function normalizeBasePath(basePath = '/') {
+  const value = String(basePath || '').trim();
+
+  if (!value || value === '/') {
+    return '/';
+  }
+
+  return `/${value.replace(/^\/+|\/+$/g, '')}/`;
+}
+
 function resolveDocHref(docsPath, rootPrefix = './') {
   const value = String(docsPath || '');
 
@@ -19,11 +29,23 @@ function resolveDocHref(docsPath, rootPrefix = './') {
     return '#';
   }
 
-  if (value.startsWith('/')) {
+  if (/^(?:[a-z]+:)?\/\//i.test(value) || value.startsWith('#')) {
     return value;
   }
 
-  return `${rootPrefix}${value.replace(/^\.\//, '')}`;
+  const normalizedRootPrefix = normalizeBasePath(rootPrefix);
+  const normalizedPath = `/${value.replace(/^\.\//, '').replace(/^\/+/, '')}`;
+
+  if (
+    normalizedRootPrefix !== '/' &&
+    (normalizedPath === normalizedRootPrefix.slice(0, -1) || normalizedPath.startsWith(normalizedRootPrefix))
+  ) {
+    return normalizedPath;
+  }
+
+  return normalizedRootPrefix === '/'
+    ? normalizedPath
+    : `${normalizedRootPrefix.slice(0, -1)}${normalizedPath}`;
 }
 
 function escapeHtml(value) {
@@ -942,7 +964,9 @@ class WorkflowStudioController {
         event.preventDefault();
         event.stopPropagation();
         const href = button.getAttribute('data-open-doc');
-        window.open(href, '_blank', 'noopener,noreferrer');
+        if (href) {
+          window.location.assign(href);
+        }
       });
     });
 
@@ -1032,7 +1056,7 @@ class WorkflowStudioController {
           <div>${escapeHtml(record.summary)}</div>
           <div style="margin-top:8px;"><a href="${escapeHtml(
             this.repository.getDocHref(record.recordName)
-          )}" target="_blank" rel="noopener noreferrer">Open docs in a new tab</a></div>
+          )}">Open docs</a></div>
         </div>
       </article>
     `;
