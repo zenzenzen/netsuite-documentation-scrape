@@ -1,0 +1,31 @@
+---
+const {
+  recordName,
+  docsByRecord,
+  description = '',
+  missingTitle = `No page generated for ${recordName}.`,
+} = Astro.props;
+
+const href = docsByRecord.get(recordName) || null;
+---
+
+{
+  href ? (
+    <a class="chip" href={href} data-doc-link-state="linked">
+      <strong>{recordName}</strong>
+      <small>{description}</small>
+    </a>
+  ) : (
+    <span
+      class="chip chip-disabled"
+      role="link"
+      aria-disabled="true"
+      title={missingTitle}
+      data-doc-link-state="disabled"
+      data-disabled-reason={missingTitle}
+    >
+      <strong>{recordName}</strong>
+      <small>{description}</small>
+    </span>
+  )
+}

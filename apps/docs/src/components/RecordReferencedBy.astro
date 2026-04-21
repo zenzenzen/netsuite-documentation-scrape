@@ -1,0 +1,21 @@
+---
+import DocsLinkChip from './DocsLinkChip.astro';
+
+const { records = [], docsByRecord } = Astro.props;
+---
+
+{
+  !records.length ? (
+    <div class="muted">No other indexed records currently point at this record.</div>
+  ) : (
+    <div class="chip-row">
+      {records.map((recordName) => (
+        <DocsLinkChip
+          recordName={recordName}
+          docsByRecord={docsByRecord}
+          description="references this record"
+        />
+      ))}
+    </div>
+  )
+}

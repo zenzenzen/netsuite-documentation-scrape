@@ -130,6 +130,17 @@ const {
         border-color: rgba(20, 143, 136, 0.34);
       }
 
+      .chip-disabled {
+        cursor: default;
+        opacity: 0.64;
+      }
+
+      .chip-disabled:hover {
+        transform: none;
+        box-shadow: none;
+        border-color: var(--line);
+      }
+
       .top-link strong { font-size: 0.95rem; }
       .top-link span, .chip small { color: var(--muted); }
       .top-link strong, .top-link span, .chip strong, .chip small {

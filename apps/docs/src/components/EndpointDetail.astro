@@ -1,4 +1,6 @@
 ---
+import DocsLinkChip from './DocsLinkChip.astro';
+
 const { operation, docsByRecord } = Astro.props;
 
 const paramRows = operation.parameters || [];
@@ -36,10 +38,7 @@ function methodTone(method) {
       dependencies.length ? (
         <div class="chip-row">
           {dependencies.map((dependency) => (
-            <a class="chip" href={docsByRecord.get(dependency) || '#'}>
-              <strong>{dependency}</strong>
-              <small>dependency</small>
-            </a>
+            <DocsLinkChip recordName={dependency} docsByRecord={docsByRecord} description="dependency" />
           ))}
         </div>
       ) : null

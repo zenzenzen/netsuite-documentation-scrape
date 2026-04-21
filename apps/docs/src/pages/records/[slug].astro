@@ -3,6 +3,7 @@ import { getMigratedRecordSlugs, getRecordDetail, getRecordsIndex } from '@netsu
 import RecordLayout from '../../layouts/RecordLayout.astro';
 import RecordHero from '../../components/RecordHero.astro';
 import RecordDependencies from '../../components/RecordDependencies.astro';
+import RecordReferencedBy from '../../components/RecordReferencedBy.astro';
 import EndpointAccordion from '../../components/EndpointAccordion.astro';
 import SchemaSnapshot from '../../components/SchemaSnapshot.astro';
 import { buildDocsPathMap } from '../../lib/docs.js';
@@ -43,7 +44,7 @@ const schemaRows = record.definition?.fields || [];
       <h2>{record.title}</h2>
       <p>Linked records surface here as navigable chips, so you can jump between record dependencies while you read the endpoint contracts.</p>
     </div>
-    <div class="panel">
+    <div class="panel" data-record-links-panel>
       <RecordDependencies dependencies={record.dependencyRecords} docsByRecord={docsByRecord} />
     </div>
   </section>
@@ -54,6 +55,16 @@ const schemaRows = record.definition?.fields || [];
       <p>Transform routes are expanded by default because they usually drive the interesting cross-record workflows in NetSuite.</p>
     </div>
     <EndpointAccordion operations={record.operations} docsByRecord={docsByRecord} />
+  </section>
+
+  <section class="page-section" data-page-section data-section-id="record-referenced-by" data-section-title="Referenced By">
+    <div class="section-heading">
+      <h2>Referenced By</h2>
+      <p>Use these back-links to find the indexed records that currently point at this record through schema or endpoint dependency references.</p>
+    </div>
+    <div class="panel" data-record-referenced-by-panel>
+      <RecordReferencedBy records={record.referencedBy} docsByRecord={docsByRecord} />
+    </div>
   </section>
 
   {

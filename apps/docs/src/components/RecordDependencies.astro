@@ -1,4 +1,6 @@
 ---
+import DocsLinkChip from './DocsLinkChip.astro';
+
 const { dependencies = [], docsByRecord } = Astro.props;
 ---
 
@@ -8,10 +10,11 @@ const { dependencies = [], docsByRecord } = Astro.props;
   ) : (
     <div class="chip-row">
       {dependencies.map((dependency) => (
-        <a class="chip" href={docsByRecord.get(dependency) || '#'}>
-          <strong>{dependency}</strong>
-          <small>{dependency.replace(/([a-z])([A-Z])/g, '$1 $2')}</small>
-        </a>
+        <DocsLinkChip
+          recordName={dependency}
+          docsByRecord={docsByRecord}
+          description={dependency.replace(/([a-z])([A-Z])/g, '$1 $2')}
+        />
       ))}
     </div>
   )
