@@ -31,3 +31,12 @@ test('overview and transforms pages render route content', async ({ page }) => {
   await expect(page.locator('.matrix')).toBeVisible();
   await expect(page.locator('a[href="/records/customer"]').first()).toBeVisible();
 });
+
+test('record page workflow link anchors the current record', async ({ page }) => {
+  await page.goto('/records/invoice');
+
+  await page.getByRole('link', { name: 'Open in workflow studio' }).click();
+
+  await expect(page).toHaveURL(/\/records\/invoice\?base=invoice#workflow-studio$/);
+  await expect(page.locator('[data-workflow-base]')).toHaveValue('invoice');
+});
