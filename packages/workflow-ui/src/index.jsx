@@ -807,15 +807,38 @@ function FrontierPillList({ records, onAdvance }) {
   );
 }
 
-export function WorkflowStudio({ workflowIndex }) {
-  const [workflowMap, setWorkflowMap] = useState(() => new Map());
-  const [selectedPath, setSelectedPath] = useState(() => {
-    if (typeof window === 'undefined') {
-      return [];
+function resolveInitialSelectedPath(workflowIndex, initialBaseSlug) {
+  if (typeof window !== 'undefined') {
+    // Shared URLs take precedence when they resolve to a known record in the current workflow index.
+    const parsed = parseShareQuery(window.location.search, workflowIndex);
+    if (parsed?.lockedLevels?.length) {
+      return parsed.lockedLevels.flat();
+    }
+  }
+
+  if (!initialBaseSlug) {
+    return [];
+  }
+
+  const initialRecord =
+    findRecordBySlug(workflowIndex, initialBaseSlug) ||
+    findRecordByName(workflowIndex, initialBaseSlug);
+
+  return initialRecord ? [initialRecord.recordName] : [];
+}
+
+export function WorkflowStudio({ workflowIndex, initialWorkflow = null, initialBaseSlug = null }) {
+  const [workflowMap, setWorkflowMap] = useState(() => {
+    const next = new Map();
+
+    if (initialWorkflow?.slug) {
+      next.set(initialWorkflow.slug, initialWorkflow);
     }
 
-    const parsed = parseShareQuery(window.location.search, workflowIndex);
-    return parsed ? parsed.lockedLevels.flat() : [];
+    return next;
+  });
+  const [selectedPath, setSelectedPath] = useState(() => {
+    return resolveInitialSelectedPath(workflowIndex, initialBaseSlug);
   });
   const [inspectionRecordName, setInspectionRecordName] = useState(null);
   const [focusedRecordName, setFocusedRecordName] = useState(null);
@@ -832,6 +855,7 @@ export function WorkflowStudio({ workflowIndex }) {
   });
   const [copyState, setCopyState] = useState('');
   const [loadingSlug, setLoadingSlug] = useState(null);
+  const [workflowError, setWorkflowError] = useState(null);
   const graphRef = useRef(null);
   const reactFlowInstanceRef = useRef(null);
   const fitViewFrameRef = useRef(0);
@@ -898,6 +922,7 @@ export function WorkflowStudio({ workflowIndex }) {
     ensureWorkflow(anchorRecord.slug).catch((error) => {
       console.error(error);
       setLoadingSlug(null);
+      setWorkflowError(`Workflow data unavailable for ${anchorRecord.title}.`);
     });
   }, [anchorRecord?.slug]);
 
@@ -1041,6 +1066,7 @@ export function WorkflowStudio({ workflowIndex }) {
 
   async function ensureWorkflow(slug) {
     if (workflowMap.has(slug)) {
+      setWorkflowError(null);
       return workflowMap.get(slug);
     }
 
@@ -1056,6 +1082,7 @@ export function WorkflowStudio({ workflowIndex }) {
       next.set(slug, payload);
       return next;
     });
+    setWorkflowError(null);
     setLoadingSlug(null);
     return payload;
   }
@@ -1067,6 +1094,7 @@ export function WorkflowStudio({ workflowIndex }) {
     }
 
     setLoadingSlug(record.slug || record.recordName);
+    setWorkflowError(null);
     startTransition(() => {
       setInspectionRecordName(null);
       setFocusedRecordName(null);
@@ -1085,6 +1113,7 @@ export function WorkflowStudio({ workflowIndex }) {
     }
 
     startTransition(() => {
+      setWorkflowError(null);
       setInspectionRecordName(null);
       setFocusedRecordName(null);
       setSelectedPath((current) => [...current, recordName]);
@@ -1093,6 +1122,7 @@ export function WorkflowStudio({ workflowIndex }) {
 
   function handleUndoLatest() {
     startTransition(() => {
+      setWorkflowError(null);
       setInspectionRecordName(null);
       setFocusedRecordName(null);
       setSelectedPath((current) => (current.length > 1 ? current.slice(0, -1) : current));
@@ -1101,6 +1131,7 @@ export function WorkflowStudio({ workflowIndex }) {
 
   function handleBrowseAll() {
     startTransition(() => {
+      setWorkflowError(null);
       setInspectionRecordName(null);
       setFocusedRecordName(null);
       setSelectedPath([]);
@@ -1288,6 +1319,11 @@ export function WorkflowStudio({ workflowIndex }) {
                   </GraphActionButton>
                 </Panel>
               </ReactFlow>
+            ) : workflowError ? (
+              <div className="workflow-loading-state" data-workflow-error>
+                <strong>{workflowError}</strong>
+                <span>Choose a different record or reset the graph to return to the full catalog.</span>
+              </div>
             ) : (
               <div className="workflow-loading-state">
                 <strong>Loading anchored workflow…</strong>

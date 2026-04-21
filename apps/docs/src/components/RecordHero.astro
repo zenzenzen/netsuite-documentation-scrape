@@ -15,5 +15,5 @@ const { record } = Astro.props;
   <button class="record-link secondary favorite-toggle" type="button" data-favorite-toggle data-record-name={record.recordName}>
     Pin favorite
   </button>
-  <a class="record-link secondary" href="#workflow-studio">Open in workflow studio</a>
+  <a class="record-link secondary" href={`?base=${record.slug}#workflow-studio`}>Open in workflow studio</a>
 </div>
