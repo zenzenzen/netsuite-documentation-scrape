@@ -16,7 +16,19 @@
     "customer",
     "department",
     "location",
-    "subsidiary"
+    "subsidiary",
+    "billingAccount"
+  ],
+  "referencedBy": [
+    "billingAccount",
+    "cashRefund",
+    "cashSale",
+    "charge",
+    "creditMemo",
+    "invoice",
+    "job",
+    "subscription",
+    "subscriptionChangeOrder"
   ],
   "operations": [
     {

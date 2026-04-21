@@ -42,7 +42,8 @@
             "promotionCode",
             "shipItem",
             "subsidiary",
-            "term"
+            "term",
+            "estimate"
           ],
           "endpoints": [
             {
@@ -149,7 +150,8 @@
             "promotionCode",
             "shipItem",
             "subsidiary",
-            "term"
+            "term",
+            "cashSale"
           ],
           "endpoints": [
             {
@@ -247,7 +249,8 @@
             "shipItem",
             "webSite",
             "subsidiary",
-            "term"
+            "term",
+            "invoice"
           ],
           "endpoints": [
             {
@@ -352,7 +355,8 @@
             "shipItem",
             "webSite",
             "subsidiary",
-            "term"
+            "term",
+            "salesOrder"
           ],
           "endpoints": [
             {
@@ -440,7 +444,7 @@
           "title": "Cash Refund",
           "group": "extended",
           "summary": "Get list of records. 1 transform workflow available. 21 linked dependency records.",
-          "docsPath": "./public/records/cash-refund.html",
+          "docsPath": "/records/cash-refund",
           "stats": {
             "operations": 7,
             "transforms": 1,
@@ -469,7 +473,8 @@
             "promotionCode",
             "shipItem",
             "subsidiary",
-            "term"
+            "term",
+            "cashRefund"
           ],
           "endpoints": [
             {
@@ -555,7 +560,8 @@
             "customerMessage",
             "nexus",
             "promotionCode",
-            "subsidiary"
+            "subsidiary",
+            "returnAuthorization"
           ],
           "endpoints": [
             {
@@ -654,7 +660,8 @@
             "promotionCode",
             "shipItem",
             "subsidiary",
-            "term"
+            "term",
+            "creditMemo"
           ],
           "endpoints": [
             {
@@ -729,7 +736,8 @@
             "location",
             "nexus",
             "accountingPeriod",
-            "subsidiary"
+            "subsidiary",
+            "customerPayment"
           ],
           "endpoints": [
             {
@@ -804,7 +812,8 @@
             "vendor",
             "contact",
             "location",
-            "subsidiary"
+            "subsidiary",
+            "fulfillmentRequest"
           ],
           "endpoints": [
             {
@@ -877,7 +886,8 @@
             "accountingPeriod",
             "fulfillmentRequest",
             "shipItem",
-            "subsidiary"
+            "subsidiary",
+            "itemFulfillment"
           ],
           "endpoints": [
             {
@@ -935,7 +945,7 @@
           "title": "Item Receipt",
           "group": "extended",
           "summary": "Get list of records. 12 linked dependency records.",
-          "docsPath": "./public/records/item-receipt.html",
+          "docsPath": "/records/item-receipt",
           "stats": {
             "operations": 6,
             "transforms": 0,
@@ -955,7 +965,8 @@
             "inboundShipment",
             "location",
             "accountingPeriod",
-            "subsidiary"
+            "subsidiary",
+            "itemReceipt"
           ],
           "endpoints": [
             {
@@ -1008,7 +1019,7 @@
           "title": "Customer Refund",
           "group": "extended",
           "summary": "Get list of records. 14 linked dependency records.",
-          "docsPath": "./public/records/customer-refund.html",
+          "docsPath": "/records/customer-refund",
           "stats": {
             "operations": 6,
             "transforms": 0,
@@ -1030,7 +1041,8 @@
             "nexus",
             "accountingPeriod",
             "subsidiary",
-            "journalEntry"
+            "journalEntry",
+            "customerRefund"
           ],
           "endpoints": [
             {

@@ -14,7 +14,32 @@
     "subscriptionTerm",
     "department",
     "account",
-    "location"
+    "location",
+    "subscriptionPlan"
+  ],
+  "referencedBy": [
+    "analyticalImpact",
+    "assemblyBuild",
+    "assemblyUnbuild",
+    "calendarEvent",
+    "charge",
+    "expenseCategory",
+    "fairValuePrice",
+    "inventoryCostRevaluation",
+    "inventoryNumber",
+    "issue",
+    "phoneCall",
+    "priceBook",
+    "promotionCode",
+    "subscription",
+    "subscriptionChangeOrder",
+    "subscriptionLine",
+    "subscriptionPlan",
+    "supportCase",
+    "task",
+    "timeBill",
+    "usage",
+    "workOrder"
   ],
   "operations": [
     {

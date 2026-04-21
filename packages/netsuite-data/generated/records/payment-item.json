@@ -14,7 +14,29 @@
     "classification",
     "department",
     "location",
-    "paymentMethod"
+    "paymentMethod",
+    "paymentItem"
+  ],
+  "referencedBy": [
+    "analyticalImpact",
+    "assemblyBuild",
+    "assemblyUnbuild",
+    "calendarEvent",
+    "charge",
+    "expenseCategory",
+    "fairValuePrice",
+    "inventoryCostRevaluation",
+    "inventoryNumber",
+    "issue",
+    "paymentItem",
+    "phoneCall",
+    "promotionCode",
+    "subscriptionLine",
+    "supportCase",
+    "task",
+    "timeBill",
+    "usage",
+    "workOrder"
   ],
   "operations": [
     {

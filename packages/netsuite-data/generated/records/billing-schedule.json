@@ -11,7 +11,29 @@
   },
   "dependencyRecords": [
     "term",
-    "job"
+    "job",
+    "billingSchedule"
+  ],
+  "referencedBy": [
+    "assemblyItem",
+    "billingAccount",
+    "billingSchedule",
+    "charge",
+    "customer",
+    "downloadItem",
+    "estimate",
+    "giftCertificateItem",
+    "inventoryItem",
+    "job",
+    "kitItem",
+    "nonInventoryResaleItem",
+    "nonInventorySaleItem",
+    "otherChargeResaleItem",
+    "otherChargeSaleItem",
+    "salesOrder",
+    "serviceResaleItem",
+    "serviceSaleItem",
+    "subscription"
   ],
   "operations": [
     {

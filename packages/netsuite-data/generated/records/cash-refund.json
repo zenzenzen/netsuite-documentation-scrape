@@ -1,0 +1,1219 @@
+{
+  "recordName": "cashRefund",
+  "slug": "cash-refund",
+  "title": "Cash Refund",
+  "summary": "Get list of records. 1 transform workflow available. 21 linked dependency records.",
+  "docsPath": "/records/cash-refund",
+  "stats": {
+    "operations": 7,
+    "transforms": 1,
+    "schemaFields": 0
+  },
+  "dependencyRecords": [
+    "creditMemo",
+    "account",
+    "billingAccount",
+    "classification",
+    "couponCode",
+    "currency",
+    "department",
+    "discountItem",
+    "customer",
+    "partner",
+    "vendor",
+    "employee",
+    "contact",
+    "location",
+    "customerMessage",
+    "nexus",
+    "accountingPeriod",
+    "promotionCode",
+    "shipItem",
+    "subsidiary",
+    "term",
+    "cashRefund"
+  ],
+  "referencedBy": [
+    "cashRefund",
+    "cashSale",
+    "returnAuthorization"
+  ],
+  "operations": [
+    {
+      "id": "operation--cashRefund-get",
+      "summary": "Get list of records.",
+      "tag": "cashRefund",
+      "method": "GET",
+      "path": "/cashRefund",
+      "isTransform": false,
+      "transformTarget": null,
+      "requestBody": [],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "q:\nstring",
+          "name": "q:\nstring\n in query",
+          "description": "The search query that is used to filter results.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "limit:\ninteger\n(int32)\n1000",
+          "name": "limit:\ninteger\n(int32)\n1000\n in query",
+          "description": "The limit used to specify the number of results on a single page.",
+          "type": "integer\n(int32)\n1000\n integer (int32)",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "offset:\ninteger\n(int32)\n0",
+          "name": "offset:\ninteger\n(int32)\n0\n in query",
+          "description": "The offset used for selecting a specific page of results.",
+          "type": "integer\n(int32)\n0\n integer (int32)",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "200 OK",
+          "name": "200 OK\ncashRefundCollection",
+          "description": "List of records.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "cashRefundCollection",
+              "href": "#/definitions/cashRefundCollection",
+              "definitionId": "cashRefundCollection"
+            }
+          ],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "cashRefundCollection",
+          "href": "#/definitions/cashRefundCollection",
+          "definitionId": "cashRefundCollection"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [],
+      "rawText": "cashRefund\nGet list of records.\nGET /cashRefund\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nq: string\nin query\nThe search query that is used to filter results.\nlimit: integer (int32) 1000\nin query\nThe limit used to specify the number of results on a single page.\noffset: integer (int32) 0\nin query\nThe offset used for selecting a specific page of results.\napplication/vnd.oracle.resource+json; type=collection application/vnd.oracle.resource+json; type=error\n200 OK\ncashRefundCollection\nList of records.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--cashRefund-post",
+      "summary": "Insert record.",
+      "tag": "cashRefund",
+      "method": "POST",
+      "path": "/cashRefund",
+      "isTransform": false,
+      "transformTarget": null,
+      "requestBody": [
+        {
+          "label": "cashRefund",
+          "name": "cashRefund",
+          "description": "Request body.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "cashRefund",
+              "href": "#/definitions/cashRefund",
+              "definitionId": "cashRefund"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replace:\nstring",
+          "name": "replace:\nstring\n in query",
+          "description": "The names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning",
+          "name": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning\n in header",
+          "description": "Sets the strictness of property name validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nWarning\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError",
+          "name": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError\n in header",
+          "description": "Sets the strictness of property value validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nError\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "204 No Content",
+          "name": "204 No Content",
+          "description": "Inserted record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "cashRefund",
+          "href": "#/definitions/cashRefund",
+          "definitionId": "cashRefund"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [
+        "cashRefund"
+      ],
+      "rawText": "cashRefund\nInsert record.\nPOST /cashRefund\ncashRefund\nRequest body.\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nreplace: string\nin query\nThe names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.\nX-NetSuite-PropertyNameValidation: string Error , Warning , Ignore Warning\nin header\nSets the strictness of property name validation.\nX-NetSuite-PropertyValueValidation: string Error , Warning , Ignore Error\nin header\nSets the strictness of property value validation.\napplication/vnd.oracle.resource+json; type=error\n204 No Content\nInserted record.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--cashRefund--id--delete",
+      "summary": "Remove record.",
+      "tag": "cashRefund",
+      "method": "DELETE",
+      "path": "/cashRefund/{id}",
+      "isTransform": false,
+      "transformTarget": null,
+      "requestBody": [],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "id:\ninteger\n(int32)",
+          "name": "id:\ninteger\n(int32)\n in path",
+          "description": "Internal identifier.",
+          "type": "integer\n(int32)\n integer (int32)",
+          "subtitle": "in path",
+          "required": true,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "204 No Content",
+          "name": "204 No Content",
+          "description": "Removed record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [],
+      "rawText": "cashRefund\nRemove record.\nDELETE /cashRefund/{id}\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nid: integer (int32)\nin path\nInternal identifier.\napplication/vnd.oracle.resource+json; type=error\n204 No Content\nRemoved record.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--cashRefund--id--get",
+      "summary": "Get record.",
+      "tag": "cashRefund",
+      "method": "GET",
+      "path": "/cashRefund/{id}",
+      "isTransform": false,
+      "transformTarget": null,
+      "requestBody": [],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "id:\ninteger\n(int32)",
+          "name": "id:\ninteger\n(int32)\n in path",
+          "description": "Internal identifier.",
+          "type": "integer\n(int32)\n integer (int32)",
+          "subtitle": "in path",
+          "required": true,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "expandSubResources:\nboolean\nfalse",
+          "name": "expandSubResources:\nboolean\nfalse\n in query",
+          "description": "Set to 'true' to automatically expand all sublists, sublist lines, and subrecords on this record.",
+          "type": "boolean\nfalse\n boolean",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "simpleEnumFormat:\nboolean\nfalse",
+          "name": "simpleEnumFormat:\nboolean\nfalse\n in query",
+          "description": "Set to true to return enumeration values in a format that only shows the internal ID value.",
+          "type": "boolean\nfalse\n boolean",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "fields:\nstring",
+          "name": "fields:\nstring\n in query",
+          "description": "The names of the fields and sublists on the record. Only the selected fields and sublists will be returned in the response.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "200 OK",
+          "name": "200 OK\ncashRefund",
+          "description": "Retrieved record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "cashRefund",
+              "href": "#/definitions/cashRefund",
+              "definitionId": "cashRefund"
+            }
+          ],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "cashRefund",
+          "href": "#/definitions/cashRefund",
+          "definitionId": "cashRefund"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [
+        "cashRefund"
+      ],
+      "rawText": "cashRefund\nGet record.\nGET /cashRefund/{id}\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nid: integer (int32)\nin path\nInternal identifier.\nexpandSubResources: boolean false\nin query\nSet to 'true' to automatically expand all sublists, sublist lines, and subrecords on this record.\nsimpleEnumFormat: boolean false\nin query\nSet to true to return enumeration values in a format that only shows the internal ID value.\nfields: string\nin query\nThe names of the fields and sublists on the record. Only the selected fields and sublists will be returned in the response.\napplication/vnd.oracle.resource+json; type=singular application/vnd.oracle.resource+json; type=error\n200 OK\ncashRefund\nRetrieved record.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--cashRefund--id--patch",
+      "summary": "Update record.",
+      "tag": "cashRefund",
+      "method": "PATCH",
+      "path": "/cashRefund/{id}",
+      "isTransform": false,
+      "transformTarget": null,
+      "requestBody": [
+        {
+          "label": "cashRefund",
+          "name": "cashRefund",
+          "description": "Request body.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "cashRefund",
+              "href": "#/definitions/cashRefund",
+              "definitionId": "cashRefund"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "id:\ninteger\n(int32)",
+          "name": "id:\ninteger\n(int32)\n in path",
+          "description": "Internal identifier.",
+          "type": "integer\n(int32)\n integer (int32)",
+          "subtitle": "in path",
+          "required": true,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning",
+          "name": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning\n in header",
+          "description": "Sets the strictness of property name validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nWarning\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError",
+          "name": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError\n in header",
+          "description": "Sets the strictness of property value validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nError\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replace:\nstring",
+          "name": "replace:\nstring\n in query",
+          "description": "The names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replaceSelectedFields:\nboolean\nfalse",
+          "name": "replaceSelectedFields:\nboolean\nfalse\n in query",
+          "description": "If set to 'true', all fields that should be deleted in the update request, including body fields, must be included in the 'replace' query parameter.",
+          "type": "boolean\nfalse\n boolean",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "204 No Content",
+          "name": "204 No Content",
+          "description": "Updated record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "cashRefund",
+          "href": "#/definitions/cashRefund",
+          "definitionId": "cashRefund"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [
+        "cashRefund"
+      ],
+      "rawText": "cashRefund\nUpdate record.\nPATCH /cashRefund/{id}\ncashRefund\nRequest body.\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nid: integer (int32)\nin path\nInternal identifier.\nX-NetSuite-PropertyNameValidation: string Error , Warning , Ignore Warning\nin header\nSets the strictness of property name validation.\nX-NetSuite-PropertyValueValidation: string Error , Warning , Ignore Error\nin header\nSets the strictness of property value validation.\nreplace: string\nin query\nThe names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.\nreplaceSelectedFields: boolean false\nin query\nIf set to 'true', all fields that should be deleted in the update request, including body fields, must be included in the 'replace' query parameter.\napplication/vnd.oracle.resource+json; type=error\n204 No Content\nUpdated record.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--cashRefund--id--put",
+      "summary": "Insert or update record.",
+      "tag": "cashRefund",
+      "method": "PUT",
+      "path": "/cashRefund/{id}",
+      "isTransform": false,
+      "transformTarget": null,
+      "requestBody": [
+        {
+          "label": "cashRefund",
+          "name": "cashRefund",
+          "description": "Request body.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "cashRefund",
+              "href": "#/definitions/cashRefund",
+              "definitionId": "cashRefund"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "id:\nstring",
+          "name": "id:\nstring\n in path",
+          "description": "External identifier.",
+          "type": "string\n string",
+          "subtitle": "in path",
+          "required": true,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning",
+          "name": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning\n in header",
+          "description": "Sets the strictness of property name validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nWarning\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError",
+          "name": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError\n in header",
+          "description": "Sets the strictness of property value validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nError\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replace:\nstring",
+          "name": "replace:\nstring\n in query",
+          "description": "The names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replaceSelectedFields:\nboolean\nfalse",
+          "name": "replaceSelectedFields:\nboolean\nfalse\n in query",
+          "description": "If set to 'true', all fields that should be deleted in the update request, including body fields, must be included in the 'replace' query parameter.",
+          "type": "boolean\nfalse\n boolean",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "204 No Content",
+          "name": "204 No Content",
+          "description": "Upserted record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "cashRefund",
+          "href": "#/definitions/cashRefund",
+          "definitionId": "cashRefund"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [
+        "cashRefund"
+      ],
+      "rawText": "cashRefund\nInsert or update record.\nPUT /cashRefund/{id}\ncashRefund\nRequest body.\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nid: string\nin path\nExternal identifier.\nX-NetSuite-PropertyNameValidation: string Error , Warning , Ignore Warning\nin header\nSets the strictness of property name validation.\nX-NetSuite-PropertyValueValidation: string Error , Warning , Ignore Error\nin header\nSets the strictness of property value validation.\nreplace: string\nin query\nThe names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.\nreplaceSelectedFields: boolean false\nin query\nIf set to 'true', all fields that should be deleted in the update request, including body fields, must be included in the 'replace' query parameter.\napplication/vnd.oracle.resource+json; type=error\n204 No Content\nUpserted record.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--cashRefund--id---transform-creditMemo-post",
+      "summary": "Transform to creditMemo.",
+      "tag": "cashRefund",
+      "method": "POST",
+      "path": "/cashRefund/{id}/!transform/creditMemo",
+      "isTransform": true,
+      "transformTarget": "creditMemo",
+      "requestBody": [
+        {
+          "label": "creditMemo",
+          "name": "creditMemo",
+          "description": "Request body.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "creditMemo",
+              "href": "#/definitions/creditMemo",
+              "definitionId": "creditMemo"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning",
+          "name": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning\n in header",
+          "description": "Sets the strictness of property name validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nWarning\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError",
+          "name": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError\n in header",
+          "description": "Sets the strictness of property value validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nError\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replace:\nstring",
+          "name": "replace:\nstring\n in query",
+          "description": "The names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "id:\ninteger\n(int32)",
+          "name": "id:\ninteger\n(int32)\n in path",
+          "description": "Internal identifier.",
+          "type": "integer\n(int32)\n integer (int32)",
+          "subtitle": "in path",
+          "required": true,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "204 No Content",
+          "name": "204 No Content\ncreditMemo",
+          "description": "Transformed record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "creditMemo",
+              "href": "#/definitions/creditMemo",
+              "definitionId": "creditMemo"
+            }
+          ],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "creditMemo",
+          "href": "#/definitions/creditMemo",
+          "definitionId": "creditMemo"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [
+        "creditMemo"
+      ],
+      "rawText": "cashRefund\nTransform to creditMemo.\nPOST /cashRefund/{id}/!transform/creditMemo\ncreditMemo\nRequest body.\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nX-NetSuite-PropertyNameValidation: string Error , Warning , Ignore Warning\nin header\nSets the strictness of property name validation.\nX-NetSuite-PropertyValueValidation: string Error , Warning , Ignore Error\nin header\nSets the strictness of property value validation.\nreplace: string\nin query\nThe names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.\nid: integer (int32)\nin path\nInternal identifier.\napplication/vnd.oracle.resource+json; type=singular application/vnd.oracle.resource+json; type=error\n204 No Content\ncreditMemo\nTransformed record.\ndefault\nnsError\nError response."
+    }
+  ],
+  "definition": {
+    "id": "definition-cashRefund",
+    "refs": [
+      {
+        "text": "account",
+        "href": "#/definitions/account",
+        "definitionId": "account"
+      },
+      {
+        "text": "cashRefund-accountingBookDetailCollection",
+        "href": "#/definitions/cashRefund-accountingBookDetailCollection",
+        "definitionId": "cashRefund-accountingBookDetailCollection"
+      },
+      {
+        "text": "cashRefund-appliedRulesCollection",
+        "href": "#/definitions/cashRefund-appliedRulesCollection",
+        "definitionId": "cashRefund-appliedRulesCollection"
+      },
+      {
+        "text": "nsResource",
+        "href": "#/definitions/nsResource",
+        "definitionId": "nsResource"
+      },
+      {
+        "text": "billingAccount",
+        "href": "#/definitions/billingAccount",
+        "definitionId": "billingAccount"
+      },
+      {
+        "text": "cashRefund-billingAddress",
+        "href": "#/definitions/cashRefund-billingAddress",
+        "definitionId": "cashRefund-billingAddress"
+      },
+      {
+        "text": "classification",
+        "href": "#/definitions/classification",
+        "definitionId": "classification"
+      },
+      {
+        "text": "couponCode",
+        "href": "#/definitions/couponCode",
+        "definitionId": "couponCode"
+      },
+      {
+        "text": "currency",
+        "href": "#/definitions/currency",
+        "definitionId": "currency"
+      },
+      {
+        "text": "department",
+        "href": "#/definitions/department",
+        "definitionId": "department"
+      },
+      {
+        "text": "discountItem",
+        "href": "#/definitions/discountItem",
+        "definitionId": "discountItem"
+      },
+      {
+        "text": "customer",
+        "href": "#/definitions/customer",
+        "definitionId": "customer"
+      },
+      {
+        "text": "partner",
+        "href": "#/definitions/partner",
+        "definitionId": "partner"
+      },
+      {
+        "text": "vendor",
+        "href": "#/definitions/vendor",
+        "definitionId": "vendor"
+      },
+      {
+        "text": "employee",
+        "href": "#/definitions/employee",
+        "definitionId": "employee"
+      },
+      {
+        "text": "contact",
+        "href": "#/definitions/contact",
+        "definitionId": "contact"
+      },
+      {
+        "text": "cashRefund-itemCollection",
+        "href": "#/definitions/cashRefund-itemCollection",
+        "definitionId": "cashRefund-itemCollection"
+      },
+      {
+        "text": "nsLink",
+        "href": "#/definitions/nsLink",
+        "definitionId": "nsLink"
+      },
+      {
+        "text": "location",
+        "href": "#/definitions/location",
+        "definitionId": "location"
+      },
+      {
+        "text": "customerMessage",
+        "href": "#/definitions/customerMessage",
+        "definitionId": "customerMessage"
+      },
+      {
+        "text": "nexus",
+        "href": "#/definitions/nexus",
+        "definitionId": "nexus"
+      },
+      {
+        "text": "cashRefund-partnersCollection",
+        "href": "#/definitions/cashRefund-partnersCollection",
+        "definitionId": "cashRefund-partnersCollection"
+      },
+      {
+        "text": "accountingPeriod",
+        "href": "#/definitions/accountingPeriod",
+        "definitionId": "accountingPeriod"
+      },
+      {
+        "text": "promotionCode",
+        "href": "#/definitions/promotionCode",
+        "definitionId": "promotionCode"
+      },
+      {
+        "text": "cashRefund-salesTeamCollection",
+        "href": "#/definitions/cashRefund-salesTeamCollection",
+        "definitionId": "cashRefund-salesTeamCollection"
+      },
+      {
+        "text": "shipItem",
+        "href": "#/definitions/shipItem",
+        "definitionId": "shipItem"
+      },
+      {
+        "text": "cashRefund-shippingAddress",
+        "href": "#/definitions/cashRefund-shippingAddress",
+        "definitionId": "cashRefund-shippingAddress"
+      },
+      {
+        "text": "subsidiary",
+        "href": "#/definitions/subsidiary",
+        "definitionId": "subsidiary"
+      },
+      {
+        "text": "cashRefund-taxDetailsCollection",
+        "href": "#/definitions/cashRefund-taxDetailsCollection",
+        "definitionId": "cashRefund-taxDetailsCollection"
+      },
+      {
+        "text": "term",
+        "href": "#/definitions/term",
+        "definitionId": "term"
+      }
+    ],
+    "fields": [],
+    "rawText": "cashRefund\naccount: account\naccountingBookDetail: cashRefund-accountingBookDetailCollection\naltHandlingCost Handling Cost: number (double)\nThis is the amount the customer was charged for handling.\naltShippingCost Shipping Cost: number (double)\nThis is the amount the customer was charged for shipping.\nappliedRules: cashRefund-appliedRulesCollection\nasOfDate As of Date: string (date)\nType an as of date for this cash refund.\nbillAddr1 Billing Address Line 1: string\nbillAddr2 Billing Address Line 2: string\nbillAddr3 Billing Address Line 3: string\nbillAddress Bill To: string\nThe default billing address autofills this field from the customer's record at Lists > Relationships > Customers. To enter a different address: * Select another address in the Bill To Select field. * Select New in the Bill To Select field to enter a new billing address.\nbillAddressList: nsResource\nbillAddressee Billing Addressee: string\nbillAttention Billing Attention: string\nbillCity Billing Address City: string\nbillCountry: object\nid Internal identifier: string PR , PS , PT , PW , PY , QA , AD , AE , AF , AG ,\nrefName Reference Name: string\nbillOverride Override: string\nbillPhone Billing Phone: string\nbillState Billing Address State: string\nbillZip Billing Address Zip Code: string\nbillingAccount: billingAccount\nbillingAddress: cashRefund-billingAddress\nbillingAddress_text Billing Address: string\nbulkProcSubmission: nsResource\ncanHaveStackable Can Stack Promotions: boolean\ncardSwipe Card Swipe: string\ncardholderAuthentication: nsResource\ncheckNumber Check #: string\nclass: classification\ncleared Cleared: boolean\nclearedDate Date Cleared: string (date)\ncontribPct Contribution Percentage: string\ncouponCode: couponCode\ncreatedDate Date Created: string (date-time)\ncreatedFrom: nsResource\ncurrency: currency\ncustomForm: object\nid Internal identifier: string -9904 , 96\nrefName Reference Name: string\ncustomerPaymentAuthorization: nsResource\ndebitKsn Debit KSN: string\ndebitPinBlock Debit Pin Block: string\ndeferredRevenue Deferred Revenue: number (double)\nDeferred Revenue: amount of revenue deferred on this transaction\ndepartment: department\ndiscountAmount Discount Amount: number (double)\ndiscountDate Discount Date: string (date)\ndiscountItem: discountItem\ndiscountRate Rate: number (double)\nNetSuite enters the rate for the discount item you selected. You can change the discount rate for this cash refund. Enter the discount as a dollar amount like 10.00, or as a percentage like 10%.\ndiscountTotal Discount Total: number (double)\nNetSuite enters the amount discounted on this cash refund. If this discount item is taxable, the discount is applied before taxes. If it is not taxable, the discount is applied after taxes.\ndueDate Due Date: string (date)\ndynamicDescriptor Soft Descriptor: string\nemail Email: string\nendDate End Date: string (date)\nentity: one of: [ customer, partner, vendor, nsResource, employee, contact ]\nentityTaxRegNum Customer Tax Reg. Number: string\nSelect the customer's tax registration number associated with this cash refund.\nestGrossProfit Est. Gross Profit: number (double)\nEstimated Gross Profit is a read-only field that equals the revenue amount minus the Est. Cost. At the transaction level, it equals the gross profit of all lines, factoring transaction-level discounts and markups.\nestGrossProfitPercent Est. Gross Profit Percent: number (double)\nEstimated Gross Profit Margin, as a percentage: Read-only field that equals the Est. Gross Profit divided by revenue, expressed as a percentage. At the transaction level, it equals the gross profit percent of all lines, factoring transaction-level discounts and markups.\nexchangeRate Exchange Rate: number (double)\nThe currency's exchange rate is shown in this field. You can edit the exchange rate for this transaction only, or you can update the currency record with the exchange rate you enter here.\nexcludeCommission Exclude Commissions: boolean\nCheck this option to exclude this transaction and its subordinate transactions from inclusion in all commission calculations.\nexcludeFromGLNumbering Exclude from GL Audit Numbering: boolean\nexternalId External ID: string\nhandlingCost Handling Cost: number (double)\nEnter the amount the customer was charged for handling.\nhandlingMode: object\nid Internal identifier: string MIMIC , PROCESS , SAVE_ONLY\nrefName Reference Name: string\nhandlingTaxAmount Handling Tax Amount: number (double)\nid Internal ID: string\ninputReferenceCode Input P/N Ref.: string\nintegrationId: string\nitem: cashRefund-itemCollection\njob: one of: [ customer, partner, vendor, nsResource, employee, contact ]\nlastModifiedDate Date Last Modified: string (date-time)\nleadSource: nsResource\nlinks Links: nsLink\nnsLink\nlocation: location\nmemo Memo: string\nIf you wish, enter a memo to describe this cash refund. It will appear on reports such as the 2-line Undeposited Funds register.\nmessage Customer Message: string\nEdit the message you selected in the Select Message field, or enter a new message here. If you choose to print, email or fax this transaction to the customer, this message shows on the transaction.\nmessageSel: customerMessage\nmuccPromoCodeInstance Promo Code: string\nnexus: nexus\noriginator Originator: string\notherRefNum PO/Check Number: string\nIf required, enter the customer's original check number.\noutputAuthCode Auth. Code: string\noutputReferenceCode P/N Ref.: string\npartner: partner\npartners: cashRefund-partnersCollection\npayPalAuthId Authorization ID: string\nAuthorization identification number. Populated from the PayPal response.\npayPalTranId PayPal Tran. ID: string\nUnique transaction identification number of the payment. Populated from the PayPal response.\npaymentCardCsc CSC: string\npaymentDeviceId Payment Device ID: string\npaymentInstrumentLimit Payment Instrument Limit: number (double)\npaymentOperation: object\nid Internal identifier: string CREDIT , REFUND\nrefName Reference Name: string\npaymentOption: nsResource\npaymentProcessingProfile: nsResource\npostingPeriod: accountingPeriod\nprevDate Previous Effective Date: string (date)\nprevPartner Previous Partner: integer (int64)\nprevRep Previous Representative: integer (int64)\npromoCode: promotionCode\npromoCodePluginImpl Promo Code: string\nrecognizedRevenue Recognized Revenue: number (double)\nRecognized Revenue: cumulative amount of revenue recognized for this transaction\nrecurringBill Recurring Bill: boolean\nrefName Reference Name: string\nrefundCheck Create Check: boolean\nPlace a check mark in the box after Create Check if you wish to refund money by check. Clear this box if you want to issue a cash or credit card refund.\nrevCommitStatus Revenue Commitment Status: string\nrevCommitStatusDescr Revenue Commitment Status: string\nrevRecOnRevCommitment Rev Rec on Rev Commit.: boolean\nrevenueStatus Revenue Status: string\nThe possible values for this field are: 1. Pending: indicates that no recognition has occurred. All revenue is still deferred. 2. In Progress: indicates that some recognition has occurred. 3. Completed: indicates that all recognition has occurred. No deferred revenue remains.\nrevenueStatusDescr Revenue Status: string\nsalesEffectiveDate Sales Effective Date: string (date)\nYou can change the sales effective date for this transaction. The sales effective date determines which commission plan and historical sales team this transaction applies to. If this return is created from a sales transaction, the sales effective date from the sale shown in the Created From field is set by default for this refund.\nsalesGroup: nsResource\nsalesRep: one of: [ customer, partner, vendor, nsResource, employee, contact ]\nsalesReturn Sales Return: string\nsalesTeam: cashRefund-salesTeamCollection\nshipAddress Ship To: string\nshipAddressList: nsResource\nshipDate Ship Date: string (date)\nshipIsResidential Shipping address is residential: boolean\nshipMethod: shipItem\nshipOverride Override: boolean\nshippingAddress: cashRefund-shippingAddress\nshippingAddress_text Shipping Address: string\nshippingCost Shipping Cost: number (double)\nEnter the amount the customer was charged for shipping.\nshippingCostOverridden Shipping Cost Overridden: boolean\nshippingTaxAmount Shipping Tax Amount: number (double)\nThis field displays the shipping tax amount for this cash refund.\nsource: object\nid Internal identifier: string SuitePhone , smbXML , CSV , ADP , QIF , QB , PERQUEST , Yahoo , PaymentLink , customerCenter ,\nrefName Reference Name: string\nstartDate Start Date: string (date)\nstoreOrder: string\nsubsidiary: subsidiary\nsubsidiaryTaxRegNum Subsidiary Tax Reg. Number: string\nThis field shows the tax registration number of the transaction nexus. NetSuite automatically populates this field based on the nexus lookup logic. You can override the transaction nexus and tax registration number that NetSuite automatically selects by checking the Nexus Override box. When you select a different tax registration number in the dropdown list, the corresponding nexus is automatically selected in the Nexus field.\nsubtotal Subtotal: number (double)\nThis field shows the subtotal of the items on this cash refund. This is the total before discounts, shipping costs, handling costs or taxes are added to the refund.\nsyncPartnerTeams Update Customer: boolean\nsyncSalesTeams Update Customer: boolean\nCheck this box if you want to update the sales team on the customer's record with changes you make here.\ntaxDetails: cashRefund-taxDetailsCollection\ntaxDetailsOverride Tax Details Override: boolean\nCheck this box to override the tax information on the Tax Details subtab of the transaction. Only roles with at least the Edit level of the Tax Details Tab permission can override the tax details.\ntaxPointDate Tax Point Date: string (date)\ntaxPointDateOverride Tax Point Date Override: boolean\nCheck this box to override the tax point date.\ntaxRegOverride Tax Registration Override: boolean\ntaxTotal Tax: number (double)\nNetSuite multiplies the tax rate by the taxable total of line items and enters it here.\nterms: term\nthirdPartyAcct 3rd Party Account: string\ntoBeEmailed To Be Emailed: boolean\nCheck this box if you want to e-mail this cash refund form. Then, enter the e-mail address in the space to the right of the check box. You can enter multiple e-mail addresses by separating them with semicolons. It is important to separate the addresses with only semicolons, and do not include any spaces.\ntoBeFaxed To Be Faxed: boolean\nCheck this box if you want to fax this cash sale refund. Enter the fax number in the space to the right of the check box if it doesn't already appear. To fax NetSuite forms, an administrator must first set up fax service at Setup > Company > Printing, Fax and E-mail Preferences.\ntoBePrinted To Be Printed: boolean\nCheck this box if you wish to save this in a queue of cash refund forms to print. Otherwise, you can click Print below to submit and print this form at once.\ntoPrint2 Print {1}: boolean\nPlace a check mark in the box after Print Check if you are creating a check and if you wish to print that check.\ntotal Total: number (double)\nNetSuite computes the total of line items and tax, and then enters it here.\ntotalAfterTaxes Total After Taxes: number (double)\ntotalCostEstimate Est. Cost: number (double)\nThe estimated cost of the specific number of items. This is calculated as: estimated rate x quantity = estimated cost\ntranDate Date: string (date)\nNetSuite inserts today's date for the posting date of this cash refund. You can type or pick another date. What you enter here determines the date range in which this transaction appears in the A/R and A/P registers. You can select or enter custom date ranges on registers.\ntranId Refund #: string\nNetSuite increases the largest refund number by one. If you wish, you can type another number. The next refund number will revert to the standard pattern. You can enter a maximum of 45 characters in this field.\ntranIsVsoeBundle Transaction Is VSOE Bundle: boolean\ntransactionNumber Transaction Number: string\ntransactionToRefund: nsResource\nvsoeAutoCalc Auto Calculate VSOE Allocation: boolean\nThe VSOE allocation amount can be calculated automatically by checking the Auto Calculate VSOE Allocation box. Allocation is the process to determine the VSOE price for items. The total VSOE amount allocated is the revenue amount to be recognized for the bundle.\nwebSite: string\nwhichChargesToAdd: object\nid Internal identifier: string , ALL , TRANSACTION_DATE , AS_OF_DATE\nrefName Reference Name: string"
+  }
+}

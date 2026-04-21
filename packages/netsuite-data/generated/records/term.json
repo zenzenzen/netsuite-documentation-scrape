@@ -9,7 +9,30 @@
     "transforms": 0,
     "schemaFields": 0
   },
-  "dependencyRecords": [],
+  "dependencyRecords": [
+    "term"
+  ],
+  "referencedBy": [
+    "billingSchedule",
+    "blanketPurchaseOrder",
+    "cashRefund",
+    "cashSale",
+    "creditMemo",
+    "customer",
+    "estimate",
+    "intercompanyTransferOrder",
+    "invoice",
+    "otherName",
+    "purchaseContract",
+    "purchaseOrder",
+    "purchaseRequisition",
+    "salesOrder",
+    "term",
+    "transferOrder",
+    "vendor",
+    "vendorBill",
+    "workOrder"
+  ],
   "operations": [
     {
       "id": "operation--term-get",

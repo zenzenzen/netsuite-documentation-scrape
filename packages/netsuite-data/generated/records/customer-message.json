@@ -9,7 +9,19 @@
     "transforms": 0,
     "schemaFields": 0
   },
-  "dependencyRecords": [],
+  "dependencyRecords": [
+    "customerMessage"
+  ],
+  "referencedBy": [
+    "cashRefund",
+    "cashSale",
+    "creditMemo",
+    "customerMessage",
+    "estimate",
+    "invoice",
+    "returnAuthorization",
+    "salesOrder"
+  ],
   "operations": [
     {
       "id": "operation--customerMessage-get",

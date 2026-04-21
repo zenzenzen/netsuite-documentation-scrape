@@ -12,7 +12,11 @@
   "dependencyRecords": [
     "currency",
     "vendor",
-    "subsidiary"
+    "subsidiary",
+    "vendorSubsidiaryRelationship"
+  ],
+  "referencedBy": [
+    "vendorSubsidiaryRelationship"
   ],
   "operations": [
     {

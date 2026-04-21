@@ -12,7 +12,14 @@
   "dependencyRecords": [
     "customerCategory",
     "shipItem",
-    "priceLevel"
+    "priceLevel",
+    "webSite"
+  ],
+  "referencedBy": [
+    "customer",
+    "invoice",
+    "salesOrder",
+    "webSite"
   ],
   "operations": [
     {

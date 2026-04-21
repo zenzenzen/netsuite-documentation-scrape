@@ -29,7 +29,14 @@
     "promotionCode",
     "shipItem",
     "subsidiary",
-    "term"
+    "term",
+    "creditMemo"
+  ],
+  "referencedBy": [
+    "cashRefund",
+    "creditMemo",
+    "invoice",
+    "returnAuthorization"
   ],
   "operations": [
     {

@@ -35,7 +35,19 @@
     "shipItem",
     "webSite",
     "subsidiary",
-    "term"
+    "term",
+    "salesOrder"
+  ],
+  "referencedBy": [
+    "customer",
+    "customerDeposit",
+    "estimate",
+    "fulfillmentRequest",
+    "job",
+    "opportunity",
+    "salesOrder",
+    "subscription",
+    "subscriptionLine"
   ],
   "operations": [
     {

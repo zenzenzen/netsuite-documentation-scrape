@@ -33,7 +33,8 @@
             "location",
             "nexus",
             "accountingPeriod",
-            "subsidiary"
+            "subsidiary",
+            "customerPayment"
           ],
           "endpoints": [
             {
@@ -97,7 +98,7 @@
           "title": "Customer Refund",
           "group": "extended",
           "summary": "Get list of records. 14 linked dependency records.",
-          "docsPath": "./public/records/customer-refund.html",
+          "docsPath": "/records/customer-refund",
           "stats": {
             "operations": 6,
             "transforms": 0,
@@ -119,7 +120,8 @@
             "nexus",
             "accountingPeriod",
             "subsidiary",
-            "journalEntry"
+            "journalEntry",
+            "customerRefund"
           ],
           "endpoints": [
             {

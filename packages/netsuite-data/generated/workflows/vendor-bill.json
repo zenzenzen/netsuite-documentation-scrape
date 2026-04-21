@@ -36,7 +36,8 @@
             "nexus",
             "accountingPeriod",
             "subsidiary",
-            "term"
+            "term",
+            "vendorBill"
           ],
           "endpoints": [
             {
@@ -133,7 +134,8 @@
             "location",
             "nexus",
             "accountingPeriod",
-            "subsidiary"
+            "subsidiary",
+            "vendorCredit"
           ],
           "endpoints": [
             {
@@ -208,7 +210,8 @@
             "nexus",
             "accountingPeriod",
             "subsidiary",
-            "journalEntry"
+            "journalEntry",
+            "vendorPayment"
           ],
           "endpoints": [
             {
@@ -282,7 +285,8 @@
             "contact",
             "location",
             "nexus",
-            "subsidiary"
+            "subsidiary",
+            "vendorReturnAuthorization"
           ],
           "endpoints": [
             {
@@ -372,7 +376,8 @@
             "accountingPeriod",
             "fulfillmentRequest",
             "shipItem",
-            "subsidiary"
+            "subsidiary",
+            "itemFulfillment"
           ],
           "endpoints": [
             {

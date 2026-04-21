@@ -1,0 +1,1043 @@
+{
+  "recordName": "inventoryItem",
+  "slug": "inventory-item",
+  "title": "Inventory Item",
+  "summary": "Get list of records. 11 linked dependency records.",
+  "docsPath": "/records/inventory-item",
+  "stats": {
+    "operations": 6,
+    "transforms": 0,
+    "schemaFields": 0
+  },
+  "dependencyRecords": [
+    "account",
+    "billingSchedule",
+    "classification",
+    "costCategory",
+    "currency",
+    "shipItem",
+    "department",
+    "location",
+    "pricingGroup",
+    "unitsType",
+    "vendor",
+    "inventoryItem"
+  ],
+  "referencedBy": [
+    "analyticalImpact",
+    "assemblyBuild",
+    "assemblyUnbuild",
+    "calendarEvent",
+    "charge",
+    "expenseCategory",
+    "fairValuePrice",
+    "inventoryCostRevaluation",
+    "inventoryItem",
+    "inventoryNumber",
+    "issue",
+    "phoneCall",
+    "promotionCode",
+    "subscriptionLine",
+    "supportCase",
+    "task",
+    "timeBill",
+    "usage",
+    "workOrder"
+  ],
+  "operations": [
+    {
+      "id": "operation--inventoryItem-get",
+      "summary": "Get list of records.",
+      "tag": "inventoryItem",
+      "method": "GET",
+      "path": "/inventoryItem",
+      "isTransform": false,
+      "transformTarget": null,
+      "requestBody": [],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "q:\nstring",
+          "name": "q:\nstring\n in query",
+          "description": "The search query that is used to filter results.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "limit:\ninteger\n(int32)\n1000",
+          "name": "limit:\ninteger\n(int32)\n1000\n in query",
+          "description": "The limit used to specify the number of results on a single page.",
+          "type": "integer\n(int32)\n1000\n integer (int32)",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "offset:\ninteger\n(int32)\n0",
+          "name": "offset:\ninteger\n(int32)\n0\n in query",
+          "description": "The offset used for selecting a specific page of results.",
+          "type": "integer\n(int32)\n0\n integer (int32)",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "200 OK",
+          "name": "200 OK\ninventoryItemCollection",
+          "description": "List of records.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "inventoryItemCollection",
+              "href": "#/definitions/inventoryItemCollection",
+              "definitionId": "inventoryItemCollection"
+            }
+          ],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "inventoryItemCollection",
+          "href": "#/definitions/inventoryItemCollection",
+          "definitionId": "inventoryItemCollection"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [],
+      "rawText": "inventoryItem\nGet list of records.\nGET /inventoryItem\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nq: string\nin query\nThe search query that is used to filter results.\nlimit: integer (int32) 1000\nin query\nThe limit used to specify the number of results on a single page.\noffset: integer (int32) 0\nin query\nThe offset used for selecting a specific page of results.\napplication/vnd.oracle.resource+json; type=collection application/vnd.oracle.resource+json; type=error\n200 OK\ninventoryItemCollection\nList of records.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--inventoryItem-post",
+      "summary": "Insert record.",
+      "tag": "inventoryItem",
+      "method": "POST",
+      "path": "/inventoryItem",
+      "isTransform": false,
+      "transformTarget": null,
+      "requestBody": [
+        {
+          "label": "inventoryItem",
+          "name": "inventoryItem",
+          "description": "Request body.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "inventoryItem",
+              "href": "#/definitions/inventoryItem",
+              "definitionId": "inventoryItem"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replace:\nstring",
+          "name": "replace:\nstring\n in query",
+          "description": "The names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning",
+          "name": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning\n in header",
+          "description": "Sets the strictness of property name validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nWarning\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError",
+          "name": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError\n in header",
+          "description": "Sets the strictness of property value validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nError\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "204 No Content",
+          "name": "204 No Content",
+          "description": "Inserted record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "inventoryItem",
+          "href": "#/definitions/inventoryItem",
+          "definitionId": "inventoryItem"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [
+        "inventoryItem"
+      ],
+      "rawText": "inventoryItem\nInsert record.\nPOST /inventoryItem\ninventoryItem\nRequest body.\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nreplace: string\nin query\nThe names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.\nX-NetSuite-PropertyNameValidation: string Error , Warning , Ignore Warning\nin header\nSets the strictness of property name validation.\nX-NetSuite-PropertyValueValidation: string Error , Warning , Ignore Error\nin header\nSets the strictness of property value validation.\napplication/vnd.oracle.resource+json; type=error\n204 No Content\nInserted record.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--inventoryItem--id--delete",
+      "summary": "Remove record.",
+      "tag": "inventoryItem",
+      "method": "DELETE",
+      "path": "/inventoryItem/{id}",
+      "isTransform": false,
+      "transformTarget": null,
+      "requestBody": [],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "id:\ninteger\n(int32)",
+          "name": "id:\ninteger\n(int32)\n in path",
+          "description": "Internal identifier.",
+          "type": "integer\n(int32)\n integer (int32)",
+          "subtitle": "in path",
+          "required": true,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "204 No Content",
+          "name": "204 No Content",
+          "description": "Removed record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [],
+      "rawText": "inventoryItem\nRemove record.\nDELETE /inventoryItem/{id}\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nid: integer (int32)\nin path\nInternal identifier.\napplication/vnd.oracle.resource+json; type=error\n204 No Content\nRemoved record.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--inventoryItem--id--get",
+      "summary": "Get record.",
+      "tag": "inventoryItem",
+      "method": "GET",
+      "path": "/inventoryItem/{id}",
+      "isTransform": false,
+      "transformTarget": null,
+      "requestBody": [],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "id:\ninteger\n(int32)",
+          "name": "id:\ninteger\n(int32)\n in path",
+          "description": "Internal identifier.",
+          "type": "integer\n(int32)\n integer (int32)",
+          "subtitle": "in path",
+          "required": true,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "expandSubResources:\nboolean\nfalse",
+          "name": "expandSubResources:\nboolean\nfalse\n in query",
+          "description": "Set to 'true' to automatically expand all sublists, sublist lines, and subrecords on this record.",
+          "type": "boolean\nfalse\n boolean",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "simpleEnumFormat:\nboolean\nfalse",
+          "name": "simpleEnumFormat:\nboolean\nfalse\n in query",
+          "description": "Set to true to return enumeration values in a format that only shows the internal ID value.",
+          "type": "boolean\nfalse\n boolean",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "fields:\nstring",
+          "name": "fields:\nstring\n in query",
+          "description": "The names of the fields and sublists on the record. Only the selected fields and sublists will be returned in the response.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "200 OK",
+          "name": "200 OK\ninventoryItem",
+          "description": "Retrieved record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "inventoryItem",
+              "href": "#/definitions/inventoryItem",
+              "definitionId": "inventoryItem"
+            }
+          ],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "inventoryItem",
+          "href": "#/definitions/inventoryItem",
+          "definitionId": "inventoryItem"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [
+        "inventoryItem"
+      ],
+      "rawText": "inventoryItem\nGet record.\nGET /inventoryItem/{id}\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nid: integer (int32)\nin path\nInternal identifier.\nexpandSubResources: boolean false\nin query\nSet to 'true' to automatically expand all sublists, sublist lines, and subrecords on this record.\nsimpleEnumFormat: boolean false\nin query\nSet to true to return enumeration values in a format that only shows the internal ID value.\nfields: string\nin query\nThe names of the fields and sublists on the record. Only the selected fields and sublists will be returned in the response.\napplication/vnd.oracle.resource+json; type=singular application/vnd.oracle.resource+json; type=error\n200 OK\ninventoryItem\nRetrieved record.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--inventoryItem--id--patch",
+      "summary": "Update record.",
+      "tag": "inventoryItem",
+      "method": "PATCH",
+      "path": "/inventoryItem/{id}",
+      "isTransform": false,
+      "transformTarget": null,
+      "requestBody": [
+        {
+          "label": "inventoryItem",
+          "name": "inventoryItem",
+          "description": "Request body.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "inventoryItem",
+              "href": "#/definitions/inventoryItem",
+              "definitionId": "inventoryItem"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "id:\ninteger\n(int32)",
+          "name": "id:\ninteger\n(int32)\n in path",
+          "description": "Internal identifier.",
+          "type": "integer\n(int32)\n integer (int32)",
+          "subtitle": "in path",
+          "required": true,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning",
+          "name": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning\n in header",
+          "description": "Sets the strictness of property name validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nWarning\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError",
+          "name": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError\n in header",
+          "description": "Sets the strictness of property value validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nError\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replace:\nstring",
+          "name": "replace:\nstring\n in query",
+          "description": "The names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replaceSelectedFields:\nboolean\nfalse",
+          "name": "replaceSelectedFields:\nboolean\nfalse\n in query",
+          "description": "If set to 'true', all fields that should be deleted in the update request, including body fields, must be included in the 'replace' query parameter.",
+          "type": "boolean\nfalse\n boolean",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "204 No Content",
+          "name": "204 No Content",
+          "description": "Updated record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "inventoryItem",
+          "href": "#/definitions/inventoryItem",
+          "definitionId": "inventoryItem"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [
+        "inventoryItem"
+      ],
+      "rawText": "inventoryItem\nUpdate record.\nPATCH /inventoryItem/{id}\ninventoryItem\nRequest body.\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nid: integer (int32)\nin path\nInternal identifier.\nX-NetSuite-PropertyNameValidation: string Error , Warning , Ignore Warning\nin header\nSets the strictness of property name validation.\nX-NetSuite-PropertyValueValidation: string Error , Warning , Ignore Error\nin header\nSets the strictness of property value validation.\nreplace: string\nin query\nThe names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.\nreplaceSelectedFields: boolean false\nin query\nIf set to 'true', all fields that should be deleted in the update request, including body fields, must be included in the 'replace' query parameter.\napplication/vnd.oracle.resource+json; type=error\n204 No Content\nUpdated record.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--inventoryItem--id--put",
+      "summary": "Insert or update record.",
+      "tag": "inventoryItem",
+      "method": "PUT",
+      "path": "/inventoryItem/{id}",
+      "isTransform": false,
+      "transformTarget": null,
+      "requestBody": [
+        {
+          "label": "inventoryItem",
+          "name": "inventoryItem",
+          "description": "Request body.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "inventoryItem",
+              "href": "#/definitions/inventoryItem",
+              "definitionId": "inventoryItem"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "id:\nstring",
+          "name": "id:\nstring\n in path",
+          "description": "External identifier.",
+          "type": "string\n string",
+          "subtitle": "in path",
+          "required": true,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning",
+          "name": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning\n in header",
+          "description": "Sets the strictness of property name validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nWarning\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError",
+          "name": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError\n in header",
+          "description": "Sets the strictness of property value validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nError\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replace:\nstring",
+          "name": "replace:\nstring\n in query",
+          "description": "The names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replaceSelectedFields:\nboolean\nfalse",
+          "name": "replaceSelectedFields:\nboolean\nfalse\n in query",
+          "description": "If set to 'true', all fields that should be deleted in the update request, including body fields, must be included in the 'replace' query parameter.",
+          "type": "boolean\nfalse\n boolean",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "204 No Content",
+          "name": "204 No Content",
+          "description": "Upserted record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "inventoryItem",
+          "href": "#/definitions/inventoryItem",
+          "definitionId": "inventoryItem"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [
+        "inventoryItem"
+      ],
+      "rawText": "inventoryItem\nInsert or update record.\nPUT /inventoryItem/{id}\ninventoryItem\nRequest body.\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nid: string\nin path\nExternal identifier.\nX-NetSuite-PropertyNameValidation: string Error , Warning , Ignore Warning\nin header\nSets the strictness of property name validation.\nX-NetSuite-PropertyValueValidation: string Error , Warning , Ignore Error\nin header\nSets the strictness of property value validation.\nreplace: string\nin query\nThe names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.\nreplaceSelectedFields: boolean false\nin query\nIf set to 'true', all fields that should be deleted in the update request, including body fields, must be included in the 'replace' query parameter.\napplication/vnd.oracle.resource+json; type=error\n204 No Content\nUpserted record.\ndefault\nnsError\nError response."
+    }
+  ],
+  "definition": {
+    "id": "definition-inventoryItem",
+    "refs": [
+      {
+        "text": "inventoryItem-accountingBookDetailCollection",
+        "href": "#/definitions/inventoryItem-accountingBookDetailCollection",
+        "definitionId": "inventoryItem-accountingBookDetailCollection"
+      },
+      {
+        "text": "inventoryItem",
+        "href": "#/definitions/inventoryItem",
+        "definitionId": "inventoryItem"
+      },
+      {
+        "text": "nsResource",
+        "href": "#/definitions/nsResource",
+        "definitionId": "nsResource"
+      },
+      {
+        "text": "account",
+        "href": "#/definitions/account",
+        "definitionId": "account"
+      },
+      {
+        "text": "billingSchedule",
+        "href": "#/definitions/billingSchedule",
+        "definitionId": "billingSchedule"
+      },
+      {
+        "text": "inventoryItem-binNumberCollection",
+        "href": "#/definitions/inventoryItem-binNumberCollection",
+        "definitionId": "inventoryItem-binNumberCollection"
+      },
+      {
+        "text": "classification",
+        "href": "#/definitions/classification",
+        "definitionId": "classification"
+      },
+      {
+        "text": "inventoryItem-correlatedItemsCollection",
+        "href": "#/definitions/inventoryItem-correlatedItemsCollection",
+        "definitionId": "inventoryItem-correlatedItemsCollection"
+      },
+      {
+        "text": "costCategory",
+        "href": "#/definitions/costCategory",
+        "definitionId": "costCategory"
+      },
+      {
+        "text": "currency",
+        "href": "#/definitions/currency",
+        "definitionId": "currency"
+      },
+      {
+        "text": "shipItem",
+        "href": "#/definitions/shipItem",
+        "definitionId": "shipItem"
+      },
+      {
+        "text": "department",
+        "href": "#/definitions/department",
+        "definitionId": "department"
+      },
+      {
+        "text": "inventoryItem-hierarchyVersionsCollection",
+        "href": "#/definitions/inventoryItem-hierarchyVersionsCollection",
+        "definitionId": "inventoryItem-hierarchyVersionsCollection"
+      },
+      {
+        "text": "nsResourceCollection",
+        "href": "#/definitions/nsResourceCollection",
+        "definitionId": "nsResourceCollection"
+      },
+      {
+        "text": "shipItemCollection",
+        "href": "#/definitions/shipItemCollection",
+        "definitionId": "shipItemCollection"
+      },
+      {
+        "text": "inventoryItem-itemVendorCollection",
+        "href": "#/definitions/inventoryItem-itemVendorCollection",
+        "definitionId": "inventoryItem-itemVendorCollection"
+      },
+      {
+        "text": "nsLink",
+        "href": "#/definitions/nsLink",
+        "definitionId": "nsLink"
+      },
+      {
+        "text": "location",
+        "href": "#/definitions/location",
+        "definitionId": "location"
+      },
+      {
+        "text": "inventoryItem-locationsCollection",
+        "href": "#/definitions/inventoryItem-locationsCollection",
+        "definitionId": "inventoryItem-locationsCollection"
+      },
+      {
+        "text": "inventoryItem-presentationItemCollection",
+        "href": "#/definitions/inventoryItem-presentationItemCollection",
+        "definitionId": "inventoryItem-presentationItemCollection"
+      },
+      {
+        "text": "inventoryItem-price",
+        "href": "#/definitions/inventoryItem-price",
+        "definitionId": "inventoryItem-price"
+      },
+      {
+        "text": "pricingGroup",
+        "href": "#/definitions/pricingGroup",
+        "definitionId": "pricingGroup"
+      },
+      {
+        "text": "unitsType",
+        "href": "#/definitions/unitsType",
+        "definitionId": "unitsType"
+      },
+      {
+        "text": "inventoryItem-siteCategoryCollection",
+        "href": "#/definitions/inventoryItem-siteCategoryCollection",
+        "definitionId": "inventoryItem-siteCategoryCollection"
+      },
+      {
+        "text": "subsidiaryCollection",
+        "href": "#/definitions/subsidiaryCollection",
+        "definitionId": "subsidiaryCollection"
+      },
+      {
+        "text": "inventoryItem-translationsCollection",
+        "href": "#/definitions/inventoryItem-translationsCollection",
+        "definitionId": "inventoryItem-translationsCollection"
+      },
+      {
+        "text": "vendor",
+        "href": "#/definitions/vendor",
+        "definitionId": "vendor"
+      }
+    ],
+    "fields": [],
+    "rawText": "inventoryItem\nVSOEDeferral: object\nid Internal identifier: string DEFERALLUNTIL , DEFERUNTIL\nrefName Reference Name: string\nVSOEDelivered Default as Delivered: boolean\nCheck this box to automatically set this item to a Delivered status when this item is added to a transaction. Clear this box to leave the delivery status clear by default.\nVSOEPermitDiscount: object\nid Internal identifier: string IFDELIVERED , NEVER\nrefName Reference Name: string\nVSOEPrice Allocation Price: number (double)\nEnter the VSOE Price for this item if it is known. Note: If you need to use more than one VSOE price for an item, you can set the most common price here and then change the price on each order manually.\nVSOESopGroup: object\nid Internal identifier: string EXCLUDE , NORMAL , SOFTWARE\nrefName Reference Name: string\naccountingBookDetail: inventoryItem-accountingBookDetailCollection\nalternateDemandSourceItem: inventoryItem\namortizationPeriod Amortization Period: integer (int64)\namortizationTemplate: nsResource\nassetAccount: account\natpLeadTime ATP Lead Time: integer (int64)\natpMethod: object\nid Internal identifier: string CUMULATIVE_ATP_WITH_LOOK_AHEAD , DISCRETE_ATP\nrefName Reference Name: string\nautoExpandKitForRevenuemgmt Auto-Expansion for Revenue Management: boolean\nautoLeadTime Auto-Calculate Lead Time: boolean\nLead time is the average number of days between ordering this item from the vendor and receiving it. * Check the Auto-Calculate box if you want NetSuite to calculate the lead time based on the most recent order history of this item. This is calculated by taking the number of days between the order entry and receipt on the three most recent purchase orders, and dividing by three. o If there are multiple receipts for the item against the same purchase order, only the first receipt is used for the calculation. o Lead time calculation is not weighted by number of units received. o More recent purchase orders without receipts are ignored. * Clear the Auto-Calculate box to manually enter a lead time value in days. If the Auto-Calculate box is cleared and no value is entered, then the default value from the Set Up Inventory Management page is used.\nautoPreferredStockLevel Auto-Calculate Preferred Stock Level: boolean\nThe preferred stock level is the optimum quantity to maintain in stock of an item. The quantity you enter here is used to determine your replenishment needs on the Order Items page. It is the quantity you want to have in stock after an order is placed. * Auto-Calculating – Check the Auto-Calculate box if you want NetSuite to calculate the preferred stock level based on demand for the item. The preferred stock level is calculated as: (daily demand * number of days supply preferred). If no preferred stock level is identified, then the default preferred stock level is used from the Set Up Inventory Management page. * Manually Calculating – Clear the Auto-Calculate box to manually enter the preferred stock quantity. The preferred stock level you set is used to calculate the quantity of items to be ordered on the Order Items page.\nautoReorderPoint Auto-Calculate Reorder Point: boolean\nReorder Point is the quantity level at which you need to reorder or build more of this item. * Auto-Calculate – Check the Auto-Calculate box to automatically calculate the reorder point based on demand for the item over time. The reorder point depends on the safety stock definition and is calculated as follows: o Without safety stock defined: Reorder point = (average lead time days * demand) o With safety stock defined in days: Reorder point = [(average lead time days + safety stock days) * demand] o With safety stock quantity defined: Reorder point = [(average lead time days * demand) + safety stock quantity) * Manually Calculate – Clear the Auto-Calculate box to manually enter the point at which to reorder or build more of this item. If you go to Home > User Preferences and place a check mark in the Inventory Level Warnings box, NetSuite reminds you when you have reached the reorder point.\navailableToPartners Available to Adv. Partners: boolean\nCheck this box to make this item available to partners with the Advanced Partner Center role for viewing. These items are also available to partners with roles that are customized for the Advanced Partner Center and include view, create or edit access to item records.\naverageCost Average Cost: number (double)\nThis field displays the current average cost of the item across all locations. Using the weighted-average method, the average cost is calculated as the total units available during a period divided by the beginning inventory cost plus the cost of additions to inventory. Note: The average cost calculated per location is listed for each location on the Locations subtab. If you use Multiple Units of Measure, average cost is calculated using stock units.\nbackwardConsumptionDays Backward Consumption Days: integer (int64)\nWhen you use the Forecast Consumption demand source method, set the following: * Forward Consumption – Number of days after the order date to consider * Backward Consumption – Number of days prior to the order date to consider When backward and forward consumption days are entered for an item, these fields determine the window, or time period, that is considered for each sales order when a forecast amount may be consumed to calculate demand. If an order falls within the consumption window, that order quantity is calculated as being consumed and the forecast is adjusted to account for the order consumption. Note: NetSuite always considers backward consumption first. The forecast closest to the order in the backward window is consumed first. The forecast closest to the order in the forward window is considered if there are remaining quantities to be consumed. Note: Only sales order and invoice quantities can consume forecast quantities. Demand from transfer orders and work orders does not consume forecast quantities.\nbaseUnit Primary Base Unit: string\nThis field displays the base unit of measure for this item.\nbillExchRateVarianceAcct: account\nbillPriceVarianceAcct: account\nbillQtyVarianceAcct: account\nbillingSchedule: billingSchedule\nbinNumber: inventoryItem-binNumberCollection\nclass: classification\ncogsAccount: account\nconsumptionUnit Primary Consumption Unit: string\nIf you use the Multiple Units of Measure feature, select the default unit of measure for inventory.\ncontingentRevenueHandling Eligible For Contingent Revenue Handling: boolean\nCheck this box to indicate that the item is subject to contingent revenue handling. When checked, revenue allocation is affected.\nconversionRate Conversion Rate (/Primary Base): number (float)\ncopyDescription Copy from Sales Order: boolean\nCheck this box to copy the purchase description from the item description you enter on a sales order. Clear this box to enter a purchase description in the field above.\ncorrelatedItems: inventoryItem-correlatedItemsCollection\ncost Purchase Price: number (double)\nEnter the price you pay for this item. If you do not enter a price, purchase orders for this item show the most recent purchase price by default. If you select a preferred vendor for this item, the price is shown in the currency selected on the vendor's record. If no preferred vendor is selected, the price is shown in your base currency.\ncostAccountingStatus Cost Accounting Status: string\ncostCategory: costCategory\ncostEstimate Item Defined Cost: number (double)\nEnter an Item Defined Cost amount.\ncostEstimateUnits Est. Cost Unit: string\ncostingMethod: object\nid Internal identifier: string SERIAL , LOT , AVG , LIFO , GROUPAVG , FIFO , STANDARD\nrefName Reference Name: string\ncountryOfManufacture: object\nid Internal identifier: string PR , PS , PT , PW , PY , QA , AD , AE , AF , AG ,\nrefName Reference Name: string\ncreateExpensePlansOn: nsResource\ncreateRevenuePlansOn: nsResource\ncreatedDate Date Created: string (date-time)\ncurrency: currency\ncustReturnVarianceAccount: account\ncustomForm: object\nid Internal identifier: string -200 , 26 , -10201 , -10200\nrefName Reference Name: string\ndateConvertedToInv Date Converted To Inv.: string (date-time)\ndefaultAllocationStrategy: nsResource\ndefaultItemShipMethod: shipItem\ndefaultReturnCost Default Return Cost: number (double)\nEnter the rate you want to default to show as the cost for this item when it is returned. What you enter in this field defaults to show in the Override Rate field on item receipts. You can still change this value after it appears on the item receipt.\ndefaultReturnCostUnits: string\ndeferralAccount: account\ndeferredRevenueAccount: account\ndemandModifier Estimated Demand Change: number (double)\nEnter the default percentage of Expected Demand Change to use for calculating item demand. For example, if you know that new customers will increase sales of this item in the future, you can enter a 10% expected demand change to be added on to previous sales totals. If no expected demand change percentage is entered, then the default value from the Set Up Inventory Management page is used.\ndemandSource: object\nid Internal identifier: string FORECASTANDORDERS , EXISTINGORDERSANDDEPENDENTDEMAND , FORECASTCONSUMPTION , ITEMDEMANDPLAN\nrefName Reference Name: string\ndemandTimeFence Demand Time Fence: integer (int64)\nDemand Time Fence defaults to the number entered in the Default Demand Time Fence field. Verify the default or enter a number between zero and 365 to determine the demand time fence for this item.\ndepartment: department\ndescription Description: string\nEnter a description for this item. This description will appear in the Description column of sales forms.\ndirectRevenuePosting Direct Revenue Posting: boolean\nCheck this box to disable advanced revenue management for this item. When checked, posting transactions that include this item post directly to the item revenue account. No revenue element or revenue arrangement is created. When you check this box, the Deferred Revenue Account on the Accounting subtab is disabled. When you create sales transactions that include items that have this box checked, all the items in the transaction must have the box checked. You cannot mix items that post directly to revenue with items that post to deferred revenue in the same transaction. This restriction also applies to kit items. All items in a kit must post either to revenue or to deferred revenue. You cannot check or clear the box after the item has been used in a transaction with advanced revenue management. By default, this box is not checked.\ndisplayName Display Name/Code: string\nEnter an optional name of up to 250 characters for this item in addition to the Item Name. If you are integrating with a Yahoo! store, this field is imported from Yahoo!. The display name prints in the Item column of sales forms when Basic printing is used. If this item is a member of a kit, this name appears in the Item column when the Print Items box is checked. If you do not enter a display name, the item name appears on printed forms.\ndistributionCategory: nsResource\ndistributionNetwork: nsResource\ndontShowPrice Don't Show Price: boolean\nCheck this box to hide the price of this item online. This is useful for items you want to advertise but don't want to sell or for items that you track inventory for and want to display but are offered in combination with other items.\ndropShipExpenseAccount: account\nenableCatchWeight Enable Catch Weight: boolean\nenforceminqtyinternally Enforce Minimum Internally: boolean\nCheck this box to apply the minimum quantity restriction on sales orders generated from NetSuite. When you clear this box, but enter a number in the Minimum Quantity field, the minimum quantity is only applied to web store orders.\nexcludeFromSiteMap Exclude from Sitemap: boolean\nCheck this box to exclude a tab, category or item page from the site map.\nexpenseAmortizationRule: nsResource\nexternalId External ID: string\nfeaturedDescription Featured Description: string\nIf this item is displayed on the home page of your Web site, enter a featured description for this item. This description appears below the item's store display name on the Home page of your store or site. You can enter up to 999 characters including basic HTML code. Enter and format text using the formatting options, or click the HTML Source Code link to enter HTML. If you see the Enhance text button next to this field, you can get writing help for this field from our generative AI service, NetSuite Text Enhance. Click the Enhance Text button to use the available options. Learn more about Text Enhance.\nfixedLotSize Fixed Lot Size: number (float)\nIf you selected Fixed Lot Size as the lot sizing method, then enter a quantity in the Fixed Lot Size field. This is the quantity that procurement of this item is always based on, regardless of demand projections.\nfixedLotSizeUnits: string\nforwardConsumptionDays Forward Consumption Days: integer (int64)\nWhen you use the Forecast Consumption demand source method, set the following: * Forward Consumption – Number of days after the order date to consider * Backward Consumption – Number of days prior to the order date to consider When backward and forward consumption days are entered for an item, these fields determine the window, or time period, that is considered for each sales order when a forecast amount may be consumed to calculate demand. If an order falls within the consumption window, that order quantity is calculated as being consumed and the forecast is adjusted to account for the order consumption. Note: NetSuite always considers backward consumption first. The forecast closest to the order in the backward window is consumed first. The forecast closest to the order in the forward window is considered if there are remaining quantities to be consumed. Note: Only sales order and invoice quantities can consume forecast quantities. Demand from transfer orders and work orders does not consume forecast quantities.\nfraudRisk: object\nid Internal identifier: string LOW , MEDIUM , HIGH\nrefName Reference Name: string\nfroogleProductFeed Google Base Product Feed: boolean\nCheck this box to include this item when exporting item lists to Froogle. Clear this box to remove this item when exporting item lists to Froogle.\nfuturehorizon Supply Chain Future Horizon: integer (int64)\nEnter the number of days ahead you want to be included in a snapshot for this item. This will include future orders beyond the snapshot generated for this item. For example, when you select 30 in this field, open orders that are past due by 30 days are included. The default for this field is 30 days. The maximum you can enter in this field is 365 days.\ngainLossAccount: account\nhandlingCost Handling Cost: number (double)\nAs an option, you may enter a handling cost for this item in dollars. You must also create a shipping item for per-item shipping and handling costs at Lists > Shipping Items > New. When this item is selected on sales orders, invoices or cash sales, the appropriate shipping and handling charges are automatically calculated.\nhazmatHazardClass Hazmat Hazard Class: string\nEnter the DOT hazardous material class or division.\nhazmatId Hazmat Id: string\nEnter the regulatory identifier for the commodity from the Federal Express Ground Hazardous Materials Shipping Guide. The format is UNXXXX, where XXXX is a four digit number.\nhazmatItemUnits Hazmat Item Units: string\nEnter the unit of measure for this item, such as kg or ml.\nhazmatItemUnitsQty Hazmat Item Units Quantity: number (float)\nEnter the quantity for the item units.\nhazmatPackingGroup: object\nid Internal identifier: string , DEFAULT , I , II , III\nrefName Reference Name: string\nhazmatShippingName Hazmat Shipping Name: string\nEnter the shipping name for the ID as listed in the Federal Express Ground Hazardous Materials Shipping Guide. This item appears on the OP950 form.\nhierarchyVersions: inventoryItem-hierarchyVersionsCollection\nid Internal ID: string\nReturns the internal ID for the item.\nincludeChildren Include Children: boolean\nCheck the Include Children box to share the item with all the sub-subsidiaries associated with each subsidiary selected in the Subsidiary field. Note: When sharing items across subsidiaries, all of the options selected on the item record must be compatible across subsidiaries. For example, when entering an inventory item to be shared across subsidiaries, you should select Income and Asset accounts on the item record that are also shared across the same subsidiaries.\nincomeAccount: account\ninsertItemAttribute: object\nid Internal identifier: string class , department , itemid , location , issueproduct , vendorname\nrefName Reference Name: string\ninterCoDefRevAccount: account\nintercoCogsAccount: account\nintercoExpenseAccountHidden: string\nintercoIncomeAccount: account\ninternalId Internal ID: integer (int64)\nUse this ID number to create smart tags for your item templates, site templates, and custom Web site that you host with NetSuite. Smart tags use the following format:\nisDonationItem Variable Amount: boolean\nCheck this box to set this item as variable-priced. This enables customers to enter their own prices for this item, such as for donations.\nisDropShipItem Drop Ship Item: boolean\nCheck the Drop Ship Item box to have this item default as a drop ship item on sales orders. When a sales transaction for a drop ship item is approved, a linked purchase order for the preferred vendor is automatically generated. The vendor ships this item to your customer directly. Note: an item can be a drop ship or a special order, but not both.\nisGCoCompliant Google Checkout Compliant: boolean\nisHazmatItem Hazmat/Dangerous Goods: boolean\nCheck this box if this item is categorized as either hazardous material or dangerous goods. These items can only be shipped using FedEx integration.\nisInactive Inactive: boolean\nWhen you check this box, this item will no longer appear on a list unless you check the Show All box at the bottom of the list page.\nisLotItem Lot Numbered: boolean\nisOnline Display in Website: boolean\nCheck this box to make this item available online in your Web site. You cannot sell this item online unless you check this box. If the item is of the Other Charge for Sale or Resale subtype, checking this box does not make it available in the web store catalog. However, it becomes available during web store checkout.\nisSerialItem Serialized: boolean\nisSpecialOrderItem Special Order Item: boolean\nCheck this box if you want this item to default as a special order on sales transactions. When a sales transaction for a special order item is approved, a linked purchase order is automatically generated. Then, the order cannot be fulfilled until the linked purchase order is received. Special order items can be used for custom orders or \"just-in-time\" inventory. Important: You must identify a preferred vendor and a purchase price on an item record in order for that item to be selected as a special order. Note: An item can be a drop ship or a special order, but not both.\nisStorePickupAllowed Store Pickup Allowed: boolean\nIf this box is checked, indicates that at least one location allows store pickup of the item. If you clear the Allow Store Pickup box in the Locations sublist for all locations, this box is also cleared when you save the item record. This field is read only.\nissueProduct: nsResource\nitemCarrier: object\nid Internal identifier: string ups , nonups\nrefName Reference Name: string\nitemId Item Name/Number: string\nEnter up to 250 characters for the name of this item. This name appears in lists on transactions. If you have the option of entering a display name and do not, the item name prints in the Item column of sales forms when Basic printing is used. If you have the option to enter a vendor name and do not, the item name prints in the Item column of purchase forms. If you have entered a display name, it will print on purchases instead of the item name when Basic printing is used.\nitemOptions: nsResourceCollection\nitemProcessFamily: nsResource\nitemProcessGroup: nsResource\nitemRevenueCategory: nsResource\nitemShipMethod: shipItemCollection\nitemType: object\nid Internal identifier: string Group , Description , Discount , EndGroup , GiftCert , Subtotal , Service , ShipItem , TaxItem , InvtPart ,\nrefName Reference Name: string\nitemVendor: inventoryItem-itemVendorCollection\nlastModifiedDate Last Modified: string (date-time)\nlastPurchasePrice Last Purchase Price: number (double)\nThis field displays the most recent purchase price of the item. This price is determined by the most recent transaction for the item that added positive inventory, such as a purchase receipt, inventory transfer or inventory adjustment. (This does not include item returns or assembly unbuilds.) If two transactions are entered on the same day, the one entered later takes precedence and is used to calculate the last purchase price. When you use the Multiple-Location Inventory feature, the following is true: * The last purchase price reflects the most recent transaction at any location. * The Inventory subtab of inventory item records includes a link to the last positive-inventory transaction per location. * If multiple purchases are made on the same day with different prices and locations, then the highest price paid on that day becomes the last purchase price. If you use Multiple Units of Measure, the last purchase price is calculated using purchase units.\nleadTime Purchase Lead Time: integer (int64)\nLead time is the average number of days between ordering this item from the vendor and receiving it. * Auto-Calculating – Check the Auto-Calculate box if you want NetSuite to calculate the lead time based on the most recent order history of this item. Lead time is calculated by taking the number of days between the order entry and receipt on the three most recent purchase orders, and dividing by three. If more than three purchase orders exist, all purchase orders within the period specified in the Order Analysis Interval field on the Inventory Management Preferences dialog will be used. o If there are multiple receipts for the item against the same purchase order, the calculation is made using the difference between the purchase order and the last receipt (the receipt that fully receives the order). o Lead time calculation is not weighted by number of units received. o More recent purchase orders without receipts are ignored. * Manually Calculating – Clear the Auto-Calculate box to manually enter a lead time value in days. If the Auto-Calculate box is cleared and no value is entered, then the default value from the Set Up Inventory Management page is used.\nlinks Links: nsLink\nnsLink\nlocation: location\nlocations: inventoryItem-locationsCollection\nlowerWarningLimit Lower Warning Limit % (-): number (float)\nmanufacturer Manufacturer: string\nEnter the name of the company that manufactures this item.\nmanufacturerAddr1 Manufacturer Address: string\nEnter the address of the manufacturer. This is necessary to fill out international shipping forms when you sell and ship this item.\nmanufacturerCity Manufacturer City: string\nEnter the city location of the manufacturer of this item. This is necessary to automatically fill out international forms when you ship this item across borders.\nmanufacturerState Manufacturer State: string\nEnter the state where this item's manufacturer is located. This is necessary to fill out international forms when you ship this item.\nmanufacturerTariff HS Tariff Number: string\nEnter the Harmonized System (HS) tariff code number or the Harmonized Tariff Schedule (HTS) code number. This number should be six to ten characters.\nmanufacturerTaxId Manufacturer Tax Id: string\nEnter the Tax ID Number (TIN) for the manufacturer.\nmanufacturerZip Manufacturer Zip Code: string\nEnter the postal code of the location of this manufacturer. This is necessary to create international forms when you ship this item.\nmatchBillToReceipt Match Bill To Receipt: boolean\nCheck the Match Bill to Receipt box if you want the Match Bill to Receipt box on transaction lines to be checked by default for this item. This enables you to generate variances based on vendor bill lines. Then, on the Post Vendor Bill Variances page, you must select Bill in the Transaction Type field to generate the variance postings. Purchase orders that include this item default to have this box checked and variances are generated based on vendor bill lines. Clear this box if you want to generate variance postings based on purchase order lines rather than vendor bill lines and do not want the Match Bill to Receipt box to be checked by default on transaction lines for this item. Then, on the Post Vendor Bill Variances page, you must select Purchase Order in the Transaction Type field to generate the variance postings. This preference defaults to be disabled. Even when enabled, this option can be changed on individual purchase order lines.\nmatrixItemNameTemplate Matrix Item Name Template: string\nThis field is used to control how the matrix item will be displayed in the Matrix Item Name/Number field. Compose the order in which attributes and matrix options are displayed by selecting from the Insert Item Attribute and Insert Matrix Option dropdown lists. Add custom separator characters to easier distinguish the various options. Example: Item Name: Fabric / Color / Waist / Length [Location]\nmatrixItemNameTemplateHelp Matrix Item Name Template: string\nmatrixType: object\nid Internal identifier: string , PARENT , CHILD\nrefName Reference Name: string\nmaxDonationAmount Maximum Variable Amount: number (double)\nIf you checked the Variable Amount box, enter the maximum amount that can be paid or donated for this item.\nmaximumquantity Maximum Order Qty: integer (int64)\nEnter the greatest quantity of this item that customers can purchase. If customers enter an item quantity above the maximum amount, a warning message is displayed. Web store customers are unable to complete checkout unless they enter a quantity equal to or below the maximum quantity. Leave this field empty to allow customers to check out without maximum quantity restrictions. You can edit this warning at Setup > Site Builder/SuiteCommerce Advanced > Customize Text.\nmetaTagHtml Meta Tag HTML: string\nEnter the Meta Tag HTML you want to appear in the < head > section of this item page. Meta tags enable your Web site to be found by search engines.\nminimumquantity Minimum Order Qty: integer (int64)\nEnter the lowest quantity that customers can purchase. Web store customers receive a warning and cannot check out if they enter an item quantity below this minimum. Leave this field empty to allow customers to check out with no minimum quantity restrictions. You can edit this warning at Setup > Site Builder/SuiteCommerce Advanced > Customize Text.\nmpn Manufacturer Part Number: string\nMPN (Manufacturers Part Number) - Enter the part number used by the manufacturer to identify this item.\nmultManufactureAddr Multiple Manufacturer Addresses: boolean\nCheck the Multiple Manufacture Addresses box if this manufacturer uses more than one address.\nnexTagCategory NexTag Category: string\nEnter the name of the NexTag category this item should be included in. This category is included in the product feeds you can export at Setup > Web Site > Product Feeds.\nnexTagProductFeed NexTag Product Feed: boolean\nCheck this box to include this item when exporting item lists to NexTag. Clear this box to remove this item when exporting item lists to NexTag.\nnoPriceMessage No Price Message: string\nIf you opted to not show a price online, enter the message that should show instead of the price. For example, you might enter \"Call for Price.\"\nofferSupport Offer Support: boolean\nCheck this box to offer support for this particular item. By offering support for items, customers can select on case records which item they are having trouble with.\nonSpecial On Special: boolean\nIf you want to put this item on special, check this box. The item then appears in the Specials category in your store or site.\noriginalItemSubtype Original Item Subtype: string\noriginalItemType Original Item Type: string\noutOfStockBehavior: object\nid Internal identifier: string DISABLE , ENABLENMSG , REMOVE , ENABLE , DEFAULT\nrefName Reference Name: string\noutOfStockMessage Out Of Stock Message: string\nYou can enter a custom out of stock message for this item. The message here replaces the default out of stock message.\noverallQuantityPricingType: object\nid Internal identifier: string ITEM , PARENT , SCHEDULE\nrefName Reference Name: string\npageTitle Page Title: string\nEnter the text you want to appear as the page's title for this item. This text appears in the browser tab. Use a descriptive title for the item page, this can help achieve better results with search engine ranking.\nparent: inventoryItem\nparentOnly Use as Category Only: boolean\nperiodicLotSizeDays Periods of Supply Increment: integer (int64)\nIn the Period of Supply Increment field, enter a number from 1 to 90. The default setting is 1. The increment starts on the first day an order is required. From the first day, NetSuite aggregates all orders in the increment. Orders are placed on the first day of the period. Note: The Periodic Lot Size Increment field is enabled only when you select Interval in the Periodic Lot Size Type field.\nperiodicLotSizeType: object\nid Internal identifier: string INTERVAL , WEEKLY , MONTHLY\nrefName Reference Name: string\nplanningItemCategory: nsResource\npreferenceCriterion: object\nid Internal identifier: string , A , B , C , D , E , F\nrefName Reference Name: string\npreferredLocation: location\npreferredStockLevel Preferred Stock Level: number (float)\nThe preferred stock level is the optimum quantity to maintain in stock of an item. The quantity you enter here is used to determine your replenishment needs on the Order Items page. It is the quantity you want to have in stock after an order is placed. * Auto-Calculating – Check the Auto-Calculate box if you want NetSuite to calculate the preferred stock level based on demand for the item. The preferred stock level is calculated as: (daily demand * number of days supply preferred). If no preferred stock level is identified, then the default preferred stock level is used from the Set Up Inventory Management page. * Manually Calculating – Clear the Auto-Calculate box to manually enter the preferred stock quantity. The preferred stock level you set is used to calculate the quantity of items to be ordered on the Order Items page.\npreferredStockLevelDays Days: number (float)\nThe preferred stock level is the optimum quantity to maintain in stock of an item. The quantity you enter here is used to determine your replenishment needs on the Order Items page. It is the quantity you want to have in stock after an order is placed. * Auto-Calculating – Check the Auto-Calculate box if you want NetSuite to calculate the preferred stock level based on demand for the item. The preferred stock level is calculated as: (daily demand * number of days supply preferred). If no preferred stock level is identified, then the default preferred stock level is used from the Set Up Inventory Management page. * Manually Calculating – Clear the Auto-Calculate box to manually enter the preferred stock quantity. The preferred stock level you set is used to calculate the quantity of items to be ordered on the Order Items page.\npreferredStockLevelUnits: string\npresentationItem: inventoryItem-presentationItemCollection\nprice: inventoryItem-price\npricesIncludeTax Prices Include Tax: boolean\nCheck this box to save the base price as the tax inclusive price. Clear this box to save the base price as the tax exclusive price.\npricingGroup: pricingGroup\npurchaseDescription Purchase Description: string\nEnter up to 999 characters of text for a description of this item to appear on vendor orders. Include the unit of measure in this description. If you see the Enhance text button next to this field, you can get writing help for this field from our generative AI service, NetSuite Text Enhance. Click the Enhance Text button to use the available options. Learn more about Text Enhance.\npurchaseOrderAmount Vendor Bill - Purchase Order Amount Tolerance: number (float)\nEnter the tolerance limit for the discrepancy between the amount on the vendor bill and purchase order.\npurchaseOrderQuantity Vendor Bill - Purchase Order Quantity Tolerance: number (float)\nEnter the tolerance limit for the discrepancy between the quantity on the vendor bill and purchase order.\npurchaseOrderQuantityDiff Vendor Bill - Purchase Order Quantity Difference: number (float)\nEnter the difference limit for the discrepancy between the quantity on the vendor bill and purchase order.\npurchasePriceVarianceAcct: account\npurchaseUnit Primary Purchase Unit: string\nSelect the unit you use to purchase this item from the vendor.\nquantityAvailable Quantity Available: number (float)\nquantityAvailableBase Quantity Available (Base Unit): number (float)\nquantityBackOrdered Quantity Back Ordered: number (float)\nquantityCommitted Quantity Committed: number (float)\nThis field shows the number of this item that are already committed to be sold and are currently showing on orders.\nquantityOnHand Quantity On Hand: number (float)\nThis field shows the quantity of this item you have on hand.\nquantityOnHandBase Quantity On Hand (Base Unit): number (float)\nquantityOnHandUnits Quantity On Hand Units: string\nquantityOnOrder Quantity On Order: number (float)\nThis field shows the quantity of this item you currently have on order with the vendor.\nquantityPricingSchedule: nsResource\nrate Price: number (double)\nEnter the rate for this discount or markup. The rate can be either a percentage or dollar amount. A percentage discount must be followed by a % sign. A dollar amount should be entered as a positive number.\nrateIncludingTax Price Including Tax: number (double)\nreceiptAmount Vendor Bill - Item Receipt Amount Tolerance: number (float)\nEnter the tolerance limit for the discrepancy between the amount on the vendor bill and item receipt.\nreceiptQuantity Vendor Bill - Item Receipt Quantity Tolerance: number (float)\nEnter the tolerance limit for the discrepancy between the quantity on the vendor bill and item receipt.\nreceiptQuantityDiff Vendor Bill - Item Receipt Quantity Difference: number (float)\nEnter the difference limit for the discrepancy between the quantity on the vendor bill and item receipt.\nrefName Reference Name: string\nrelatedItemsDescription Related Items Description: string\nEnter a description for the related items you show with this item in your Web site. You can enter up to 999 characters of letters, numbers and basic HTML code. You can also clear the View as HTML box below to enter and format text using the formatting options above. This eliminates the need for HTML code.\nreorderMultiple Reorder Multiple: integer (int64)\nEnter the quantity you prefer to order of this item each time. Then, the Order Items page suggests ordering a quantity of this item that is always multiple of the number you enter. For example, if the vendor only accepts orders in multiples of one thousand, you would enter 1000 in this field. Then, the Order items page might suggest that you order 1000 or 2000, but not 1500. Note: If you use the Multiple Units of Measure feature, the reorder multiple always functions in base units.\nreorderPoint Reorder Point: number (float)\nThe Reorder Point is the quantity level at which you need to reorder or build more of this item. * Auto-Calculating – Check the Auto-Calculate box if you want NetSuite to calculate the reorder point based on demand for the item over time. The reorder point depends on the safety stock definition and is calculated as follows: o Without safety stock defined: Reorder point = (average lead time days * demand) o With safety stock defined in days: Reorder point = [(average lead time days + safety stock days) * demand] o With safety stock quantity defined: Reorder point = [(average lead time days * demand) + safety stock quantity) * Manually Calculating – Clear the Auto-Calculate box if you want to manually enter the point at which to reorder or build more of this item. If you go to Home > User Preferences and place a check mark in the Inventory Level Warnings box, you are reminded when you have reached the reorder point.\nreorderPointUnits: string\nrescheduleInDays Reschedule In Days: integer (int64)\nIn the Reschedule In Days field, enter a number between one and 90 that is the maximum number of days that the order can be advanced from the current day. For example, if you enter 10 in this field, an order for this item can be moved up ten days earlier, but not eleven or more days. This field defaults to be blank. Note: If this field is left blank, NetSuite does not make recommendations to reschedule orders for this item to a later date.\nrescheduleOutDays Reschedule Out Days: integer (int64)\nIn the Reschedule Out Days field, enter a number between one and 180 that is the maximum number of days that the order can be delayed from the current day. For example, if you enter 10 in this field, an order for this item can be moved to ten days later, but not eleven or more days. This field defaults to be blank. Note: If this field is left blank, NetSuite does not make recommendations to reschedule orders for this item to a later date.\nresidual Residual: number (double)\nrevRecForecastRule: nsResource\nrevReclassFxAccount: account\nrevenueAllocationGroup: nsResource\nrevenueRecognitionRule: nsResource\nrotationType: object\nid Internal identifier: string LEFO , FEFO\nrefName Reference Name: string\nroundUpAsComponent Round Up Quantity as Component: boolean\nIf you use the component yield preference, depending on your settings, the component yield calculation may result in a fractional quantity. You can use this setting so that the quantity for a component on a work order automatically rounds up to a whole number in base units. For example, you have an assembly that requires 2 units of Component A. The component yield is 99%. To build 5 of these assemblies requires 10.1 units of Component A. Since you can consume components only in whole numbers, you cannot consume 10.1 units. Therefore, you need to round up to the next highest whole number in base units. Check the Round Up Quantity as Component box to enable NetSuite to round up the quantity consumed for this item. Clear this box if you do not want NetSuite to round up the quantity consumed for this item.\nsafetyStockLevel Safety Stock Level: number (float)\nEnter the amount of an item you prefer to keep in stock at all times. Safety stock can be a quantity or a number of days worth of stock. This amount is used to auto-calculate the reorder point of an item. * To define safety stock as a quantity, enter a value. * To define safety stock as a number of days, enter a value in the field next to Days. If no safety stock value is entered, then the default value from the Set Up Inventory Management page is used.\nsafetyStockLevelDays Safety Stock Level Days: integer (int64)\nEnter the amount of an item you prefer to keep in stock at all times. Safety stock can be a quantity or a number of days worth of stock. This amount is used to auto-calculate the reorder point of an item. * To define safety stock as a quantity, enter a value. * To define safety stock as a number of days, enter a value in the field next to Days. If no safety stock value is entered, then the default value from the Set Up Inventory Management page is used.\nsaleUnit Primary Sale Unit: string\nSelect the unit you use to sell this item to customers on sales transactions.\nsalesDescription Sales Description: string\nEnter a sales description for this item. You can enter letters and numbers. There is a 999 character limit. The sales description displays on transactions such as sales orders, cash sales and invoices. If you use the Web Store feature, the sales description displays immediately under the item's store display name on item list pages in your store or site, if you have not entered a store description for an item. Enter the store description on the Store subtab of the item record. The sales description also displays by default when the item is in the Web store shopping cart.\nsavedReorderPoint Reorder Point: number (float)\nscheduleBCode: object\nid Internal identifier: string 22 , 23 , 24 , 25 , 26 , 27 , 28 , 29 , 30 , 31 ,\nrefName Reference Name: string\nscheduleBNumber Schedule B Number: string\nEnter the number for the Schedule B form for this item.\nscheduleBQuantity Schedule B Quantity: number (float)\nEnter the numeric quantity in relation to the unit of measure entered in the Schedule B Code field. These two fields are used together to determine the amount represented by one of this item on the Schedule B form for Shipping Export Declarations. For example, if you enter 5 in the Schedule B Quantity field, and you select kilogram in the Schedule B Code field, when you fulfill two of these items on an order, the Schedule B form presents the items’ amount as 10 kilograms.\nsearchKeywords Search Keywords: string\nEnter alternative search keywords that customers might use to find this item using your Web store’s internal search. These can include synonyms, acronyms, alternate languages or misspellings. These keywords are seen as equally important as the item name when searches are conducted.\nseasonalDemand Seasonal Demand: boolean\nCheck the Seasonal Demand box to define how NetSuite analyzes customer demand for this item . Customer demand for an item is used to auto-calculate reorder points and preferred stock levels. An item’s demand rate is calculated as the average sales quantity per day. * Historical Demand – Clear the Seasonal Demand box to calculate the demand as average sales per day over a specific period. To set the number of months interval between analysis to evaluate sales orders and calculate item demand, go to Setup > Accounting > Set Up Inventory Management > Order Analysis Interval field. * Seasonal Demand – Check the Seasonal Demand box to calculate the reorder quantity for this item based on inventory demand changes through the year. To set the number of months interval between analysis to evaluate sales orders and calculate item demand, go to Setup > Accounting > Set Up Inventory Management > Order Analysis Interval field.\nsecondaryBaseUnit Secondary Base Unit: string\nsecondaryConsumptionUnit Secondary Consumption Unit: string\nsecondaryPurchaseUnit Secondary Purchase Unit: string\nsecondarySaleUnit Secondary Sale Unit: string\nsecondaryStockUnit Secondary Stock Unit: string\nsecondaryUnitsType: unitsType\nshipIndividually Ships Individually: boolean\nCheck this box if this item always ships alone and with no other items in the same package. This helps determine the number of packages needed and the shipping rate on order fulfillments.\nshipPackage: nsResource\nshippingCost Shipping Cost: number (double)\nAs an option, you may enter a shipping cost for this item in dollars. You must also create a shipping item for per-item shipping costs at Lists > Shipping Items > New. When this item is selected on sales orders, invoices or cash sales, the appropriate shipping charges are automatically calculated.\nshoppingDotComCategory Shopping.com Category: string\nEnter the name of the Shopping.com category that this item should go under. This category is included in the product feeds that you can export from Setup > Web Site > Product Feeds. Go to www.shopping.com for more information on the categories available. This is an optional field only available for following item records: Kit/Package, Non-inventory Item for Sale, Non-inventory Item for Resale, Assembly (lot and serialized), and Inventory (lot and serialized).\nshoppingProductFeed Shopping Product Feed: boolean\nCheck this box to include this item when exporting item lists to Shopping.com. Clear this box to remove this item when exporting item lists to Shopping.com.\nshopzillaCategoryId Shopzilla Category ID: integer (int64)\nEnter the name of the Shopzilla category this item should be included in. This category is included in the product feeds you export at Setup > Web Site > Product Feeds. Go to www.shopzilla.com for more information on the available categories. This is an optional field only displayed for the following item records: Kit/Package, Non-inventory Item for Sale, Non-inventory Item for Resale, Assembly (lot and serialized), and Inventory (lot and serialized).\nshopzillaProductFeed Shopzilla Product Feed: boolean\nCheck this box to include this item when exporting item lists to Shopzilla. Clear this box to remove this item when exporting item lists to Shopzilla.\nshowDefaultDonationAmount Show Default Amount: boolean\nCheck this box to suggest the item's online price for the item. When customers navigate to a donation item, they first see the online price for the item and then can choose to enter any amount they like.\nsiteCategory: inventoryItem-siteCategoryCollection\nsiteMapPriority: object\nid Internal identifier: string , 0.0 , 0.1 , 0.2 , 0.3 , 0.4 , 0.5 , 0.6 , 0.7 , 0.8 ,\nrefName Reference Name: string\nsoftDescriptor: object\nid Internal identifier: string 1 , 2\nrefName Reference Name: string\nstockDescription Stock Description: string\nEnter up to 21 characters to specify information about this item, such as New, Refurbished or Ships 2-3 days.\nstockUnit Primary Stock Unit: string\nSelect the unit you use to stock this item in inventory.\nstoreDescription Store Description: string\nThe store description appears under the item's store display name on item list pages in your store or site. To make the store description displays when an item is in the Web store shopping cart, go to Setup '>' Web Site '>' Set Up Web Site. Click the Cart subtab, and check the box next to Store Description. If you see the Enhance text button next to this field, you can get writing help for this field from our generative AI service, NetSuite Text Enhance. Click the Enhance Text button to use the available options. Learn more about Text Enhance.\nstoreDetailedDescription Detailed Description: string\nEnter a detailed description for this item. When your customers click an item's store display name for more information, they see this description. If you are using Internet Explorer, you can also clear the View Source box below to enter and format text using the formatting options above. This eliminates the need for HTML code. If you do not see the View Source box, make sure Rich Text Editing is enabled. If you see the Enhance text button next to this field, you can get writing help for this field from our generative AI service, NetSuite Text Enhance. Click the Enhance Text button to use the available options. Learn more about Text Enhance.\nstoreDisplayImage: nsResource\nstoreDisplayName Store Display Name: string\nEnter the name of this item as you want it displayed in your Web site. You can enter up to 250 characters.\nstoreDisplayThumbnail: nsResource\nsubsidiary: subsidiaryCollection\nsupplyLotSizingMethod: object\nid Internal identifier: string FIXED_LOT_SIZE , LOT_FOR_LOT , FIXED_LOT_MULTIPLE , PERIODIC_LOT_SIZE\nrefName Reference Name: string\nsupplyReplenishmentMethod: object\nid Internal identifier: string TIME_PHASED , MPS , REORDER_POINT , MRP\nrefName Reference Name: string\nsupplyTimeFence Planning Time Fence: integer (int64)\nThis field defaults to the number entered in the Default Planning Time Fence field. Verify the default or enter a number between zero and 365 to determine the planning time fence for this item.\nsupplyType: object\nid Internal identifier: string TRANSFER , PURCHASE\nrefName Reference Name: string\ntotalValue Total Value: number (double)\nEnter or accept the total value of this item. NetSuite generates this amount by multiplying your purchase price and your quantity on hand. As you buy and sell additional inventory, NetSuite continues to calculate the total value.\ntrackLandedCost Track Landed Cost: boolean\nCheck this box to track landed costs associated with this item. Note: You must include an item that tracks landed costs on transactions you want to source for landed costs. For example, on the Landed Costs subtab of item receipts, a vendor bill shows in the source transaction list only if the bill includes a landed cost item.\ntracksaasmetrics Track SaaS Metrics: boolean\ntracksaasmetricsenddate SaaS Metric End Date: string (date)\ntracksaasmetricsstartdate SaaS Metric Start Date: string (date)\ntransferPrice Transfer Price: number (double)\nEnter a transfer price on an item record to set the default value used as the transfer price on transfer orders. You can still override this default by entering a new transfer price for an item on the transfer order. The use of the value in the Transfer Price field on a transfer order depends on your setting for the Use Item Cost as Transfer Cost preference. When the Use Item Cost as Transfer Cost preference is enabled, the transfer price on a transfer order is not considered for posting cost accounting of line items. In the Transfer Price field, enter a declared value for the item to be used for shipping purposes only. When the Use Item Cost as Transfer Cost preference is disabled, the transfer price on a transfer order is considered for posting cost accounting of line items. Items that do not have a transfer price set on a transfer order use a zero value for cost accounting calculations when the item is received. Note: If the Transfer Price field is blank on the item record, a value of zero shows by default on the transfer order. Unless a transfer price value is entered on the transfer order, a value of zero is used for COGS calculations when the item is received.\ntransferPriceUnits Transfer Price Units: string\ntranslations: inventoryItem-translationsCollection\nunitsForPickDecomposition: nsResourceCollection\nunitsType: unitsType\nupcCode UPC Code: string\nEnter a maximum of 999 characters in this field to identify an internal name or number to store the item's UPC Code. You can use the text you enter here when adding the item to transactions, searching, or viewing reports. * When you enter text in this field, the SKU/UPC field on item labels displays this UPC Code and prints in UPC bar code format. * When this field is clear, the SKU/UPC field on item labels displays the Item Name/Number and prints in Code-128 bar code format.\nupdateExistingTranAccounts Update Existing Transactions' Accounts : boolean\nupperWarningLimit Upper Warning Limit % (+): number (float)\nurlComponent URL Component: string\nEnter a short, descriptive name for this item to appear as part of its URL in the Web store. Setting a name to show in the URL can result in better ranking from search engines. If you leave this field blank, NetSuite terms and numbers are used as identifiers in the URL. Note: Descriptive URL components are case sensitive. Descriptive URLs must match the case used in the URL Component field of an item record to point to the correct page.\nuseBins Use Bins: boolean\nCheck this box to track bin locations for this item. If you choose to use bins for this item, you must associate at least one bin with the item using the Bin Numbers subtab. You can associate multiple items with one bin and multiple bins with one item. You can also designate one preferred bin per location. The preferred bin is listed by default on receipt and fulfillment transactions. To create bin records that can be selected here, go to Lists > Supply Chain > Bins > New.\nuseMarginalRates Use Marginal Rates: boolean\nCheck this box if you want the quantity discounts in the schedule to be applied to each pricing bracket separately. For example, a schedule offers no discount for the first 100 items sold and a 5% discount if more than 100 are sold. If 150 items are sold, the first 100 are at normal price, and the other fifty items are sold at 5% discount. Leave this box clear if you want the discount to apply to all of the items sold.\nvendReturnVarianceAccount: account\nvendor: vendor\nvendorName Vendor Name/Code: string\nIf your vendor uses a name for this item that is different from the name you use, you can enter up to 60 characters as the vendor's name for this item here. The vendor's name for this item prints in the Item column of purchase forms. If you do not enter a vendor name, the item name prints in the Item column of purchase forms. If you have entered a display name, it will print on purchases instead of the item name.\nweight Item Weight : number (float)\nEnter the weight of this item and select the units in the dropdown.\nweightUnit: object\nid Internal identifier: string 1 , 2 , 3 , 4\nrefName Reference Name: string\nweightUnits Weight Units: string\nyahooProductFeed Yahoo Shopping Product Feed: boolean"
+  }
+}

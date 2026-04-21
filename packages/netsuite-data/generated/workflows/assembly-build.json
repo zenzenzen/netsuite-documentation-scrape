@@ -11,7 +11,7 @@
           "title": "Assembly Build",
           "group": "extended",
           "summary": "Get list of records. 1 transform workflow available. 33 linked dependency records.",
-          "docsPath": "./public/records/assembly-build.html",
+          "docsPath": "/records/assembly-build",
           "stats": {
             "operations": 7,
             "transforms": 1,
@@ -52,7 +52,8 @@
             "otherChargePurchaseItem",
             "accountingPeriod",
             "itemRevision",
-            "subsidiary"
+            "subsidiary",
+            "assemblyBuild"
           ],
           "endpoints": [
             {
@@ -116,7 +117,7 @@
           "title": "Assembly Unbuild",
           "group": "extended",
           "summary": "Get list of records. 30 linked dependency records.",
-          "docsPath": "./public/records/assembly-unbuild.html",
+          "docsPath": "/records/assembly-unbuild",
           "stats": {
             "operations": 6,
             "transforms": 0,
@@ -154,7 +155,8 @@
             "otherChargePurchaseItem",
             "accountingPeriod",
             "itemRevision",
-            "subsidiary"
+            "subsidiary",
+            "assemblyUnbuild"
           ],
           "endpoints": [
             {

@@ -15,7 +15,18 @@
     "partner",
     "vendor",
     "employee",
-    "contact"
+    "contact",
+    "couponCode"
+  ],
+  "referencedBy": [
+    "cashRefund",
+    "cashSale",
+    "couponCode",
+    "creditMemo",
+    "estimate",
+    "invoice",
+    "returnAuthorization",
+    "salesOrder"
   ],
   "operations": [
     {

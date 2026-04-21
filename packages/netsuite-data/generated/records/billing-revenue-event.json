@@ -10,7 +10,11 @@
     "schemaFields": 0
   },
   "dependencyRecords": [
-    "subscriptionLine"
+    "subscriptionLine",
+    "billingRevenueEvent"
+  ],
+  "referencedBy": [
+    "billingRevenueEvent"
   ],
   "operations": [
     {

@@ -32,7 +32,8 @@
             "contact",
             "location",
             "nexus",
-            "subsidiary"
+            "subsidiary",
+            "vendorReturnAuthorization"
           ],
           "endpoints": [
             {
@@ -122,7 +123,8 @@
             "accountingPeriod",
             "fulfillmentRequest",
             "shipItem",
-            "subsidiary"
+            "subsidiary",
+            "itemFulfillment"
           ],
           "endpoints": [
             {
@@ -196,7 +198,8 @@
             "location",
             "nexus",
             "accountingPeriod",
-            "subsidiary"
+            "subsidiary",
+            "vendorCredit"
           ],
           "endpoints": [
             {

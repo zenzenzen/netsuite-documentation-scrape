@@ -29,7 +29,8 @@
             "hcmJob",
             "location",
             "salesRole",
-            "subsidiary"
+            "subsidiary",
+            "employee"
           ],
           "endpoints": [
             {
@@ -99,7 +100,7 @@
           "title": "Expense Report",
           "group": "extended",
           "summary": "Get list of records. 13 linked dependency records.",
-          "docsPath": "./public/records/expense-report.html",
+          "docsPath": "/records/expense-report",
           "stats": {
             "operations": 6,
             "transforms": 0,
@@ -120,7 +121,8 @@
             "location",
             "nexus",
             "accountingPeriod",
-            "subsidiary"
+            "subsidiary",
+            "expenseReport"
           ],
           "endpoints": [
             {
@@ -173,7 +175,7 @@
           "title": "Time Bill",
           "group": "extended",
           "summary": "Get list of records. 34 linked dependency records.",
-          "docsPath": "./public/records/time-bill.html",
+          "docsPath": "/records/time-bill",
           "stats": {
             "operations": 6,
             "transforms": 0,
@@ -215,7 +217,8 @@
             "location",
             "payrollItem",
             "priceLevel",
-            "timeSheet"
+            "timeSheet",
+            "timeBill"
           ],
           "endpoints": [
             {

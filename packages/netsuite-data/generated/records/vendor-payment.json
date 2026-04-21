@@ -23,7 +23,13 @@
     "nexus",
     "accountingPeriod",
     "subsidiary",
-    "journalEntry"
+    "journalEntry",
+    "vendorPayment"
+  ],
+  "referencedBy": [
+    "vendor",
+    "vendorBill",
+    "vendorPayment"
   ],
   "operations": [
     {

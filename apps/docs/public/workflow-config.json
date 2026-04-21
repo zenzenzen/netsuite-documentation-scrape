@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-04-21T10:51:05.478Z",
+  "generatedAt": "2026-04-21T11:00:10.989Z",
   "sourceUrl": "https://system.netsuite.com/help/helpcenter/en_US/APIs/REST_API_Browser/record/v1/2025.2/index.html",
   "records": [
     {
@@ -37,7 +37,8 @@
         "promotionCode",
         "shipItem",
         "subsidiary",
-        "term"
+        "term",
+        "creditMemo"
       ],
       "endpoints": [
         {
@@ -112,7 +113,8 @@
         "subsidiary",
         "employee",
         "shipItem",
-        "term"
+        "term",
+        "customer"
       ],
       "endpoints": [
         {
@@ -228,7 +230,8 @@
         "shipItem",
         "webSite",
         "subsidiary",
-        "term"
+        "term",
+        "invoice"
       ],
       "endpoints": [
         {
@@ -313,7 +316,8 @@
         "accountingPeriod",
         "fulfillmentRequest",
         "shipItem",
-        "subsidiary"
+        "subsidiary",
+        "itemFulfillment"
       ],
       "endpoints": [
         {
@@ -373,7 +377,8 @@
         "contact",
         "department",
         "location",
-        "subsidiary"
+        "subsidiary",
+        "partner"
       ],
       "endpoints": [
         {
@@ -433,7 +438,8 @@
         "classification",
         "department",
         "location",
-        "paymentMethod"
+        "paymentMethod",
+        "paymentItem"
       ],
       "endpoints": [
         {
@@ -514,7 +520,8 @@
         "shipItem",
         "webSite",
         "subsidiary",
-        "term"
+        "term",
+        "salesOrder"
       ],
       "endpoints": [
         {
@@ -602,7 +609,8 @@
       "dependencies": [
         "currency",
         "customer",
-        "vendor"
+        "vendor",
+        "subsidiary"
       ],
       "endpoints": [
         {
@@ -643,7 +651,8 @@
         "currency",
         "account",
         "subsidiary",
-        "term"
+        "term",
+        "vendor"
       ],
       "endpoints": [
         {
@@ -739,7 +748,8 @@
         "nexus",
         "accountingPeriod",
         "subsidiary",
-        "term"
+        "term",
+        "vendorBill"
       ],
       "endpoints": [
         {
@@ -812,7 +822,9 @@
         "outgoingTransforms": 0,
         "incomingTransforms": 0
       },
-      "dependencies": [],
+      "dependencies": [
+        "vendorCategory"
+      ],
       "endpoints": [
         {
           "method": "GET",
@@ -879,7 +891,8 @@
         "location",
         "nexus",
         "accountingPeriod",
-        "subsidiary"
+        "subsidiary",
+        "vendorCredit"
       ],
       "endpoints": [
         {
@@ -948,7 +961,8 @@
         "nexus",
         "accountingPeriod",
         "subsidiary",
-        "journalEntry"
+        "journalEntry",
+        "vendorPayment"
       ],
       "endpoints": [
         {
@@ -1016,7 +1030,8 @@
         "contact",
         "location",
         "nexus",
-        "subsidiary"
+        "subsidiary",
+        "vendorReturnAuthorization"
       ],
       "endpoints": [
         {
@@ -1086,7 +1101,8 @@
       "dependencies": [
         "currency",
         "vendor",
-        "subsidiary"
+        "subsidiary",
+        "vendorSubsidiaryRelationship"
       ],
       "endpoints": [
         {
@@ -1148,7 +1164,8 @@
         "customer",
         "department",
         "location",
-        "subsidiary"
+        "subsidiary",
+        "billingAccount"
       ],
       "endpoints": [
         {
@@ -1204,7 +1221,8 @@
         "incomingTransforms": 0
       },
       "dependencies": [
-        "subscriptionLine"
+        "subscriptionLine",
+        "billingRevenueEvent"
       ],
       "endpoints": [
         {
@@ -1261,7 +1279,8 @@
       },
       "dependencies": [
         "term",
-        "job"
+        "job",
+        "billingSchedule"
       ],
       "endpoints": [
         {
@@ -1328,7 +1347,8 @@
         "department",
         "location",
         "salesOrder",
-        "subsidiary"
+        "subsidiary",
+        "subscription"
       ],
       "endpoints": [
         {
@@ -1391,7 +1411,8 @@
         "subscriptionTerm",
         "employee",
         "subscription",
-        "subsidiary"
+        "subsidiary",
+        "subscriptionChangeOrder"
       ],
       "endpoints": [
         {
@@ -1473,7 +1494,8 @@
         "otherChargePurchaseItem",
         "location",
         "salesOrder",
-        "subscription"
+        "subscription",
+        "subscriptionLine"
       ],
       "endpoints": [
         {
@@ -1533,7 +1555,8 @@
         "subscriptionTerm",
         "department",
         "account",
-        "location"
+        "location",
+        "subscriptionPlan"
       ],
       "endpoints": [
         {
@@ -1588,7 +1611,9 @@
         "outgoingTransforms": 0,
         "incomingTransforms": 0
       },
-      "dependencies": [],
+      "dependencies": [
+        "subscriptionTerm"
+      ],
       "endpoints": [
         {
           "method": "GET",
@@ -1647,7 +1672,8 @@
         "currency",
         "department",
         "location",
-        "unitsType"
+        "unitsType",
+        "account"
       ],
       "endpoints": [
         {
@@ -1702,7 +1728,9 @@
         "outgoingTransforms": 0,
         "incomingTransforms": 0
       },
-      "dependencies": [],
+      "dependencies": [
+        "accountingPeriod"
+      ],
       "endpoints": [
         {
           "method": "GET",
@@ -1779,7 +1807,8 @@
         "promotionCode",
         "shipItem",
         "subsidiary",
-        "term"
+        "term",
+        "cashSale"
       ],
       "endpoints": [
         {
@@ -1846,7 +1875,9 @@
         "outgoingTransforms": 0,
         "incomingTransforms": 0
       },
-      "dependencies": [],
+      "dependencies": [
+        "classification"
+      ],
       "endpoints": [
         {
           "method": "GET",
@@ -1905,7 +1936,8 @@
         "partner",
         "vendor",
         "employee",
-        "subsidiary"
+        "subsidiary",
+        "contact"
       ],
       "endpoints": [
         {
@@ -1966,7 +1998,8 @@
         "partner",
         "vendor",
         "employee",
-        "contact"
+        "contact",
+        "couponCode"
       ],
       "endpoints": [
         {
@@ -2021,7 +2054,9 @@
         "outgoingTransforms": 0,
         "incomingTransforms": 0
       },
-      "dependencies": [],
+      "dependencies": [
+        "currency"
+      ],
       "endpoints": [
         {
           "method": "GET",
@@ -2075,7 +2110,9 @@
         "outgoingTransforms": 0,
         "incomingTransforms": 0
       },
-      "dependencies": [],
+      "dependencies": [
+        "customerCategory"
+      ],
       "endpoints": [
         {
           "method": "GET",
@@ -2129,7 +2166,9 @@
         "outgoingTransforms": 0,
         "incomingTransforms": 0
       },
-      "dependencies": [],
+      "dependencies": [
+        "customerMessage"
+      ],
       "endpoints": [
         {
           "method": "GET",
@@ -2197,7 +2236,8 @@
         "location",
         "nexus",
         "accountingPeriod",
-        "subsidiary"
+        "subsidiary",
+        "customerPayment"
       ],
       "endpoints": [
         {
@@ -2258,7 +2298,9 @@
         "outgoingTransforms": 0,
         "incomingTransforms": 0
       },
-      "dependencies": [],
+      "dependencies": [
+        "customerStatus"
+      ],
       "endpoints": [
         {
           "method": "GET",
@@ -2312,7 +2354,9 @@
         "outgoingTransforms": 0,
         "incomingTransforms": 0
       },
-      "dependencies": [],
+      "dependencies": [
+        "department"
+      ],
       "endpoints": [
         {
           "method": "GET",
@@ -2370,7 +2414,8 @@
         "account",
         "classification",
         "department",
-        "location"
+        "location",
+        "discountItem"
       ],
       "endpoints": [
         {
@@ -2435,7 +2480,8 @@
         "hcmJob",
         "location",
         "salesRole",
-        "subsidiary"
+        "subsidiary",
+        "employee"
       ],
       "endpoints": [
         {
@@ -2525,7 +2571,8 @@
         "promotionCode",
         "shipItem",
         "subsidiary",
-        "term"
+        "term",
+        "estimate"
       ],
       "endpoints": [
         {
@@ -2606,7 +2653,8 @@
         "vendor",
         "contact",
         "location",
-        "subsidiary"
+        "subsidiary",
+        "fulfillmentRequest"
       ],
       "endpoints": [
         {
@@ -2669,7 +2717,8 @@
         "employee",
         "nexus",
         "accountingPeriod",
-        "subsidiary"
+        "subsidiary",
+        "journalEntry"
       ],
       "endpoints": [
         {
@@ -2724,7 +2773,9 @@
         "outgoingTransforms": 0,
         "incomingTransforms": 0
       },
-      "dependencies": [],
+      "dependencies": [
+        "location"
+      ],
       "endpoints": [
         {
           "method": "GET",
@@ -2779,7 +2830,8 @@
         "incomingTransforms": 0
       },
       "dependencies": [
-        "vendor"
+        "vendor",
+        "nexus"
       ],
       "endpoints": [
         {
@@ -2850,7 +2902,8 @@
         "customerStatus",
         "location",
         "nexus",
-        "subsidiary"
+        "subsidiary",
+        "opportunity"
       ],
       "endpoints": [
         {
@@ -2930,7 +2983,8 @@
         "incomingTransforms": 0
       },
       "dependencies": [
-        "account"
+        "account",
+        "paymentMethod"
       ],
       "endpoints": [
         {
@@ -2985,7 +3039,9 @@
         "outgoingTransforms": 0,
         "incomingTransforms": 0
       },
-      "dependencies": [],
+      "dependencies": [
+        "priceLevel"
+      ],
       "endpoints": [
         {
           "method": "GET",
@@ -3061,7 +3117,8 @@
         "servicePurchaseItem",
         "otherChargeSaleItem",
         "otherChargeResaleItem",
-        "otherChargePurchaseItem"
+        "otherChargePurchaseItem",
+        "promotionCode"
       ],
       "endpoints": [
         {
@@ -3133,7 +3190,8 @@
         "purchaseContract",
         "shipItem",
         "subsidiary",
-        "term"
+        "term",
+        "purchaseOrder"
       ],
       "endpoints": [
         {
@@ -3225,7 +3283,8 @@
         "customerMessage",
         "nexus",
         "promotionCode",
-        "subsidiary"
+        "subsidiary",
+        "returnAuthorization"
       ],
       "endpoints": [
         {
@@ -3301,7 +3360,8 @@
       "dependencies": [
         "account",
         "salesTaxItem",
-        "subsidiary"
+        "subsidiary",
+        "shipItem"
       ],
       "endpoints": [
         {
@@ -3356,7 +3416,9 @@
         "outgoingTransforms": 0,
         "incomingTransforms": 0
       },
-      "dependencies": [],
+      "dependencies": [
+        "term"
+      ],
       "endpoints": [
         {
           "method": "GET",
@@ -3413,7 +3475,8 @@
       "dependencies": [
         "customerCategory",
         "shipItem",
-        "priceLevel"
+        "priceLevel",
+        "webSite"
       ],
       "endpoints": [
         {
@@ -3460,7 +3523,7 @@
       "title": "Adv Intercompany Journal Entry",
       "group": "extended",
       "summary": "Get list of records. 8 linked dependency records.",
-      "docsPath": "./public/records/adv-intercompany-journal-entry.html",
+      "docsPath": "/records/adv-intercompany-journal-entry",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -3476,7 +3539,8 @@
         "employee",
         "nexus",
         "accountingPeriod",
-        "subsidiary"
+        "subsidiary",
+        "advIntercompanyJournalEntry"
       ],
       "endpoints": [
         {
@@ -3523,7 +3587,7 @@
       "title": "Analytical Impact",
       "group": "extended",
       "summary": "Get list of records. 32 linked dependency records.",
-      "docsPath": "./public/records/analytical-impact.html",
+      "docsPath": "/records/analytical-impact",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -3563,7 +3627,8 @@
         "otherChargePurchaseItem",
         "location",
         "currency",
-        "subsidiary"
+        "subsidiary",
+        "analyticalImpact"
       ],
       "endpoints": [
         {
@@ -3610,7 +3675,7 @@
       "title": "Assembly Build",
       "group": "extended",
       "summary": "Get list of records. 1 transform workflow available. 33 linked dependency records.",
-      "docsPath": "./public/records/assembly-build.html",
+      "docsPath": "/records/assembly-build",
       "stats": {
         "operations": 7,
         "transforms": 1,
@@ -3651,7 +3716,8 @@
         "otherChargePurchaseItem",
         "accountingPeriod",
         "itemRevision",
-        "subsidiary"
+        "subsidiary",
+        "assemblyBuild"
       ],
       "endpoints": [
         {
@@ -3704,7 +3770,7 @@
       "title": "Assembly Item",
       "group": "extended",
       "summary": "Get list of records. 2 transform workflows available. 13 linked dependency records.",
-      "docsPath": "./public/records/assembly-item.html",
+      "docsPath": "/records/assembly-item",
       "stats": {
         "operations": 8,
         "transforms": 2,
@@ -3725,7 +3791,8 @@
         "location",
         "pricingGroup",
         "unitsType",
-        "vendor"
+        "vendor",
+        "assemblyItem"
       ],
       "endpoints": [
         {
@@ -3784,7 +3851,7 @@
       "title": "Assembly Unbuild",
       "group": "extended",
       "summary": "Get list of records. 30 linked dependency records.",
-      "docsPath": "./public/records/assembly-unbuild.html",
+      "docsPath": "/records/assembly-unbuild",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -3822,7 +3889,8 @@
         "otherChargePurchaseItem",
         "accountingPeriod",
         "itemRevision",
-        "subsidiary"
+        "subsidiary",
+        "assemblyUnbuild"
       ],
       "endpoints": [
         {
@@ -3869,7 +3937,7 @@
       "title": "Bin",
       "group": "extended",
       "summary": "Get list of records. 1 linked dependency record.",
-      "docsPath": "./public/records/bin.html",
+      "docsPath": "/records/bin",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -3878,7 +3946,8 @@
         "incomingTransforms": 0
       },
       "dependencies": [
-        "location"
+        "location",
+        "bin"
       ],
       "endpoints": [
         {
@@ -3925,7 +3994,7 @@
       "title": "Bin Transfer",
       "group": "extended",
       "summary": "Get list of records. 2 linked dependency records.",
-      "docsPath": "./public/records/bin-transfer.html",
+      "docsPath": "/records/bin-transfer",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -3935,7 +4004,8 @@
       },
       "dependencies": [
         "location",
-        "subsidiary"
+        "subsidiary",
+        "binTransfer"
       ],
       "endpoints": [
         {
@@ -3982,7 +4052,7 @@
       "title": "Bin Worksheet",
       "group": "extended",
       "summary": "Get list of records. 2 linked dependency records.",
-      "docsPath": "./public/records/bin-worksheet.html",
+      "docsPath": "/records/bin-worksheet",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -3992,7 +4062,8 @@
       },
       "dependencies": [
         "location",
-        "subsidiary"
+        "subsidiary",
+        "binWorksheet"
       ],
       "endpoints": [
         {
@@ -4039,7 +4110,7 @@
       "title": "Blanket Purchase Order",
       "group": "extended",
       "summary": "Get list of records. 12 linked dependency records.",
-      "docsPath": "./public/records/blanket-purchase-order.html",
+      "docsPath": "/records/blanket-purchase-order",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -4059,7 +4130,8 @@
         "location",
         "nexus",
         "subsidiary",
-        "term"
+        "term",
+        "blanketPurchaseOrder"
       ],
       "endpoints": [
         {
@@ -4106,7 +4178,7 @@
       "title": "Bom",
       "group": "extended",
       "summary": "Get list of records. 1 linked dependency record.",
-      "docsPath": "./public/records/bom.html",
+      "docsPath": "/records/bom",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -4115,7 +4187,8 @@
         "incomingTransforms": 0
       },
       "dependencies": [
-        "assemblyItem"
+        "assemblyItem",
+        "bom"
       ],
       "endpoints": [
         {
@@ -4162,7 +4235,7 @@
       "title": "Bom Revision",
       "group": "extended",
       "summary": "Get list of records. 1 linked dependency record.",
-      "docsPath": "./public/records/bom-revision.html",
+      "docsPath": "/records/bom-revision",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -4171,7 +4244,8 @@
         "incomingTransforms": 0
       },
       "dependencies": [
-        "bom"
+        "bom",
+        "bomRevision"
       ],
       "endpoints": [
         {
@@ -4218,7 +4292,7 @@
       "title": "Budget Category",
       "group": "extended",
       "summary": "Get list of records.",
-      "docsPath": "./public/records/budget-category.html",
+      "docsPath": "/records/budget-category",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -4226,7 +4300,9 @@
         "outgoingTransforms": 0,
         "incomingTransforms": 0
       },
-      "dependencies": [],
+      "dependencies": [
+        "budgetCategory"
+      ],
       "endpoints": [
         {
           "method": "GET",
@@ -4272,7 +4348,7 @@
       "title": "Calendar Event",
       "group": "extended",
       "summary": "Get list of records. 31 linked dependency records.",
-      "docsPath": "./public/records/calendar-event.html",
+      "docsPath": "/records/calendar-event",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -4311,7 +4387,8 @@
         "otherChargeSaleItem",
         "otherChargeResaleItem",
         "otherChargePurchaseItem",
-        "supportCase"
+        "supportCase",
+        "calendarEvent"
       ],
       "endpoints": [
         {
@@ -4358,7 +4435,7 @@
       "title": "Campaign",
       "group": "extended",
       "summary": "Insert record. 2 linked dependency records.",
-      "docsPath": "./public/records/campaign.html",
+      "docsPath": "/records/campaign",
       "stats": {
         "operations": 5,
         "transforms": 0,
@@ -4368,7 +4445,8 @@
       },
       "dependencies": [
         "employee",
-        "promotionCode"
+        "promotionCode",
+        "campaign"
       ],
       "endpoints": [
         {
@@ -4409,7 +4487,7 @@
       "title": "Campaign Response",
       "group": "extended",
       "summary": "Get list of records. 5 linked dependency records.",
-      "docsPath": "./public/records/campaign-response.html",
+      "docsPath": "/records/campaign-response",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -4422,7 +4500,8 @@
         "partner",
         "vendor",
         "employee",
-        "contact"
+        "contact",
+        "campaignResponse"
       ],
       "endpoints": [
         {
@@ -4469,7 +4548,7 @@
       "title": "Cash Refund",
       "group": "extended",
       "summary": "Get list of records. 1 transform workflow available. 21 linked dependency records.",
-      "docsPath": "./public/records/cash-refund.html",
+      "docsPath": "/records/cash-refund",
       "stats": {
         "operations": 7,
         "transforms": 1,
@@ -4498,7 +4577,8 @@
         "promotionCode",
         "shipItem",
         "subsidiary",
-        "term"
+        "term",
+        "cashRefund"
       ],
       "endpoints": [
         {
@@ -4551,7 +4631,7 @@
       "title": "Charge",
       "group": "extended",
       "summary": "Get list of records. 37 linked dependency records.",
-      "docsPath": "./public/records/charge.html",
+      "docsPath": "/records/charge",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -4596,7 +4676,8 @@
         "projectTask",
         "subscriptionLine",
         "subsidiary",
-        "timeBill"
+        "timeBill",
+        "charge"
       ],
       "endpoints": [
         {
@@ -4643,7 +4724,7 @@
       "title": "Check",
       "group": "extended",
       "summary": "Get list of records. 14 linked dependency records.",
-      "docsPath": "./public/records/check.html",
+      "docsPath": "/records/check",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -4665,7 +4746,8 @@
         "nexus",
         "accountingPeriod",
         "subsidiary",
-        "journalEntry"
+        "journalEntry",
+        "check"
       ],
       "endpoints": [
         {
@@ -4712,7 +4794,7 @@
       "title": "Commerce Category",
       "group": "extended",
       "summary": "Get list of records. 5 linked dependency records.",
-      "docsPath": "./public/records/commerce-category.html",
+      "docsPath": "/records/commerce-category",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -4725,7 +4807,8 @@
         "partner",
         "vendor",
         "employee",
-        "contact"
+        "contact",
+        "commerceCategory"
       ],
       "endpoints": [
         {
@@ -4772,7 +4855,7 @@
       "title": "Competitor",
       "group": "extended",
       "summary": "Get list of records.",
-      "docsPath": "./public/records/competitor.html",
+      "docsPath": "/records/competitor",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -4780,7 +4863,9 @@
         "outgoingTransforms": 0,
         "incomingTransforms": 0
       },
-      "dependencies": [],
+      "dependencies": [
+        "competitor"
+      ],
       "endpoints": [
         {
           "method": "GET",
@@ -4826,7 +4911,7 @@
       "title": "Consolidated Exchange Rate",
       "group": "extended",
       "summary": "Get list of records. 3 linked dependency records.",
-      "docsPath": "./public/records/consolidated-exchange-rate.html",
+      "docsPath": "/records/consolidated-exchange-rate",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -4837,7 +4922,8 @@
       "dependencies": [
         "currency",
         "subsidiary",
-        "accountingPeriod"
+        "accountingPeriod",
+        "consolidatedExchangeRate"
       ],
       "endpoints": [
         {
@@ -4884,7 +4970,7 @@
       "title": "Contact Category",
       "group": "extended",
       "summary": "Get list of records.",
-      "docsPath": "./public/records/contact-category.html",
+      "docsPath": "/records/contact-category",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -4892,7 +4978,9 @@
         "outgoingTransforms": 0,
         "incomingTransforms": 0
       },
-      "dependencies": [],
+      "dependencies": [
+        "contactCategory"
+      ],
       "endpoints": [
         {
           "method": "GET",
@@ -4938,7 +5026,7 @@
       "title": "Contact Role",
       "group": "extended",
       "summary": "Get list of records.",
-      "docsPath": "./public/records/contact-role.html",
+      "docsPath": "/records/contact-role",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -4946,7 +5034,9 @@
         "outgoingTransforms": 0,
         "incomingTransforms": 0
       },
-      "dependencies": [],
+      "dependencies": [
+        "contactRole"
+      ],
       "endpoints": [
         {
           "method": "GET",
@@ -4992,7 +5082,7 @@
       "title": "Cost Category",
       "group": "extended",
       "summary": "Get list of records. 1 linked dependency record.",
-      "docsPath": "./public/records/cost-category.html",
+      "docsPath": "/records/cost-category",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -5001,7 +5091,8 @@
         "incomingTransforms": 0
       },
       "dependencies": [
-        "account"
+        "account",
+        "costCategory"
       ],
       "endpoints": [
         {
@@ -5048,7 +5139,7 @@
       "title": "Credit Card Charge",
       "group": "extended",
       "summary": "Get list of records. 13 linked dependency records.",
-      "docsPath": "./public/records/credit-card-charge.html",
+      "docsPath": "/records/credit-card-charge",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -5069,7 +5160,8 @@
         "location",
         "nexus",
         "accountingPeriod",
-        "subsidiary"
+        "subsidiary",
+        "creditCardCharge"
       ],
       "endpoints": [
         {
@@ -5116,7 +5208,7 @@
       "title": "Credit Card Refund",
       "group": "extended",
       "summary": "Get list of records. 13 linked dependency records.",
-      "docsPath": "./public/records/credit-card-refund.html",
+      "docsPath": "/records/credit-card-refund",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -5137,7 +5229,8 @@
         "location",
         "nexus",
         "accountingPeriod",
-        "subsidiary"
+        "subsidiary",
+        "creditCardRefund"
       ],
       "endpoints": [
         {
@@ -5184,7 +5277,7 @@
       "title": "Currency Rate",
       "group": "extended",
       "summary": "Get list of records. 1 linked dependency record.",
-      "docsPath": "./public/records/currency-rate.html",
+      "docsPath": "/records/currency-rate",
       "stats": {
         "operations": 4,
         "transforms": 0,
@@ -5193,7 +5286,8 @@
         "incomingTransforms": 0
       },
       "dependencies": [
-        "currency"
+        "currency",
+        "currencyRate"
       ],
       "endpoints": [
         {
@@ -5228,7 +5322,7 @@
       "title": "Customer Deposit",
       "group": "extended",
       "summary": "Get list of records. 2 transform workflows available. 16 linked dependency records.",
-      "docsPath": "./public/records/customer-deposit.html",
+      "docsPath": "/records/customer-deposit",
       "stats": {
         "operations": 8,
         "transforms": 2,
@@ -5252,7 +5346,8 @@
         "nexus",
         "accountingPeriod",
         "salesOrder",
-        "subsidiary"
+        "subsidiary",
+        "customerDeposit"
       ],
       "endpoints": [
         {
@@ -5311,7 +5406,7 @@
       "title": "Customer Refund",
       "group": "extended",
       "summary": "Get list of records. 14 linked dependency records.",
-      "docsPath": "./public/records/customer-refund.html",
+      "docsPath": "/records/customer-refund",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -5333,7 +5428,8 @@
         "nexus",
         "accountingPeriod",
         "subsidiary",
-        "journalEntry"
+        "journalEntry",
+        "customerRefund"
       ],
       "endpoints": [
         {
@@ -5380,7 +5476,7 @@
       "title": "Customer Subsidiary Relationship",
       "group": "extended",
       "summary": "Get list of records. 3 linked dependency records.",
-      "docsPath": "./public/records/customer-subsidiary-relationship.html",
+      "docsPath": "/records/customer-subsidiary-relationship",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -5391,7 +5487,8 @@
       "dependencies": [
         "customer",
         "currency",
-        "subsidiary"
+        "subsidiary",
+        "customerSubsidiaryRelationship"
       ],
       "endpoints": [
         {
@@ -5438,7 +5535,7 @@
       "title": "Deposit",
       "group": "extended",
       "summary": "Get list of records. 7 linked dependency records.",
-      "docsPath": "./public/records/deposit.html",
+      "docsPath": "/records/deposit",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -5453,7 +5550,8 @@
         "department",
         "location",
         "accountingPeriod",
-        "subsidiary"
+        "subsidiary",
+        "deposit"
       ],
       "endpoints": [
         {
@@ -5500,7 +5598,7 @@
       "title": "Deposit Application",
       "group": "extended",
       "summary": "Get list of records. 13 linked dependency records.",
-      "docsPath": "./public/records/deposit-application.html",
+      "docsPath": "/records/deposit-application",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -5521,7 +5619,8 @@
         "deposit",
         "location",
         "accountingPeriod",
-        "subsidiary"
+        "subsidiary",
+        "depositApplication"
       ],
       "endpoints": [
         {
@@ -5568,7 +5667,7 @@
       "title": "Description Item",
       "group": "extended",
       "summary": "Get list of records. 3 linked dependency records.",
-      "docsPath": "./public/records/description-item.html",
+      "docsPath": "/records/description-item",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -5579,7 +5678,8 @@
       "dependencies": [
         "classification",
         "department",
-        "location"
+        "location",
+        "descriptionItem"
       ],
       "endpoints": [
         {
@@ -5626,7 +5726,7 @@
       "title": "Download Item",
       "group": "extended",
       "summary": "Get list of records. 6 linked dependency records.",
-      "docsPath": "./public/records/download-item.html",
+      "docsPath": "/records/download-item",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -5640,7 +5740,8 @@
         "account",
         "department",
         "location",
-        "pricingGroup"
+        "pricingGroup",
+        "downloadItem"
       ],
       "endpoints": [
         {
@@ -5687,7 +5788,7 @@
       "title": "Email Template",
       "group": "extended",
       "summary": "Get list of records. 5 linked dependency records.",
-      "docsPath": "./public/records/email-template.html",
+      "docsPath": "/records/email-template",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -5700,7 +5801,8 @@
         "partner",
         "vendor",
         "employee",
-        "contact"
+        "contact",
+        "emailTemplate"
       ],
       "endpoints": [
         {
@@ -5747,7 +5849,7 @@
       "title": "Expense Category",
       "group": "extended",
       "summary": "Get list of records. 23 linked dependency records.",
-      "docsPath": "./public/records/expense-category.html",
+      "docsPath": "/records/expense-category",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -5778,7 +5880,8 @@
         "servicePurchaseItem",
         "otherChargeSaleItem",
         "otherChargeResaleItem",
-        "otherChargePurchaseItem"
+        "otherChargePurchaseItem",
+        "expenseCategory"
       ],
       "endpoints": [
         {
@@ -5825,7 +5928,7 @@
       "title": "Expense Report",
       "group": "extended",
       "summary": "Get list of records. 13 linked dependency records.",
-      "docsPath": "./public/records/expense-report.html",
+      "docsPath": "/records/expense-report",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -5846,7 +5949,8 @@
         "location",
         "nexus",
         "accountingPeriod",
-        "subsidiary"
+        "subsidiary",
+        "expenseReport"
       ],
       "endpoints": [
         {
@@ -5893,7 +5997,7 @@
       "title": "Fair Value Price",
       "group": "extended",
       "summary": "Get list of records. 26 linked dependency records.",
-      "docsPath": "./public/records/fair-value-price.html",
+      "docsPath": "/records/fair-value-price",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -5927,7 +6031,8 @@
         "otherChargeResaleItem",
         "otherChargePurchaseItem",
         "subsidiary",
-        "unitsType"
+        "unitsType",
+        "fairValuePrice"
       ],
       "endpoints": [
         {
@@ -5974,7 +6079,7 @@
       "title": "Gift Certificate",
       "group": "extended",
       "summary": "Get list of records. 2 linked dependency records.",
-      "docsPath": "./public/records/gift-certificate.html",
+      "docsPath": "/records/gift-certificate",
       "stats": {
         "operations": 4,
         "transforms": 0,
@@ -5984,7 +6089,8 @@
       },
       "dependencies": [
         "currency",
-        "giftCertificateItem"
+        "giftCertificateItem",
+        "giftCertificate"
       ],
       "endpoints": [
         {
@@ -6019,7 +6125,7 @@
       "title": "Gift Certificate Item",
       "group": "extended",
       "summary": "Get list of records. 6 linked dependency records.",
-      "docsPath": "./public/records/gift-certificate-item.html",
+      "docsPath": "/records/gift-certificate-item",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -6033,7 +6139,8 @@
         "department",
         "account",
         "location",
-        "pricingGroup"
+        "pricingGroup",
+        "giftCertificateItem"
       ],
       "endpoints": [
         {
@@ -6080,7 +6187,7 @@
       "title": "Global Account Mapping",
       "group": "extended",
       "summary": "Get list of records. 5 linked dependency records.",
-      "docsPath": "./public/records/global-account-mapping.html",
+      "docsPath": "/records/global-account-mapping",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -6093,7 +6200,8 @@
         "department",
         "account",
         "location",
-        "subsidiary"
+        "subsidiary",
+        "globalAccountMapping"
       ],
       "endpoints": [
         {
@@ -6140,7 +6248,7 @@
       "title": "Hcm Job",
       "group": "extended",
       "summary": "Get list of records.",
-      "docsPath": "./public/records/hcm-job.html",
+      "docsPath": "/records/hcm-job",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -6148,7 +6256,9 @@
         "outgoingTransforms": 0,
         "incomingTransforms": 0
       },
-      "dependencies": [],
+      "dependencies": [
+        "hcmJob"
+      ],
       "endpoints": [
         {
           "method": "GET",
@@ -6194,7 +6304,7 @@
       "title": "Impact Subcategory",
       "group": "extended",
       "summary": "Get list of records.",
-      "docsPath": "./public/records/impact-subcategory.html",
+      "docsPath": "/records/impact-subcategory",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -6202,7 +6312,9 @@
         "outgoingTransforms": 0,
         "incomingTransforms": 0
       },
-      "dependencies": [],
+      "dependencies": [
+        "impactSubcategory"
+      ],
       "endpoints": [
         {
           "method": "GET",
@@ -6248,7 +6360,7 @@
       "title": "Inbound Shipment",
       "group": "extended",
       "summary": "Get list of records. 1 linked dependency record.",
-      "docsPath": "./public/records/inbound-shipment.html",
+      "docsPath": "/records/inbound-shipment",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -6257,7 +6369,8 @@
         "incomingTransforms": 0
       },
       "dependencies": [
-        "currency"
+        "currency",
+        "inboundShipment"
       ],
       "endpoints": [
         {
@@ -6304,7 +6417,7 @@
       "title": "Intercompany Journal Entry",
       "group": "extended",
       "summary": "Get list of records. 8 linked dependency records.",
-      "docsPath": "./public/records/intercompany-journal-entry.html",
+      "docsPath": "/records/intercompany-journal-entry",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -6320,7 +6433,8 @@
         "employee",
         "nexus",
         "accountingPeriod",
-        "subsidiary"
+        "subsidiary",
+        "intercompanyJournalEntry"
       ],
       "endpoints": [
         {
@@ -6367,7 +6481,7 @@
       "title": "Intercompany Transfer Order",
       "group": "extended",
       "summary": "Get list of records. 2 transform workflows available. 11 linked dependency records.",
-      "docsPath": "./public/records/intercompany-transfer-order.html",
+      "docsPath": "/records/intercompany-transfer-order",
       "stats": {
         "operations": 8,
         "transforms": 2,
@@ -6386,7 +6500,8 @@
         "nexus",
         "shipItem",
         "subsidiary",
-        "term"
+        "term",
+        "intercompanyTransferOrder"
       ],
       "endpoints": [
         {
@@ -6445,7 +6560,7 @@
       "title": "Inventory Adjustment",
       "group": "extended",
       "summary": "Get list of records. 7 linked dependency records.",
-      "docsPath": "./public/records/inventory-adjustment.html",
+      "docsPath": "/records/inventory-adjustment",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -6460,7 +6575,8 @@
         "customer",
         "department",
         "accountingPeriod",
-        "subsidiary"
+        "subsidiary",
+        "inventoryAdjustment"
       ],
       "endpoints": [
         {
@@ -6507,7 +6623,7 @@
       "title": "Inventory Cost Revaluation",
       "group": "extended",
       "summary": "Get list of records. 28 linked dependency records.",
-      "docsPath": "./public/records/inventory-cost-revaluation.html",
+      "docsPath": "/records/inventory-cost-revaluation",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -6543,7 +6659,8 @@
         "otherChargePurchaseItem",
         "location",
         "accountingPeriod",
-        "subsidiary"
+        "subsidiary",
+        "inventoryCostRevaluation"
       ],
       "endpoints": [
         {
@@ -6590,7 +6707,7 @@
       "title": "Inventory Count",
       "group": "extended",
       "summary": "Get list of records. 5 linked dependency records.",
-      "docsPath": "./public/records/inventory-count.html",
+      "docsPath": "/records/inventory-count",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -6603,7 +6720,8 @@
         "classification",
         "department",
         "location",
-        "subsidiary"
+        "subsidiary",
+        "inventoryCount"
       ],
       "endpoints": [
         {
@@ -6650,7 +6768,7 @@
       "title": "Inventory Item",
       "group": "extended",
       "summary": "Get list of records. 11 linked dependency records.",
-      "docsPath": "./public/records/inventory-item.html",
+      "docsPath": "/records/inventory-item",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -6669,7 +6787,8 @@
         "location",
         "pricingGroup",
         "unitsType",
-        "vendor"
+        "vendor",
+        "inventoryItem"
       ],
       "endpoints": [
         {
@@ -6716,7 +6835,7 @@
       "title": "Inventory Number",
       "group": "extended",
       "summary": "Get list of records. 22 linked dependency records.",
-      "docsPath": "./public/records/inventory-number.html",
+      "docsPath": "/records/inventory-number",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -6746,7 +6865,8 @@
         "servicePurchaseItem",
         "otherChargeSaleItem",
         "otherChargeResaleItem",
-        "otherChargePurchaseItem"
+        "otherChargePurchaseItem",
+        "inventoryNumber"
       ],
       "endpoints": [
         {
@@ -6793,7 +6913,7 @@
       "title": "Inventory Transfer",
       "group": "extended",
       "summary": "Get list of records. 5 linked dependency records.",
-      "docsPath": "./public/records/inventory-transfer.html",
+      "docsPath": "/records/inventory-transfer",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -6806,7 +6926,8 @@
         "department",
         "location",
         "accountingPeriod",
-        "subsidiary"
+        "subsidiary",
+        "inventoryTransfer"
       ],
       "endpoints": [
         {
@@ -6853,7 +6974,7 @@
       "title": "Issue",
       "group": "extended",
       "summary": "Get list of records. 27 linked dependency records.",
-      "docsPath": "./public/records/issue.html",
+      "docsPath": "/records/issue",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -6888,7 +7009,8 @@
         "servicePurchaseItem",
         "otherChargeSaleItem",
         "otherChargeResaleItem",
-        "otherChargePurchaseItem"
+        "otherChargePurchaseItem",
+        "issue"
       ],
       "endpoints": [
         {
@@ -6935,7 +7057,7 @@
       "title": "Item Account Mapping",
       "group": "extended",
       "summary": "Get list of records. 5 linked dependency records.",
-      "docsPath": "./public/records/item-account-mapping.html",
+      "docsPath": "/records/item-account-mapping",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -6948,7 +7070,8 @@
         "department",
         "account",
         "location",
-        "subsidiary"
+        "subsidiary",
+        "itemAccountMapping"
       ],
       "endpoints": [
         {
@@ -6995,7 +7118,7 @@
       "title": "Item Group",
       "group": "extended",
       "summary": "Get list of records. 4 linked dependency records.",
-      "docsPath": "./public/records/item-group.html",
+      "docsPath": "/records/item-group",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -7007,7 +7130,8 @@
         "classification",
         "shipItem",
         "department",
-        "location"
+        "location",
+        "itemGroup"
       ],
       "endpoints": [
         {
@@ -7054,7 +7178,7 @@
       "title": "Item Receipt",
       "group": "extended",
       "summary": "Get list of records. 12 linked dependency records.",
-      "docsPath": "./public/records/item-receipt.html",
+      "docsPath": "/records/item-receipt",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -7074,7 +7198,8 @@
         "inboundShipment",
         "location",
         "accountingPeriod",
-        "subsidiary"
+        "subsidiary",
+        "itemReceipt"
       ],
       "endpoints": [
         {
@@ -7121,7 +7246,7 @@
       "title": "Item Revision",
       "group": "extended",
       "summary": "Get list of records. 1 linked dependency record.",
-      "docsPath": "./public/records/item-revision.html",
+      "docsPath": "/records/item-revision",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -7130,7 +7255,8 @@
         "incomingTransforms": 0
       },
       "dependencies": [
-        "assemblyItem"
+        "assemblyItem",
+        "itemRevision"
       ],
       "endpoints": [
         {
@@ -7177,7 +7303,7 @@
       "title": "Job",
       "group": "extended",
       "summary": "Get list of records. 4 transform workflows available. 17 linked dependency records.",
-      "docsPath": "./public/records/job.html",
+      "docsPath": "/records/job",
       "stats": {
         "operations": 10,
         "transforms": 4,
@@ -7202,7 +7328,8 @@
         "partner",
         "vendor",
         "employee",
-        "subsidiary"
+        "subsidiary",
+        "job"
       ],
       "endpoints": [
         {
@@ -7273,7 +7400,7 @@
       "title": "Job Status",
       "group": "extended",
       "summary": "Get list of records.",
-      "docsPath": "./public/records/job-status.html",
+      "docsPath": "/records/job-status",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -7281,7 +7408,9 @@
         "outgoingTransforms": 0,
         "incomingTransforms": 0
       },
-      "dependencies": [],
+      "dependencies": [
+        "jobStatus"
+      ],
       "endpoints": [
         {
           "method": "GET",
@@ -7327,7 +7456,7 @@
       "title": "Job Type",
       "group": "extended",
       "summary": "Get list of records.",
-      "docsPath": "./public/records/job-type.html",
+      "docsPath": "/records/job-type",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -7335,7 +7464,9 @@
         "outgoingTransforms": 0,
         "incomingTransforms": 0
       },
-      "dependencies": [],
+      "dependencies": [
+        "jobType"
+      ],
       "endpoints": [
         {
           "method": "GET",
@@ -7381,7 +7512,7 @@
       "title": "Kit Item",
       "group": "extended",
       "summary": "Get list of records. 7 linked dependency records.",
-      "docsPath": "./public/records/kit-item.html",
+      "docsPath": "/records/kit-item",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -7396,7 +7527,8 @@
         "account",
         "department",
         "location",
-        "pricingGroup"
+        "pricingGroup",
+        "kitItem"
       ],
       "endpoints": [
         {
@@ -7443,7 +7575,7 @@
       "title": "Manufacturing Cost Template",
       "group": "extended",
       "summary": "Get list of records. 1 linked dependency record.",
-      "docsPath": "./public/records/manufacturing-cost-template.html",
+      "docsPath": "/records/manufacturing-cost-template",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -7452,7 +7584,8 @@
         "incomingTransforms": 0
       },
       "dependencies": [
-        "subsidiary"
+        "subsidiary",
+        "manufacturingCostTemplate"
       ],
       "endpoints": [
         {
@@ -7499,7 +7632,7 @@
       "title": "Manufacturing Operation Task",
       "group": "extended",
       "summary": "Get list of records. 2 linked dependency records.",
-      "docsPath": "./public/records/manufacturing-operation-task.html",
+      "docsPath": "/records/manufacturing-operation-task",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -7509,7 +7642,8 @@
       },
       "dependencies": [
         "manufacturingCostTemplate",
-        "workOrder"
+        "workOrder",
+        "manufacturingOperationTask"
       ],
       "endpoints": [
         {
@@ -7556,7 +7690,7 @@
       "title": "Manufacturing Routing",
       "group": "extended",
       "summary": "Get list of records. 3 linked dependency records.",
-      "docsPath": "./public/records/manufacturing-routing.html",
+      "docsPath": "/records/manufacturing-routing",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -7567,7 +7701,8 @@
       "dependencies": [
         "bom",
         "assemblyItem",
-        "subsidiary"
+        "subsidiary",
+        "manufacturingRouting"
       ],
       "endpoints": [
         {
@@ -7614,7 +7749,7 @@
       "title": "Markup Item",
       "group": "extended",
       "summary": "Get list of records. 4 linked dependency records.",
-      "docsPath": "./public/records/markup-item.html",
+      "docsPath": "/records/markup-item",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -7626,7 +7761,8 @@
         "account",
         "classification",
         "department",
-        "location"
+        "location",
+        "markupItem"
       ],
       "endpoints": [
         {
@@ -7673,7 +7809,7 @@
       "title": "Merchandise Hierarchy Level",
       "group": "extended",
       "summary": "Get list of records.",
-      "docsPath": "./public/records/merchandise-hierarchy-level.html",
+      "docsPath": "/records/merchandise-hierarchy-level",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -7681,7 +7817,9 @@
         "outgoingTransforms": 0,
         "incomingTransforms": 0
       },
-      "dependencies": [],
+      "dependencies": [
+        "merchandiseHierarchyLevel"
+      ],
       "endpoints": [
         {
           "method": "GET",
@@ -7727,7 +7865,7 @@
       "title": "Merchandise Hierarchy Node",
       "group": "extended",
       "summary": "Get list of records.",
-      "docsPath": "./public/records/merchandise-hierarchy-node.html",
+      "docsPath": "/records/merchandise-hierarchy-node",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -7735,7 +7873,9 @@
         "outgoingTransforms": 0,
         "incomingTransforms": 0
       },
-      "dependencies": [],
+      "dependencies": [
+        "merchandiseHierarchyNode"
+      ],
       "endpoints": [
         {
           "method": "GET",
@@ -7781,7 +7921,7 @@
       "title": "Merchandise Hierarchy Version",
       "group": "extended",
       "summary": "Get list of records.",
-      "docsPath": "./public/records/merchandise-hierarchy-version.html",
+      "docsPath": "/records/merchandise-hierarchy-version",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -7789,7 +7929,9 @@
         "outgoingTransforms": 0,
         "incomingTransforms": 0
       },
-      "dependencies": [],
+      "dependencies": [
+        "merchandiseHierarchyVersion"
+      ],
       "endpoints": [
         {
           "method": "GET",
@@ -7835,7 +7977,7 @@
       "title": "Message",
       "group": "extended",
       "summary": "Get list of records. 5 linked dependency records.",
-      "docsPath": "./public/records/message.html",
+      "docsPath": "/records/message",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -7848,7 +7990,8 @@
         "partner",
         "vendor",
         "employee",
-        "contact"
+        "contact",
+        "message"
       ],
       "endpoints": [
         {
@@ -7895,7 +8038,7 @@
       "title": "Non Inventory Purchase Item",
       "group": "extended",
       "summary": "Get list of records. 8 linked dependency records.",
-      "docsPath": "./public/records/non-inventory-purchase-item.html",
+      "docsPath": "/records/non-inventory-purchase-item",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -7911,7 +8054,8 @@
         "department",
         "location",
         "unitsType",
-        "vendor"
+        "vendor",
+        "nonInventoryPurchaseItem"
       ],
       "endpoints": [
         {
@@ -7958,7 +8102,7 @@
       "title": "Non Inventory Resale Item",
       "group": "extended",
       "summary": "Get list of records. 11 linked dependency records.",
-      "docsPath": "./public/records/non-inventory-resale-item.html",
+      "docsPath": "/records/non-inventory-resale-item",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -7977,7 +8121,8 @@
         "location",
         "pricingGroup",
         "unitsType",
-        "vendor"
+        "vendor",
+        "nonInventoryResaleItem"
       ],
       "endpoints": [
         {
@@ -8024,7 +8169,7 @@
       "title": "Non Inventory Sale Item",
       "group": "extended",
       "summary": "Get list of records. 9 linked dependency records.",
-      "docsPath": "./public/records/non-inventory-sale-item.html",
+      "docsPath": "/records/non-inventory-sale-item",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -8041,7 +8186,8 @@
         "department",
         "location",
         "pricingGroup",
-        "unitsType"
+        "unitsType",
+        "nonInventorySaleItem"
       ],
       "endpoints": [
         {
@@ -8088,7 +8234,7 @@
       "title": "Note Type",
       "group": "extended",
       "summary": "Get list of records.",
-      "docsPath": "./public/records/note-type.html",
+      "docsPath": "/records/note-type",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -8096,7 +8242,9 @@
         "outgoingTransforms": 0,
         "incomingTransforms": 0
       },
-      "dependencies": [],
+      "dependencies": [
+        "noteType"
+      ],
       "endpoints": [
         {
           "method": "GET",
@@ -8142,7 +8290,7 @@
       "title": "Other Charge Purchase Item",
       "group": "extended",
       "summary": "Get list of records. 8 linked dependency records.",
-      "docsPath": "./public/records/other-charge-purchase-item.html",
+      "docsPath": "/records/other-charge-purchase-item",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -8158,7 +8306,8 @@
         "department",
         "location",
         "unitsType",
-        "vendor"
+        "vendor",
+        "otherChargePurchaseItem"
       ],
       "endpoints": [
         {
@@ -8205,7 +8354,7 @@
       "title": "Other Charge Resale Item",
       "group": "extended",
       "summary": "Get list of records. 10 linked dependency records.",
-      "docsPath": "./public/records/other-charge-resale-item.html",
+      "docsPath": "/records/other-charge-resale-item",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -8223,7 +8372,8 @@
         "location",
         "pricingGroup",
         "unitsType",
-        "vendor"
+        "vendor",
+        "otherChargeResaleItem"
       ],
       "endpoints": [
         {
@@ -8270,7 +8420,7 @@
       "title": "Other Charge Sale Item",
       "group": "extended",
       "summary": "Get list of records. 8 linked dependency records.",
-      "docsPath": "./public/records/other-charge-sale-item.html",
+      "docsPath": "/records/other-charge-sale-item",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -8286,7 +8436,8 @@
         "department",
         "location",
         "pricingGroup",
-        "unitsType"
+        "unitsType",
+        "otherChargeSaleItem"
       ],
       "endpoints": [
         {
@@ -8333,7 +8484,7 @@
       "title": "Other Name",
       "group": "extended",
       "summary": "Get list of records. 6 linked dependency records.",
-      "docsPath": "./public/records/other-name.html",
+      "docsPath": "/records/other-name",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -8347,7 +8498,8 @@
         "currency",
         "account",
         "subsidiary",
-        "term"
+        "term",
+        "otherName"
       ],
       "endpoints": [
         {
@@ -8394,7 +8546,7 @@
       "title": "Other Name Category",
       "group": "extended",
       "summary": "Get list of records.",
-      "docsPath": "./public/records/other-name-category.html",
+      "docsPath": "/records/other-name-category",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -8402,7 +8554,9 @@
         "outgoingTransforms": 0,
         "incomingTransforms": 0
       },
-      "dependencies": [],
+      "dependencies": [
+        "otherNameCategory"
+      ],
       "endpoints": [
         {
           "method": "GET",
@@ -8448,7 +8602,7 @@
       "title": "Paycheck",
       "group": "extended",
       "summary": "Get list of records. 11 linked dependency records.",
-      "docsPath": "./public/records/paycheck.html",
+      "docsPath": "/records/paycheck",
       "stats": {
         "operations": 2,
         "transforms": 0,
@@ -8467,7 +8621,8 @@
         "contact",
         "location",
         "accountingPeriod",
-        "subsidiary"
+        "subsidiary",
+        "paycheck"
       ],
       "endpoints": [
         {
@@ -8490,7 +8645,7 @@
       "title": "Payroll Item",
       "group": "extended",
       "summary": "Get list of records. 3 linked dependency records.",
-      "docsPath": "./public/records/payroll-item.html",
+      "docsPath": "/records/payroll-item",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -8501,7 +8656,8 @@
       "dependencies": [
         "account",
         "subsidiary",
-        "vendor"
+        "vendor",
+        "payrollItem"
       ],
       "endpoints": [
         {
@@ -8548,7 +8704,7 @@
       "title": "Period End Journal",
       "group": "extended",
       "summary": "Get list of records. 7 linked dependency records.",
-      "docsPath": "./public/records/period-end-journal.html",
+      "docsPath": "/records/period-end-journal",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -8563,7 +8719,8 @@
         "location",
         "account",
         "accountingPeriod",
-        "subsidiary"
+        "subsidiary",
+        "periodEndJournal"
       ],
       "endpoints": [
         {
@@ -8610,7 +8767,7 @@
       "title": "Phone Call",
       "group": "extended",
       "summary": "Get list of records. 31 linked dependency records.",
-      "docsPath": "./public/records/phone-call.html",
+      "docsPath": "/records/phone-call",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -8649,7 +8806,8 @@
         "otherChargeSaleItem",
         "otherChargeResaleItem",
         "otherChargePurchaseItem",
-        "supportCase"
+        "supportCase",
+        "phoneCall"
       ],
       "endpoints": [
         {
@@ -8696,7 +8854,7 @@
       "title": "Price Book",
       "group": "extended",
       "summary": "Get list of records. 2 linked dependency records.",
-      "docsPath": "./public/records/price-book.html",
+      "docsPath": "/records/price-book",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -8706,7 +8864,8 @@
       },
       "dependencies": [
         "currency",
-        "subscriptionPlan"
+        "subscriptionPlan",
+        "priceBook"
       ],
       "endpoints": [
         {
@@ -8753,7 +8912,7 @@
       "title": "Price Plan",
       "group": "extended",
       "summary": "Get list of records. 1 linked dependency record.",
-      "docsPath": "./public/records/price-plan.html",
+      "docsPath": "/records/price-plan",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -8762,7 +8921,8 @@
         "incomingTransforms": 0
       },
       "dependencies": [
-        "currency"
+        "currency",
+        "pricePlan"
       ],
       "endpoints": [
         {
@@ -8809,7 +8969,7 @@
       "title": "Pricing Group",
       "group": "extended",
       "summary": "Get list of records.",
-      "docsPath": "./public/records/pricing-group.html",
+      "docsPath": "/records/pricing-group",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -8817,7 +8977,9 @@
         "outgoingTransforms": 0,
         "incomingTransforms": 0
       },
-      "dependencies": [],
+      "dependencies": [
+        "pricingGroup"
+      ],
       "endpoints": [
         {
           "method": "GET",
@@ -8863,7 +9025,7 @@
       "title": "Project Task",
       "group": "extended",
       "summary": "Get list of records. 5 linked dependency records.",
-      "docsPath": "./public/records/project-task.html",
+      "docsPath": "/records/project-task",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -8876,7 +9038,8 @@
         "employee",
         "customer",
         "partner",
-        "vendor"
+        "vendor",
+        "projectTask"
       ],
       "endpoints": [
         {
@@ -8923,7 +9086,7 @@
       "title": "Purchase Contract",
       "group": "extended",
       "summary": "Get list of records. 12 linked dependency records.",
-      "docsPath": "./public/records/purchase-contract.html",
+      "docsPath": "/records/purchase-contract",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -8943,7 +9106,8 @@
         "location",
         "nexus",
         "subsidiary",
-        "term"
+        "term",
+        "purchaseContract"
       ],
       "endpoints": [
         {
@@ -8990,7 +9154,7 @@
       "title": "Purchase Requisition",
       "group": "extended",
       "summary": "Get list of records. 1 transform workflow available. 12 linked dependency records.",
-      "docsPath": "./public/records/purchase-requisition.html",
+      "docsPath": "/records/purchase-requisition",
       "stats": {
         "operations": 7,
         "transforms": 1,
@@ -9010,7 +9174,8 @@
         "contact",
         "location",
         "subsidiary",
-        "term"
+        "term",
+        "purchaseRequisition"
       ],
       "endpoints": [
         {
@@ -9063,7 +9228,7 @@
       "title": "Resource Group",
       "group": "extended",
       "summary": "Get list of records.",
-      "docsPath": "./public/records/resource-group.html",
+      "docsPath": "/records/resource-group",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -9071,7 +9236,9 @@
         "outgoingTransforms": 0,
         "incomingTransforms": 0
       },
-      "dependencies": [],
+      "dependencies": [
+        "resourceGroup"
+      ],
       "endpoints": [
         {
           "method": "GET",
@@ -9117,7 +9284,7 @@
       "title": "Rev Rec Schedule",
       "group": "extended",
       "summary": "Get list of records. 2 linked dependency records.",
-      "docsPath": "./public/records/rev-rec-schedule.html",
+      "docsPath": "/records/rev-rec-schedule",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -9127,7 +9294,8 @@
       },
       "dependencies": [
         "revRecTemplate",
-        "job"
+        "job",
+        "revRecSchedule"
       ],
       "endpoints": [
         {
@@ -9174,7 +9342,7 @@
       "title": "Rev Rec Template",
       "group": "extended",
       "summary": "Get list of records. 1 linked dependency record.",
-      "docsPath": "./public/records/rev-rec-template.html",
+      "docsPath": "/records/rev-rec-template",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -9183,7 +9351,8 @@
         "incomingTransforms": 0
       },
       "dependencies": [
-        "job"
+        "job",
+        "revRecTemplate"
       ],
       "endpoints": [
         {
@@ -9230,7 +9399,7 @@
       "title": "Sales Role",
       "group": "extended",
       "summary": "Get list of records.",
-      "docsPath": "./public/records/sales-role.html",
+      "docsPath": "/records/sales-role",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -9238,7 +9407,9 @@
         "outgoingTransforms": 0,
         "incomingTransforms": 0
       },
-      "dependencies": [],
+      "dependencies": [
+        "salesRole"
+      ],
       "endpoints": [
         {
           "method": "GET",
@@ -9284,7 +9455,7 @@
       "title": "Sales Tax Item",
       "group": "extended",
       "summary": "Get list of records. 1 linked dependency record.",
-      "docsPath": "./public/records/sales-tax-item.html",
+      "docsPath": "/records/sales-tax-item",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -9293,7 +9464,8 @@
         "incomingTransforms": 0
       },
       "dependencies": [
-        "taxType"
+        "taxType",
+        "salesTaxItem"
       ],
       "endpoints": [
         {
@@ -9340,7 +9512,7 @@
       "title": "Service Purchase Item",
       "group": "extended",
       "summary": "Get list of records. 8 linked dependency records.",
-      "docsPath": "./public/records/service-purchase-item.html",
+      "docsPath": "/records/service-purchase-item",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -9356,7 +9528,8 @@
         "department",
         "location",
         "unitsType",
-        "vendor"
+        "vendor",
+        "servicePurchaseItem"
       ],
       "endpoints": [
         {
@@ -9403,7 +9576,7 @@
       "title": "Service Resale Item",
       "group": "extended",
       "summary": "Get list of records. 10 linked dependency records.",
-      "docsPath": "./public/records/service-resale-item.html",
+      "docsPath": "/records/service-resale-item",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -9421,7 +9594,8 @@
         "location",
         "pricingGroup",
         "unitsType",
-        "vendor"
+        "vendor",
+        "serviceResaleItem"
       ],
       "endpoints": [
         {
@@ -9468,7 +9642,7 @@
       "title": "Service Sale Item",
       "group": "extended",
       "summary": "Get list of records. 8 linked dependency records.",
-      "docsPath": "./public/records/service-sale-item.html",
+      "docsPath": "/records/service-sale-item",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -9484,7 +9658,8 @@
         "department",
         "location",
         "pricingGroup",
-        "unitsType"
+        "unitsType",
+        "serviceSaleItem"
       ],
       "endpoints": [
         {
@@ -9531,7 +9706,7 @@
       "title": "Statistical Journal Entry",
       "group": "extended",
       "summary": "Get list of records. 7 linked dependency records.",
-      "docsPath": "./public/records/statistical-journal-entry.html",
+      "docsPath": "/records/statistical-journal-entry",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -9546,7 +9721,8 @@
         "employee",
         "accountingPeriod",
         "subsidiary",
-        "unitsType"
+        "unitsType",
+        "statisticalJournalEntry"
       ],
       "endpoints": [
         {
@@ -9593,7 +9769,7 @@
       "title": "Subtotal Item",
       "group": "extended",
       "summary": "Get list of records.",
-      "docsPath": "./public/records/subtotal-item.html",
+      "docsPath": "/records/subtotal-item",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -9601,7 +9777,9 @@
         "outgoingTransforms": 0,
         "incomingTransforms": 0
       },
-      "dependencies": [],
+      "dependencies": [
+        "subtotalItem"
+      ],
       "endpoints": [
         {
           "method": "GET",
@@ -9647,7 +9825,7 @@
       "title": "Support Case",
       "group": "extended",
       "summary": "Get list of records. 29 linked dependency records.",
-      "docsPath": "./public/records/support-case.html",
+      "docsPath": "/records/support-case",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -9684,7 +9862,8 @@
         "otherChargeResaleItem",
         "otherChargePurchaseItem",
         "inventoryNumber",
-        "subsidiary"
+        "subsidiary",
+        "supportCase"
       ],
       "endpoints": [
         {
@@ -9731,7 +9910,7 @@
       "title": "Task",
       "group": "extended",
       "summary": "Get list of records. 31 linked dependency records.",
-      "docsPath": "./public/records/task.html",
+      "docsPath": "/records/task",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -9770,7 +9949,8 @@
         "otherChargeSaleItem",
         "otherChargeResaleItem",
         "otherChargePurchaseItem",
-        "supportCase"
+        "supportCase",
+        "task"
       ],
       "endpoints": [
         {
@@ -9817,7 +9997,7 @@
       "title": "Tax Type",
       "group": "extended",
       "summary": "Get list of records.",
-      "docsPath": "./public/records/tax-type.html",
+      "docsPath": "/records/tax-type",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -9825,7 +10005,9 @@
         "outgoingTransforms": 0,
         "incomingTransforms": 0
       },
-      "dependencies": [],
+      "dependencies": [
+        "taxType"
+      ],
       "endpoints": [
         {
           "method": "GET",
@@ -9871,7 +10053,7 @@
       "title": "Time Bill",
       "group": "extended",
       "summary": "Get list of records. 34 linked dependency records.",
-      "docsPath": "./public/records/time-bill.html",
+      "docsPath": "/records/time-bill",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -9913,7 +10095,8 @@
         "location",
         "payrollItem",
         "priceLevel",
-        "timeSheet"
+        "timeSheet",
+        "timeBill"
       ],
       "endpoints": [
         {
@@ -9960,7 +10143,7 @@
       "title": "Time Sheet",
       "group": "extended",
       "summary": "Get list of records. 5 linked dependency records.",
-      "docsPath": "./public/records/time-sheet.html",
+      "docsPath": "/records/time-sheet",
       "stats": {
         "operations": 5,
         "transforms": 0,
@@ -9973,7 +10156,8 @@
         "partner",
         "vendor",
         "employee",
-        "contact"
+        "contact",
+        "timeSheet"
       ],
       "endpoints": [
         {
@@ -10014,7 +10198,7 @@
       "title": "Topic",
       "group": "extended",
       "summary": "Get list of records.",
-      "docsPath": "./public/records/topic.html",
+      "docsPath": "/records/topic",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -10022,7 +10206,9 @@
         "outgoingTransforms": 0,
         "incomingTransforms": 0
       },
-      "dependencies": [],
+      "dependencies": [
+        "topic"
+      ],
       "endpoints": [
         {
           "method": "GET",
@@ -10068,7 +10254,7 @@
       "title": "Transfer Order",
       "group": "extended",
       "summary": "Get list of records. 2 transform workflows available. 11 linked dependency records.",
-      "docsPath": "./public/records/transfer-order.html",
+      "docsPath": "/records/transfer-order",
       "stats": {
         "operations": 8,
         "transforms": 2,
@@ -10087,7 +10273,8 @@
         "nexus",
         "shipItem",
         "subsidiary",
-        "term"
+        "term",
+        "transferOrder"
       ],
       "endpoints": [
         {
@@ -10146,7 +10333,7 @@
       "title": "Units Type",
       "group": "extended",
       "summary": "Get list of records.",
-      "docsPath": "./public/records/units-type.html",
+      "docsPath": "/records/units-type",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -10154,7 +10341,9 @@
         "outgoingTransforms": 0,
         "incomingTransforms": 0
       },
-      "dependencies": [],
+      "dependencies": [
+        "unitsType"
+      ],
       "endpoints": [
         {
           "method": "GET",
@@ -10200,7 +10389,7 @@
       "title": "Usage",
       "group": "extended",
       "summary": "Get list of records. 25 linked dependency records.",
-      "docsPath": "./public/records/usage.html",
+      "docsPath": "/records/usage",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -10233,7 +10422,8 @@
         "otherChargeResaleItem",
         "otherChargePurchaseItem",
         "subscription",
-        "subscriptionLine"
+        "subscriptionLine",
+        "usage"
       ],
       "endpoints": [
         {
@@ -10280,7 +10470,7 @@
       "title": "Vendor Prepayment",
       "group": "extended",
       "summary": "Get list of records. 1 transform workflow available. 15 linked dependency records.",
-      "docsPath": "./public/records/vendor-prepayment.html",
+      "docsPath": "/records/vendor-prepayment",
       "stats": {
         "operations": 7,
         "transforms": 1,
@@ -10303,7 +10493,8 @@
         "accountingPeriod",
         "purchaseOrder",
         "subsidiary",
-        "journalEntry"
+        "journalEntry",
+        "vendorPrepayment"
       ],
       "endpoints": [
         {
@@ -10356,7 +10547,7 @@
       "title": "Vendor Prepayment Application",
       "group": "extended",
       "summary": "Get list of records. 13 linked dependency records.",
-      "docsPath": "./public/records/vendor-prepayment-application.html",
+      "docsPath": "/records/vendor-prepayment-application",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -10377,7 +10568,8 @@
         "location",
         "accountingPeriod",
         "subsidiary",
-        "vendorPrepayment"
+        "vendorPrepayment",
+        "vendorPrepaymentApplication"
       ],
       "endpoints": [
         {
@@ -10424,7 +10616,7 @@
       "title": "Work Order",
       "group": "extended",
       "summary": "Get list of records. 4 transform workflows available. 42 linked dependency records.",
-      "docsPath": "./public/records/work-order.html",
+      "docsPath": "/records/work-order",
       "stats": {
         "operations": 10,
         "transforms": 4,
@@ -10474,7 +10666,8 @@
         "otherChargePurchaseItem",
         "itemRevision",
         "subsidiary",
-        "term"
+        "term",
+        "workOrder"
       ],
       "endpoints": [
         {
@@ -10545,7 +10738,7 @@
       "title": "Work Order Close",
       "group": "extended",
       "summary": "Get list of records. 10 linked dependency records.",
-      "docsPath": "./public/records/work-order-close.html",
+      "docsPath": "/records/work-order-close",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -10563,7 +10756,8 @@
         "location",
         "accountingPeriod",
         "itemRevision",
-        "subsidiary"
+        "subsidiary",
+        "workOrderClose"
       ],
       "endpoints": [
         {
@@ -10610,7 +10804,7 @@
       "title": "Work Order Completion",
       "group": "extended",
       "summary": "Get list of records. 12 linked dependency records.",
-      "docsPath": "./public/records/work-order-completion.html",
+      "docsPath": "/records/work-order-completion",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -10630,7 +10824,8 @@
         "manufacturingRouting",
         "accountingPeriod",
         "itemRevision",
-        "subsidiary"
+        "subsidiary",
+        "workOrderCompletion"
       ],
       "endpoints": [
         {
@@ -10677,7 +10872,7 @@
       "title": "Work Order Issue",
       "group": "extended",
       "summary": "Get list of records. 12 linked dependency records.",
-      "docsPath": "./public/records/work-order-issue.html",
+      "docsPath": "/records/work-order-issue",
       "stats": {
         "operations": 6,
         "transforms": 0,
@@ -10697,7 +10892,8 @@
         "manufacturingRouting",
         "accountingPeriod",
         "itemRevision",
-        "subsidiary"
+        "subsidiary",
+        "workOrderIssue"
       ],
       "endpoints": [
         {

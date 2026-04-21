@@ -9,7 +9,15 @@
     "transforms": 0,
     "schemaFields": 0
   },
-  "dependencyRecords": [],
+  "dependencyRecords": [
+    "customerCategory"
+  ],
+  "referencedBy": [
+    "customer",
+    "customerCategory",
+    "job",
+    "webSite"
+  ],
   "operations": [
     {
       "id": "operation--customerCategory-get",

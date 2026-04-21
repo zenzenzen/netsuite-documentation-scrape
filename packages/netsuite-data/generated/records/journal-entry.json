@@ -17,7 +17,15 @@
     "employee",
     "nexus",
     "accountingPeriod",
-    "subsidiary"
+    "subsidiary",
+    "journalEntry"
+  ],
+  "referencedBy": [
+    "check",
+    "customerRefund",
+    "journalEntry",
+    "vendorPayment",
+    "vendorPrepayment"
   ],
   "operations": [
     {

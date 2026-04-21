@@ -41,11 +41,63 @@ function loadRecords(recordNames) {
 
 const allRecords = loadRecords(rawIndex.scrapedRecords);
 const recordMap = new Map(allRecords.map((record) => [record.recordName, record]));
+const allRecordSet = new Set(allRecords.map((record) => record.recordName));
+
+function getLinkedRecordNames(record) {
+  return unique([
+    ...(record.dependencyRecords || []),
+    ...((record.operations || []).flatMap((operation) => operation.dependencyRecords || [])),
+  ]);
+}
+
+function buildReferencedByMap(records) {
+  const referencedBy = new Map();
+
+  // Invert the dependency graph once during the build so record pages can show back-links cheaply.
+  for (const record of records) {
+    for (const dependency of getLinkedRecordNames(record)) {
+      if (!allRecordSet.has(dependency)) {
+        continue;
+      }
+
+      if (!referencedBy.has(dependency)) {
+        referencedBy.set(dependency, new Set());
+      }
+
+      referencedBy.get(dependency).add(record.recordName);
+    }
+  }
+
+  return referencedBy;
+}
+
+function buildUnresolvedReferenceMap(records) {
+  const unresolved = new Map();
+
+  for (const record of records) {
+    for (const dependency of getLinkedRecordNames(record)) {
+      if (allRecordSet.has(dependency)) {
+        continue;
+      }
+
+      if (!unresolved.has(record.recordName)) {
+        unresolved.set(record.recordName, new Set());
+      }
+
+      unresolved.get(record.recordName).add(dependency);
+    }
+  }
+
+  return unresolved;
+}
+
+const referencedByMap = buildReferencedByMap(allRecords);
+const unresolvedReferenceMap = buildUnresolvedReferenceMap(allRecords);
 const focusRecords = FOCUS_RECORDS.map((name) => recordMap.get(name)).filter(Boolean);
 const billingRecords = BILLING_RECORDS.map((name) => recordMap.get(name)).filter(Boolean);
 const billingRecordSet = new Set(billingRecords.map((record) => record.recordName));
 const focusDependencyRecords = unique(
-  focusRecords.flatMap((record) => record.dependencyRecords || [])
+  focusRecords.flatMap((record) => getLinkedRecordNames(record))
 ).filter((recordName) => !FOCUS_RECORDS.includes(recordName) && !billingRecordSet.has(recordName));
 const dependencyRecords = focusDependencyRecords
   .map((recordName) => recordMap.get(recordName))
@@ -90,11 +142,7 @@ function summarizeRecord(record) {
 }
 
 function buildRecordDocsPath(recordName) {
-  if (curatedRecordSet.has(recordName)) {
-    return `/records/${slugify(recordName)}`;
-  }
-
-  return relativeLinkFromRoot(recordName);
+  return `/records/${slugify(recordName)}`;
 }
 
 function buildWorkflowConfig(records, transforms) {
@@ -142,7 +190,7 @@ function buildWorkflowConfig(records, transforms) {
         outgoingTransforms: outgoingCounts.get(record.recordName) || 0,
         incomingTransforms: incomingCounts.get(record.recordName) || 0,
       },
-      dependencies: unique(record.dependencyRecords || []),
+      dependencies: getLinkedRecordNames(record),
       endpoints: (record.operations || []).slice(0, 12).map((operation) => ({
         method: operation.method,
         path: operation.path,
@@ -202,13 +250,30 @@ function buildRecordDetail(record) {
       transforms: 0,
       schemaFields: 0,
     },
-    dependencyRecords: unique(record.dependencyRecords || []),
+    dependencyRecords: getLinkedRecordNames(record),
+    referencedBy: Array.from(referencedByMap.get(record.recordName) || []).sort(),
     operations: record.operations || [],
     definition: {
       ...(record.definition || {}),
       fields: (record.definition?.fields || []).slice(0, 40),
     },
   };
+}
+
+function renderLinkedChip(label, description, href, disabledTitle) {
+  if (href) {
+    return `<a class="chip" href="${escapeHtml(href)}"><strong>${escapeHtml(label)}</strong><small>${escapeHtml(
+      description
+    )}</small></a>`;
+  }
+
+  return `<span class="chip chip-disabled" aria-disabled="true" title="${escapeHtml(
+    disabledTitle
+  )}"><strong>${escapeHtml(label)}</strong><small>${escapeHtml(description)}</small></span>`;
+}
+
+function buildLegacyRecordLink(recordName) {
+  return allRecordSet.has(recordName) ? relativeLinkFromRecord(recordName) : null;
 }
 
 function renderPinnedSection() {
@@ -374,9 +439,31 @@ function renderDependencyChips(record, linkBuilder) {
   return `<div class="chip-row">${dependencies
     .map(
       (dependency) =>
-        `<a class="chip" href="${escapeHtml(linkBuilder(dependency))}"><strong>${escapeHtml(
-          dependency
-        )}</strong><small>${escapeHtml(toTitleCase(dependency))}</small></a>`
+        renderLinkedChip(
+          dependency,
+          toTitleCase(dependency),
+          linkBuilder(dependency),
+          `No page generated for ${dependency}.`
+        )
+    )
+    .join('')}</div>`;
+}
+
+function renderReferencedByChips(record, linkBuilder) {
+  const referencedBy = record.referencedBy || [];
+
+  if (!referencedBy.length) {
+    return '<div class="muted">No other indexed records currently point at this record.</div>';
+  }
+
+  return `<div class="chip-row">${referencedBy
+    .map((recordName) =>
+      renderLinkedChip(
+        recordName,
+        'references this record',
+        linkBuilder(recordName),
+        `No page generated for ${recordName}.`
+      )
     )
     .join('')}</div>`;
 }
@@ -400,9 +487,12 @@ function renderEndpointDetails(operation, linkBuilder) {
           ? `<div class="chip-row">${dependencies
               .map(
                 (dependency) =>
-                  `<a class="chip" href="${escapeHtml(linkBuilder(dependency))}"><strong>${escapeHtml(
-                    dependency
-                  )}</strong><small>dependency</small></a>`
+                  renderLinkedChip(
+                    dependency,
+                    'dependency',
+                    linkBuilder(dependency),
+                    `No page generated for ${dependency}.`
+                  )
               )
               .join('')}</div>`
           : ''
@@ -487,7 +577,7 @@ function renderSchemaTable(record) {
 
 function renderRecordPage(record) {
   const operationMarkup = (record.operations || [])
-    .map((operation) => renderEndpointDetails(operation, relativeLinkFromRecord))
+    .map((operation) => renderEndpointDetails(operation, buildLegacyRecordLink))
     .join('');
 
   return pageShell({
@@ -521,7 +611,17 @@ function renderRecordPage(record) {
           <p>Linked records surface here as navigable chips, so you can jump between record dependencies while you read the endpoint contracts.</p>
         </div>
         <div class="panel">
-          ${renderDependencyChips(record, relativeLinkFromRecord)}
+          ${renderDependencyChips(record, buildLegacyRecordLink)}
+        </div>
+      </section>
+
+      <section class="page-section" data-page-section data-section-id="record-referenced-by" data-section-title="Referenced By">
+        <div class="section-heading">
+          <h2>Referenced By</h2>
+          <p>Use these back-links to find the indexed records that currently point at this record through schema or endpoint dependency references.</p>
+        </div>
+        <div class="panel">
+          ${renderReferencedByChips(record, buildLegacyRecordLink)}
         </div>
       </section>
 
@@ -848,9 +948,12 @@ function renderTransformsPage() {
           ${transforms
             .map(
               (transform) =>
-                `<a class="chip" href="${escapeHtml(relativeLinkFromRoot(source))}"><strong>${escapeHtml(
-                  transform.source
-                )}</strong><small>to ${escapeHtml(transform.target)}</small></a>`
+                renderLinkedChip(
+                  transform.source,
+                  `to ${transform.target}`,
+                  allRecordSet.has(transform.target) ? relativeLinkFromRoot(transform.target) : null,
+                  `No page generated for ${transform.target}.`
+                )
             )
             .join('')}
         </div>
@@ -861,12 +964,16 @@ function renderTransformsPage() {
   const matrixRows = focusTransforms
     .map(
       (transform) => `<tr>
-        <td><a href="${escapeHtml(relativeLinkFromRoot(transform.source))}">${escapeHtml(
-          transform.source
-        )}</a></td>
-        <td><a href="${escapeHtml(relativeLinkFromRoot(transform.target))}">${escapeHtml(
-          transform.target
-        )}</a></td>
+        <td>${
+          allRecordSet.has(transform.source)
+            ? `<a href="${escapeHtml(relativeLinkFromRoot(transform.source))}">${escapeHtml(transform.source)}</a>`
+            : `<span title="${escapeHtml(`No page generated for ${transform.source}.`)}">${escapeHtml(transform.source)}</span>`
+        }</td>
+        <td>${
+          allRecordSet.has(transform.target)
+            ? `<a href="${escapeHtml(relativeLinkFromRoot(transform.target))}">${escapeHtml(transform.target)}</a>`
+            : `<span title="${escapeHtml(`No page generated for ${transform.target}.`)}">${escapeHtml(transform.target)}</span>`
+        }</td>
         <td><code>${escapeHtml(transform.path)}</code></td>
         <td>${escapeHtml(transform.summary || 'Transform route')}</td>
       </tr>`
@@ -921,7 +1028,7 @@ ensureDir(GENERATED_DATA_DIR);
 ensureDir(GENERATED_RECORDS_DIR);
 ensureDir(GENERATED_WORKFLOWS_DIR);
 
-for (const record of curatedRecords) {
+for (const record of allRecords) {
   writeText(
     path.join(PUBLIC_RECORDS_DIR, `${slugify(record.recordName)}.html`),
     renderRecordPage(record)
@@ -934,7 +1041,7 @@ writeText(WORKFLOW_CONFIG_FILE, `${JSON.stringify(workflowConfig, null, 2)}\n`);
 writeJson(path.join(GENERATED_DATA_DIR, 'records-index.json'), generatedRecordsIndex);
 writeJson(path.join(GENERATED_DATA_DIR, 'workflow-index.json'), generatedWorkflowIndex);
 
-for (const record of curatedRecords) {
+for (const record of allRecords) {
   writeJson(path.join(GENERATED_RECORDS_DIR, `${slugify(record.recordName)}.json`), buildRecordDetail(record));
 }
 
@@ -944,6 +1051,14 @@ for (const layout of generatedWorkflowLayouts) {
 
 console.log(`Wrote ${PUBLIC_HOME_FILE}`);
 console.log(`Wrote ${PUBLIC_TRANSFORMS_FILE}`);
-console.log(`Wrote ${curatedRecords.length} record pages to ${PUBLIC_RECORDS_DIR}`);
-console.log(`Wrote ${curatedRecords.length} record detail payloads to ${GENERATED_RECORDS_DIR}`);
+if (unresolvedReferenceMap.size) {
+  console.warn('Unresolved dependency references:');
+
+  for (const [recordName, dependencies] of unresolvedReferenceMap.entries()) {
+    console.warn(`- ${recordName}: ${Array.from(dependencies).sort().join(', ')}`);
+  }
+}
+
+console.log(`Wrote ${allRecords.length} record pages to ${PUBLIC_RECORDS_DIR}`);
+console.log(`Wrote ${allRecords.length} record detail payloads to ${GENERATED_RECORDS_DIR}`);
 console.log(`Wrote ${WORKFLOW_CONFIG_FILE}`);

@@ -11,7 +11,7 @@
           "title": "Intercompany Transfer Order",
           "group": "extended",
           "summary": "Get list of records. 2 transform workflows available. 11 linked dependency records.",
-          "docsPath": "./public/records/intercompany-transfer-order.html",
+          "docsPath": "/records/intercompany-transfer-order",
           "stats": {
             "operations": 8,
             "transforms": 2,
@@ -30,7 +30,8 @@
             "nexus",
             "shipItem",
             "subsidiary",
-            "term"
+            "term",
+            "intercompanyTransferOrder"
           ],
           "endpoints": [
             {
@@ -120,7 +121,8 @@
             "accountingPeriod",
             "fulfillmentRequest",
             "shipItem",
-            "subsidiary"
+            "subsidiary",
+            "itemFulfillment"
           ],
           "endpoints": [
             {
@@ -173,7 +175,7 @@
           "title": "Item Receipt",
           "group": "extended",
           "summary": "Get list of records. 12 linked dependency records.",
-          "docsPath": "./public/records/item-receipt.html",
+          "docsPath": "/records/item-receipt",
           "stats": {
             "operations": 6,
             "transforms": 0,
@@ -193,7 +195,8 @@
             "inboundShipment",
             "location",
             "accountingPeriod",
-            "subsidiary"
+            "subsidiary",
+            "itemReceipt"
           ],
           "endpoints": [
             {

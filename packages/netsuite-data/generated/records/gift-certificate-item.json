@@ -1,0 +1,989 @@
+{
+  "recordName": "giftCertificateItem",
+  "slug": "gift-certificate-item",
+  "title": "Gift Certificate Item",
+  "summary": "Get list of records. 6 linked dependency records.",
+  "docsPath": "/records/gift-certificate-item",
+  "stats": {
+    "operations": 6,
+    "transforms": 0,
+    "schemaFields": 0
+  },
+  "dependencyRecords": [
+    "billingSchedule",
+    "classification",
+    "department",
+    "account",
+    "location",
+    "pricingGroup",
+    "giftCertificateItem"
+  ],
+  "referencedBy": [
+    "analyticalImpact",
+    "assemblyBuild",
+    "assemblyUnbuild",
+    "calendarEvent",
+    "charge",
+    "expenseCategory",
+    "fairValuePrice",
+    "giftCertificate",
+    "giftCertificateItem",
+    "inventoryCostRevaluation",
+    "inventoryNumber",
+    "issue",
+    "phoneCall",
+    "promotionCode",
+    "subscriptionLine",
+    "supportCase",
+    "task",
+    "timeBill",
+    "usage",
+    "workOrder"
+  ],
+  "operations": [
+    {
+      "id": "operation--giftCertificateItem-get",
+      "summary": "Get list of records.",
+      "tag": "giftCertificateItem",
+      "method": "GET",
+      "path": "/giftCertificateItem",
+      "isTransform": false,
+      "transformTarget": null,
+      "requestBody": [],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "q:\nstring",
+          "name": "q:\nstring\n in query",
+          "description": "The search query that is used to filter results.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "limit:\ninteger\n(int32)\n1000",
+          "name": "limit:\ninteger\n(int32)\n1000\n in query",
+          "description": "The limit used to specify the number of results on a single page.",
+          "type": "integer\n(int32)\n1000\n integer (int32)",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "offset:\ninteger\n(int32)\n0",
+          "name": "offset:\ninteger\n(int32)\n0\n in query",
+          "description": "The offset used for selecting a specific page of results.",
+          "type": "integer\n(int32)\n0\n integer (int32)",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "200 OK",
+          "name": "200 OK\ngiftCertificateItemCollection",
+          "description": "List of records.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "giftCertificateItemCollection",
+              "href": "#/definitions/giftCertificateItemCollection",
+              "definitionId": "giftCertificateItemCollection"
+            }
+          ],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "giftCertificateItemCollection",
+          "href": "#/definitions/giftCertificateItemCollection",
+          "definitionId": "giftCertificateItemCollection"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [],
+      "rawText": "giftCertificateItem\nGet list of records.\nGET /giftCertificateItem\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nq: string\nin query\nThe search query that is used to filter results.\nlimit: integer (int32) 1000\nin query\nThe limit used to specify the number of results on a single page.\noffset: integer (int32) 0\nin query\nThe offset used for selecting a specific page of results.\napplication/vnd.oracle.resource+json; type=collection application/vnd.oracle.resource+json; type=error\n200 OK\ngiftCertificateItemCollection\nList of records.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--giftCertificateItem-post",
+      "summary": "Insert record.",
+      "tag": "giftCertificateItem",
+      "method": "POST",
+      "path": "/giftCertificateItem",
+      "isTransform": false,
+      "transformTarget": null,
+      "requestBody": [
+        {
+          "label": "giftCertificateItem",
+          "name": "giftCertificateItem",
+          "description": "Request body.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "giftCertificateItem",
+              "href": "#/definitions/giftCertificateItem",
+              "definitionId": "giftCertificateItem"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replace:\nstring",
+          "name": "replace:\nstring\n in query",
+          "description": "The names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning",
+          "name": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning\n in header",
+          "description": "Sets the strictness of property name validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nWarning\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError",
+          "name": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError\n in header",
+          "description": "Sets the strictness of property value validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nError\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "204 No Content",
+          "name": "204 No Content",
+          "description": "Inserted record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "giftCertificateItem",
+          "href": "#/definitions/giftCertificateItem",
+          "definitionId": "giftCertificateItem"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [
+        "giftCertificateItem"
+      ],
+      "rawText": "giftCertificateItem\nInsert record.\nPOST /giftCertificateItem\ngiftCertificateItem\nRequest body.\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nreplace: string\nin query\nThe names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.\nX-NetSuite-PropertyNameValidation: string Error , Warning , Ignore Warning\nin header\nSets the strictness of property name validation.\nX-NetSuite-PropertyValueValidation: string Error , Warning , Ignore Error\nin header\nSets the strictness of property value validation.\napplication/vnd.oracle.resource+json; type=error\n204 No Content\nInserted record.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--giftCertificateItem--id--delete",
+      "summary": "Remove record.",
+      "tag": "giftCertificateItem",
+      "method": "DELETE",
+      "path": "/giftCertificateItem/{id}",
+      "isTransform": false,
+      "transformTarget": null,
+      "requestBody": [],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "id:\ninteger\n(int32)",
+          "name": "id:\ninteger\n(int32)\n in path",
+          "description": "Internal identifier.",
+          "type": "integer\n(int32)\n integer (int32)",
+          "subtitle": "in path",
+          "required": true,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "204 No Content",
+          "name": "204 No Content",
+          "description": "Removed record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [],
+      "rawText": "giftCertificateItem\nRemove record.\nDELETE /giftCertificateItem/{id}\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nid: integer (int32)\nin path\nInternal identifier.\napplication/vnd.oracle.resource+json; type=error\n204 No Content\nRemoved record.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--giftCertificateItem--id--get",
+      "summary": "Get record.",
+      "tag": "giftCertificateItem",
+      "method": "GET",
+      "path": "/giftCertificateItem/{id}",
+      "isTransform": false,
+      "transformTarget": null,
+      "requestBody": [],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "id:\ninteger\n(int32)",
+          "name": "id:\ninteger\n(int32)\n in path",
+          "description": "Internal identifier.",
+          "type": "integer\n(int32)\n integer (int32)",
+          "subtitle": "in path",
+          "required": true,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "expandSubResources:\nboolean\nfalse",
+          "name": "expandSubResources:\nboolean\nfalse\n in query",
+          "description": "Set to 'true' to automatically expand all sublists, sublist lines, and subrecords on this record.",
+          "type": "boolean\nfalse\n boolean",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "simpleEnumFormat:\nboolean\nfalse",
+          "name": "simpleEnumFormat:\nboolean\nfalse\n in query",
+          "description": "Set to true to return enumeration values in a format that only shows the internal ID value.",
+          "type": "boolean\nfalse\n boolean",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "fields:\nstring",
+          "name": "fields:\nstring\n in query",
+          "description": "The names of the fields and sublists on the record. Only the selected fields and sublists will be returned in the response.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "200 OK",
+          "name": "200 OK\ngiftCertificateItem",
+          "description": "Retrieved record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "giftCertificateItem",
+              "href": "#/definitions/giftCertificateItem",
+              "definitionId": "giftCertificateItem"
+            }
+          ],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "giftCertificateItem",
+          "href": "#/definitions/giftCertificateItem",
+          "definitionId": "giftCertificateItem"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [
+        "giftCertificateItem"
+      ],
+      "rawText": "giftCertificateItem\nGet record.\nGET /giftCertificateItem/{id}\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nid: integer (int32)\nin path\nInternal identifier.\nexpandSubResources: boolean false\nin query\nSet to 'true' to automatically expand all sublists, sublist lines, and subrecords on this record.\nsimpleEnumFormat: boolean false\nin query\nSet to true to return enumeration values in a format that only shows the internal ID value.\nfields: string\nin query\nThe names of the fields and sublists on the record. Only the selected fields and sublists will be returned in the response.\napplication/vnd.oracle.resource+json; type=singular application/vnd.oracle.resource+json; type=error\n200 OK\ngiftCertificateItem\nRetrieved record.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--giftCertificateItem--id--patch",
+      "summary": "Update record.",
+      "tag": "giftCertificateItem",
+      "method": "PATCH",
+      "path": "/giftCertificateItem/{id}",
+      "isTransform": false,
+      "transformTarget": null,
+      "requestBody": [
+        {
+          "label": "giftCertificateItem",
+          "name": "giftCertificateItem",
+          "description": "Request body.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "giftCertificateItem",
+              "href": "#/definitions/giftCertificateItem",
+              "definitionId": "giftCertificateItem"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "id:\ninteger\n(int32)",
+          "name": "id:\ninteger\n(int32)\n in path",
+          "description": "Internal identifier.",
+          "type": "integer\n(int32)\n integer (int32)",
+          "subtitle": "in path",
+          "required": true,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning",
+          "name": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning\n in header",
+          "description": "Sets the strictness of property name validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nWarning\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError",
+          "name": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError\n in header",
+          "description": "Sets the strictness of property value validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nError\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replace:\nstring",
+          "name": "replace:\nstring\n in query",
+          "description": "The names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replaceSelectedFields:\nboolean\nfalse",
+          "name": "replaceSelectedFields:\nboolean\nfalse\n in query",
+          "description": "If set to 'true', all fields that should be deleted in the update request, including body fields, must be included in the 'replace' query parameter.",
+          "type": "boolean\nfalse\n boolean",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "204 No Content",
+          "name": "204 No Content",
+          "description": "Updated record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "giftCertificateItem",
+          "href": "#/definitions/giftCertificateItem",
+          "definitionId": "giftCertificateItem"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [
+        "giftCertificateItem"
+      ],
+      "rawText": "giftCertificateItem\nUpdate record.\nPATCH /giftCertificateItem/{id}\ngiftCertificateItem\nRequest body.\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nid: integer (int32)\nin path\nInternal identifier.\nX-NetSuite-PropertyNameValidation: string Error , Warning , Ignore Warning\nin header\nSets the strictness of property name validation.\nX-NetSuite-PropertyValueValidation: string Error , Warning , Ignore Error\nin header\nSets the strictness of property value validation.\nreplace: string\nin query\nThe names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.\nreplaceSelectedFields: boolean false\nin query\nIf set to 'true', all fields that should be deleted in the update request, including body fields, must be included in the 'replace' query parameter.\napplication/vnd.oracle.resource+json; type=error\n204 No Content\nUpdated record.\ndefault\nnsError\nError response."
+    },
+    {
+      "id": "operation--giftCertificateItem--id--put",
+      "summary": "Insert or update record.",
+      "tag": "giftCertificateItem",
+      "method": "PUT",
+      "path": "/giftCertificateItem/{id}",
+      "isTransform": false,
+      "transformTarget": null,
+      "requestBody": [
+        {
+          "label": "giftCertificateItem",
+          "name": "giftCertificateItem",
+          "description": "Request body.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "giftCertificateItem",
+              "href": "#/definitions/giftCertificateItem",
+              "definitionId": "giftCertificateItem"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "parameters": [
+        {
+          "label": "Prefer:\nstring\nrespond-async",
+          "name": "Prefer:\nstring\nrespond-async\n in header",
+          "description": "The server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.",
+          "type": "string\nrespond-async\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "respond-async"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-Idempotency-Key:\nstring",
+          "name": "X-NetSuite-Idempotency-Key:\nstring\n in header",
+          "description": "A user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.",
+          "type": "string\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "id:\nstring",
+          "name": "id:\nstring\n in path",
+          "description": "External identifier.",
+          "type": "string\n string",
+          "subtitle": "in path",
+          "required": true,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning",
+          "name": "X-NetSuite-PropertyNameValidation:\nstring\nError ,\nWarning ,\nIgnore\nWarning\n in header",
+          "description": "Sets the strictness of property name validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nWarning\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError",
+          "name": "X-NetSuite-PropertyValueValidation:\nstring\nError ,\nWarning ,\nIgnore\nError\n in header",
+          "description": "Sets the strictness of property value validation.",
+          "type": "string\nError ,\nWarning ,\nIgnore\nError\n string",
+          "subtitle": "in header",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [
+            "Error",
+            "Warning",
+            "Ignore"
+          ],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replace:\nstring",
+          "name": "replace:\nstring\n in query",
+          "description": "The names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.",
+          "type": "string\n string",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "replaceSelectedFields:\nboolean\nfalse",
+          "name": "replaceSelectedFields:\nboolean\nfalse\n in query",
+          "description": "If set to 'true', all fields that should be deleted in the update request, including body fields, must be included in the 'replace' query parameter.",
+          "type": "boolean\nfalse\n boolean",
+          "subtitle": "in query",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        }
+      ],
+      "responses": [
+        {
+          "label": "204 No Content",
+          "name": "204 No Content",
+          "description": "Upserted record.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [],
+          "children": []
+        },
+        {
+          "label": "default",
+          "name": "default\nnsError",
+          "description": "Error response.",
+          "type": "",
+          "subtitle": "",
+          "required": false,
+          "defaultValue": "",
+          "enumValues": [],
+          "refs": [
+            {
+              "text": "nsError",
+              "href": "#/definitions/nsError",
+              "definitionId": "nsError"
+            }
+          ],
+          "children": []
+        }
+      ],
+      "dependencyRefs": [
+        {
+          "text": "giftCertificateItem",
+          "href": "#/definitions/giftCertificateItem",
+          "definitionId": "giftCertificateItem"
+        },
+        {
+          "text": "nsError",
+          "href": "#/definitions/nsError",
+          "definitionId": "nsError"
+        }
+      ],
+      "dependencyRecords": [
+        "giftCertificateItem"
+      ],
+      "rawText": "giftCertificateItem\nInsert or update record.\nPUT /giftCertificateItem/{id}\ngiftCertificateItem\nRequest body.\nPrefer: string respond-async\nin header\nThe server behavior requested by the client. Use 'respond-async' to execute the request asynchronously. If the request is executed asynchronously, 'Preference-applied: respond-async' is returned in the response.\nX-NetSuite-Idempotency-Key: string\nin header\nA user-defined unique idempotency key that is applied to every asynchronous requests to ensure that the request is executed only once. Only one request can be executed with every unique idempotency key. Use UUID in string format as defined by RFC 4122. If the request is executed synchronously, this value is ignored.\nid: string\nin path\nExternal identifier.\nX-NetSuite-PropertyNameValidation: string Error , Warning , Ignore Warning\nin header\nSets the strictness of property name validation.\nX-NetSuite-PropertyValueValidation: string Error , Warning , Ignore Error\nin header\nSets the strictness of property value validation.\nreplace: string\nin query\nThe names of sublists on this record. All sublist lines will be replaced with lines specified in the request. The names are delimited by comma.\nreplaceSelectedFields: boolean false\nin query\nIf set to 'true', all fields that should be deleted in the update request, including body fields, must be included in the 'replace' query parameter.\napplication/vnd.oracle.resource+json; type=error\n204 No Content\nUpserted record.\ndefault\nnsError\nError response."
+    }
+  ],
+  "definition": {
+    "id": "definition-giftCertificateItem",
+    "refs": [
+      {
+        "text": "giftCertificateItem-authCodesCollection",
+        "href": "#/definitions/giftCertificateItem-authCodesCollection",
+        "definitionId": "giftCertificateItem-authCodesCollection"
+      },
+      {
+        "text": "billingSchedule",
+        "href": "#/definitions/billingSchedule",
+        "definitionId": "billingSchedule"
+      },
+      {
+        "text": "classification",
+        "href": "#/definitions/classification",
+        "definitionId": "classification"
+      },
+      {
+        "text": "giftCertificateItem-correlatedItemsCollection",
+        "href": "#/definitions/giftCertificateItem-correlatedItemsCollection",
+        "definitionId": "giftCertificateItem-correlatedItemsCollection"
+      },
+      {
+        "text": "department",
+        "href": "#/definitions/department",
+        "definitionId": "department"
+      },
+      {
+        "text": "account",
+        "href": "#/definitions/account",
+        "definitionId": "account"
+      },
+      {
+        "text": "nsResource",
+        "href": "#/definitions/nsResource",
+        "definitionId": "nsResource"
+      },
+      {
+        "text": "nsResourceCollection",
+        "href": "#/definitions/nsResourceCollection",
+        "definitionId": "nsResourceCollection"
+      },
+      {
+        "text": "nsLink",
+        "href": "#/definitions/nsLink",
+        "definitionId": "nsLink"
+      },
+      {
+        "text": "location",
+        "href": "#/definitions/location",
+        "definitionId": "location"
+      },
+      {
+        "text": "giftCertificateItem",
+        "href": "#/definitions/giftCertificateItem",
+        "definitionId": "giftCertificateItem"
+      },
+      {
+        "text": "giftCertificateItem-presentationItemCollection",
+        "href": "#/definitions/giftCertificateItem-presentationItemCollection",
+        "definitionId": "giftCertificateItem-presentationItemCollection"
+      },
+      {
+        "text": "giftCertificateItem-price",
+        "href": "#/definitions/giftCertificateItem-price",
+        "definitionId": "giftCertificateItem-price"
+      },
+      {
+        "text": "pricingGroup",
+        "href": "#/definitions/pricingGroup",
+        "definitionId": "pricingGroup"
+      },
+      {
+        "text": "giftCertificateItem-siteCategoryCollection",
+        "href": "#/definitions/giftCertificateItem-siteCategoryCollection",
+        "definitionId": "giftCertificateItem-siteCategoryCollection"
+      },
+      {
+        "text": "subsidiaryCollection",
+        "href": "#/definitions/subsidiaryCollection",
+        "definitionId": "subsidiaryCollection"
+      },
+      {
+        "text": "giftCertificateItem-translationsCollection",
+        "href": "#/definitions/giftCertificateItem-translationsCollection",
+        "definitionId": "giftCertificateItem-translationsCollection"
+      }
+    ],
+    "fields": [],
+    "rawText": "giftCertificateItem\nauthCodes: giftCertificateItem-authCodesCollection\navailableToPartners Available to Adv. Partners: boolean\nCheck this box to make this item available to partners with the Advanced Partner Center role for viewing. These items are also available to partners with roles that are customized for the Advanced Partner Center and include view, create or edit access to item records.\nbillingSchedule: billingSchedule\nclass: classification\ncorrelatedItems: giftCertificateItem-correlatedItemsCollection\ncostEstimate Item Defined Cost: number (double)\nEnter an Item Defined Cost amount.\ncreatedDate Date Created: string (date-time)\ncustomForm: object\nid Internal identifier: string -210 , 36 , -10211 , -10210\nrefName Reference Name: string\ndaysBeforeExpiration Days Before Expiration: integer (int64)\nIf you want this item to expire, enter the number of days it should remain active after purchase. If this item is downloadable and the same customer purchases this item more than once, the countdown to expiration restarts with each purchase. Note: If this item is a gift certificate and the buyer lives in California, Connecticut, Louisiana, Massachusetts, New Hampshire, Rhode Island or Washington, by law the gift certificate cannot expire.\ndepartment: department\ndescription Description: string\nEnter a description for this item. This description will appear in the Description column of sales forms.\ndisplayName Display Name/Code: string\nEnter an optional name of up to 250 characters for this item in addition to the Item Name. If you are integrating with a Yahoo! store, this field is imported from Yahoo!. The display name prints in the Item column of sales forms when Basic printing is used. If this item is a member of a kit, this name appears in the Item column when the Print Items box is checked. If you do not enter a display name, the item name appears on printed forms.\ndontShowPrice Don't Show Price: boolean\nCheck this box to hide the price of this item online. This is useful for items you want to advertise but don't want to sell or for items that you track inventory for and want to display but are offered in combination with other items.\nexcludeFromSiteMap Exclude from Sitemap: boolean\nCheck this box to exclude a tab, category or item page from the site map.\nexternalId External ID: string\nfeaturedDescription Featured Description: string\nIf this item is displayed on the home page of your Web site, enter a featured description for this item. This description appears below the item's store display name on the Home page of your store or site. You can enter up to 999 characters including basic HTML code. Enter and format text using the formatting options, or click the HTML Source Code link to enter HTML. If you see the Enhance text button next to this field, you can get writing help for this field from our generative AI service, NetSuite Text Enhance. Click the Enhance Text button to use the available options. Learn more about Text Enhance.\nid Internal ID: string\nincludeChildren Include Children: boolean\nCheck the Include Children box to share the item with all the sub-subsidiaries associated with each subsidiary selected in the Subsidiary field. Note: When sharing items across subsidiaries, all of the options selected on the item record must be compatible across subsidiaries. For example, when entering an inventory item to be shared across subsidiaries, you should select Income and Asset accounts on the item record that are also shared across the same subsidiaries.\nincomeAccount: account\ninternalId Internal ID: integer (int64)\nUse this ID number to create smart tags for your item templates, site templates, and custom Web site that you host with NetSuite.\nisDonationItem Variable Amount: boolean\nCheck this box to set this item as variable-priced. This enables customers to enter their own prices for this item, such as for donations.\nisFulfillable Can be Fulfilled: boolean\nCheck the Can be Fulfilled/Received box to enable this item to be received and fulfilled during order processing. Clear this box if this item does not require being received and fulfilled. Note: Once this item has been added to transactions, this setting cannot be changed. This field is used when the Advanced Billing and Advanced Shipping features are both enabled.\nisGCoCompliant Google Checkout Compliant: boolean\nisInactive Inactive: boolean\nWhen you check this box, this item will no longer appear on a list unless you check the Show All box at the bottom of the list page.\nisOnline Display in Website: boolean\nCheck this box to make this item available online in your Web site. You cannot sell this item online unless you check this box. If the item is of the Other Charge for Sale or Resale subtype, checking this box does not make it available in the web store catalog. However, it becomes available during web store checkout.\nissueProduct: nsResource\nitemId Item Name/Number: string\nEnter up to 250 characters for the name of this item. This name appears in lists on transactions. If you have the option of entering a display name and do not, the item name prints in the Item column of sales forms when Basic printing is used. If you have the option to enter a vendor name and do not, the item name prints in the Item column of purchase forms. If you have entered a display name, it will print on purchases instead of the item name when Basic printing is used.\nitemOptions: nsResourceCollection\nitemType: object\nid Internal identifier: string Group , Description , Discount , EndGroup , GiftCert , Subtotal , Service , ShipItem , TaxItem , InvtPart ,\nrefName Reference Name: string\nlastModifiedDate Last Modified: string (date-time)\nliabilityAccount: account\nlinks Links: nsLink\nnsLink\nlocation: location\nmaxDonationAmount Maximum Variable Amount: number (double)\nIf you checked the Variable Amount box, enter the maximum amount that can be paid or donated for this item.\nmetaTagHtml Meta Tag HTML: string\nEnter the Meta Tag HTML you want to appear in the < head > section of this item page. Meta tags enable your Web site to be found by search engines.\nnoPriceMessage No Price Message: string\nIf you opted to not show a price online, enter the message that should show instead of the price. For example, you might enter \"Call for Price.\"\nofferSupport Offer Support: boolean\nCheck this box to offer support for this particular item. By offering support for items, customers can select on case records which item they are having trouble with.\nonSpecial On Special: boolean\nIf you want to put this item on special, check this box. The item then appears in the Specials category in your store or site.\noutOfStockBehavior: object\nid Internal identifier: string DISABLE , ENABLENMSG , REMOVE , ENABLE , DEFAULT\nrefName Reference Name: string\noutOfStockMessage Out Of Stock Message: string\nYou can enter a custom out of stock message for this item. The message here replaces the default out of stock message.\npageTitle Page Title: string\nEnter the text you want to appear as the page's title for this item. This text appears in the browser tab. Use a descriptive title for the item page, this can help achieve better results with search engine ranking.\nparent: giftCertificateItem\nparentOnly Use as Category Only: boolean\npresentationItem: giftCertificateItem-presentationItemCollection\nprice: giftCertificateItem-price\npricesIncludeTax Prices Include Tax: boolean\nCheck this box to save the base price as the tax inclusive price. Clear this box to save the base price as the tax exclusive price.\npricingGroup: pricingGroup\nrate Price: number (double)\nEnter the rate for this discount or markup. The rate can be either a percentage or dollar amount. A percentage discount must be followed by a % sign. A dollar amount should be entered as a positive number.\nrateIncludingTax Price Including Tax: number (double)\nrefName Reference Name: string\nrelatedItemsDescription Related Items Description: string\nEnter a description for the related items you show with this item in your Web site. You can enter up to 999 characters of letters, numbers and basic HTML code. You can also clear the View as HTML box below to enter and format text using the formatting options above. This eliminates the need for HTML code.\nsalesDescription Sales Description: string\nEnter a sales description for this item. You can enter letters and numbers. There is a 999 character limit. The sales description displays on transactions such as sales orders, cash sales and invoices. If you use the Web Store feature, the sales description displays immediately under the item's store display name on item list pages in your store or site, if you have not entered a store description for an item. Enter the store description on the Store subtab of the item record. The sales description also displays by default when the item is in the Web store shopping cart. If you see the Enhance text button next to this field, you can get writing help for this field from our generative AI service, NetSuite Text Enhance. Click the Enhance Text button to use the available options. Learn more about Text Enhance.\nsearchKeywords Search Keywords: string\nEnter alternative search keywords that customers might use to find this item using your Web store’s internal search. These can include synonyms, acronyms, alternate languages or misspellings. These keywords are seen as equally important as the item name when searches are conducted.\nshowDefaultDonationAmount Show Default Amount: boolean\nCheck this box to suggest the item's online price for the item. When customers navigate to a donation item, they first see the online price for the item and then can choose to enter any amount they like.\nsiteCategory: giftCertificateItem-siteCategoryCollection\nsiteMapPriority: object\nid Internal identifier: string , 0.0 , 0.1 , 0.2 , 0.3 , 0.4 , 0.5 , 0.6 , 0.7 , 0.8 ,\nrefName Reference Name: string\nstoreDescription Store Description: string\nThe store description appears under the item's store display name on item list pages in your store or site. To make the store description display when an item is in the Web store shopping cart, go to Setup > Web Site > Set Up Web Site. Click the Cart subtab, and check the box next to Store Description. If you see the Enhance text button next to this field, you can get writing help for this field from our generative AI service, NetSuite Text Enhance. Click the Enhance Text button to use the available options. Learn more about Text Enhance.\nstoreDetailedDescription Detailed Description: string\nEnter a detailed description for this item. When your customers click an item's store display name for more information, they see this description. If you are using Internet Explorer, you can also clear the View Source box below to enter and format text using the formatting options above. This eliminates the need for HTML code. If you do not see the View Source box, make sure Rich Text Editing is enabled at Home > Set Preferences > Appearance. If you see the Enhance text button next to this field, you can get writing help for this field from our generative AI service, NetSuite Text Enhance. Click the Enhance Text button to use the available options. Learn more about Text Enhance.\nstoreDisplayImage: nsResource\nstoreDisplayName Store Display Name: string\nEnter the name of this item as you want it displayed in your Web site. You can enter up to 250 characters.\nstoreDisplayThumbnail: nsResource\nsubsidiary: subsidiaryCollection\nsubtype: object\nid Internal identifier: string Sale , Purchase , Resale\nrefName Reference Name: string\ntranslations: giftCertificateItem-translationsCollection\nupcCode UPC Code: string\nEnter a maximum of 999 characters in this field to identify an internal name or number to store the item's UPC Code. You can use the text you enter here when adding the item to transactions, searching, or viewing reports. * When you enter text in this field, the SKU/UPC field on item labels displays this UPC Code and prints in UPC bar code format. * When this field is clear, the SKU/UPC field on item labels displays the Item Name/Number and prints in Code-128 bar code format.\nurlComponent URL Component: string\nEnter a short, descriptive name for this item to appear as part of its URL in the Web store. Setting a name to show in the URL can result in better ranking from search engines. If you leave this field blank, NetSuite terms and numbers are used as identifiers in the URL. Note: Descriptive URL components are case sensitive. Descriptive URLs must match the case used in the URL Component field of an item record to point to the correct page."
+  }
+}

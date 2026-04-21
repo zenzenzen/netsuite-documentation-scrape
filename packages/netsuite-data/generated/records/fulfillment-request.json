@@ -17,7 +17,13 @@
     "vendor",
     "contact",
     "location",
-    "subsidiary"
+    "subsidiary",
+    "fulfillmentRequest"
+  ],
+  "referencedBy": [
+    "fulfillmentRequest",
+    "itemFulfillment",
+    "salesOrder"
   ],
   "operations": [
     {
